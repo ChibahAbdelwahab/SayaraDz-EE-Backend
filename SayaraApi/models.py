@@ -18,7 +18,7 @@ class Vehicule(models.Model):
     app_label = "Vehicule"
     numChassis = models.CharField(max_length=100, primary_key=True)
     disponible = models.BooleanField()
-    imageVehicle = models.ImageField(upload_to="images/vehicules",default='images/vehicules/voiture.jpg')
+    imageVehicle = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
 
     # Relationship Fields
     versionVoiture = models.ForeignKey(
@@ -38,6 +38,8 @@ class Vehicule(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_vehicule_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.numChassis
 
 class Marque(models.Model):
     # Fields
@@ -58,6 +60,8 @@ class Marque(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_marque_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.nomMarque
 
 
 class Version(models.Model):
@@ -84,12 +88,14 @@ class Version(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_version_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.nomVersion
 
 
 class Modele(models.Model):
     # Fields
     app_label = "Modele"
-    idModele = models.CharField(primary_key=True,max_length= 50)
+    idModele = models.CharField(primary_key=True, max_length=50)
     nomModele = models.CharField(max_length=255)
 
     # Relationship Fields
@@ -110,4 +116,5 @@ class Modele(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_modele_update', args=(self.pk,))
 
-   
+    def __str__(self):
+        return self.nomModele
