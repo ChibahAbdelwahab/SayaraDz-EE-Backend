@@ -89,7 +89,7 @@ class Version(models.Model):
 class Modele(models.Model):
     # Fields
     app_label = "Modele"
-    idModele = models.AutoField(primary_key=True)
+    idModele = models.CharField(primary_key=True,max_length= 50)
     nomModele = models.CharField(max_length=255)
 
     # Relationship Fields
