@@ -56,12 +56,12 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
-    ],
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.IsAuthenticated'
+    #],
+    #'DEFAULT_AUTHENTICATION_CLASSES': [
+    #    'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+    #],
 }
 
 DRF_FIREBASE_AUTH = {
@@ -132,3 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+print(MEDIA_ROOT)
+print(BASE_DIR)
