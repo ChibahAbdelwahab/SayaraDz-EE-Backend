@@ -56,12 +56,12 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
-    ],
+   # 'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.IsAuthenticated'
+   # ],
+    #'DEFAULT_AUTHENTICATION_CLASSES': [
+    #    'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+    #],
 }
 
 DRF_FIREBASE_AUTH = {
@@ -140,12 +140,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media" )
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
