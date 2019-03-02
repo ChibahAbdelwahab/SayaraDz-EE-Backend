@@ -22,9 +22,8 @@ class MarqueSerializer(serializers.ModelSerializer):
         fields = (
             'pk', 
             'idMarque', 
-            'nomMarque',
-            'imageMarque'   ,
-
+            'nomMarque', 
+            'imageMarque', 
         )
 
 
@@ -48,7 +47,7 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk', 
             'nomModele', 
             'idModele', 
-            'marqueModele',
+            'marqueModele'
         )
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):

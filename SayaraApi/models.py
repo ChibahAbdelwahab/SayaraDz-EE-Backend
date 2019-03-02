@@ -44,7 +44,7 @@ class Marque(models.Model):
     app_label = "Marque"
     idMarque = models.AutoField(primary_key=True)
     nomMarque = models.CharField(max_length=50)
-    imageMarque = models.ImageField(upload_to="images/marques")
+    imageMarque = models.ImageField(upload_to="marque/images/")
 
     class Meta:
         ordering = ('-pk',)
