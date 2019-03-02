@@ -7,7 +7,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = (
     # urls for Django Rest Framework SayaraApi
-    path('SayaraApi/v1/', include(router.urls)),
+    path('', include(router.urls)),
 )
 
 urlpatterns += (
