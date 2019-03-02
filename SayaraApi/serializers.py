@@ -23,7 +23,7 @@ class MarqueSerializer(serializers.ModelSerializer):
             'pk', 
             'idMarque', 
             'nomMarque',
-            'imageMarque',
+            'imageMarque'   ,
 
         )
 

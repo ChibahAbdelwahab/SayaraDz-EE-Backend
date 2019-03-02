@@ -14,16 +14,16 @@ from django_extensions.db import fields as extension_fields
 
 
 class Vehicule(models.Model):
-
     # Fields
     app_label = "Vehicule"
     numChassis = models.CharField(max_length=100, primary_key=True)
     disponible = models.BooleanField()
+    imageVehicle = models.ImageField(upload_to="images/vehicules",default='images/vehicules/voiture.jpg')
 
     # Relationship Fields
     versionVoiture = models.ForeignKey(
         'SayaraApi.Version',
-        on_delete=models.CASCADE, related_name="vehicules", 
+        on_delete=models.CASCADE, related_name="vehicules",
     )
 
     class Meta:
@@ -35,13 +35,11 @@ class Vehicule(models.Model):
     def get_absolute_url(self):
         return reverse('SayaraApi_vehicule_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('SayaraApi_vehicule_update', args=(self.pk,))
 
 
 class Marque(models.Model):
-
     # Fields
     app_label = "Marque"
     idMarque = models.AutoField(primary_key=True)
@@ -57,51 +55,51 @@ class Marque(models.Model):
     def get_absolute_url(self):
         return reverse('SayaraApi_marque_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('SayaraApi_marque_update', args=(self.pk,))
 
     def __str__(self):
         return self.nomMarque
 
-class Version(models.Model):
 
+class Version(models.Model):
     # Fields
     app_label = "Version"
     nomVersion = models.CharField(max_length=100)
-    codeVersion = models.CharField(max_length = 20, primary_key=True)
+    codeVersion = models.CharField(max_length=20, primary_key=True)
 
     # Relationship Fields
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
-        on_delete=models.CASCADE, related_name="versions", 
+        on_delete=models.CASCADE, related_name="versions",
     )
 
     class Meta:
         ordering = ('-pk',)
-        
+
     def __unicode__(self):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
         return reverse('SayaraApi_version_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('SayaraApi_version_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.nomVersion
+
 
 class Modele(models.Model):
-
     # Fields
     app_label = "Modele"
     nomModele = models.CharField(max_length=255)
-    idModele = models.CharField(max_length = 10, primary_key=True)
+    idModele = models.AutoField(primary_key=True)
 
     # Relationship Fields
     marqueModele = models.ForeignKey(
         'SayaraApi.Marque',
-        on_delete=models.CASCADE, related_name="modeles", 
+        on_delete=models.CASCADE, related_name="modeles",
     )
 
     class Meta:
@@ -113,8 +111,8 @@ class Modele(models.Model):
     def get_absolute_url(self):
         return reverse('SayaraApi_modele_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('SayaraApi_modele_update', args=(self.pk,))
 
-
+    def __str__(self):
+        return self.nomModele
