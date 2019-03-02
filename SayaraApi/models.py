@@ -58,8 +58,6 @@ class Marque(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_marque_update', args=(self.pk,))
 
-    def __str__(self):
-        return self.nomMarque
 
 
 class Version(models.Model):
@@ -86,8 +84,6 @@ class Version(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_version_update', args=(self.pk,))
 
-    def __str__(self):
-        return self.nomVersion
 
 
 class Modele(models.Model):
@@ -114,5 +110,4 @@ class Modele(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_modele_update', args=(self.pk,))
 
-    def __str__(self):
-        return self.nomModele
+   
