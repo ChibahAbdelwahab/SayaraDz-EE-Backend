@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'CHANGEME')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["72760247.ngrok.io", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -54,6 +54,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+    ],
+}
+
+DRF_FIREBASE_AUTH = {
+    'FIREBASE_SERVICE_ACCOUNT_KEY': 'configuration.json'
+}
+
+
+FIREBASE_KEY = 'configuration.json'
 
 ROOT_URLCONF = 'project.urls'
 

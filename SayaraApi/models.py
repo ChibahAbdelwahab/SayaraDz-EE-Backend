@@ -44,7 +44,7 @@ class Marque(models.Model):
 
     # Fields
     app_label = "Marque"
-    idMarque = models.IntegerField(primary_key=True)
+    idMarque = models.AutoField(primary_key=True)
     nomMarque = models.CharField(max_length=50)
     imageMarque = models.ImageField(upload_to="marque/images/")
 
@@ -61,6 +61,8 @@ class Marque(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_marque_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.nomMarque
 
 class Version(models.Model):
 
