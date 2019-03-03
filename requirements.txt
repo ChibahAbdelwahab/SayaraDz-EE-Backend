@@ -11,9 +11,11 @@ django-crispy-forms==1.7.2
 django-extensions==2.1.6
 django-filter==2.1.0
 django-heroku==0.3.1
+django-rest-auth==0.9.3
 djangorestframework==3.9.1
 djangorestframework-firebase==0.2.0
 drf-firebase-auth==0.0.4
+export==0.1.2
 firebase-admin==2.16.0
 gcloud==0.17.0
 google-api-core==1.8.0

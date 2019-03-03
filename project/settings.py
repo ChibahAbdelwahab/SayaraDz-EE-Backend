@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import django_heroku
 import os
 
-
-#Configuration for pycharm automated test with pytest
+# Configuration for pycharm automated test with pytest
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -30,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,12 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_extensions',
     'crispy_forms',
     'rest_framework',
-    #'api',
-    'SayaraApi'
+    'rest_auth',
+    'rest_framework.authtoken',
+    'SayaraApi',
 ]
 
 MIDDLEWARE = [
@@ -64,13 +61,15 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+# REST_FRAMEWORK = {}
 
 DRF_FIREBASE_AUTH = {
     'FIREBASE_SERVICE_ACCOUNT_KEY': 'configuration.json'
 }
-
 
 FIREBASE_KEY = 'configuration.json'
 
@@ -93,7 +92,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
-
+#
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -105,7 +104,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -115,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},  # noqa
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},  # noqa
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -130,13 +127,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,"media" )
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -144,7 +140,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media" )
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
-
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

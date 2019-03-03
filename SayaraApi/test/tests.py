@@ -12,7 +12,7 @@ class unAuthentifiedUserRequest(unittest.TestCase):
 
 
 #Test for Authentified client request
-class authetifiedUserRequest(unittest.TestCase):
+class authentifiedUserRequest(unittest.TestCase):
     def test_detail(self):
         user = User(username='testName')
         client = APIClient()
