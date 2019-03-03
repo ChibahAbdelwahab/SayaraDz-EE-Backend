@@ -19,11 +19,11 @@ firebase_admin.initialize_app(cred)
 class FirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         id_token = request.META.get('HTTP_AUTHORIZATION')
-        print(request.META.get('HTTP_AUTHORIZATION'))
+        #print(request.META.get('HTTP_AUTHORIZATION'))
         decoded_token= None
         try:
             decoded_token = auth.verify_id_token(id_token)
-            print(decoded_token)
+            #print(decoded_token)
         except Exception as e:
             print('Exception: ',e)
             pass
@@ -35,6 +35,6 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
         name = decoded_token.get('name')
         email = decoded_token.get('email')
         user,bool = User.objects.get_or_create(username=name,email=email)
-        print(user,bool)
+        #print(user,bool)
 
         return (user, None)

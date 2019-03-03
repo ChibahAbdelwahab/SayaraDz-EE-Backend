@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import django_heroku
 import os
 
+
+#Configuration for pycharm automated test with pytest
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -56,12 +59,12 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
-    ],
+    #'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.IsAuthenticated'
+    #],
+    #'DEFAULT_AUTHENTICATION_CLASSES': [
+    #    'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+    #],
 }
 
 DRF_FIREBASE_AUTH = {
