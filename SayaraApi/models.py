@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
 from django.db import models as models
 from django_extensions.db import fields as extension_fields
+from django.contrib.auth.models import User
 
 
 class Vehicule(models.Model):
@@ -40,6 +41,7 @@ class Vehicule(models.Model):
 
     def __str__(self):
         return self.numChassis
+
 
 class Marque(models.Model):
     # Fields
@@ -118,3 +120,28 @@ class Modele(models.Model):
 
     def __str__(self):
         return self.nomModele
+
+
+class Annonce(models.Model):
+    # Fields
+    app_label = "Annonce"
+    idAnnonce = models.CharField(primary_key=True, max_length=50)
+    titre = models.CharField(max_length=50)
+    prix = models.IntegerField()
+    commentaites = models.CharField(max_length=255)
+
+    # Relationship Fields
+    idVehicule = models.ForeignKey(
+        'SayaraApi.Vehicule',
+        related_name="vehicule",
+        on_delete="DO_NOTHING",
+    )
+    idUser = models.ForeignKey(
+        User,
+        related_name="proprietaire",
+        on_delete="DO_NOTHING",
+
+    )
+
+    def __str__(self):
+        return self.titre

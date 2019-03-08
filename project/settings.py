@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'CHANGEME')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_framework.authtoken',
     'SayaraApi',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -65,7 +67,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# REST_FRAMEWORK = {}
+#REST_FRAMEWORK = {}
 
 DRF_FIREBASE_AUTH = {
     'FIREBASE_SERVICE_ACCOUNT_KEY': 'configuration.json'
@@ -143,3 +145,4 @@ STATIC_URL = '/static/'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+CORS_ORIGIN_ALLOW_ALL= True

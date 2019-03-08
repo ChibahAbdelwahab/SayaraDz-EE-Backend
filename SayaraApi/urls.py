@@ -4,7 +4,6 @@ from . import views
 
 router = routers.DefaultRouter()
 
-
 urlpatterns = (
     # urls for Django Rest Framework SayaraApi
     path('', include(router.urls)),
@@ -43,4 +42,3 @@ urlpatterns += (
     path('modele/update/<int:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
     path('modele/list', views.ListModeleView.as_view(), name="modele_List"),
 )
-
