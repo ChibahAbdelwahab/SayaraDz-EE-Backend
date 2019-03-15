@@ -27,13 +27,13 @@ urlpatterns += (
     path('marque/update/<slug:pk>/', views.MarqueUpdateView.as_view(), name='SayaraApi_marque_update'),
 )
 
-
 urlpatterns += (
     # urls for Version
     path('version/', views.VersionListView.as_view(), name='SayaraApi_version_list'),
     path('version/create/', views.VersionCreateView.as_view(), name='SayaraApi_version_create'),
-    path('version/detail/<int:pk>/', views.VersionDetailView.as_view(), name='SayaraApi_version_detail'),
-    path('version/update/<int:pk>/', views.VersionUpdateView.as_view(), name='SayaraApi_version_update'),
+    path('version/detail/<slug:pk>/', views.VersionDetailView.as_view(), name='SayaraApi_version_detail'),
+    path('version/delete/<slug:pk>/', views.VersionDeleteView.as_view(), name='SayaraApi_version_delete'),
+    path('version/update/<slug:pk>/', views.VersionUpdateView.as_view(), name='SayaraApi_version_update'),
 )
 
 

@@ -98,7 +98,7 @@ class VersionListView(generics.ListAPIView):
         return queryset
 
 
-class VersionCreateView(generics.UpdateAPIView):
+class VersionCreateView(generics.CreateAPIView):
     queryset = Version.objects.all()
     serializer_class = VersionSerializer
 
@@ -107,10 +107,17 @@ class VersionDetailView(generics.RetrieveAPIView):
     queryset = Version.objects.all()
     serializer_class = VersionSerializer
 
+class VersionUpdateView(generics.UpdateAPIView):
+    queryset = Version.objects.all()
+    serializer_class = VersionUpdateSerializer
 
-class VersionUpdateView(UpdateView):
-    model = Version
-    form_class = VersionForm
+class VersionDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Version, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)
 
 
 class ModeleListView(generics.ListAPIView):

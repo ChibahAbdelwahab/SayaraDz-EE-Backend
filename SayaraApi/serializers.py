@@ -35,6 +35,14 @@ class VersionSerializer(serializers.ModelSerializer):
             'modeleVersion',
         )
 
+class VersionUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Version
+        fields = (
+            'nomVersion', 
+            'modeleVersion',
+        )
 
 class ModeleSerializer(serializers.ModelSerializer):
 
