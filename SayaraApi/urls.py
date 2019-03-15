@@ -18,13 +18,16 @@ urlpatterns += (
     path('vehicule/list', views.VehiculeListView.as_view(), name="vehicule_List"),
 )
 
+
 urlpatterns += (
     # urls for Marque
     path('marque/', views.MarqueListView.as_view(), name='SayaraApi_marque_list'),
     path('marque/create/', views.MarqueCreateView.as_view(), name='SayaraApi_marque_create'),
     path('marque/detail/<int:pk>/', views.MarqueDetailView.as_view(), name='SayaraApi_marque_detail'),
+    path('marque/delete/<slug:pk>/', views.MarqueDeleteView.as_view(), name='SayaraApi_marque_delete'),
     path('marque/update/<int:pk>/', views.MarqueUpdateView.as_view(), name='SayaraApi_marque_update'),
 )
+
 
 urlpatterns += (
     # urls for Version

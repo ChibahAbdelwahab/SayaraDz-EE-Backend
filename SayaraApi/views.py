@@ -1,10 +1,11 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import Vehicule, Marque, Version, Modele
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from .forms import VehiculeForm, MarqueForm, VersionForm, ModeleForm
-from rest_framework import generics
+from rest_framework import generics, views
 from rest_framework.response import Response
-from .serializers import VehiculeSerializer, MarqueSerializer, VersionSerializer, ModeleSerializer
+from .serializers import *
 
 class VehiculeListView(generics.ListAPIView):
     model = Vehicule
@@ -65,9 +66,17 @@ class MarqueDetailView(generics.RetrieveAPIView):
     serializer_class = MarqueSerializer
 
 
-class MarqueUpdateView(UpdateView):
-    model = Marque
-    form_class = MarqueForm
+class MarqueUpdateView(generics.UpdateAPIView):
+    queryset = Marque.objects.all()
+    serializer_class = MarqueSerializer
+
+class MarqueDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Marque, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)
 
 
 class VersionListView(generics.ListAPIView):
