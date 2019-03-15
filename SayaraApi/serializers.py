@@ -13,6 +13,15 @@ class VehiculeSerializer(serializers.ModelSerializer):
             'versionVoiture'
         )
 
+class VehiculeUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Vehicule
+        fields = (
+            'disponible', 
+            'versionVoiture'
+        )
+
 
 class MarqueSerializer(serializers.ModelSerializer):
 

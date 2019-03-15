@@ -36,10 +36,17 @@ class VehiculeDetailView(generics.RetrieveAPIView):
     serializer_class = VehiculeSerializer
 
 
-class VehiculeUpdateView(UpdateView):
-    model = Vehicule
-    form_class = VehiculeForm
+class VehiculeUpdateView(generics.UpdateAPIView):
+    queryset = Vehicule.objects.all()
+    serializer_class = VehiculeUpdateSerializer
 
+class VehiculeDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Vehicule, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)
 
 class MarqueListView(generics.ListAPIView):
     model = Marque

@@ -15,6 +15,7 @@ urlpatterns += (
     path('vehicule/create/', views.VehiculeCreateView.as_view(), name='SayaraApi_vehicule_create'),
     path('vehicule/detail/<slug:pk>/', views.VehiculeDetailView.as_view(), name='SayaraApi_vehicule_detail'),
     path('vehicule/update/<slug:pk>/', views.VehiculeUpdateView.as_view(), name='SayaraApi_vehicule_update'),
+    path('vehicule/delete/<slug:pk>/', views.VehiculeDeleteView.as_view(), name='SayaraApi_vehicule_delete'),
     path('vehicule/list', views.VehiculeListView.as_view(), name="vehicule_List"),
 )
 
