@@ -18,14 +18,13 @@ urlpatterns += (
     path('vehicule/list', views.VehiculeListView.as_view(), name="vehicule_List"),
 )
 
-
 urlpatterns += (
     # urls for Marque
     path('marque/', views.MarqueListView.as_view(), name='SayaraApi_marque_list'),
     path('marque/create/', views.MarqueCreateView.as_view(), name='SayaraApi_marque_create'),
-    path('marque/detail/<int:pk>/', views.MarqueDetailView.as_view(), name='SayaraApi_marque_detail'),
+    path('marque/detail/<slug:pk>/', views.MarqueDetailView.as_view(), name='SayaraApi_marque_detail'),
     path('marque/delete/<slug:pk>/', views.MarqueDeleteView.as_view(), name='SayaraApi_marque_delete'),
-    path('marque/update/<int:pk>/', views.MarqueUpdateView.as_view(), name='SayaraApi_marque_update'),
+    path('marque/update/<slug:pk>/', views.MarqueUpdateView.as_view(), name='SayaraApi_marque_update'),
 )
 
 
@@ -37,11 +36,13 @@ urlpatterns += (
     path('version/update/<int:pk>/', views.VersionUpdateView.as_view(), name='SayaraApi_version_update'),
 )
 
+
 urlpatterns += (
     # urls for Modele
     path('modele/', views.ModeleListView.as_view(), name='SayaraApi_modele_list'),
     path('modele/create/', views.ModeleCreateView.as_view(), name='SayaraApi_modele_create'),
-    path('modele/detail/<int:pk>/', views.ModeleDetailView.as_view(), name='SayaraApi_modele_detail'),
-    path('modele/update/<int:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
+    path('modele/detail/<slug:pk>/', views.ModeleDetailView.as_view(), name='SayaraApi_modele_detail'),
+    path('modele/update/<slug:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
+    path('modele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
     path('modele/list', views.ListModeleView.as_view(), name="modele_List"),
 )

@@ -146,8 +146,15 @@ class ModeleDetailView(generics.RetrieveAPIView):
     queryset = Modele.objects.all()
     serializer_class = ModeleSerializer
 
+class ModeleUpdateView(generics.UpdateAPIView):
+    queryset = Modele.objects.all()
+    serializer_class = ModeleUpdateSerializer
 
-class ModeleUpdateView(UpdateView):
-    model = Modele
-    form_class = ModeleForm
+class ModeleDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Modele, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)
 
