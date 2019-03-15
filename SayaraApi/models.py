@@ -121,7 +121,7 @@ class Modele(models.Model):
     def __str__(self):
         return self.nomModele
 
-
+#dd
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
