@@ -50,9 +50,9 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for Fabriquant
-    path('SayaraApi/fabriquant/', views.FabriquantListView.as_view(), name='SayaraApi_fabriquant_list'),
-    path('SayaraApi/fabriquant/create/', views.FabriquantCreateView.as_view(), name='SayaraApi_fabriquant_create'),
-    path('SayaraApi/fabriquant/detail/<slug:pk>/', views.FabriquantDetailView.as_view(), name='SayaraApi_fabriquant_detail'),
-    path('SayaraApi/fabriquant/update/<slug:pk>/', views.FabriquantUpdateView.as_view(), name='SayaraApi_fabriquant_update'),
-    path('modele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
+    #path('SayaraApi/fabriquant/', views.FabriquantListView.as_view(), name='SayaraApi_fabriquant_list'),
+    #path('SayaraApi/fabriquant/create/', views.FabriquantCreateView.as_view(), name='SayaraApi_fabriquant_create'),
+    #path('SayaraApi/fabriquant/detail/<slug:pk>/', views.FabriquantDetailView.as_view(), name='SayaraApi_fabriquant_detail'),
+    #path('SayaraApi/fabriquant/update/<slug:pk>/', views.FabriquantUpdateView.as_view(), name='SayaraApi_fabriquant_update'),
+    #path('modele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
 )
