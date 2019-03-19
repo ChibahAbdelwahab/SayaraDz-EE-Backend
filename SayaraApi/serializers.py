@@ -83,3 +83,11 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'marqueModele',
         )
 
+class FabriquantSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Fabriquant
+        fields = (
+            'nomFabriquant', 
+            'idFabriquant', 
+        )

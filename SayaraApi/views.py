@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from .models import Vehicule, Marque, Version, Modele
+from .models import *
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from .forms import VehiculeForm, MarqueForm, VersionForm, ModeleForm
@@ -172,3 +172,41 @@ class ModeleDeleteView(views.APIView):
         thing.delete()
         return Response({'message':'supprimé'}, status=204)
 
+class FabriquantListView(generics.ListAPIView):
+    model = Fabriquant
+    serializer_class = FabriquantSerializer
+    #pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = Modele.objects.all()
+        query_nom            = self.request.GET.get("nomFabriquant",None)
+        query_id   = self.request.GET.get("idFabriquant",None)
+        if query_nom is not None:
+            queryset = queryset.filter(Q(nomFabriquant = query_nom))
+        if query_id is not None:
+            queryset = queryset.filter(Q(idFabriquant = query_id))
+
+        return queryset
+    
+
+
+class FabriquantCreateView(generics.CreateAPIView):
+    queryset = Fabriquant.objects.all()
+    serializer_class = FabriquantSerializer
+
+
+class FabriquantDetailView(generics.RetrieveAPIView):
+    queryset = Fabriquant.objects.all()
+    serializer_class = FabriquantSerializer
+
+
+class FabriquantUpdateView(generics.UpdateAPIView):
+    queryset = Fabriquant.objects.all()
+    serializer_class = FabriquantSerializer
+
+class FabricantDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Marque, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)

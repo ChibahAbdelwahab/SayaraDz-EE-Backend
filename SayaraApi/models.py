@@ -121,7 +121,7 @@ class Modele(models.Model):
     def __str__(self):
         return self.nomModele
 
-#dd
+
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
@@ -145,3 +145,31 @@ class Annonce(models.Model):
 
     def __str__(self):
         return self.titre
+
+
+
+class Fabriquant(models.Model):
+
+    # Fields
+    nomFabriquant = models.CharField(max_length=255)
+    idFabriquant = models.AutoField(primary_key=True)
+
+    # Relationship Fields
+    marqueFabriquant = models.ForeignKey(
+        'U.marque',
+        on_delete=models.CASCADE, related_name="fabriquants", 
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('SayaraApi_fabriquant_detail', args=(self.pk,))
+
+
+    def get_update_url(self):
+        return reverse('SayaraApi_fabriquant_update', args=(self.pk,))
+
