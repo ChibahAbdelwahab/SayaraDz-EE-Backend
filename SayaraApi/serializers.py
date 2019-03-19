@@ -83,11 +83,11 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'marqueModele',
         )
 
-class FabriquantSerializer(serializers.ModelSerializer):
+class FabricantSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Fabriquant
+        model = models.Fabricant
         fields = (
-            'nomFabriquant', 
-            'idFabriquant', 
+            'nomFabricant', 
+            'idFabricant', 
         )

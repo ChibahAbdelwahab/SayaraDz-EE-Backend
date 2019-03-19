@@ -172,36 +172,36 @@ class ModeleDeleteView(views.APIView):
         thing.delete()
         return Response({'message':'supprimé'}, status=204)
 
-class FabriquantListView(generics.ListAPIView):
-    model = Fabriquant
-    serializer_class = FabriquantSerializer
+class FabricantListView(generics.ListAPIView):
+    model = Fabricant
+    serializer_class = FabricantSerializer
     #pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
-        query_nom            = self.request.GET.get("nomFabriquant",None)
-        query_id   = self.request.GET.get("idFabriquant",None)
+        query_nom            = self.request.GET.get("nomFabricant",None)
+        query_id   = self.request.GET.get("idFabricant",None)
         if query_nom is not None:
-            queryset = queryset.filter(Q(nomFabriquant = query_nom))
+            queryset = queryset.filter(Q(nomFabricant = query_nom))
         if query_id is not None:
-            queryset = queryset.filter(Q(idFabriquant = query_id))
+            queryset = queryset.filter(Q(idFabricant = query_id))
 
         return queryset
     
 
 
-class FabriquantCreateView(generics.CreateAPIView):
-    queryset = Fabriquant.objects.all()
-    serializer_class = FabriquantSerializer
+class FabricantCreateView(generics.CreateAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 
-class FabriquantDetailView(generics.RetrieveAPIView):
-    queryset = Fabriquant.objects.all()
-    serializer_class = FabriquantSerializer
+class FabricantDetailView(generics.RetrieveAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 
-class FabriquantUpdateView(generics.UpdateAPIView):
-    queryset = Fabriquant.objects.all()
-    serializer_class = FabriquantSerializer
+class FabricantUpdateView(generics.UpdateAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 class FabricantDeleteView(views.APIView):
     def get_object(self, pk):

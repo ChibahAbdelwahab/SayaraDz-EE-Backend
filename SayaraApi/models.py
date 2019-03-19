@@ -148,16 +148,16 @@ class Annonce(models.Model):
 
 
 
-class Fabriquant(models.Model):
+class Fabricant(models.Model):
 
     # Fields
-    nomFabriquant = models.CharField(max_length=255)
-    idFabriquant = models.AutoField(primary_key=True)
+    nomFabricant = models.CharField(max_length=255)
+    idFabricant = models.AutoField(primary_key=True)
 
     # Relationship Fields
-    marqueFabriquant = models.ForeignKey(
+    marqueFabricant = models.ForeignKey(
         'U.marque',
-        on_delete=models.CASCADE, related_name="fabriquants", 
+        on_delete=models.CASCADE, related_name="fabricants", 
     )
 
     class Meta:
@@ -167,9 +167,9 @@ class Fabriquant(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('SayaraApi_fabriquant_detail', args=(self.pk,))
+        return reverse('SayaraApi_fabricant_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('SayaraApi_fabriquant_update', args=(self.pk,))
+        return reverse('SayaraApi_fabricant_update', args=(self.pk,))
 
