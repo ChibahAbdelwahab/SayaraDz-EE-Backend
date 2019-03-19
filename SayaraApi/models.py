@@ -164,3 +164,9 @@ class Fabricant(models.Model):
     def __str__(self):
         return self.nomFabricant
 
+
+class UtilisateurFabricant(User):
+    Fabricant = models.ForeignKey(
+        'SayaraApi.fabricant',
+        on_delete=models.CASCADE, related_name="utilisateurs",
+    )
