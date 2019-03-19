@@ -156,7 +156,7 @@ class Fabricant(models.Model):
 
     # Relationship Fields
     marqueFabricant = models.ForeignKey(
-        'U.marque',
+        'SayaraApi.marque',
         on_delete=models.CASCADE, related_name="fabricants", 
     )
 
@@ -173,3 +173,9 @@ class Fabricant(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_fabricant_update', args=(self.pk,))
 
+
+class UtilisateurFabricant(User):
+    Fabricant = models.ForeignKey(
+        'SayaraApi.fabricant',
+        on_delete=models.CASCADE, related_name="utilisateurs", 
+    )
