@@ -156,7 +156,7 @@ class Fabricant(models.Model):
 
     # Relationship Fields
     marqueFabricant = models.ForeignKey(
-        'U.marque',
+        'SayaraApi.marque',
         on_delete=models.CASCADE, related_name="fabricants", 
     )
 
