@@ -173,3 +173,9 @@ class Fabricant(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_fabricant_update', args=(self.pk,))
 
+class userAccount(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    fabriquant = models.ForeignKey(
+        'SayaraApi.fabricant',
+        on_delete=models.CASCADE, related_name="fabricant",
+    )
