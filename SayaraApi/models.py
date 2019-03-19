@@ -1,17 +1,8 @@
 from django.urls import reverse
-from django_extensions.db.fields import AutoSlugField
-from django.db.models import BooleanField
-from django.db.models import CharField
-from django.db.models import IntegerField
-from django.db.models import TextField
-from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth import get_user_model
-from django.contrib.auth import models as auth_models
 from django.db import models as models
-from django_extensions.db import fields as extension_fields
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Vehicule(models.Model):
@@ -147,9 +138,7 @@ class Annonce(models.Model):
         return self.titre
 
 
-
 class Fabricant(models.Model):
-
     # Fields
     nomFabricant = models.CharField(max_length=255)
     idFabricant = models.AutoField(primary_key=True)
@@ -157,7 +146,7 @@ class Fabricant(models.Model):
     # Relationship Fields
     marqueFabricant = models.ForeignKey(
         'SayaraApi.marque',
-        on_delete=models.CASCADE, related_name="fabricants", 
+        on_delete=models.CASCADE, related_name="fabricants",
     )
 
     class Meta:
@@ -169,13 +158,9 @@ class Fabricant(models.Model):
     def get_absolute_url(self):
         return reverse('SayaraApi_fabricant_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('SayaraApi_fabricant_update', args=(self.pk,))
 
-class userAccount(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    fabriquant = models.ForeignKey(
-        'SayaraApi.fabricant',
-        on_delete=models.CASCADE, related_name="fabricant",
-    )
+    def __str__(self):
+        return self.nomFabricant
+
