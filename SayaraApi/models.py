@@ -12,6 +12,8 @@ from django.contrib.auth import models as auth_models
 from django.db import models as models
 from django_extensions.db import fields as extension_fields
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Vehicule(models.Model):
@@ -174,7 +176,11 @@ class Fabricant(models.Model):
         return reverse('SayaraApi_fabricant_update', args=(self.pk,))
 
 
-class UtilisateurFabricant(User):
+class UtilisateurFabricant(models.Model):
+    user = models.OneToOneField(
+        User, 
+        on_delete=models.CASCADE, related_name="utilisateurfabricants", 
+    )
     Fabricant = models.ForeignKey(
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="utilisateurs", 
