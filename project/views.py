@@ -9,7 +9,7 @@ class CustomLoginView(LoginView):
         orginal_response = super().get_response()
         try :
             fabricant = self.user.profile.Fabricant.nomFabricant
-            marque = fabricant.marqueFabricant.nomMarque
+            marque = self.user.profile.Fabricant.marqueFabricant.nomMarque
         except:
             fabricant=""
             marque=""
