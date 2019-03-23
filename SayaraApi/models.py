@@ -165,7 +165,11 @@ class Fabricant(models.Model):
         return self.nomFabricant
 
 
-class UtilisateurFabricant(User):
+class UtilisateurFabricant(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE, related_name="utilisateurfabricants",
+    )
     Fabricant = models.ForeignKey(
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="utilisateurs",
