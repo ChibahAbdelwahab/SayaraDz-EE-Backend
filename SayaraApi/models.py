@@ -174,5 +174,5 @@ class Profile(models.Model):
     is_client = models.BooleanField(default=False)
     Fabricant = models.ForeignKey(
         'SayaraApi.fabricant',
-        on_delete=models.CASCADE, related_name="fabricant",
+        on_delete=models.CASCADE, related_name="fabricant", null=True,
     )
