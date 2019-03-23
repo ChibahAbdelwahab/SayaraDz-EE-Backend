@@ -34,7 +34,7 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
         uid = decoded_token.get('uid')
         name = decoded_token.get('name')
         email = decoded_token.get('email')
-        user,bool = User.objects.get_or_create(username=name,email=email)
+        user,bool = User.objects.get_or_create(username=name,email=email,is_client=True)
         #print(user,bool)
 
         return (user, None)
