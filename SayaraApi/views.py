@@ -210,3 +210,43 @@ class FabricantDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message':'supprimé'}, status=204)
+
+
+class CouleurListView(generics.ListAPIView):
+    model = Couleur
+    serializer_class = CouleurSerializer
+    #pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = Modele.objects.all()
+        query_nom            = self.request.GET.get("nomCouleur",None)
+        query_id   = self.request.GET.get("idCouleur",None)
+        if query_nom is not None:
+            queryset = queryset.filter(Q(nomCouleur = query_nom))
+        if query_id is not None:
+            queryset = queryset.filter(Q(idCouleur = query_id))
+
+        return queryset
+    
+
+
+class CouleurCreateView(generics.CreateAPIView):
+    queryset = Couleur.objects.all()
+    serializer_class = CouleurSerializer
+
+
+class CouleurDetailView(generics.RetrieveAPIView):
+    queryset = Couleur.objects.all()
+    serializer_class = CouleurSerializer
+
+
+class CouleurUpdateView(generics.UpdateAPIView):
+    queryset = Couleur.objects.all()
+    serializer_class = CouleurSerializer
+
+class CouleurDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Marque, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)

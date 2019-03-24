@@ -9,6 +9,7 @@ admin.site.register(Version)
 admin.site.register(Modele)
 admin.site.register(Annonce)
 admin.site.register(Fabricant)
+admin.site.register(Couleur)
 
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton

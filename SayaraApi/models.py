@@ -11,7 +11,6 @@ class Vehicule(models.Model):
     numChassis = models.CharField(max_length=100, primary_key=True)
     disponible = models.BooleanField()
     imageVehicle = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-
     # Relationship Fields
     versionVoiture = models.ForeignKey(
         'SayaraApi.Version',
@@ -90,13 +89,18 @@ class Modele(models.Model):
     app_label = "Modele"
     idModele = models.CharField(primary_key=True, max_length=50)
     nomModele = models.CharField(max_length=255)
-
     # Relationship Fields
+    couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
     marqueModele = models.ForeignKey(
         'SayaraApi.Marque',
         on_delete=models.CASCADE, related_name="modeles",
     )
-
+        # Relationship Fields
+    couleurCompatible = models.ManyToManyField(
+        'SayaraApi.Couleur',
+        related_name="modeles", 
+        blank=True
+    )
     class Meta:
         ordering = ('-pk',)
 
@@ -139,6 +143,7 @@ class Annonce(models.Model):
 
 
 class Fabricant(models.Model):
+    app_label = "Fabricant"
     # Fields
     nomFabricant = models.CharField(max_length=255)
     idFabricant = models.AutoField(primary_key=True)
@@ -176,3 +181,21 @@ class Profile(models.Model):
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="fabricant", null=True,
     )
+
+class Couleur(models.Model):
+    app_label = "Couleur"
+    codeCouleur = models.CharField(max_length=3, primary_key=True)
+    nomCouleur = models.CharField(max_length=50)
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('SayaraApi_couleur_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('SayaraApi_couleur_update', args=(self.pk,))
+
+#Option

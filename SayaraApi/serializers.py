@@ -60,7 +60,8 @@ class ModeleSerializer(serializers.ModelSerializer):
         fields = ( 
             'nomModele', 
             'idModele', 
-            'marqueModele'
+            'marqueModele',
+            'couleurCompatible'
         )
 
     
@@ -71,7 +72,8 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
         model = models.Modele
         fields = ( 
             'nomModele', 
-            'marqueModele'
+            'marqueModele',
+            'couleurCompatible'
         )
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
@@ -81,6 +83,7 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'nomModele', 
             'idModele', 
             'marqueModele',
+            'couleurCompatible'
         )
 
 class FabricantSerializer(serializers.ModelSerializer):
@@ -90,4 +93,12 @@ class FabricantSerializer(serializers.ModelSerializer):
         fields = (
             'nomFabricant', 
             'idFabricant', 
+        )
+class CouleurSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Couleur
+        fields = ( 
+            'codeCouleur', 
+            'nomCouleur', 
         )
