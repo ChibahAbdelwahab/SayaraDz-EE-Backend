@@ -56,3 +56,7 @@ urlpatterns += (
     #àpoiuyiopù^*e'(-è_path('SayaraApi/fabriquant/update/<slug:pk>/', views.FabriquantUpdateView.as_view(), name='SayaraApi_fabriquant_update'),
     #path('modele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
 )
+urlpatterns += (
+    # urls for Mobile Queries
+    path('query/annonce/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
+)

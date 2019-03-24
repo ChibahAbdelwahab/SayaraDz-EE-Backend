@@ -9,11 +9,13 @@ class CustomLoginView(LoginView):
         orginal_response = super().get_response()
         try :
             fabricant = self.user.profile.Fabricant.nomFabricant
-            marque = self.user.profile.Fabricant.marqueFabricant.idMarque
+            marqueid = self.user.profile.Fabricant.marqueFabricant.idMarque
+            marque = self.user.profile.Fabricant.marqueFabricant.nomMarque
         except:
             fabricant=""
+            marqueId=""
             marque=""
         mydata = {"admin": self.user.is_staff, 'firstName': self.user.first_name, 'lastName': self.user.last_name,
-                  "email": self.user.last_name, 'fabricant': fabricant, "marque": marque}
+                  "email": self.user.last_name, 'fabricant': fabricant, "marqueid": marqueid,"marque":marque}
         orginal_response.data.update(mydata)
         return orginal_response

@@ -34,6 +34,15 @@ class Vehicule(models.Model):
         return self.numChassis
 
 
+class OcasionVehicule(Vehicule):
+    date = models.DateField()
+    kilometrage = models.IntegerField()
+
+    @property
+    def prix(self):
+        annonce = Annonce.objects.get("")
+
+
 class Marque(models.Model):
     # Fields
     app_label = "Marque"
@@ -116,7 +125,6 @@ class Modele(models.Model):
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
-    idAnnonce = models.CharField(primary_key=True, max_length=50)
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
     commentaites = models.CharField(max_length=255)
