@@ -177,7 +177,7 @@ class FabricantListView(generics.ListAPIView):
     serializer_class = FabricantSerializer
     #pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Modele.objects.all()
+        queryset = Fabricant.objects.all()
         query_nom            = self.request.GET.get("nomFabricant",None)
         query_id   = self.request.GET.get("idFabricant",None)
         if query_nom is not None:
@@ -217,9 +217,9 @@ class CouleurListView(generics.ListAPIView):
     serializer_class = CouleurSerializer
     #pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Modele.objects.all()
+        queryset = Couleur.objects.all()
         query_nom            = self.request.GET.get("nomCouleur",None)
-        query_id   = self.request.GET.get("idCouleur",None)
+        query_id   = self.request.GET.get("codeCouleur",None)
         if query_nom is not None:
             queryset = queryset.filter(Q(nomCouleur = query_nom))
         if query_id is not None:
@@ -244,6 +244,46 @@ class CouleurUpdateView(generics.UpdateAPIView):
     serializer_class = CouleurSerializer
 
 class CouleurDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Marque, pk=pk)
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message':'supprimé'}, status=204)
+
+
+class OptionListView(generics.ListAPIView):
+    model = Option
+    serializer_class = OptionSerializer
+    #pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = Option.objects.all()
+        query_nom            = self.request.GET.get("nomOption",None)
+        query_id   = self.request.GET.get("codeOption",None)
+        if query_nom is not None:
+            queryset = queryset.filter(Q(nomOption = query_nom))
+        if query_id is not None:
+            queryset = queryset.filter(Q(idOption = query_id))
+
+        return queryset
+    
+
+
+class OptionCreateView(generics.CreateAPIView):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer
+
+
+class OptionDetailView(generics.RetrieveAPIView):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer
+
+
+class OptionUpdateView(generics.UpdateAPIView):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer
+
+class OptionDeleteView(views.APIView):
     def get_object(self, pk):
         return get_object_or_404(Marque, pk=pk)
     def delete(self, request, pk, *args, **kwargs):

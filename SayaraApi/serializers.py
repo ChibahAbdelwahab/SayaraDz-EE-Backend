@@ -42,6 +42,7 @@ class VersionSerializer(serializers.ModelSerializer):
             'nomVersion', 
             'codeVersion', 
             'modeleVersion',
+            'optionsVersion'
         )
 
 class VersionUpdateSerializer(serializers.ModelSerializer):
@@ -51,6 +52,7 @@ class VersionUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'nomVersion', 
             'modeleVersion',
+            'optionsVersion'
         )
 
 class ModeleSerializer(serializers.ModelSerializer):
@@ -101,4 +103,13 @@ class CouleurSerializer(serializers.ModelSerializer):
         fields = ( 
             'codeCouleur', 
             'nomCouleur', 
+        )
+
+class OptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Option
+        fields = (
+            'nomOption', 
+            'codeOption', 
         )

@@ -67,3 +67,11 @@ urlpatterns += (
     path('couleur/delete/<slug:pk>/', views.CouleurDeleteView.as_view(), name='SayaraApi_modele_delete'),
 )
 
+urlpatterns += (
+    #urls for Option
+    path('option/', views.OptionListView.as_view(), name='SayaraApi_option_list'),
+    path('option/create/', views.OptionCreateView.as_view(), name='SayaraApi_option_create'),
+    path('option/detail/<slug:pk>/', views.OptionDetailView.as_view(), name='SayaraApi_option_detail'),
+    path('option/update/<slug:pk>/', views.OptionUpdateView.as_view(), name='SayaraApi_option_update'),
+    path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_modele_delete'),
+)

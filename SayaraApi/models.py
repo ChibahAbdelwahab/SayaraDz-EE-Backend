@@ -63,6 +63,11 @@ class Version(models.Model):
     codeVersion = models.CharField(max_length=20, primary_key=True)
 
     # Relationship Fields
+    optionsVersion = models.ManyToManyField(
+        'SayaraApi.Option',
+        related_name="versions", 
+        blank=True
+    )
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions",
@@ -198,4 +203,22 @@ class Couleur(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_couleur_update', args=(self.pk,))
 
-#Option
+class Option(models.Model):
+
+    # Fields
+    nomOption = models.CharField(max_length=255)
+    codeOption = models.TextField(max_length=100)
+
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('SayaraApi_option_detail', args=(self.pk,))
+
+
+    def get_update_url(self):
+        return reverse('SayaraApi_option_update', args=(self.pk,))
