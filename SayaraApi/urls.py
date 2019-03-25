@@ -40,12 +40,31 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for Fabriquant
-    #path('SayaraApi/fabriquant/', views.FabriquantListView.as_view(), name='SayaraApi_fabriquant_list'),
-    #path('SayaraApi/fabriquant/create/', views.FabriquantCreateView.as_view(), name='SayaraApi_fabriquant_create'),
-    #path('SayaraApi/fabriquant/detail/<slug:pk>/', views.FabriquantDetailView.as_view(), name='SayaraApi_fabriquant_detail'),
-    #àpoiuyiopù^*e'(-è_path('SayaraApi/fabriquant/update/<slug:pk>/', views.FabriquantUpdateView.as_view(), name='SayaraApi_fabriquant_update'),
-    #path('modele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
+    #urls for Fabriquant
+    path('fabriquant/', views.FabricantListView.as_view(), name='SayaraApi_fabriquant_list'),
+    path('fabriquant/create/', views.FabricantCreateView.as_view(), name='SayaraApi_fabriquant_create'),
+    path('fabriquant/detail/<slug:pk>/', views.FabricantDetailView.as_view(), name='SayaraApi_fabriquant_detail'),
+    path('fabriquant/update/<slug:pk>/', views.FabricantUpdateView.as_view(), name='SayaraApi_fabriquant_update'),
+    path('fabriquant/delete/<slug:pk>/', views.FabricantDeleteView.as_view(), name='SayaraApi_modele_delete'),
+)
+
+
+urlpatterns += (
+    #urls for Couleur
+    path('couleur/', views.CouleurListView.as_view(), name='SayaraApi_couleur_list'),
+    path('couleur/create/', views.CouleurCreateView.as_view(), name='SayaraApi_couleur_create'),
+    path('couleur/detail/<slug:pk>/', views.CouleurDetailView.as_view(), name='SayaraApi_couleur_detail'),
+    path('couleur/update/<slug:pk>/', views.CouleurUpdateView.as_view(), name='SayaraApi_couleur_update'),
+    path('couleur/delete/<slug:pk>/', views.CouleurDeleteView.as_view(), name='SayaraApi_modele_delete'),
+)
+
+urlpatterns += (
+    #urls for Option
+    path('option/', views.OptionListView.as_view(), name='SayaraApi_option_list'),
+    path('option/create/', views.OptionCreateView.as_view(), name='SayaraApi_option_create'),
+    path('option/detail/<slug:pk>/', views.OptionDetailView.as_view(), name='SayaraApi_option_detail'),
+    path('option/update/<slug:pk>/', views.OptionUpdateView.as_view(), name='SayaraApi_option_update'),
+    path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_modele_delete'),
 )
 urlpatterns += (
     # urls for Mobile Queries

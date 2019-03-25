@@ -67,6 +67,11 @@ class Version(models.Model):
     codeVersion = models.CharField(max_length=20, primary_key=True)
 
     # Relationship Fields
+    optionsVersion = models.ManyToManyField(
+        'SayaraApi.Option',
+        related_name="versions",
+        blank=True
+    )
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions",
@@ -93,13 +98,18 @@ class Modele(models.Model):
     app_label = "Modele"
     idModele = models.CharField(primary_key=True, max_length=50)
     nomModele = models.CharField(max_length=255)
-
     # Relationship Fields
+    couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
     marqueModele = models.ForeignKey(
         'SayaraApi.Marque',
         on_delete=models.CASCADE, related_name="modeles",
     )
-
+        # Relationship Fields
+    couleurCompatible = models.ManyToManyField(
+        'SayaraApi.Couleur',
+        related_name="modeles",
+        blank=True
+    )
     class Meta:
         ordering = ('-pk',)
 
@@ -143,6 +153,7 @@ class Annonce(models.Model):
 
 
 class Fabricant(models.Model):
+    app_label = "Fabricant"
     # Fields
     nomFabricant = models.CharField(max_length=255)
     idFabricant = models.AutoField(primary_key=True)
@@ -180,6 +191,42 @@ class Profile(models.Model):
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
+
+class Couleur(models.Model):
+    app_label = "Couleur"
+    codeCouleur = models.CharField(max_length=3, primary_key=True)
+    nomCouleur = models.CharField(max_length=50)
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('SayaraApi_couleur_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('SayaraApi_couleur_update', args=(self.pk,))
+
+class Option(models.Model):
+
+    # Fields
+    nomOption = models.CharField(max_length=255)
+    codeOption = models.TextField(max_length=100)
+
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('SayaraApi_option_detail', args=(self.pk,))
+
+
+    def get_update_url(self):
+        return reverse('SayaraApi_option_update', args=(self.pk,))
 
 
 class VehiculeOccasion(Vehicule):

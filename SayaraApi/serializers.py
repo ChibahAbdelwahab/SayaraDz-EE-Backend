@@ -3,7 +3,8 @@ from . import models
 from rest_framework import serializers
 
 
-class VehiculeOccasionSerializer(serializers.ModelSerializer):
+class VehiculeSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.VehiculeOccasion
         fields = (
@@ -40,6 +41,7 @@ class VersionSerializer(serializers.ModelSerializer):
             'nomVersion',
             'codeVersion',
             'modeleVersion',
+            'optionsVersion'
         )
 
 
@@ -49,22 +51,28 @@ class VersionUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'nomVersion',
             'modeleVersion',
+            'optionsVersion'
         )
 
 
 class ModeleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
-        fields = (
-            'nomModele',
-            'idModele',
-            'marqueModele'
+        fields = ( 
+            'nomModele', 
+            'idModele', 
+            'marqueModele',
+            'couleurCompatible'
         )
 
 
 class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
+        fields = ( 
+            'nomModele', 
+            'marqueModele',
+            'couleurCompatible'
         fields = (
             'nomModele',
             'marqueModele'
@@ -78,6 +86,7 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'nomModele',
             'idModele',
             'marqueModele',
+            'couleurCompatible'
         )
 
 
@@ -87,6 +96,23 @@ class FabricantSerializer(serializers.ModelSerializer):
         fields = (
             'nomFabricant',
             'idFabricant',
+        )
+class CouleurSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Couleur
+        fields = (
+            'codeCouleur',
+            'nomCouleur',
+        )
+
+class OptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Option
+        fields = (
+            'nomOption',
+            'codeOption',
         )
 
 
