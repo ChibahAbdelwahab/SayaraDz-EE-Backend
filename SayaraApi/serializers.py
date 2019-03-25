@@ -8,8 +8,8 @@ class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Vehicule
         fields = (
-            'numChassis', 
-            'disponible', 
+            'numChassis',
+            'disponible',
             'versionVoiture'
         )
 
@@ -18,35 +18,33 @@ class VehiculeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Vehicule
         fields = (
-            'disponible', 
+            'disponible',
             'versionVoiture'
         )
 
 
 class MarqueSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Marque
         fields = (
-            'idMarque', 
-            'nomMarque', 
-            'imageMarque', 
+            'idMarque',
+            'nomMarque',
+            'imageMarque',
         )
 
 
 class VersionSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Version
         fields = (
-            'nomVersion', 
-            'codeVersion', 
+            'nomVersion',
+            'codeVersion',
             'modeleVersion',
             'optionsVersion'
         )
+
 
 class VersionUpdateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Version
         fields = (
@@ -56,8 +54,8 @@ class VersionUpdateSerializer(serializers.ModelSerializer):
             'optionsVersion'
         )
 
-class ModeleSerializer(serializers.ModelSerializer):
 
+class ModeleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
         fields = ( 
@@ -68,10 +66,8 @@ class ModeleSerializer(serializers.ModelSerializer):
             'couleurCompatible'
         )
 
-    
 
 class ModeleUpdateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Modele
         fields = ( 
@@ -80,6 +76,7 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
             'marqueModele',
             'couleurCompatible'
         )
+
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
     class Meta:
@@ -92,21 +89,21 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'couleurCompatible'
         )
 
-class FabricantSerializer(serializers.ModelSerializer):
 
+class FabricantSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Fabricant
         fields = (
-            'nomFabricant', 
-            'idFabricant', 
+            'nomFabricant',
+            'idFabricant',
         )
 class CouleurSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Couleur
-        fields = ( 
-            'codeCouleur', 
-            'nomCouleur', 
+        fields = (
+            'codeCouleur',
+            'nomCouleur',
         )
 
 class OptionSerializer(serializers.ModelSerializer):
@@ -114,6 +111,44 @@ class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Option
         fields = (
-            'nomOption', 
-            'codeOption', 
+            'nomOption',
+            'codeOption',
         )
+
+
+class AnnonceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Annonce
+        depth = 1
+        exclude = ()
+
+class VehiculeOccasionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.VehiculeOccasion
+        fields = (
+            'numChassis',
+            'versionVoiture',
+            'kilometrage',
+            'date',
+            'imageVehicle',
+        )
+class VehiculeNeufSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.VehiculeNeuf
+        fields = (
+            'numChassis',
+            'versionVoiture',
+            'disponible',
+            'prix'
+        )
+
+class AnnonceOccasionSerializer(serializers.ModelSerializer):
+    titre = serializers.CharField()
+    #idVehicule= VehiculeOccasionSerializer()
+    idUser = serializers.StringRelatedField()
+    date = serializers.DateField(source='idVehicule.date')
+    imageVehicle=serializers.ImageField(source='idVehicule.imageVehicle')
+    kilometrage = serializers.IntegerField(source='idVehicule.kilometrage')
+    class Meta:
+        model = models.Annonce
+        fields="__all__"

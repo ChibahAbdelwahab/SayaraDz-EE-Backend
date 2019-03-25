@@ -8,17 +8,21 @@ from django.dispatch import receiver
 class Vehicule(models.Model):
     # Fields
     app_label = "Vehicule"
-    numChassis = models.CharField(max_length=100, primary_key=True)
-    disponible = models.BooleanField()
-    imageVehicle = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    numChassis = models.CharField(max_length=100)
+    idVehicule = models.AutoField(primary_key=True)
+    imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    imageVehicle2 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
+    imageVehicle3 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
+
     # Relationship Fields
     versionVoiture = models.ForeignKey(
         'SayaraApi.Version',
-        on_delete=models.CASCADE, related_name="vehicules",
+        on_delete=models.CASCADE,
     )
 
     class Meta:
         ordering = ('-pk',)
+        abstract = True
 
     def __unicode__(self):
         return u'%s' % self.pk
@@ -66,7 +70,7 @@ class Version(models.Model):
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',
-        related_name="versions", 
+        related_name="versions",
         blank=True
     )
     modeleVersion = models.ForeignKey(
@@ -105,7 +109,7 @@ class Modele(models.Model):
         # Relationship Fields
     couleurCompatible = models.ManyToManyField(
         'SayaraApi.Couleur',
-        related_name="modeles", 
+        related_name="modeles",
         blank=True
     )
     class Meta:
@@ -127,14 +131,15 @@ class Modele(models.Model):
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
-    idAnnonce = models.CharField(primary_key=True, max_length=50)
+    #idAnnonce = models.AutoField(primary_key=True)
+
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
     commentaites = models.CharField(max_length=255)
 
     # Relationship Fields
     idVehicule = models.ForeignKey(
-        'SayaraApi.Vehicule',
+        'SayaraApi.VehiculeOccasion',
         related_name="vehicule",
         on_delete="DO_NOTHING",
     )
@@ -186,7 +191,7 @@ class Profile(models.Model):
     is_client = models.BooleanField(default=False)
     Fabricant = models.ForeignKey(
         'SayaraApi.fabricant',
-        on_delete=models.CASCADE, related_name="fabricant", null=True,
+        on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
 
 class Couleur(models.Model):
@@ -224,3 +229,20 @@ class Option(models.Model):
 
     def get_update_url(self):
         return reverse('SayaraApi_option_update', args=(self.pk,))
+
+
+class VehiculeOccasion(Vehicule):
+    kilometrage = models.IntegerField()
+    date = models.DateField()
+
+
+class VehiculeNeuf(Vehicule):
+    disponible = models.BooleanField()
+    idFabricant = models.ForeignKey(
+        'SayaraApi.Fabricant',
+        on_delete=models.CASCADE,
+    )
+
+    @property
+    def prix(self):
+        return 122
