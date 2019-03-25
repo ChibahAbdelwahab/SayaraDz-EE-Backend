@@ -6,16 +6,15 @@ from rest_framework import serializers
 class VehiculeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.VehiculeOccasion
+        model = models.Vehicule
         fields = (
             'numChassis',
             'disponible',
-            'versionVoiture',
-            'kilometrage',
-            'date'
+            'versionVoiture'
         )
 
 class VehiculeUpdateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.Vehicule
         fields = (
@@ -73,9 +72,6 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
             'nomModele', 
             'marqueModele',
             'couleurCompatible'
-        fields = (
-            'nomModele',
-            'marqueModele'
         )
 
 
