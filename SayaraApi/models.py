@@ -129,7 +129,7 @@ class Modele(models.Model):
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
-    idAnnonce = models.AutoField(primary_key=True)
+    #idAnnonce = models.AutoField(primary_key=True)
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
