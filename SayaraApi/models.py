@@ -59,8 +59,9 @@ class Marque(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
+    id2 = models.AutoField(primary_key=True)
     nomVersion = models.CharField(max_length=100)
-    codeVersion = models.CharField(max_length=20, primary_key=True)
+    codeVersion = models.CharField(max_length=20)
 
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
@@ -92,7 +93,8 @@ class Version(models.Model):
 class Modele(models.Model):
     # Fields
     app_label = "Modele"
-    idModele = models.CharField(primary_key=True, max_length=50)
+    idModele = models.AutoField(primary_key=True)
+    codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
     # Relationship Fields
     couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
@@ -207,7 +209,7 @@ class Option(models.Model):
 
     # Fields
     nomOption = models.CharField(max_length=255)
-    codeOption = models.TextField(max_length=100)
+    codeOption = models.CharField(max_length=100)
 
 
     class Meta:
