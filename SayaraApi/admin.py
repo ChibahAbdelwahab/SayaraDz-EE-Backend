@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from .models import *
 
-admin.site.register(Vehicule)
+admin.site.register(VehiculeOccasion)
+admin.site.register(VehiculeNeuf)
 admin.site.register(Marque)
 admin.site.register(Version)
 admin.site.register(Modele)

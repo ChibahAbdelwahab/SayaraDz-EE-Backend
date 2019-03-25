@@ -5,7 +5,7 @@ from .models import Vehicule, Marque, Version, Modele
 class VehiculeForm(forms.ModelForm):
     class Meta:
         model = Vehicule
-        fields = ['numChassis', 'disponible']
+        fields = []
 
 
 class MarqueForm(forms.ModelForm):

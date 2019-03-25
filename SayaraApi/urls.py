@@ -9,15 +9,6 @@ urlpatterns = (
     path('', include(router.urls)),
 )
 
-urlpatterns += (
-    # urls for Vehicule
-    path('vehicule/', views.VehiculeListView.as_view(), name='SayaraApi_vehicule_list'),
-    path('vehicule/create/', views.VehiculeCreateView.as_view(), name='SayaraApi_vehicule_create'),
-    path('vehicule/detail/<slug:pk>/', views.VehiculeDetailView.as_view(), name='SayaraApi_vehicule_detail'),
-    path('vehicule/update/<slug:pk>/', views.VehiculeUpdateView.as_view(), name='SayaraApi_vehicule_update'),
-    path('vehicule/delete/<slug:pk>/', views.VehiculeDeleteView.as_view(), name='SayaraApi_vehicule_delete'),
-    path('vehicule/list', views.VehiculeListView.as_view(), name="vehicule_List"),
-)
 
 urlpatterns += (
     # urls for Marque
@@ -58,5 +49,6 @@ urlpatterns += (
 )
 urlpatterns += (
     # urls for Mobile Queries
-    path('query/annonce/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
+    path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
+    path('annonce/neuf', views.AnnnonceNeufListView.as_view(), name='Annonce'),
 )

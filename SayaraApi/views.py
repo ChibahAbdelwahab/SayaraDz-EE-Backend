@@ -8,52 +8,6 @@ from rest_framework.response import Response
 from .serializers import *
 
 
-class VehiculeListView(generics.ListAPIView):
-    model = Vehicule
-    serializer_class = VehiculeSerializer
-
-    # pagination_class    = VehiculeListPagination
-
-    def get_queryset(self, *args, **kwargs):
-        queryset = Vehicule.objects.all()
-        query_pk = self.request.GET.get("disponible", None)
-        query_NumChassis = self.request.GET.get("numchassis", None)
-        query_Version = self.request.GET.get("version", None)
-        if query_pk is not None:
-            queryset = queryset.filter(Q(disponible=query_pk))
-        if query_NumChassis is not None:
-            queryset = queryset.filter(Q(numChassis=query_NumChassis))
-        if query_Version is not None:
-            queryset = queryset.filter(Q(versionVoiture=query_Version))
-
-        return queryset
-
-
-class VehiculeCreateView(generics.CreateAPIView):
-    queryset = Vehicule.objects.all()
-    serializer_class = VehiculeSerializer
-
-
-class VehiculeDetailView(generics.RetrieveAPIView):
-    queryset = Vehicule.objects.all()
-    serializer_class = VehiculeSerializer
-
-
-class VehiculeUpdateView(generics.UpdateAPIView):
-    queryset = Vehicule.objects.all()
-    serializer_class = VehiculeUpdateSerializer
-
-
-class VehiculeDeleteView(views.APIView):
-    def get_object(self, pk):
-        return get_object_or_404(Vehicule, pk=pk)
-
-    def delete(self, request, pk, *args, **kwargs):
-        thing = self.get_object(pk)
-        thing.delete()
-        return Response({'message': 'supprimé'}, status=204)
-
-
 class MarqueListView(generics.ListAPIView):
     model = Marque
     serializer_class = MarqueSerializer
@@ -242,6 +196,40 @@ class MarqueListView(generics.ListAPIView):
         queryset = Marque.objects.all()
         query_nom = self.request.GET.get("idMarque", None)
         query_idModele = self.request.GET.get("nomMarque", None)
+        if query_nom is not None:
+            queryset = queryset.filter(Q(idMarque=query_nom))
+        if query_idModele is not None:
+            queryset = queryset.filter(Q(nomMarque=query_idModele))
+
+        return queryset
+
+
+class AnnnonceOccasionListView(generics.ListAPIView):
+    models = Annonce
+    serializer_class = AnnonceOccasionSerializer
+
+    def get_queryset(self, *args, **kwargs):
+
+        queryset = Annonce.objects.all().select_related('idVehicule')
+        query_nom = self.request.GET.get("idAnnonce", None)
+        query_idModele = self.request.GET.get("titre", None)
+        if query_nom is not None:
+            queryset = queryset.filter(Q(idMarque=query_nom))
+        if query_idModele is not None:
+            queryset = queryset.filter(Q(nomMarque=query_idModele))
+
+        return queryset
+
+
+class AnnnonceNeufListView(generics.ListAPIView):
+    models = VehiculeNeuf
+    serializer_class = VehiculeNeufSerializer
+
+    def get_queryset(self, *args, **kwargs):
+
+        queryset = VehiculeNeuf.objects.all()
+        query_nom = self.request.GET.get("numChassis", None)
+        query_idModele = self.request.GET.get("idVehicle", None)
         if query_nom is not None:
             queryset = queryset.filter(Q(idMarque=query_nom))
         if query_idModele is not None:
