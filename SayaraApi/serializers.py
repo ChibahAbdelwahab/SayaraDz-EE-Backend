@@ -48,7 +48,8 @@ class VersionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
-            'nomVersion',
+            'nomVersion', 
+            'codeVersion', 
             'modeleVersion',
             'optionsVersion'
         )
@@ -60,6 +61,7 @@ class ModeleSerializer(serializers.ModelSerializer):
         fields = ( 
             'nomModele', 
             'idModele', 
+            'codeModele',
             'marqueModele',
             'couleurCompatible'
         )
@@ -69,7 +71,8 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
         fields = ( 
-            'nomModele', 
+            'nomModele',
+            'codeModele', 
             'marqueModele',
             'couleurCompatible'
         )
@@ -80,7 +83,8 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
         model = models.Modele
         fields = (
             'nomModele',
-            'idModele',
+            'idModele', 
+            'codeModele', 
             'marqueModele',
             'couleurCompatible'
         )

@@ -8,6 +8,12 @@ from rest_framework.response import Response
 from .serializers import *
 
 
+
+
+#Marque views ###########################################################################
+
+
+
 class MarqueListView(generics.ListAPIView):
     model = Marque
     serializer_class = MarqueSerializer
@@ -50,6 +56,11 @@ class MarqueDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
+
+#Version views ###########################################################################
+
+
+
 class VersionListView(generics.ListAPIView):
     model = Version
     serializer_class = VersionSerializer
@@ -57,13 +68,16 @@ class VersionListView(generics.ListAPIView):
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Version.objects.all()
-        query_nom = self.request.GET.get("nomVersion", None)
-        query_idModele = self.request.GET.get("codeVersion", None)
-        query_marqueModele = self.request.GET.get("modeleVersion", None)
+        query_nom            = self.request.GET.get("nomVersion",None)
+        query_idModele   = self.request.GET.get("idVersion",None)
+        query_code   = self.request.GET.get("codeVersion",None)
+        query_marqueModele          = self.request.GET.get("modeleVersion",None)
         if query_nom is not None:
-            queryset = queryset.filter(Q(nomVersion=query_nom))
+            queryset = queryset.filter(Q(nomVersion = query_nom))
+        if query_code is not None:
+            queryset = queryset.filter(Q(codeVersion = query_code))
         if query_idModele is not None:
-            queryset = queryset.filter(Q(codeVersion=query_idModele))
+            queryset = queryset.filter(Q(idVersion = query_idModele))
         if query_marqueModele is not None:
             queryset = queryset.filter(Q(modeleVersion=query_marqueModele))
 
@@ -102,15 +116,18 @@ class ModeleListView(generics.ListAPIView):
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
-        query_nom = self.request.GET.get("nomModele", None)
-        query_idModele = self.request.GET.get("idModele", None)
-        query_marqueModele = self.request.GET.get("marqueModele", None)
+        query_nom            = self.request.GET.get("nomModele",None)
+        query_idModele   = self.request.GET.get("idModele",None)
+        query_code   = self.request.GET.get("codeModele",None)
+        query_marqueModele          = self.request.GET.get("marqueModele",None)
         if query_nom is not None:
             queryset = queryset.filter(Q(nomModele=query_nom))
         if query_idModele is not None:
             queryset = queryset.filter(Q(idModele=query_idModele))
         if query_marqueModele is not None:
-            queryset = queryset.filter(Q(marqueModele=query_marqueModele))
+            queryset = queryset.filter(Q(marqueModele = query_marqueModele))
+        if query_code is not None:
+            queryset = queryset.filter(Q(codeVersion = query_code))
 
         return queryset
 
