@@ -65,7 +65,6 @@ class Version(models.Model):
     app_label = "Version"
     nomVersion = models.CharField(max_length=100)
     codeVersion = models.CharField(max_length=20, primary_key=True)
-
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',

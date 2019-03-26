@@ -40,4 +40,6 @@ Thumbs.db
 # Folder #
 migrations/
 media/
-__pycache__*
+
+#Cached files #
+*.pyc
