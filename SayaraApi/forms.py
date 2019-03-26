@@ -7,7 +7,7 @@ class VehiculeForm(forms.ModelForm):
         model = Vehicule
         fields = []
 
-
+#some comment
 class MarqueForm(forms.ModelForm):
     class Meta:
         model = Marque
