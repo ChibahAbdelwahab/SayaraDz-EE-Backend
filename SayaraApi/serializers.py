@@ -41,7 +41,7 @@ class VersionSerializer(serializers.ModelSerializer):
             'codeVersion',
             'modeleVersion',
             'optionsVersion',
-            'id2'
+            'id2',
         )
 
 
