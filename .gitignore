@@ -36,7 +36,8 @@
 ehthumbs.db
 Thumbs.db
 
-
+#Intelij folder #
+.idea
 # Folder #
 migrations/
 media/
