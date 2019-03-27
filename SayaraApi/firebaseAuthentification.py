@@ -14,7 +14,7 @@ json = os.path.join(settings.BASE_DIR, settings.FIREBASE_KEY)
 cred = credentials.Certificate(json)
 firebase_admin.initialize_app(cred)
 
-
+#
 class FirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         id_token = request.META.get('HTTP_AUTHORIZATION')
