@@ -64,7 +64,7 @@ class ModeleSerializer(serializers.ModelSerializer):
             'idModele', 
             'codeModele',
             'marqueModele',
-            'couleurCompatible'
+            #'couleurCompatible'
         )
 
 
@@ -75,7 +75,7 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
             'nomModele',
             'codeModele', 
             'marqueModele',
-            'couleurCompatible'
+            #'couleurCompatible'
         )
 
 
@@ -87,7 +87,7 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'idModele', 
             'codeModele', 
             'marqueModele',
-            'couleurCompatible'
+            #'couleurCompatible'
         )
 
 
@@ -103,8 +103,21 @@ class CouleurSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Couleur
         fields = (
+            'pk',
             'codeCouleur',
             'nomCouleur',
+            'ModeleCouleur'
+        )
+
+class CouleurCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Couleur
+        fields = (
+            'pk',
+            'codeCouleur',
+            'nomCouleur',
+            'ModeleCouleur'
         )
 
 class OptionSerializer(serializers.ModelSerializer):
