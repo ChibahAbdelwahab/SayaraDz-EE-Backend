@@ -102,8 +102,8 @@ class Modele(models.Model):
     nomModele = models.CharField(max_length=255)
     # Relationship Fields
     #couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
-    marqueModele = models.ForeignKey(
-        'SayaraApi.Marque',
+    fabricantModele = models.ForeignKey(
+        'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="modeles",
     )
     class Meta:

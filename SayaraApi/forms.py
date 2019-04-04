@@ -23,6 +23,6 @@ class VersionForm(forms.ModelForm):
 class ModeleForm(forms.ModelForm):
     class Meta:
         model = Modele
-        fields = ['nomModele', 'idModele', 'marqueModele']
+        fields = ['nomModele', 'idModele']
 
 

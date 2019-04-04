@@ -119,13 +119,13 @@ class ModeleListView(generics.ListAPIView):
         query_nom            = self.request.GET.get("nomModele",None)
         query_idModele   = self.request.GET.get("idModele",None)
         query_code   = self.request.GET.get("codeModele",None)
-        query_marqueModele          = self.request.GET.get("marqueModele",None)
+        query_marqueModele          = self.request.GET.get("fabricantModele",None)
         if query_nom is not None:
             queryset = queryset.filter(Q(nomModele=query_nom))
         if query_idModele is not None:
             queryset = queryset.filter(Q(idModele=query_idModele))
         if query_marqueModele is not None:
-            queryset = queryset.filter(Q(marqueModele = query_marqueModele))
+            queryset = queryset.filter(Q(fabricantModele = query_marqueModele))
         if query_code is not None:
             queryset = queryset.filter(Q(codeVersion = query_code))
 
@@ -168,7 +168,7 @@ class FabricantListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Modele.objects.all()
+        queryset = Fabricant.objects.all()
         query_nom = self.request.GET.get("nomFabricant", None)
         query_id = self.request.GET.get("idFabricant", None)
         if query_nom is not None:
