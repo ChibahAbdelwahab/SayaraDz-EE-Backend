@@ -141,15 +141,9 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
         model = models.Annonce
         fields = "__all__"
 
-class ModeleSerializer(serializers.ModelSerializer):
-    couleurs = CouleurSerializer(many=True, read_only=True)
 
+class ModeleSerializer(serializers.ModelSerializer):
     class Meta:
+        depth = 1
         model = models.Modele
-        fields = (
-            'nomModele',
-            'pk',
-            'codeModele',
-            'fabricantModele',
-            'couleurs'
-        )
+        fields = "__all__"
