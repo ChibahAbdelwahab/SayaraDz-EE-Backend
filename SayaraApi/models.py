@@ -40,7 +40,6 @@ class Vehicule(models.Model):
 class Marque(models.Model):
     # Fields
     app_label = "Marque"
-    idMarque = models.AutoField(primary_key=True)
     nomMarque = models.CharField(max_length=50)
     imageMarque = models.ImageField(upload_to="marque/images/")
 
@@ -63,7 +62,6 @@ class Marque(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    id2 = models.AutoField(primary_key=True)
     nomVersion = models.CharField(max_length=100)
     codeVersion = models.CharField(max_length=20)
 
@@ -97,7 +95,6 @@ class Version(models.Model):
 class Modele(models.Model):
     # Fields
     app_label = "Modele"
-    idModele = models.AutoField(primary_key=True)
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
     # Relationship Fields
@@ -152,7 +149,6 @@ class Fabricant(models.Model):
     app_label = "Fabricant"
     # Fields
     nomFabricant = models.CharField(max_length=255)
-    idFabricant = models.AutoField(primary_key=True)
 
     # Relationship Fields
     marqueFabricant = models.ForeignKey(
@@ -237,7 +233,7 @@ class VehiculeOccasion(Vehicule):
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
-    idFabricant = models.ForeignKey(
+    fabricantVehicule = models.ForeignKey(
         'SayaraApi.Fabricant',
         on_delete=models.CASCADE,
     )
