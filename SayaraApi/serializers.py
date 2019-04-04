@@ -151,5 +151,5 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk',
             'codeModele',
             'fabricantModele',
-            # 'couleurCompatible'
+            'couleurs'
         )
