@@ -142,7 +142,9 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
     #idVehicule= VehiculeOccasionSerializer()
     idUser = serializers.StringRelatedField()
     date = serializers.DateField(source='idVehicule.date')
-    imageVehicle=serializers.ImageField(source='idVehicule.imageVehicle')
+    imageVehicle1=serializers.ImageField(source='idVehicule.imageVehicle1')
+    imageVehicle2=serializers.ImageField(source='idVehicule.imageVehicle2')
+    imageVehicle3=serializers.ImageField(source='idVehicule.imageVehicle3')
     kilometrage = serializers.IntegerField(source='idVehicule.kilometrage')
     class Meta:
         model = models.Annonce
