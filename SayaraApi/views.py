@@ -96,7 +96,7 @@ class VersionDetailView(generics.RetrieveAPIView):
 
 class VersionUpdateView(generics.UpdateAPIView):
     queryset = Version.objects.all()
-    serializer_class = VersionUpdateSerializer
+    serializer_class = VersionSerializer
 
 
 class VersionDeleteView(views.APIView):
