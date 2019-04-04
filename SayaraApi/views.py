@@ -243,8 +243,11 @@ class CouleurListView(generics.ListAPIView):
     serializer_class = CouleurSerializer
     def get_queryset(self, *args, **kwargs):
         queryset = Couleur.objects.all()
+        query_idMarque = self.request.GET.get("idMarque",None)
         query_nom  = self.request.GET.get("nomCouleur",None)
         query_id   = self.request.GET.get("codeCouleur",None)
+        if query_idMarque is not None:
+            queryset = queryset.filter(Q(nomCouleur=query_nom))
         if query_nom is not None:
             queryset = queryset.filter(Q(nomCouleur = query_nom))
         if query_id is not None:
