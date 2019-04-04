@@ -141,9 +141,16 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
         model = models.Annonce
         fields = "__all__"
 
-
 class ModeleSerializer(serializers.ModelSerializer):
+    couleurs  = CouleurSerializer(source='couleur_set')
+
     class Meta:
         depth = 1
         model = models.Modele
-        fields = "__all__"
+        fields = (
+            'nomModele',
+            'pk',
+            'codeModele',
+            'fabricantModele',
+            'couleurs'
+        )
