@@ -101,16 +101,10 @@ class Modele(models.Model):
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
     # Relationship Fields
-    couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
-    marqueModele = models.ForeignKey(
-        'SayaraApi.Marque',
+    #couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
+    fabricantModele = models.ForeignKey(
+        'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="modeles",
-    )
-        # Relationship Fields
-    couleurCompatible = models.ManyToManyField(
-        'SayaraApi.Couleur',
-        related_name="modeles",
-        blank=True
     )
     class Meta:
         ordering = ('-pk',)
@@ -196,8 +190,13 @@ class Profile(models.Model):
 
 class Couleur(models.Model):
     app_label = "Couleur"
-    codeCouleur = models.CharField(max_length=3, primary_key=True)
+    codeCouleur = models.CharField(max_length=3)
     nomCouleur = models.CharField(max_length=50)
+
+    ModeleCouleur = models.ForeignKey(
+        'SayaraApi.Modele',
+        on_delete=models.CASCADE, related_name="modele", blank=False, null=False
+    )    
     class Meta:
         ordering = ('-pk',)
 
@@ -214,7 +213,7 @@ class Option(models.Model):
 
     # Fields
     nomOption = models.CharField(max_length=255)
-    codeOption = models.CharField(max_length=100)
+    codeOption = models.CharField(max_length=100, primary_key=True)
 
 
     class Meta:
