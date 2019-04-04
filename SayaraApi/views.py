@@ -108,7 +108,7 @@ class ModeleListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Modele.objects.all()
+        queryset = Modele.objects.all().reverse()
         query_nom            = self.request.GET.get("nomModele",None)
         query_id   = self.request.GET.get("pk",None)
         query_code   = self.request.GET.get("codeModele",None)
