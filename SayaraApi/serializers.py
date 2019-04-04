@@ -143,7 +143,6 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-    couleurs = CouleurSerializer(source='couleur_set', many=True)
 
     class Meta:
         depth = 1
@@ -153,5 +152,4 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk',
             'codeModele',
             'fabricantModele',
-            'couleurs'
         )
