@@ -246,12 +246,15 @@ class CouleurListView(generics.ListAPIView):
         query_id = self.request.GET.get("pk",None)
         query_nom  = self.request.GET.get("nomCouleur",None)
         query_code   = self.request.GET.get("codeCouleur",None)
+        query_modele   = self.request.GET.get("modeleCouleur",None)
         if query_id is not None:
             queryset = queryset.filter(Q(pk=query_nom))
         if query_nom is not None:
-            queryset = queryset.filter(Q(nomCouleur = query_nom))
+            queryset = queryset.filter(Q(NomCouleur = query_nom))
         if query_code is not None:
-            queryset = queryset.filter(Q(codeCouleur = query_id))
+            queryset = queryset.filter(Q(CodeCouleur = query_id))
+        if query_modele is not None:
+            queryset = queryset.filter(Q(ModeleCouleur = query_modele))
         return queryset
 
 class CouleurCreateView(generics.CreateAPIView):

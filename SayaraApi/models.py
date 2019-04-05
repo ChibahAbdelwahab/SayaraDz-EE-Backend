@@ -73,7 +73,7 @@ class Version(models.Model):
     )
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
-        on_delete=models.CASCADE, related_name="versions",
+        on_delete=models.CASCADE, related_name="versions"
     )
 
     class Meta:
