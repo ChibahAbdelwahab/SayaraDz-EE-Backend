@@ -9,11 +9,11 @@ class CustomLoginView(LoginView):
         orginal_response = super().get_response()
         try :
             fabricant = self.user.profile.Fabricant.nomFabricant
-            marqueid = self.user.profile.Fabricant.marqueFabricant.idMarque
+            marqueid = self.user.profile.Fabricant.marqueFabricant.id
             marque = self.user.profile.Fabricant.marqueFabricant.nomMarque
         except:
             fabricant=""
-            marqueId=""
+            marqueid=""
             marque=""
         mydata = {"admin": self.user.is_staff, 'firstName': self.user.first_name, 'lastName': self.user.last_name,
                   "email": self.user.last_name, 'fabricant': fabricant, "marqueid": marqueid,"marque":marque}

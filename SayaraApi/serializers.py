@@ -1,10 +1,9 @@
-from . import models
-
 from rest_framework import serializers
+
+from . import models
 
 
 class VehiculeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Vehicule
         fields = (
@@ -13,8 +12,8 @@ class VehiculeSerializer(serializers.ModelSerializer):
             'versionVoiture'
         )
 
-class VehiculeUpdateSerializer(serializers.ModelSerializer):
 
+class VehiculeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Vehicule
         fields = (
@@ -45,27 +44,14 @@ class VersionSerializer(serializers.ModelSerializer):
         )
 
 
-
-class ModeleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Modele
-        fields = ( 
-            'nomModele', 
-            'pk', 
-            'codeModele',
-            'fabricantModele',
-            #'couleurCompatible'
-        )
-
-
 class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
-        fields = ( 
+        fields = (
             'nomModele',
-            'codeModele', 
+            'codeModele',
             'fabricantModele',
-            #'couleurCompatible'
+            # 'couleurCompatible'
         )
 
 
@@ -74,10 +60,10 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
         model = models.Modele
         fields = (
             'nomModele',
-            'pk', 
-            'codeModele', 
+            'pk',
+            'codeModele',
             'fabricantModele',
-            #'couleurCompatible'
+            # 'couleurCompatible'
         )
 
 
@@ -89,8 +75,9 @@ class FabricantSerializer(serializers.ModelSerializer):
             'pk',
             'marqueFabricant'
         )
-class CouleurSerializer(serializers.ModelSerializer):
 
+
+class CouleurSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Couleur
         fields = (
@@ -102,7 +89,6 @@ class CouleurSerializer(serializers.ModelSerializer):
 
 
 class OptionSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Option
         fields = (
@@ -117,6 +103,7 @@ class AnnonceSerializer(serializers.ModelSerializer):
         depth = 1
         exclude = ()
 
+
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.VehiculeOccasion
@@ -127,6 +114,8 @@ class VehiculeOccasionSerializer(serializers.ModelSerializer):
             'date',
             'imageVehicle',
         )
+
+
 class VehiculeNeufSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.VehiculeNeuf
@@ -137,13 +126,32 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
             'prix'
         )
 
+
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
     titre = serializers.CharField()
-    #idVehicule= VehiculeOccasionSerializer()
+    # idVehicule= VehiculeOccasionSerializer()
     idUser = serializers.StringRelatedField()
     date = serializers.DateField(source='idVehicule.date')
-    imageVehicle=serializers.ImageField(source='idVehicule.imageVehicle')
+    imageVehicle1 = serializers.ImageField(source='idVehicule.imageVehicle1')
+    imageVehicle2 = serializers.ImageField(source='idVehicule.imageVehicle2')
+    imageVehicle3 = serializers.ImageField(source='idVehicule.imageVehicle3')
     kilometrage = serializers.IntegerField(source='idVehicule.kilometrage')
+
     class Meta:
         model = models.Annonce
-        fields="__all__"
+        fields = "__all__"
+
+
+class ModeleSerializer(serializers.ModelSerializer):
+    #TODO remove idModele from nested couleur objects
+    couleur_set = CouleurSerializer(many=True,read_only=True,)
+    class Meta:
+        depth = 1
+        model = models.Modele
+        fields = (
+            'nomModele',
+            'pk',
+            'codeModele',
+            'fabricantModele',
+            'couleur_set',
+        )

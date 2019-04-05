@@ -1,8 +1,6 @@
-from django.urls import reverse
-from django.db import models as models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.db import models as models
+from django.urls import reverse
 
 
 class Vehicule(models.Model):
@@ -11,8 +9,8 @@ class Vehicule(models.Model):
     numChassis = models.CharField(max_length=100)
     idVehicule = models.AutoField(primary_key=True)
     imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    imageVehicle2 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
-    imageVehicle3 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
+    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
 
     # Relationship Fields
     versionVoiture = models.ForeignKey(
@@ -43,18 +41,6 @@ class Marque(models.Model):
     nomMarque = models.CharField(max_length=50)
     imageMarque = models.ImageField(upload_to="marque/images/")
 
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_marque_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('SayaraApi_marque_update', args=(self.pk,))
-
     def __str__(self):
         return self.nomMarque
 
@@ -75,18 +61,9 @@ class Version(models.Model):
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions"
     )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_version_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('SayaraApi_version_update', args=(self.pk,))
+    @property
+    def fabricantVersion_id(self):
+        return self.modeleVersion.fabricantModele_id
 
     def __str__(self):
         return self.nomVersion
@@ -97,32 +74,16 @@ class Modele(models.Model):
     app_label = "Modele"
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
-    # Relationship Fields
-    #couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
     fabricantModele = models.ForeignKey(
-        'SayaraApi.fabricant',
-        on_delete=models.CASCADE, related_name="modeles",
-    )
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_modele_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('SayaraApi_modele_update', args=(self.pk,))
+        'SayaraApi.fabricant', on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.nomModele
 
-
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
-    #idAnnonce = models.AutoField(primary_key=True)
+    # idAnnonce = models.AutoField(primary_key=True)
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
@@ -156,18 +117,6 @@ class Fabricant(models.Model):
         on_delete=models.CASCADE, related_name="fabricants",
     )
 
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_fabricant_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('SayaraApi_fabricant_update', args=(self.pk,))
-
     def __str__(self):
         return self.nomFabricant
 
@@ -184,6 +133,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
 
+
 class Couleur(models.Model):
     app_label = "Couleur"
     codeCouleur = models.CharField(max_length=3)
@@ -191,39 +141,31 @@ class Couleur(models.Model):
 
     ModeleCouleur = models.ForeignKey(
         'SayaraApi.Modele',
-        on_delete=models.CASCADE, related_name="modele", blank=False, null=False
-    )    
-    class Meta:
-        ordering = ('-pk',)
+        on_delete=models.CASCADE, blank=False, null=False
+    )
 
-    def __unicode__(self):
-        return u'%s' % self.pk
+    def __str__(self):
+        return self.nomCouleur
 
-    def get_absolute_url(self):
-        return reverse('SayaraApi_couleur_detail', args=(self.pk,))
+    @property
+    def fabricantCouleur_id(self):
+        return self.ModeleCouleur.fabricantModele_id
+    # class Meta:
+    #     permissions = (
+    #         ('can_change_post_name', "Can change post name"),
+    #     )
+    #
+    # def can_change_name(self, user):
+    #     return self.user == user or user.is_staff
+    #
+    # def can_change_content(self, user):
+    #     return self.user == user or user.is_staff
 
-    def get_update_url(self):
-        return reverse('SayaraApi_couleur_update', args=(self.pk,))
 
 class Option(models.Model):
-
     # Fields
     nomOption = models.CharField(max_length=255)
     codeOption = models.CharField(max_length=100, primary_key=True)
-
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_option_detail', args=(self.pk,))
-
-
-    def get_update_url(self):
-        return reverse('SayaraApi_option_update', args=(self.pk,))
 
 
 class VehiculeOccasion(Vehicule):
