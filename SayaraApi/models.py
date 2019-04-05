@@ -1,8 +1,6 @@
-from django.urls import reverse
-from django.db import models as models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.db import models as models
+from django.urls import reverse
 
 
 class Vehicule(models.Model):
@@ -11,8 +9,8 @@ class Vehicule(models.Model):
     numChassis = models.CharField(max_length=100)
     idVehicule = models.AutoField(primary_key=True)
     imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    imageVehicle2 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
-    imageVehicle3 = models.ImageField(upload_to="images/vehicules",null=True,blank=True)
+    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
 
     # Relationship Fields
     versionVoiture = models.ForeignKey(
@@ -98,11 +96,12 @@ class Modele(models.Model):
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
     # Relationship Fields
-    #couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
+    # couleurCompatible = models.ManyToManyField("SayaraAPi.Couleur")
     fabricantModele = models.ForeignKey(
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="modeles",
     )
+
     class Meta:
         ordering = ('-pk',)
 
@@ -122,7 +121,7 @@ class Modele(models.Model):
 class Annonce(models.Model):
     # Fields
     app_label = "Annonce"
-    #idAnnonce = models.AutoField(primary_key=True)
+    # idAnnonce = models.AutoField(primary_key=True)
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
@@ -184,6 +183,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
 
+
 class Couleur(models.Model):
     app_label = "Couleur"
     codeCouleur = models.CharField(max_length=3)
@@ -191,8 +191,9 @@ class Couleur(models.Model):
 
     ModeleCouleur = models.ForeignKey(
         'SayaraApi.Modele',
-        on_delete=models.CASCADE, related_name="modele", blank=False, null=False
-    )    
+        on_delete=models.CASCADE, blank=False, null=False
+    )
+
     class Meta:
         ordering = ('-pk',)
 
@@ -205,12 +206,11 @@ class Couleur(models.Model):
     def get_update_url(self):
         return reverse('SayaraApi_couleur_update', args=(self.pk,))
 
-class Option(models.Model):
 
+class Option(models.Model):
     # Fields
     nomOption = models.CharField(max_length=255)
     codeOption = models.CharField(max_length=100, primary_key=True)
-
 
     class Meta:
         ordering = ('-pk',)
@@ -220,7 +220,6 @@ class Option(models.Model):
 
     def get_absolute_url(self):
         return reverse('SayaraApi_option_detail', args=(self.pk,))
-
 
     def get_update_url(self):
         return reverse('SayaraApi_option_update', args=(self.pk,))

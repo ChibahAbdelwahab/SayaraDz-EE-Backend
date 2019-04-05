@@ -1,7 +1,8 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, views
 from rest_framework.response import Response
-from django.db.models import Q
+
 from .models import *
 from .serializers import *
 
@@ -61,16 +62,16 @@ class VersionListView(generics.ListAPIView):
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Version.objects.all()
-        query_nom            = self.request.GET.get("nomVersion",None)
-        query_id   = self.request.GET.get("pk",None)
-        query_code   = self.request.GET.get("codeVersion",None)
-        query_marqueModele          = self.request.GET.get("modeleVersion",None)
+        query_nom = self.request.GET.get("nomVersion", None)
+        query_id = self.request.GET.get("pk", None)
+        query_code = self.request.GET.get("codeVersion", None)
+        query_marqueModele = self.request.GET.get("modeleVersion", None)
         if query_nom is not None:
             queryset = queryset.filter(Q(nomVersion=query_nom))
         if query_code is not None:
-            queryset = queryset.filter(Q(codeVersion = query_code))
+            queryset = queryset.filter(Q(codeVersion=query_code))
         if query_id is not None:
-            queryset = queryset.filter(Q(pk = query_id))
+            queryset = queryset.filter(Q(pk=query_id))
         if query_marqueModele is not None:
             queryset = queryset.filter(Q(modeleVersion=query_marqueModele))
 
@@ -108,19 +109,19 @@ class ModeleListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Modele.objects.all().reverse()
-        query_nom            = self.request.GET.get("nomModele",None)
-        query_id   = self.request.GET.get("pk",None)
-        query_code   = self.request.GET.get("codeModele",None)
-        query_marqueModele          = self.request.GET.get("fabricantModele",None)
+        queryset = Modele.objects.all()
+        query_nom = self.request.GET.get("nomModele", None)
+        query_id = self.request.GET.get("pk", None)
+        query_code = self.request.GET.get("codeModele", None)
+        query_marqueModele = self.request.GET.get("fabricantModele", None)
         if query_nom is not None:
             queryset = queryset.filter(Q(nomModele=query_nom))
         if query_id is not None:
             queryset = queryset.filter(Q(pk=query_id))
         if query_marqueModele is not None:
-            queryset = queryset.filter(Q(fabricantModele = query_marqueModele))
+            queryset = queryset.filter(Q(fabricantModele=query_marqueModele))
         if query_code is not None:
-            queryset = queryset.filter(Q(codeVersion = query_code))
+            queryset = queryset.filter(Q(codeVersion=query_code))
 
         return queryset
 
@@ -202,13 +203,13 @@ class AnnnonceOccasionListView(generics.ListAPIView):
     serializer_class = AnnonceOccasionSerializer
 
     def get_queryset(self, *args, **kwargs):
-        #TODO add more filters
+        # TODO add more filters
         queryset = Annonce.objects.all().select_related('idVehicule')
         query_d1 = self.request.GET.get("date1", None)
         query_d2 = self.request.GET.get("date2", None)
         query_km1 = self.request.GET.get("km1", None)
         query_km2 = self.request.GET.get("km2", None)
-        query_marque = self.request.GET.get("Marque",None)
+        query_marque = self.request.GET.get("Marque", None)
 
         if query_d1 is not None:
             queryset = queryset.filter(Q(date__gte=query_d1))
@@ -224,7 +225,6 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
         if query_marque is not None:
             queryset = queryset.filter(Q(nomMarque=query_marque))
-
 
         return queryset
 
@@ -253,15 +253,15 @@ class CouleurListView(generics.ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = Couleur.objects.all()
-        query_id = self.request.GET.get("pk",None)
-        query_nom  = self.request.GET.get("nomCouleur",None)
-        query_code   = self.request.GET.get("codeCouleur",None)
+        query_id = self.request.GET.get("pk", None)
+        query_nom = self.request.GET.get("nomCouleur", None)
+        query_code = self.request.GET.get("codeCouleur", None)
         if query_id is not None:
             queryset = queryset.filter(Q(pk=query_nom))
         if query_nom is not None:
-            queryset = queryset.filter(Q(nomCouleur = query_nom))
+            queryset = queryset.filter(Q(nomCouleur=query_nom))
         if query_code is not None:
-            queryset = queryset.filter(Q(codeCouleur = query_id))
+            queryset = queryset.filter(Q(codeCouleur=query_id))
         return queryset
 
 
@@ -279,27 +279,31 @@ class CouleurUpdateView(generics.UpdateAPIView):
     queryset = Couleur.objects.all()
     serializer_class = CouleurSerializer
 
+
 class CouleurDeleteView(views.APIView):
     def get_object(self, pk):
         return get_object_or_404(Marque, pk=pk)
+
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)
         thing.delete()
-        return Response({'message':'supprimé'}, status=204)
-    
+        return Response({'message': 'supprimé'}, status=204)
+
+
 class OptionListView(generics.ListAPIView):
     model = Option
     serializer_class = OptionSerializer
-    #pagination_class    = VehiculeListPagination
+
+    # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Option.objects.all()
-        query_nom  = self.request.GET.get("nomOption",None)
-        query_id   = self.request.GET.get("codeOption",None)
-        queryset = queryset.filter(Q(nomOption = query_nom))
+        query_nom = self.request.GET.get("nomOption", None)
+        query_id = self.request.GET.get("codeOption", None)
+        queryset = queryset.filter(Q(nomOption=query_nom))
         if query_nom is not None:
-            queryset = queryset.filter(Q(nomOption = query_nom))
+            queryset = queryset.filter(Q(nomOption=query_nom))
         if query_id is not None:
-            queryset = queryset.filter(Q(idOption = query_id))
+            queryset = queryset.filter(Q(idOption=query_id))
         return queryset
 
 

@@ -143,7 +143,8 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-
+    #TODO remove idModele from nested couleur objects
+    couleur_set = CouleurSerializer(many=True,read_only=True,)
     class Meta:
         depth = 1
         model = models.Modele
@@ -152,4 +153,5 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk',
             'codeModele',
             'fabricantModele',
+            'couleur_set',
         )
