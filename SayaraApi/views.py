@@ -61,7 +61,10 @@ class VersionListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = Version.objects.all()
+        try:
+            queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.Fabricant_id)
+        except User.profile.RelatedObjectDoesNotExist:
+            return None
         query_nom = self.request.GET.get("nomVersion", None)
         query_id = self.request.GET.get("pk", None)
         query_code = self.request.GET.get("codeVersion", None)
@@ -109,6 +112,7 @@ class ModeleListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
+        print(dir(self.request.user.profile))
         queryset = Modele.objects.all()
         query_nom = self.request.GET.get("nomModele", None)
         query_id = self.request.GET.get("pk", None)
