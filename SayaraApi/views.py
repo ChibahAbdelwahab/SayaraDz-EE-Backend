@@ -63,7 +63,8 @@ class VersionListView(generics.ListAPIView):
     def get_queryset(self, *args, **kwargs):
         try:
             queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.Fabricant_id)
-        except User.profile.RelatedObjectDoesNotExist:
+        #except User.profile.RelatedObjectDoesNotExist:
+        except :
             return None
         query_nom = self.request.GET.get("nomVersion", None)
         query_id = self.request.GET.get("pk", None)
