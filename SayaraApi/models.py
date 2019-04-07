@@ -61,6 +61,7 @@ class Version(models.Model):
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions",
     )
+
     @property
     def fabricantVersion_id(self):
         return self.modeleVersion.fabricantModele_id
@@ -75,10 +76,11 @@ class Modele(models.Model):
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
     fabricantModele = models.ForeignKey(
-        'SayaraApi.fabricant', on_delete=models.CASCADE,)
+        'SayaraApi.fabricant', on_delete=models.CASCADE, )
 
     def __str__(self):
         return self.nomModele
+
 
 class Annonce(models.Model):
     # Fields
@@ -166,6 +168,24 @@ class Option(models.Model):
     # Fields
     nomOption = models.CharField(max_length=255)
     codeOption = models.CharField(max_length=100, primary_key=True)
+    fabricantOption_id = models.ForeignKey(
+        'SayaraApi.Fabricant',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        default=None,
+
+    )
+
+    def save(self,fabricantOption_id=None, *args, **kwargs):
+        print(fabricantOption_id,args,kwargs)
+        # if not self.pk:
+        #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
+        super(Option, self).save(*args, **kwargs)
+   
+        
+    def __str__(self):
+        return self.nomOption
 
 
 class VehiculeOccasion(Vehicule):

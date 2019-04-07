@@ -84,7 +84,8 @@ class CouleurSerializer(serializers.ModelSerializer):
             'pk',
             'codeCouleur',
             'nomCouleur',
-            'ModeleCouleur'
+            'ModeleCouleur',
+            'fabricantCouleur_id'
         )
 
 
@@ -94,6 +95,7 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = (
             'nomOption',
             'codeOption',
+
         )
 
 

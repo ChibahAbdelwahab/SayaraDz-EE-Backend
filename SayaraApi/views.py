@@ -63,8 +63,8 @@ class VersionListView(generics.ListAPIView):
     def get_queryset(self, *args, **kwargs):
         try:
             queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.Fabricant_id)
-        #except User.profile.RelatedObjectDoesNotExist:
-        except :
+        # except User.profile.RelatedObjectDoesNotExist:
+        except:
             return None
         query_nom = self.request.GET.get("nomVersion", None)
         query_id = self.request.GET.get("pk", None)
@@ -113,7 +113,6 @@ class ModeleListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        print(dir(self.request.user.profile))
         queryset = Modele.objects.all()
         query_nom = self.request.GET.get("nomModele", None)
         query_id = self.request.GET.get("pk", None)
@@ -304,7 +303,6 @@ class OptionListView(generics.ListAPIView):
         queryset = Option.objects.all()
         query_nom = self.request.GET.get("nomOption", None)
         query_id = self.request.GET.get("codeOption", None)
-        queryset = queryset.filter(Q(nomOption=query_nom))
         if query_nom is not None:
             queryset = queryset.filter(Q(nomOption=query_nom))
         if query_id is not None:
@@ -325,7 +323,10 @@ class OptionUpdateView(generics.UpdateAPIView):
 class OptionCreateView(generics.CreateAPIView):
     queryset = Option.objects.all()
     serializer_class = OptionSerializer
-
+    def perform_create(self, serializer):
+        if "FabricantOption_id" not in serializer._kwargs["data"]:
+            serializer.save(fabricantOption_id=Fabricant.objects.get(pk=1))
+        else: serializer.save()
 
 class OptionDeleteView(views.APIView):
     def get_object(self, pk):
