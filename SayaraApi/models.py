@@ -7,9 +7,6 @@ class Vehicule(models.Model):
     app_label = "Vehicule"
     numChassis = models.CharField(max_length=100)
     idVehicule = models.AutoField(primary_key=True)
-    imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
 
     # Relationship Fields
     versionVoiture = models.ForeignKey(
@@ -59,14 +56,21 @@ class Version(models.Model):
         return self.nomVersion
 
 
+class RefModele(models.Model):
+    nomModele = models.CharField(max_length=255)
+    marqueModele = models.ForeignKey(Marque, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.nomModele
+
+
 class Modele(models.Model):
     # Fields
     app_label = "Modele"
     codeModele = models.CharField(max_length=10)
-    nomModele = models.CharField(max_length=255)
+    nomModele = models.ForeignKey(RefModele, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nomModele
+        return self.nomModele.nomModele
 
 
 class Annonce(models.Model):
@@ -88,7 +92,6 @@ class Annonce(models.Model):
         User,
         related_name="proprietaire",
         on_delete="DO_NOTHING",
-
     )
 
     def __str__(self):
@@ -122,10 +125,16 @@ class Profile(models.Model):
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
 
+
+class RefCouleur(models.Model):
+    nomCouleur = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nomCouleur
+
 class Couleur(models.Model):
     app_label = "Couleur"
     codeCouleur = models.CharField(max_length=3)
-    nomCouleur = models.CharField(max_length=50)
+    nomCouleur = models.ForeignKey(RefCouleur, on_delete=models.CASCADE)
 
     ModeleCouleur = models.ForeignKey(
         'SayaraApi.Modele',
@@ -133,52 +142,58 @@ class Couleur(models.Model):
     )
 
     def __str__(self):
-        return self.nomCouleur
+        return self.nomCouleur.nomCouleur
 
     @property
     def fabricantCouleur_id(self):
         return self.ModeleCouleur.fabricantModele_id
 
 
+class RefOption(models.Model):
+    nomOption = models.CharField(max_length=255)
+
+    def __str__(self):
+        return  self.nomOption
+
+
 class Option(models.Model):
     # Fields
-    nomOption = models.CharField(max_length=255)
+    nomOption = models.ForeignKey(RefOption, on_delete=models.CASCADE)
     codeOption = models.CharField(max_length=100, primary_key=True)
     modeleOption = models.ForeignKey('SayaraApi.modele', on_delete=models.CASCADE)
 
-    fabricantOption_id = models.ForeignKey(
-        'SayaraApi.Fabricant',
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        default=None,
-
-    )
-
-    def save(self, fabricantOption_id=None, *args, **kwargs):
-        print(fabricantOption_id, args, kwargs)
-        # if not self.pk:
-        #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
-        super(Option, self).save(*args, **kwargs)
+    # def save(self, fabricantOption_id=None, *args, **kwargs):
+    #     print(fabricantOption_id, args, kwargs)
+    #     # if not self.pk:
+    #     #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
+    #     super(Option, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.nomOption
+        return self.nomOption.nomOption
 
 
 class VehiculeOccasion(Vehicule):
     kilometrage = models.IntegerField()
     date = models.DateField()
+    imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    options = models.ManyToManyField(
+        'SayaraApi.RefOption',
+        related_name="options",
+        blank=True
+    )
 
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
-    concessionnaire = models.CharField()
+    concessionnaire = models.CharField(max_length=250)
 
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',
-        related_name="versions",
         blank=True
     )
+
     @property
     def prix(self):
         return 122

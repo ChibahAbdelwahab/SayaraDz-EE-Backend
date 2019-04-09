@@ -326,10 +326,10 @@ class OptionUpdateView(generics.UpdateAPIView):
 class OptionCreateView(generics.CreateAPIView):
     queryset = Option.objects.all()
     serializer_class = OptionSerializer
-    def perform_create(self, serializer):
-        if "FabricantOption_id" not in serializer._kwargs["data"]:
-            serializer.save(fabricantOption_id=Fabricant.objects.get(pk=1))
-        else: serializer.save()
+    # def perform_create(self, serializer):
+    #     #     if "FabricantOption_id" not in serializer._kwargs["data"]:
+    #     #         serializer.save(fabricantOption_id=Fabricant.objects.get(pk=1))
+    #     #     else: serializer.save()
 
 class OptionDeleteView(views.APIView):
     def get_object(self, pk):
