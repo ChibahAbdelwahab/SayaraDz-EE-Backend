@@ -80,7 +80,7 @@ class Annonce(models.Model):
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
-    commentaires = models.CharField(max_length=255)
+    commentaites = models.CharField(max_length=255)
 
     # Relationship Fields
     idVehicule = models.ForeignKey(
@@ -147,7 +147,7 @@ class Couleur(models.Model):
     @property
     def fabricantCouleur_id(self):
         return self.ModeleCouleur.fabricantModele_id
-#
+
 
 class RefOption(models.Model):
     nomOption = models.CharField(max_length=255)
