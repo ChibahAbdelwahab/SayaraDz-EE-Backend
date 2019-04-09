@@ -147,7 +147,7 @@ class Couleur(models.Model):
     @property
     def fabricantCouleur_id(self):
         return self.ModeleCouleur.fabricantModele_id
-
+#
 
 class RefOption(models.Model):
     nomOption = models.CharField(max_length=255)
