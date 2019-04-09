@@ -80,7 +80,7 @@ class Annonce(models.Model):
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
-    commentaites = models.CharField(max_length=255)
+    commentaires = models.CharField(max_length=255)
 
     # Relationship Fields
     idVehicule = models.ForeignKey(
