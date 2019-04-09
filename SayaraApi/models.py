@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models as models
-from django.urls import reverse
 
 
 class Vehicule(models.Model):
@@ -19,17 +18,7 @@ class Vehicule(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
         abstract = True
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('SayaraApi_vehicule_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('SayaraApi_vehicule_update', args=(self.pk,))
 
     def __str__(self):
         return self.numChassis
@@ -75,8 +64,6 @@ class Modele(models.Model):
     app_label = "Modele"
     codeModele = models.CharField(max_length=10)
     nomModele = models.CharField(max_length=255)
-    fabricantModele = models.ForeignKey(
-        'SayaraApi.fabricant', on_delete=models.CASCADE, )
 
     def __str__(self):
         return self.nomModele
@@ -135,7 +122,6 @@ class Profile(models.Model):
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
 
-
 class Couleur(models.Model):
     app_label = "Couleur"
     codeCouleur = models.CharField(max_length=3)
@@ -152,22 +138,14 @@ class Couleur(models.Model):
     @property
     def fabricantCouleur_id(self):
         return self.ModeleCouleur.fabricantModele_id
-    # class Meta:
-    #     permissions = (
-    #         ('can_change_post_name', "Can change post name"),
-    #     )
-    #
-    # def can_change_name(self, user):
-    #     return self.user == user or user.is_staff
-    #
-    # def can_change_content(self, user):
-    #     return self.user == user or user.is_staff
 
 
 class Option(models.Model):
     # Fields
     nomOption = models.CharField(max_length=255)
     codeOption = models.CharField(max_length=100, primary_key=True)
+    modeleOption = models.ForeignKey('SayaraApi.modele', on_delete=models.CASCADE)
+
     fabricantOption_id = models.ForeignKey(
         'SayaraApi.Fabricant',
         on_delete=models.CASCADE,
@@ -177,13 +155,12 @@ class Option(models.Model):
 
     )
 
-    def save(self,fabricantOption_id=None, *args, **kwargs):
-        print(fabricantOption_id,args,kwargs)
+    def save(self, fabricantOption_id=None, *args, **kwargs):
+        print(fabricantOption_id, args, kwargs)
         # if not self.pk:
         #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
         super(Option, self).save(*args, **kwargs)
-   
-        
+
     def __str__(self):
         return self.nomOption
 
@@ -195,11 +172,13 @@ class VehiculeOccasion(Vehicule):
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
-    fabricantVehicule = models.ForeignKey(
-        'SayaraApi.Fabricant',
-        on_delete=models.CASCADE,
-    )
+    concessionnaire = models.CharField()
 
+    optionsVersion = models.ManyToManyField(
+        'SayaraApi.Option',
+        related_name="versions",
+        blank=True
+    )
     @property
     def prix(self):
         return 122
