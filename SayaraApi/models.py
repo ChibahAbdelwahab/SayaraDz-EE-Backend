@@ -56,9 +56,14 @@ class Version(models.Model):
         return self.nomVersion
 
 
+class RefVersion(models.Model):
+    nomVersion = models.CharField(max_length=100, unique=True)
+
+
 class RefModele(models.Model):
-    nomModele = models.CharField(max_length=255)
+    nomModele = models.CharField(max_length=255, unique=True)
     marqueModele = models.ForeignKey(Marque, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.nomModele
 
@@ -80,7 +85,7 @@ class Annonce(models.Model):
 
     titre = models.CharField(max_length=50)
     prix = models.IntegerField()
-    commentaites = models.CharField(max_length=255)
+    commentaires = models.CharField(max_length=255)
 
     # Relationship Fields
     idVehicule = models.ForeignKey(
@@ -127,9 +132,11 @@ class Profile(models.Model):
 
 
 class RefCouleur(models.Model):
-    nomCouleur = models.CharField(max_length=50)
+    nomCouleur = models.CharField(max_length=50, unique=True)
+
     def __str__(self):
         return self.nomCouleur
+
 
 class Couleur(models.Model):
     app_label = "Couleur"
@@ -150,10 +157,10 @@ class Couleur(models.Model):
 
 
 class RefOption(models.Model):
-    nomOption = models.CharField(max_length=255)
+    nomOption = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return  self.nomOption
+        return self.nomOption
 
 
 class Option(models.Model):
