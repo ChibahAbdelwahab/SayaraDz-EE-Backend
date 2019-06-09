@@ -10,6 +10,7 @@ urlpatterns = (
 )
 
 
+
 urlpatterns += (
     # urls for Marque
     path('marque/', views.MarqueListView.as_view(), name='SayaraApi_marque_list'),
