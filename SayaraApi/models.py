@@ -51,7 +51,6 @@ class Version(models.Model):
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions"
     )
-
     @property
     def fabricantVersion_id(self):
         return self.modeleVersion.fabricantModele_id
