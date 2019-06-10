@@ -11,10 +11,13 @@ admin.site.register(Modele)
 admin.site.register(RefCouleur)
 admin.site.register(RefOption)
 admin.site.register(RefModele)
+admin.site.register(RefVersion)
 admin.site.register(Annonce)
 admin.site.register(Fabricant)
 admin.site.register(Couleur)
 admin.site.register(Option)
+
+
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton
 class ProfileInline(admin.StackedInline):
@@ -26,8 +29,3 @@ class ProfileInline(admin.StackedInline):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
-
-
-# Re-register UserAdmin
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)

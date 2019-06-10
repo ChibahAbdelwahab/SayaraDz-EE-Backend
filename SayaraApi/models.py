@@ -32,13 +32,15 @@ class Marque(models.Model):
 
 
 class RefVersion(models.Model):
-    nomVersion = models.CharField(max_length=100, unique=True)
+    nomVersion = models.CharField(max_length=255, unique=True)
+    def __str__(self):
+        return self.nomVersion
+
 
 
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    nomVersion = models.CharField(max_length=100)
     codeVersion = models.CharField(max_length=20)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
     # Relationship Fields
@@ -51,6 +53,7 @@ class Version(models.Model):
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions"
     )
+
     @property
     def fabricantVersion_id(self):
         return self.modeleVersion.fabricantModele_id

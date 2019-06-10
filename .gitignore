@@ -44,3 +44,7 @@ media/
 
 #Cached files #
 *.pyc
+
+#data files #
+*.csv
+*.json
