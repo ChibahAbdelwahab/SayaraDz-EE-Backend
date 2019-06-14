@@ -228,7 +228,8 @@ class AnnnonceOccasionListView(generics.ListAPIView):
             queryset = queryset.filter(Q(idVehicule__kilometrage__lte=query_km1))
 
         if query_marque is not None:
-            # queryset = queryset.filter(Q(idVehicule__))
+            queryset = queryset.filter(
+                Q(idVehicule__marque == query_marque))
 
         return queryset
 
