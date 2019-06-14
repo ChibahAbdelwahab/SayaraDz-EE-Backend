@@ -33,9 +33,9 @@ class Marque(models.Model):
 
 class RefVersion(models.Model):
     nomVersion = models.CharField(max_length=255, unique=True)
+
     def __str__(self):
         return self.nomVersion
-
 
 
 class Version(models.Model):
@@ -206,3 +206,18 @@ class VehiculeNeuf(Vehicule):
     @property
     def prix(self):
         return 122
+
+
+class FicheTechnique(models.Model):
+    idVehicule = models.ForeignKey(
+        'SayaraApi.VehiculeOccasion',
+        related_name="vehicule",
+        on_delete="DO_NOTHING",
+    )
+    nombrePortes = models.CharField(max_length=100)
+    boiteVitesse = models.CharField(max_length=100)
+    puissanceFiscale = models.CharField(max_length=100)
+    motorisation = models.CharField(max_length=100)
+    consomation = models.CharField(max_length=100)
+    dimension = models.CharField(max_length=100)
+    transmission = models.CharField(max_length=100)
