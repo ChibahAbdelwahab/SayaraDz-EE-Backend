@@ -1,0 +1,2 @@
+#export the database
+python3 manage.py dumpdata --exclude contenttypes --exclude auth --exclude  sessions --exclude admin  >a.json
