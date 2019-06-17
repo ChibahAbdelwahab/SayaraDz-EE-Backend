@@ -42,10 +42,11 @@ class Marque(models.Model):
     def __str__(self):
         return self.nomMarque
 
-    #TODO change this to real fabricant id
+    # TODO change this to real fabricant id
     @property
-    def fabricant_id (self):
-        return  self.nomMarque
+    def fabricant_id(self):
+        return self.nomMarque
+
 
 class RefVersion(models.Model):
     nomVersion = models.CharField(max_length=255, unique=True)
@@ -57,14 +58,20 @@ class RefVersion(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    codeVersion = models.CharField(max_length=20,primary_key=True)
+    codeVersion = models.CharField(max_length=20, primary_key=True)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
+
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',
         related_name="versions",
         blank=True
     )
+    imagesVersion = models.ManyToManyField(
+        'SayaraApi.Image',
+        blank=True
+    )
+
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
         on_delete=models.CASCADE, related_name="versions"
@@ -80,6 +87,10 @@ class Version(models.Model):
 
     def __str__(self):
         return self.nomVersion.nomVersion
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
 
 
 class RefModele(models.Model):
@@ -128,7 +139,6 @@ class Annonce(models.Model):
         related_name="proprietaire",
         on_delete="DO_NOTHING",
     )
-
 
     def __str__(self):
         return self.titre
@@ -238,5 +248,3 @@ class VehiculeNeuf(Vehicule):
     @property
     def prix(self):
         return 122
-
-
