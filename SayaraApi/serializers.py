@@ -151,9 +151,9 @@ class ModeleSerializer(serializers.ModelSerializer):
         depth = 1
         model = models.Modele
         fields = (
-            'nomModele',
+            'nom',
             'pk',
+            'marque',
             'codeModele',
-            'fabricantModele',
             'couleur_set',
         )

@@ -33,9 +33,9 @@ class Marque(models.Model):
 
 class RefVersion(models.Model):
     nomVersion = models.CharField(max_length=255, unique=True)
+
     def __str__(self):
         return self.nomVersion
-
 
 
 class Version(models.Model):
@@ -79,6 +79,12 @@ class Modele(models.Model):
     def __str__(self):
         return self.nomModele.nomModele
 
+    @property
+    def nom(self):
+        return self.nomModele.nomModele
+    @property
+    def marque(self):
+        return self.nomModele.marqueModele.nomMarque
 
 class Annonce(models.Model):
     # Fields
@@ -131,6 +137,9 @@ class Profile(models.Model):
         'SayaraApi.fabricant',
         on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
     )
+
+    def __str__(self):
+        return Fabricant.nomFabricant
 
 
 class RefCouleur(models.Model):
