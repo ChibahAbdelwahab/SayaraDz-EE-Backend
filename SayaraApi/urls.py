@@ -65,14 +65,7 @@ urlpatterns += (
     path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_option_delete'),
 )
 
-urlpatterns += (
-    # urls for FicheTechnique
-    path('fichetechnique/', views.FicheTechniqueListView.as_view(), name='app_name_fichetechnique_list'),
-    path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(),
-         name='app_name_fichetechnique_create'),
-    path('fichetechnique/update/<int:pk>/', views.FicheTechniqueUpdateView.as_view(),
-         name='app_name_fichetechnique_update'),
-)
+
 urlpatterns += (
     # urls for Mobile Queries
     # TODO type as a parameter and annonce goes to same view

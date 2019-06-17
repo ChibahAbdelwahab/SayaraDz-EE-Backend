@@ -337,19 +337,3 @@ class OptionDeleteView(views.APIView):
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
 
-
-class FicheTechniqueListView(generics.ListAPIView):
-    model = FicheTechnique
-    serializer_class = FicheTechniqueSerializer
-
-    def get_queryset(self):
-        # query_versionId = self.request.GET.get("versionId", None)
-        return FicheTechnique.objects.all()
-
-
-class FicheTechniqueCreateView(generics.CreateAPIView):
-    model = FicheTechnique
-
-
-class FicheTechniqueUpdateView(generics.UpdateAPIView):
-    model = FicheTechnique

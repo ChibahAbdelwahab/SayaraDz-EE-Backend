@@ -158,17 +158,3 @@ class ModeleSerializer(serializers.ModelSerializer):
             'couleur_set',
         )
 
-class FicheTechniqueSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.FicheTechnique
-        fields = (
-            'pk',
-            'nombrePortes',
-            'boiteVitesse',
-            'puissanceFiscale',
-            'motorisation',
-            'consomation',
-            'dimension',
-            'transmission',
-        )
