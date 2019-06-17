@@ -235,5 +235,4 @@ class FicheTechnique(models.Model):
     puissanceFiscale = models.CharField(max_length=100)
     motorisation = models.CharField(max_length=100)
     consomation = models.CharField(max_length=100)
-    dimension = models.CharField(max_length=100)
     transmission = models.CharField(max_length=100)
