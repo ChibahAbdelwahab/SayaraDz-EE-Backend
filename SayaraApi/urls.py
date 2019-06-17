@@ -9,7 +9,6 @@ urlpatterns = (
     path('', include(router.urls)),
 )
 
-
 urlpatterns += (
     # urls for Marque
     path('marque/', views.MarqueListView.as_view(), name='SayaraApi_marque_list'),
@@ -28,7 +27,6 @@ urlpatterns += (
     path('version/update/<slug:pk>/', views.VersionUpdateView.as_view(), name='SayaraApi_version_update'),
 )
 
-
 urlpatterns += (
     # urls for Modele
     path('modele/', views.ModeleListView.as_view(), name='SayaraApi_modele_list'),
@@ -40,7 +38,7 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    #urls for Fabriquant
+    # urls for Fabriquant
     path('fabricant/', views.FabricantListView.as_view(), name='SayaraApi_fabricant_list'),
     path('fabricant/create/', views.FabricantCreateView.as_view(), name='SayaraApi_fabricant_create'),
     path('fabricant/detail/<slug:pk>/', views.FabricantDetailView.as_view(), name='SayaraApi_fabricant_detail'),
@@ -50,7 +48,7 @@ urlpatterns += (
 
 #
 urlpatterns += (
-    #urls for Couleur
+    # urls for Couleur
     path('couleur/', views.CouleurListView.as_view(), name='SayaraApi_couleur_list'),
     path('couleur/create/', views.CouleurCreateView.as_view(), name='SayaraApi_couleur_create'),
     path('couleur/detail/<slug:pk>/', views.CouleurDetailView.as_view(), name='SayaraApi_couleur_detail'),
@@ -59,16 +57,25 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    #urls for Option
+    # urls for Option
     path('option/', views.OptionListView.as_view(), name='SayaraApi_option_list'),
     path('option/create/', views.OptionCreateView.as_view(), name='SayaraApi_option_create'),
     path('option/detail/<slug:pk>/', views.OptionDetailView.as_view(), name='SayaraApi_option_detail'),
     path('option/update/<slug:pk>/', views.OptionUpdateView.as_view(), name='SayaraApi_option_update'),
     path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_option_delete'),
 )
+
+urlpatterns += (
+    # urls for FicheTechnique
+    path('fichetechnique/', views.FicheTechniqueListView.as_view(), name='app_name_fichetechnique_list'),
+    path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(),
+         name='app_name_fichetechnique_create'),
+    path('fichetechnique/update/<int:pk>/', views.FicheTechniqueUpdateView.as_view(),
+         name='app_name_fichetechnique_update'),
+)
 urlpatterns += (
     # urls for Mobile Queries
-    #TODO type as a parameter and annonce goes to same view
+    # TODO type as a parameter and annonce goes to same view
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
     path('annonce/neuf', views.AnnnonceNeufListView.as_view(), name='Annonce'),
 )

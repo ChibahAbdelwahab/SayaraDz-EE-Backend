@@ -41,7 +41,7 @@ class RefVersion(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    codeVersion = models.CharField(max_length=20)
+    codeVersion = models.CharField(max_length=20,primary_key=True)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
@@ -57,6 +57,10 @@ class Version(models.Model):
     @property
     def fabricantVersion_id(self):
         return self.modeleVersion.fabricantModele_id
+
+    @property
+    def modele(self):
+        return self.modeleVersion.nomModele
 
     def __str__(self):
         return self.nomVersion.nomVersion
@@ -82,9 +86,11 @@ class Modele(models.Model):
     @property
     def nom(self):
         return self.nomModele.nomModele
+
     @property
     def marque(self):
         return self.nomModele.marqueModele.nomMarque
+
 
 class Annonce(models.Model):
     # Fields
@@ -215,3 +221,19 @@ class VehiculeNeuf(Vehicule):
     @property
     def prix(self):
         return 122
+
+
+class FicheTechnique(models.Model):
+    versionVoiture = models.ForeignKey(
+        'SayaraApi.VehiculeNeuf',
+        related_name='idvehicule',
+        on_delete=models.CASCADE,
+    )
+
+    nombrePortes = models.CharField(max_length=100)
+    boiteVitesse = models.CharField(max_length=100)
+    puissanceFiscale = models.CharField(max_length=100)
+    motorisation = models.CharField(max_length=100)
+    consomation = models.CharField(max_length=100)
+    dimension = models.CharField(max_length=100)
+    transmission = models.CharField(max_length=100)

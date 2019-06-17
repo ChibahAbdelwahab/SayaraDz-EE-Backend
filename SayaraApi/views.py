@@ -63,25 +63,21 @@ class VersionListView(generics.ListAPIView):
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        try:
-            queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.Fabricant_id)
-        # except User.profile.RelatedObjectDoesNotExist:
-        except:
-            return None
-        query_nom = self.request.GET.get("nomVersion", None)
-        query_id = self.request.GET.get("pk", None)
-        query_code = self.request.GET.get("codeVersion", None)
-        query_marqueModele = self.request.GET.get("modeleVersion", None)
-        if query_nom is not None:
-            queryset = queryset.filter(Q(nomVersion=query_nom))
-        if query_code is not None:
-            queryset = queryset.filter(Q(codeVersion=query_code))
-        if query_id is not None:
-            queryset = queryset.filter(Q(pk=query_id))
-        if query_marqueModele is not None:
-            queryset = queryset.filter(Q(modeleVersion=query_marqueModele))
+        # try:
+        #     queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.Fabricant_id)
+        # # except User.profile.RelatedObjectDoesNotExist:
+        # except:
+        #     return None
 
-        return queryset
+        query_id = self.request.GET.get("pk", None)
+        if query_id is not None:
+            return Version.objects.filter(pk=query_id)
+
+        query_modele_id = self.request.GET.get("modeleId", None)
+        if query_modele_id is not None:
+            return Version.objects.filter(modeleVersion_id=query_modele_id)
+
+        return Version.objects.all()
 
 
 class VersionCreateView(generics.CreateAPIView):
@@ -271,7 +267,6 @@ class CouleurListView(generics.ListAPIView):
         query_code = self.request.GET.get("codeCouleur", None)
         query_modele = self.request.GET.get("modeleCouleur", None)
 
-
         if query_id is not None:
             queryset = queryset.filter(Q(pk=query_nom))
         if query_nom is not None:
@@ -353,3 +348,18 @@ class OptionDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
+class FicheTechniqueListView(generics.ListAPIView):
+    model = FicheTechnique
+    serializer_class = FicheTechniqueSerializer
+
+    def get_queryset(self):
+        # query_versionId = self.request.GET.get("versionId", None)
+        return FicheTechnique.objects.all()
+
+
+class FicheTechniqueCreateView(generics.CreateAPIView):
+    model = FicheTechnique
+
+
+class FicheTechniqueUpdateView(generics.UpdateAPIView):
+    model = FicheTechnique
