@@ -14,6 +14,18 @@ class Vehicule(models.Model):
         on_delete=models.CASCADE,
     )
 
+    @property
+    def marque(self):
+        return self.versionVoiture.modeleVersion.nomModele.marqueModele
+
+    @property
+    def version(self):
+        return self.versionVoiture.nomVersion
+
+    @property
+    def modele(self):
+        return self.versionVoiture.modeleVersion.nomModele
+
     class Meta:
         abstract = True
 
@@ -30,6 +42,10 @@ class Marque(models.Model):
     def __str__(self):
         return self.nomMarque
 
+    #TODO change this to real fabricant id
+    @property
+    def fabricant_id (self):
+        return  self.nomMarque
 
 class RefVersion(models.Model):
     nomVersion = models.CharField(max_length=255, unique=True)
@@ -56,7 +72,7 @@ class Version(models.Model):
 
     @property
     def fabricantVersion_id(self):
-        return self.modeleVersion.fabricantModele_id
+        return self.modeleVersion.nomModele.marqueModele
 
     @property
     def modele(self):
@@ -113,6 +129,7 @@ class Annonce(models.Model):
         on_delete="DO_NOTHING",
     )
 
+
     def __str__(self):
         return self.titre
 
@@ -124,7 +141,7 @@ class Fabricant(models.Model):
 
     # Relationship Fields
     marqueFabricant = models.ForeignKey(
-        'SayaraApi.marque',
+        'SayaraApi.Marque',
         on_delete=models.CASCADE, related_name="fabricants",
     )
 
@@ -223,16 +240,3 @@ class VehiculeNeuf(Vehicule):
         return 122
 
 
-class FicheTechnique(models.Model):
-    versionVoiture = models.ForeignKey(
-        'SayaraApi.VehiculeNeuf',
-        related_name='idvehicule',
-        on_delete=models.CASCADE,
-    )
-
-    nombrePortes = models.CharField(max_length=100)
-    boiteVitesse = models.CharField(max_length=100)
-    puissanceFiscale = models.CharField(max_length=100)
-    motorisation = models.CharField(max_length=100)
-    consomation = models.CharField(max_length=100)
-    transmission = models.CharField(max_length=100)
