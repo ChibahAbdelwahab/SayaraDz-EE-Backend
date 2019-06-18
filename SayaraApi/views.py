@@ -191,7 +191,6 @@ class FabricantDeleteView(views.APIView):
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
 
-
 class AnnnonceOccasionListView(generics.ListAPIView):
     models = Annonce
     serializer_class = AnnonceOccasionSerializer
@@ -205,24 +204,22 @@ class AnnnonceOccasionListView(generics.ListAPIView):
         query_km2 = self.request.GET.get("km2", None)
         query_marque = self.request.GET.get("Marque", None)
 
-        if query_d1 is not None:
+        if query_d1 is not None and query_d1!="":
             queryset = queryset.filter(Q(idVehicule__date__gte=query_d1))
 
-        if query_d2 is not None:
-            queryset = queryset.filter(Q(idVehicule__date__lte=query_d1))
+        if query_d2 is not None and query_d2!="":
+            queryset = queryset.filter(Q(idVehicule__date__lte=query_d2))
 
-        if query_km1 is not None:
+        if query_km1 is not None and query_km1!="":
             queryset = queryset.filter(Q(idVehicule__kilometrage__gte=query_km1))
 
-        if query_km2 is not None:
-            queryset = queryset.filter(Q(idVehicule__kilometrage__lte=query_km1))
+        if query_km2 is not None and query_km2!="":
+            queryset = queryset.filter(Q(idVehicule__kilometrage__lte=query_km2))
 
-        if query_marque is not None:
-            queryset = queryset.filter(
-                Q(idVehicule__marque == query_marque))
+        if query_marque is not None and query_marque!="":
+            queryset = queryset.filter(Q(nomMarque=query_marque))
 
         return queryset
-
 
 class AnnnonceNeufListView(generics.ListAPIView):
     models = VehiculeNeuf
