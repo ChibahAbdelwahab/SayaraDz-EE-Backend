@@ -433,7 +433,7 @@
       "options": []
     }
   },
-  {
+   {
     "model": "SayaraApi.version",
     "pk": "11122",
     "fields": {
