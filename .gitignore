@@ -44,3 +44,5 @@ media/
 
 #Cached files #
 *.pyc
+
+venv/
