@@ -130,14 +130,14 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
 
 
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
-    titre = serializers.CharField()
+    # titre = serializers.CharField()
     # idVehicule= VehiculeOccasionSerializer()
-    idUser = serializers.StringRelatedField()
-    date = serializers.DateField(source='idVehicule.date')
-    imageVehicle1 = serializers.ImageField(source='idVehicule.imageVehicle1')
-    imageVehicle2 = serializers.ImageField(source='idVehicule.imageVehicle2')
-    imageVehicle3 = serializers.ImageField(source='idVehicule.imageVehicle3')
-    kilometrage = serializers.IntegerField(source='idVehicule.kilometrage')
+    pseudoUser = serializers.CharField()
+    date = serializers.DateField()
+    image1 = serializers.ImageField()
+    image2 = serializers.ImageField()
+    image3 = serializers.ImageField()
+    kilometrage = serializers.IntegerField()
 
     class Meta:
         model = models.Annonce
@@ -145,8 +145,9 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-    #TODO remove idModele from nested couleur objects
-    couleur_set = CouleurSerializer(many=True,read_only=True,)
+    # TODO remove idModele from nested couleur objects
+    couleur_set = CouleurSerializer(many=True, read_only=True, )
+
     class Meta:
         depth = 1
         model = models.Modele
@@ -157,4 +158,3 @@ class ModeleSerializer(serializers.ModelSerializer):
             'codeModele',
             'couleur_set',
         )
-

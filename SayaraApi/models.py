@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models as models
+from . import *
 
 
 class Vehicule(models.Model):
@@ -7,12 +8,6 @@ class Vehicule(models.Model):
     app_label = "Vehicule"
     numChassis = models.CharField(max_length=100)
     idVehicule = models.AutoField(primary_key=True)
-
-    # Relationship Fields
-    versionVoiture = models.ForeignKey(
-        'SayaraApi.Version',
-        on_delete=models.CASCADE,
-    )
 
     @property
     def marque(self):
@@ -49,7 +44,7 @@ class Marque(models.Model):
 
 
 class RefVersion(models.Model):
-    nomVersion = models.CharField(max_length=255, unique=True)
+    nomVersion = models.CharField(max_length=255, unique=True, primary_key=True)
 
     def __str__(self):
         return self.nomVersion
@@ -140,6 +135,30 @@ class Annonce(models.Model):
         on_delete="DO_NOTHING",
     )
 
+    @property
+    def image1(self):
+        return self.idVehicule.image1
+
+    @property
+    def image2(self):
+        return self.idVehicule.image2
+
+    @property
+    def image3(self):
+        return self.idVehicule.image3
+
+    @property
+    def kilometrage(self):
+        return self.idVehicule.kilometrage
+
+    @property
+    def pseudoUser(self):
+        return self.idUser.username
+
+    @property
+    def date(self):
+        return self.idVehicule.date
+
     def __str__(self):
         return self.titre
 
@@ -218,7 +237,6 @@ class Option(models.Model):
     #     # if not self.pk:
     #     #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
     #     super(Option, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.nomOption.nomOption
 
@@ -226,24 +244,19 @@ class Option(models.Model):
 class VehiculeOccasion(Vehicule):
     kilometrage = models.IntegerField()
     date = models.DateField()
-    imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    options = models.ManyToManyField(
-        'SayaraApi.RefOption',
-        related_name="options",
-        blank=True
-    )
+    image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    image2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    image3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
+    model = models.ForeignKey(RefModele, related_name="model", on_delete="DO_NOTHING")
+    options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
     concessionnaire = models.CharField(max_length=250)
-
-    optionsVersion = models.ManyToManyField(
-        'SayaraApi.Option',
-        blank=True
-    )
+    version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    optionsVersion = models.ManyToManyField(Option, blank=True)
 
     @property
     def prix(self):
