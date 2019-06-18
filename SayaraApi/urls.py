@@ -70,5 +70,5 @@ urlpatterns += (
     # urls for Mobile Queries
     # TODO type as a parameter and annonce goes to same view
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
-    path('annonce/neuf', views.AnnnonceNeufListView.as_view(), name='Annonce'),
+    path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
 )

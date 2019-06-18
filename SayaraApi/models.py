@@ -1,6 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models as models
-from . import *
+from django.utils.translation import gettext as _
+
+import datetime
+
+
+YEAR_CHOICES = []
+for r in range(1980, (datetime.datetime.now().year + 1)):
+    YEAR_CHOICES.append((r, r))
 
 
 class Vehicule(models.Model):
@@ -18,7 +25,7 @@ class Vehicule(models.Model):
         return self.versionVoiture.nomVersion
 
     @property
-    def modele(self):
+    def modele_name(self):
         return self.versionVoiture.modeleVersion.nomModele
 
     class Meta:
@@ -77,8 +84,8 @@ class Version(models.Model):
         return self.modeleVersion.nomModele.marqueModele
 
     @property
-    def modele(self):
-        return self.modeleVersion.nomModele
+    def modele_name(self):
+        return self.modeleVersion.nomModele.nomModele
 
     def __str__(self):
         return self.nomVersion.nomVersion
@@ -243,7 +250,7 @@ class Option(models.Model):
 
 class VehiculeOccasion(Vehicule):
     kilometrage = models.IntegerField()
-    date = models.DateField()
+    date = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     image2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
     image3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)

@@ -409,7 +409,7 @@
     "fields": {
       "numChassis": "12345678",
       "kilometrage": 10,
-      "date": "2010-06-18",
+      "date": "2010",
       "image2": "",
       "image1": "",
       "version": "Allure",
@@ -425,12 +425,32 @@
     "fields": {
       "numChassis": "15467",
       "kilometrage": 23,
-      "date": "2012-06-18",
+      "date": "2012",
       "image2": "",
       "image1": "",
       "version": "RLine",
       "model": 33,
       "options": []
+    }
+  },
+  {
+    "model": "SayaraApi.version",
+    "pk": "11122",
+    "fields": {
+      "nomVersion": "Allure",
+      "modeleVersion": 1,
+      "optionsVersion": [],
+      "imagesVersion": []
+    }
+  },
+  {
+    "model": "SayaraApi.version",
+    "pk": "122",
+    "fields": {
+      "nomVersion": "GTLine",
+      "modeleVersion": 1,
+      "optionsVersion": [],
+      "imagesVersion": []
     }
   }
 ]

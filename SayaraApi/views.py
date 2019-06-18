@@ -227,7 +227,7 @@ class AnnnonceOccasionListView(generics.ListAPIView):
         return queryset
 
 
-class AnnnonceNeufListView(generics.ListAPIView):
+class AnnonceNeufListView(generics.ListAPIView):
     models = VehiculeNeuf
     serializer_class = VehiculeNeufSerializer
 

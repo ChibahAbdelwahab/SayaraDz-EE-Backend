@@ -33,11 +33,14 @@ class MarqueSerializer(serializers.ModelSerializer):
 
 
 class VersionSerializer(serializers.ModelSerializer):
+    modele_name = models.Modele
+
     class Meta:
         model = models.Version
         fields = (
             'nomVersion',
             'codeVersion',
+            "modele_name",
             'modeleVersion',
             'optionsVersion',
             'pk',
