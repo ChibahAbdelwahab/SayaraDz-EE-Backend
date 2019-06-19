@@ -72,7 +72,7 @@ class VersionListView(generics.ListAPIView):
             return Version.objects.filter(Q(modeleVersion_id=query_modele_id))
         if query_modele_name is not "":
             return Version.objects.filter(Q(modeleVersion__nomModele=query_modele_name))
-        if query_marque_name it not "":
+        if query_marque_name is not "":
             return Version.objects.filter(Q(modeleVersion__nomModele__marqueModele=query_marque_name))
         return Version.objects.all()
 
