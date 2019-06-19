@@ -176,3 +176,19 @@ class LigneTarifSerializer(serializers.ModelSerializer):
             'code2',
             'code3'
         )
+
+class FicheTechniqueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'idVersion'
+        )

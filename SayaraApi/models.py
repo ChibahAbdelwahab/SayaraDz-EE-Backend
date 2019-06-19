@@ -266,10 +266,7 @@ class VehiculeNeuf(Vehicule):
         return 122
 
 
-
-
 class LigneTarif(models.Model):
-
     # Fields
     dateDebut = models.DateField()
     dateFin = models.DateField()
@@ -294,3 +291,16 @@ class LigneTarif(models.Model):
 
     class Meta:
         ordering = ('-pk',)
+
+
+class FicheTechnique(models.Model):
+    idVersion = models.OneToOneField(Version,
+                                  related_name="fichetechniques",
+                                  on_delete="DO_NOTHING", )
+    nombrePortes = models.CharField(max_length=100)
+    boiteVitesse = models.CharField(max_length=100)
+    puissanceFiscale = models.CharField(max_length=100)
+    motorisation = models.CharField(max_length=100)
+    consommation = models.CharField(max_length=100)
+    dimensions = models.CharField(max_length=100)
+    transmission = models.CharField(max_length=100)

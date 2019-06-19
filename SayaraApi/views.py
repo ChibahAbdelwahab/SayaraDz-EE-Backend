@@ -378,3 +378,36 @@ class LigneTarifDeleteView(views.APIView):
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
 
+#Fiche Technique
+class FicheTechniqueListView(generics.ListAPIView):
+    model = FicheTechnique
+    serializer_class = FicheTechniqueSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = FicheTechnique.objects.all()
+        return queryset
+
+
+class FicheTechniqueDetailView(generics.RetrieveAPIView):
+    model = FicheTechnique
+    serializer_class = FicheTechniqueSerializer
+
+
+class FicheTechniqueUpdateView(generics.UpdateAPIView):
+    model = FicheTechnique
+    serializer_class = FicheTechniqueSerializer
+
+
+class FicheTechniqueCreateView(generics.CreateAPIView):
+    model = FicheTechnique
+    serializer_class = FicheTechniqueSerializer
+
+
+class FicheTechniqueDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(FicheTechnique, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)

@@ -78,6 +78,14 @@ urlpatterns += (
     # urls for LigneTarif
     path('lignetarif/', views.LigneTarifListView.as_view(), name='SayaraApi_lignetarif_list'),
     path('lignetarif/create/', views.LigneTarifCreateView.as_view(), name='SayaraApi_lignetarif_create'),
-    path('lignetarif/detail/<int:pk>/', views.LigneTarifDetailView.as_view(), name='SayaraApi_lignetarif_detail'),
-    path('lignetarif/update/<int:pk>/', views.LigneTarifUpdateView.as_view(), name='SayaraApi_lignetarif_update'),
+    path('lignetarif/detail/<slug:pk>/', views.LigneTarifDetailView.as_view(), name='SayaraApi_lignetarif_detail'),
+    path('lignetarif/update/<slug:pk>/', views.LigneTarifUpdateView.as_view(), name='SayaraApi_lignetarif_update'),
+)
+
+urlpatterns += (
+    # urls for FicheTechnique
+    path('fichetechnique/', views.FicheTechniqueListView.as_view(), name='app_name_fichetechnique_list'),
+    path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(), name='app_name_fichetechnique_create'),
+    path('fichetechnique/detail/<slug:pk>/', views.FicheTechniqueDetailView.as_view(), name='app_name_fichetechnique_detail'),
+    path('fichetechnique/update/<slug:pk>/', views.FicheTechniqueUpdateView.as_view(), name='app_name_fichetechnique_update'),
 )
