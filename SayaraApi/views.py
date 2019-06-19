@@ -63,17 +63,19 @@ class VersionListView(generics.ListAPIView):
 
         query_id = self.request.GET.get("pk", "")
         query_modele_id = self.request.GET.get("modeleId", "")
-        query_modele_name = self.response.GET.get("modele", "")
-        query_marque_name = self.response.GET.get("marque", "")
+        query_modele_name = self.request.GET.get("modele", "")
+        query_marque_name = self.request.GET.get("marque", "")
 
         if query_id is not "":
-            return Version.objects.filter(pk=query_id)
+            return Version.objects.filter(Q(pk=query_id))
         if query_modele_id is not "":
             return Version.objects.filter(Q(modeleVersion_id=query_modele_id))
         if query_modele_name is not "":
             return Version.objects.filter(Q(modeleVersion__nomModele=query_modele_name))
         if query_marque_name is not "":
-            return Version.objects.filter(Q(modeleVersion__nomModele__marqueModele=query_marque_name))
+            print(query_marque_name)
+            return Version.objects.filter(Q(modeleVersion__nomModele__marqueModele__nomMarque__icontains=query_marque_name))
+
         return Version.objects.all()
 
 

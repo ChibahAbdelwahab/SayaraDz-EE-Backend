@@ -79,6 +79,10 @@ class Version(models.Model):
     def modele_name(self):
         return self.modeleVersion.nomModele.nomModele
 
+    @property
+    def marque_name(self):
+        return self.modeleVersion.nomModele.marqueModele.nomMarque
+
     def __str__(self):
         return self.nomVersion.nomVersion
 
