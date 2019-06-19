@@ -180,7 +180,7 @@ class FabricantUpdateView(generics.UpdateAPIView):
 
 class FabricantDeleteView(views.APIView):
     def get_object(self, pk):
-        return get_object_or_404(Marque, pk=pk)
+        return get_object_or_404(Fabricant, pk=pk)
 
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)
@@ -288,7 +288,7 @@ class CouleurUpdateView(generics.UpdateAPIView):
 
 class CouleurDeleteView(views.APIView):
     def get_object(self, pk):
-        return get_object_or_404(Marque, pk=pk)
+        return get_object_or_404(Couleur, pk=pk)
 
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)
@@ -333,9 +333,46 @@ class OptionCreateView(generics.CreateAPIView):
 
 class OptionDeleteView(views.APIView):
     def get_object(self, pk):
-        return get_object_or_404(Marque, pk=pk)
+        return get_object_or_404(Option, pk=pk)
 
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
+
+
+
+class LigneTarifListView(generics.ListAPIView):
+    model = LigneTarif
+    serializer_class = LigneTarifSerializer
+
+    # pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = LigneTarif.objects.all()
+        return queryset
+
+
+class LigneTarifDetailView(generics.RetrieveAPIView):
+    model = LigneTarif
+    serializer_class = LigneTarifSerializer
+
+
+class LigneTarifUpdateView(generics.UpdateAPIView):
+    model = LigneTarif
+    serializer_class = LigneTarifSerializer
+
+
+class LigneTarifCreateView(generics.CreateAPIView):
+    model = LigneTarif
+    serializer_class = LigneTarifSerializer
+
+
+class LigneTarifDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(LigneTarif, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)
+

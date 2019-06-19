@@ -17,6 +17,7 @@ admin.site.register(Fabricant)
 admin.site.register(Couleur)
 admin.site.register(Option)
 admin.site.register(Image)
+admin.site.register(LigneTarif)
 
 
 # Define an inline admin descriptor for Employee model

@@ -161,3 +161,17 @@ class ModeleSerializer(serializers.ModelSerializer):
             'codeModele',
             'couleur_set',
         )
+
+
+class LigneTarifSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.LigneTarif
+        fields = (
+            'dateDebut',
+            'dateFin',
+            'prix',
+            'code1',
+            'code2',
+            'code3'
+        )

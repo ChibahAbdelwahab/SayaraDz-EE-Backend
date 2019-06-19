@@ -72,3 +72,12 @@ urlpatterns += (
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
     path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
 )
+
+
+urlpatterns += (
+    # urls for LigneTarif
+    path('lignetarif/', views.LigneTarifListView.as_view(), name='SayaraApi_lignetarif_list'),
+    path('lignetarif/create/', views.LigneTarifCreateView.as_view(), name='SayaraApi_lignetarif_create'),
+    path('lignetarif/detail/<int:pk>/', views.LigneTarifDetailView.as_view(), name='SayaraApi_lignetarif_detail'),
+    path('lignetarif/update/<int:pk>/', views.LigneTarifUpdateView.as_view(), name='SayaraApi_lignetarif_update'),
+)
