@@ -7,8 +7,6 @@ from .models import *
 from .serializers import *
 
 
-
-
 class MarqueListView(generics.ListAPIView):
     model = Marque
     serializer_class = MarqueSerializer
@@ -51,8 +49,6 @@ class MarqueDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
-
-
 class VersionListView(generics.ListAPIView):
     model = Version
     serializer_class = VersionSerializer
@@ -66,13 +62,18 @@ class VersionListView(generics.ListAPIView):
         #     return ""
 
         query_id = self.request.GET.get("pk", "")
+        query_modele_id = self.request.GET.get("modeleId", "")
+        query_modele_name = self.response.GET.get("modele", "")
+        query_marque_name = self.response.GET.get("marque", "")
+
         if query_id is not "":
             return Version.objects.filter(pk=query_id)
-
-        query_modele_id = self.request.GET.get("modeleId", "")
         if query_modele_id is not "":
-            return Version.objects.filter(modeleVersion_id=query_modele_id)
-
+            return Version.objects.filter(Q(modeleVersion_id=query_modele_id))
+        if query_modele_name is not "":
+            return Version.objects.filter(Q(modeleVersion__nomModele=query_modele_name))
+        if query_marque_name it not "":
+            return Version.objects.filter(Q(modeleVersion__nomModele__marqueModele=query_marque_name))
         return Version.objects.all()
 
 
@@ -105,7 +106,6 @@ class ModeleListView(generics.ListAPIView):
     model = Modele
     serializer_class = ModeleSerializer
 
-    # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
 

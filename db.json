@@ -409,7 +409,7 @@
     "fields": {
       "numChassis": "12345678",
       "kilometrage": 10,
-      "date": "2010",
+      "date": "2010-01-01",
       "image2": "",
       "image1": "",
       "version": "Allure",
@@ -425,7 +425,7 @@
     "fields": {
       "numChassis": "15467",
       "kilometrage": 23,
-      "date": "2012",
+      "date": "2012-01-01",
       "image2": "",
       "image1": "",
       "version": "RLine",
