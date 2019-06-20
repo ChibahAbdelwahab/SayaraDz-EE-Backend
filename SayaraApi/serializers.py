@@ -44,7 +44,17 @@ class VersionSerializer(serializers.ModelSerializer):
             'modeleVersion',
             'marque_name',
             'optionsVersion',
-            'pk',
+            'imagesVersion'
+        )
+
+class VersionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Version
+        fields = (
+            'nomVersion',
+            'modeleVersion',
+            'optionsVersion',
+            'imagesVersion'
         )
 
 
@@ -99,7 +109,7 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = (
             'nomOption',
             'codeOption',
-
+            'modeleOption'
         )
 
 

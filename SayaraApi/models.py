@@ -54,17 +54,14 @@ class Version(models.Model):
     app_label = "Version"
     codeVersion = models.CharField(max_length=20, primary_key=True)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
-
+    imagesVersion = models.ImageField(upload_to="images/versions", null=True, blank=True)
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',
         related_name="versions",
         blank=True
     )
-    imagesVersion = models.ManyToManyField(
-        'SayaraApi.Image',
-        blank=True
-    )
+
 
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
