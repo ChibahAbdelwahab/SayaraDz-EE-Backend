@@ -44,7 +44,8 @@ class VersionSerializer(serializers.ModelSerializer):
             'modeleVersion',
             'marque_name',
             'optionsVersion',
-            'imagesVersion'
+            'imagesVersion',
+            'pk'
         )
 
 class VersionCreateSerializer(serializers.ModelSerializer):
@@ -54,7 +55,8 @@ class VersionCreateSerializer(serializers.ModelSerializer):
             'nomVersion',
             'modeleVersion',
             'optionsVersion',
-            'imagesVersion'
+            'imagesVersion',
+            'pk'
         )
 
 
