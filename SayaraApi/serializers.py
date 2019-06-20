@@ -53,6 +53,7 @@ class VersionCreateSerializer(serializers.ModelSerializer):
         model = models.Version
         fields = (
             'nomVersion',
+            'codeVersion',
             'modeleVersion',
             'optionsVersion',
             'imagesVersion',
