@@ -203,5 +203,31 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'idVersion'
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
         )
+
+class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
+        )
+
+        depth = 4
