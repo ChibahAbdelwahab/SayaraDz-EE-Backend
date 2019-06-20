@@ -203,7 +203,7 @@ class AnnnonceOccasionListView(generics.ListAPIView):
         query_km2 = self.request.GET.get("km2", "")
         query_prix1 = self.request.GET.get("prix1", "")
         query_prix2 = self.request.GET.get("prix2", "")
-        query_marque = self.request.GET.get("Marque", "")
+        query_marque = self.request.GET.get("marque", "")
 
         if query_d1 is not "":
             queryset = queryset.filter(Q(idVehicule__date__gte=query_d1))
@@ -224,7 +224,7 @@ class AnnnonceOccasionListView(generics.ListAPIView):
             queryset = queryset.filter(Q(prix__lte=query_prix2))
 
         if query_marque is not "":
-            queryset = queryset.filter(Q(nomMarque=query_marque))
+            queryset = queryset.filter(Q(idVehicule__model__marqueModele__nomMarque__icontains=query_marque))
 
         return queryset
 
