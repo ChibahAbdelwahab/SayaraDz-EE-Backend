@@ -39,7 +39,7 @@ Thumbs.db
 #Intelij folder #
 .idea
 # Folder #
-migrations/
+migrations/*.pyc
 media/
 
 #Cached files #
