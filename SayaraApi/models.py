@@ -184,7 +184,7 @@ class Fabricant(models.Model):
     def __str__(self):
         return self.nomFabricant
 
-
+#
 class Profile(models.Model):
     user = models.OneToOneField(
         User,
@@ -287,6 +287,7 @@ class VehiculeNeuf(Vehicule):
     def modele_name(self):
         return self.version.modele_name
 
+
 class LigneTarif(models.Model):
     # Fields
     dateDebut = models.DateField()
@@ -326,7 +327,7 @@ class FicheTechnique(models.Model):
     dimensions = models.CharField(max_length=100)
     transmission = models.CharField(max_length=100)
     capaciteReservoir = models.CharField(max_length=100)
-    vitesseMaxi= models.IntegerField()
+    vitesseMaxi = models.IntegerField()
     acceleration = models.CharField(max_length=100)
     images = models.ManyToManyField(
         Image,
