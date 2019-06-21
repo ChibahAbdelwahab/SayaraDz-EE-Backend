@@ -420,30 +420,6 @@
     }
   },
   {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 2,
-    "fields": {
-      "numChassis": "15467",
-      "kilometrage": 23,
-      "date": "2012-01-01",
-      "image2": "",
-      "image1": "",
-      "version": "RLine",
-      "model": 33,
-      "options": []
-    }
-  },
-  {
-    "model": "SayaraApi.version",
-    "pk": "11122",
-    "fields": {
-      "nomVersion": "Allure",
-      "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
-    }
-  },
-  {
     "model": "SayaraApi.version",
     "pk": "122",
     "fields": {
@@ -452,6 +428,203 @@
       "optionsVersion": [],
       "imagesVersion": []
     }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 1,
+    "fields": {
+      "nomMarque": "BMW",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 2,
+    "fields": {
+      "nomMarque": "Audi",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 3,
+    "fields": {
+      "nomMarque": "Mercedes-Benz",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 4,
+    "fields": {
+      "nomMarque": "Honda",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 5,
+    "fields": {
+      "nomMarque": "Renault",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 6,
+    "fields": {
+      "nomMarque": "Nissan",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 7,
+    "fields": {
+      "nomMarque": "GMC",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 8,
+    "fields": {
+      "nomMarque": "Mercury",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 9,
+    "fields": {
+      "nomMarque": "Nissan",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 10,
+    "fields": {
+      "nomMarque": "Kia",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 11,
+    "fields": {
+      "nomMarque": "Infiniti",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 12,
+    "fields": {
+      "nomMarque": "Infiniti",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 13,
+    "fields": {
+      "nomMarque": "Dodge",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 14,
+    "fields": {
+      "nomMarque": "Ford",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 15,
+    "fields": {
+      "nomMarque": "GMC",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 16,
+    "fields": {
+      "nomMarque": "Ford",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 17,
+    "fields": {
+      "nomMarque": "Chevrolet",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 18,
+    "fields": {
+      "nomMarque": "Maybach",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 19,
+    "fields": {
+      "nomMarque": "Maybach",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 20,
+    "fields": {
+      "nomMarque": "Peugeot",
+      "imageMarque": "marque/images/"
+    }
+  },
+  {
+    "model": "SayaraApi.marque",
+    "pk": 21,
+    "fields": {
+      "nomMarque": "Renault",
+      "imageMarque": "marque/images/Capture_du_2019-05-27_16-44-08.png"
+    }
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "Allure",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "GTLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "RLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "SLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "Sport",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "TT",
+    "fields": {}
   }
-
 ]

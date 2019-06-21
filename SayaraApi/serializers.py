@@ -153,7 +153,8 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     fabricant_id = serializers.IntegerField()
     marque = serializers.CharField()
     modele_name = serializers.CharField()
-    image = serializers.ImageField()
+    image1 = serializers.ImageField()
+    titre = serializers.CharField()
     class Meta:
         model = models.VehiculeNeuf
         fields = "__all__"

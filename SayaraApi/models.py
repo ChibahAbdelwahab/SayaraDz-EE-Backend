@@ -185,6 +185,7 @@ class Fabricant(models.Model):
         return self.nomFabricant
 
 
+#
 class Profile(models.Model):
     user = models.OneToOneField(
         User,
@@ -281,57 +282,61 @@ class VehiculeNeuf(Vehicule):
     def fabricant_name(self):
         return "Notfixedyet"
 
-    def image(self):
+    @property
+    def image1(self):
         return self.version.imagesVersion
 
+    @property
     def modele_name(self):
         return self.version.modele_name
+
+    @property
+    def titre(self):
+        return str(self.modele_name + " " + self.version.nomVersion.nomVersion)
 
 
 class LigneTarif(models.Model):
     # Fields
     dateDebut = models.DateField()
-    # dateFin = models.DateField()
-    # prix = models.FloatField()
-    #
-    # # Relationship Fields
-    # code1 = models.OneToOneField(
-    #     Version,
-    #     on_delete=models.CASCADE, related_name="lignetarifs",
-    #     blank=True, null=True
-    # )
-    # code2 = models.OneToOneField(
-    #     Option,
-    #     on_delete=models.CASCADE, related_name="lignetarifs",
-    #     blank=True, null=True
-    # )
-    # code3 = models.OneToOneField(
-    #     Couleur,
-    #     on_delete=models.CASCADE, related_name="lignetarifs",
-    #     blank=True, null=True
-    # )
+    dateFin = models.DateField()
+    prix = models.FloatField()
+
+    # Relationship Fields
+    code1 = models.OneToOneField(
+        Version,
+        on_delete=models.CASCADE, related_name="lignetarifs",
+        blank=True, null=True
+    )
+    code2 = models.OneToOneField(
+        Option,
+        on_delete=models.CASCADE, related_name="lignetarifs",
+        blank=True, null=True
+    )
+    code3 = models.OneToOneField(
+        Couleur,
+        on_delete=models.CASCADE, related_name="lignetarifs",
+        blank=True, null=True
+    )
 
     class Meta:
         ordering = ('-pk',)
 
 
 class FicheTechnique(models.Model):
-    pass
-#     idVersion = models.OneToOneField(Version,
-#                                      related_name="fichetechniques",
-#                                      on_delete="DO_NOTHING", )
-#     nombrePortes = models.CharField(max_length=100)
-#     boiteVitesse = models.CharField(max_length=100)
-#     puissanceFiscale = models.CharField(max_length=100)
-#     motorisation = models.CharField(max_length=100)
-#     consommation = models.CharField(max_length=100)
-#     dimensions = models.CharField(max_length=100)
-#     transmission = models.CharField(max_length=100)
-#     capaciteReservoir = models.CharField(max_length=100)
-#     vitesseMaxi = models.IntegerField()
-#     acceleration = models.CharField(max_length=100)
-#     images = models.ManyToManyField(
-#         Image,
-#         blank=True
-#     )
-# heroku
+    idVersion = models.OneToOneField(Version,
+                                     related_name="fichetechniques",
+                                     on_delete="DO_NOTHING", )
+    nombrePortes = models.CharField(max_length=100)
+    boiteVitesse = models.CharField(max_length=100)
+    puissanceFiscale = models.CharField(max_length=100)
+    motorisation = models.CharField(max_length=100)
+    consommation = models.CharField(max_length=100)
+    dimensions = models.CharField(max_length=100)
+    transmission = models.CharField(max_length=100)
+    capaciteReservoir = models.CharField(max_length=100)
+    vitesseMaxi = models.IntegerField()
+    acceleration = models.CharField(max_length=100)
+    images = models.ManyToManyField(
+        Image,
+        blank=True
+    )

@@ -232,13 +232,11 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
 class AnnonceListView(generics.ListAPIView):
     models = Annonce
-    serializer_class = AnnonceSerializer
-    models = Annonce
     serializer_class = AnnonceOccasionSerializer
 
     def get_queryset(self, *args, **kwargs):
-        query_user = self.request.GET.get("userId", "")
-        if query_user is not "":
+        query_user = self.request.user.id or None
+        if query_user is not None:
             return Annonce.objects.filter(Q(idUser=query_user))
 
         return Annonce.objects.all()
