@@ -190,8 +190,7 @@
   },
   {
     "model": "SayaraApi.refversion",
-    "pk": 6,
-    "fields": {
+    "pk": 6, "fields": {
       "nomVersion": "RLine"
     }
   },
