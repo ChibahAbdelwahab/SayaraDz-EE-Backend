@@ -231,7 +231,7 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
 class AnnonceNeufListView(generics.ListAPIView):
     models = VehiculeNeuf
-    serializer_class = VehiculeNeufSerializer
+    serializer_class = AnnnonceNeufSerializer
 
     def get_queryset(self, *args, **kwargs):
 

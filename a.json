@@ -176,11 +176,27 @@
     }
   },
   {
+    "model": "contenttypes.contenttype",
+    "pk": 23,
+    "fields": {
+      "app_label": "SayaraApi",
+      "model": "lignetarif"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 24,
+    "fields": {
+      "app_label": "SayaraApi",
+      "model": "fichetechnique"
+    }
+  },
+  {
     "model": "sessions.session",
-    "pk": "5sx9emlang47oz4pkfggg7e0v0uojony",
+    "pk": "1txlup7b2zqzfz0b9isdogoueqalwrsq",
     "fields": {
       "session_data": "OGJmNjI1MTQ1ZGMxNzA2YjI1MTg5MzAyMmZmYWQyNmQyMGE0Njk3Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlZDUwNGQ4YzM5ZjI5MDdmYjQxYTRhNDEwZTMyMzRiMDIyZTk2ZGNhIn0=",
-      "expire_date": "2019-07-02T20:58:01.621Z"
+      "expire_date": "2019-07-05T09:29:32.763Z"
     }
   },
   {
@@ -383,22 +399,24 @@
   },
   {
     "model": "SayaraApi.version",
-    "pk": "11122",
+    "pk": 122,
     "fields": {
-      "nomVersion": "Allure",
+      "codeVersion": "",
+      "nomVersion": "GTLine",
+      "imagesVersion": "[]",
       "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
+      "optionsVersion": []
     }
   },
   {
     "model": "SayaraApi.version",
-    "pk": "122",
+    "pk": 11122,
     "fields": {
-      "nomVersion": "GTLine",
+      "codeVersion": "",
+      "nomVersion": "Allure",
+      "imagesVersion": "[]",
       "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
+      "optionsVersion": []
     }
   },
   {
@@ -528,12 +546,20 @@
     }
   },
   {
+    "model": "SayaraApi.option",
+    "pk": "qsq",
+    "fields": {
+      "nomOption": 2,
+      "modeleOption": 1
+    }
+  },
+  {
     "model": "SayaraApi.vehiculeoccasion",
     "pk": 1,
     "fields": {
       "numChassis": "12345678",
       "kilometrage": 10,
-      "date": 2010,
+      "date": "2010-01-01",
       "image1": "",
       "image2": "",
       "image3": "",
@@ -550,13 +576,37 @@
     "fields": {
       "numChassis": "15467",
       "kilometrage": 23,
-      "date": 2012,
+      "date": "2012-01-01",
       "image1": "",
       "image2": "",
       "image3": "",
       "version": "RLine",
       "model": 33,
       "options": []
+    }
+  },
+  {
+    "model": "SayaraApi.vehiculeneuf",
+    "pk": 1,
+    "fields": {
+      "numChassis": "123",
+      "disponible": true,
+      "concessionnaire": "Hmida",
+      "version": 11122,
+      "optionsVersion": [
+        "qsq"
+      ]
+    }
+  },
+  {
+    "model": "SayaraApi.vehiculeneuf",
+    "pk": 2,
+    "fields": {
+      "numChassis": "34567",
+      "disponible": true,
+      "concessionnaire": "Hmida",
+      "version": 11122,
+      "optionsVersion": []
     }
   },
   {
@@ -1352,11 +1402,83 @@
     }
   },
   {
+    "model": "auth.permission",
+    "pk": 89,
+    "fields": {
+      "name": "Can add ligne tarif",
+      "content_type": 23,
+      "codename": "add_lignetarif"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 90,
+    "fields": {
+      "name": "Can change ligne tarif",
+      "content_type": 23,
+      "codename": "change_lignetarif"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 91,
+    "fields": {
+      "name": "Can delete ligne tarif",
+      "content_type": 23,
+      "codename": "delete_lignetarif"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 92,
+    "fields": {
+      "name": "Can view ligne tarif",
+      "content_type": 23,
+      "codename": "view_lignetarif"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 93,
+    "fields": {
+      "name": "Can add fiche technique",
+      "content_type": 24,
+      "codename": "add_fichetechnique"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 94,
+    "fields": {
+      "name": "Can change fiche technique",
+      "content_type": 24,
+      "codename": "change_fichetechnique"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 95,
+    "fields": {
+      "name": "Can delete fiche technique",
+      "content_type": 24,
+      "codename": "delete_fichetechnique"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 96,
+    "fields": {
+      "name": "Can view fiche technique",
+      "content_type": 24,
+      "codename": "view_fichetechnique"
+    }
+  },
+  {
     "model": "auth.user",
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$120000$G9zormg35Yms$KUxVJjGksbW4GHUakFh6Oeiz87Y4Oerg9UOos9LHHDQ=",
-      "last_login": "2019-06-18T20:58:01.616Z",
+      "last_login": "2019-06-21T09:29:32.757Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "",
@@ -1417,6 +1539,45 @@
       "is_fabricant": true,
       "is_client": true,
       "Fabricant": null
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2019-06-21T09:29:48.742Z",
+      "user": 1,
+      "content_type": 20,
+      "object_id": "qsq",
+      "object_repr": "Vitres \u00e9lectriques",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2019-06-21T09:29:56.519Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "1",
+      "object_repr": "123",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2019-06-21T09:30:18.306Z",
+      "user": 1,
+      "content_type": 22,
+      "object_id": "2",
+      "object_repr": "34567",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   }
 ]

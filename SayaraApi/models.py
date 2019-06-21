@@ -39,7 +39,7 @@ class Marque(models.Model):
     # TODO change this to real fabricant id
     @property
     def fabricant_id(self):
-        return self.nomMarque
+        return self.fabricants
 
 
 class RefVersion(models.Model):
@@ -61,7 +61,6 @@ class Version(models.Model):
         related_name="versions",
         blank=True
     )
-
 
     modeleVersion = models.ForeignKey(
         'SayaraApi.Modele',
@@ -108,6 +107,14 @@ class Modele(models.Model):
     @property
     def nom(self):
         return self.nomModele.nomModele
+
+    @property
+    def fabricant_name(self):
+        return self.nomModele.marqueModele.fabricant
+
+    @property
+    def fabricant_id(self):
+        return self.nomModele.marqueModele
 
     @property
     def marque(self):
@@ -262,6 +269,23 @@ class VehiculeNeuf(Vehicule):
     def prix(self):
         return 122
 
+    @property
+    def marque(self):
+        return self.version.modeleVersion.marque
+
+    @property
+    def fabricant_id(self):
+        return 1
+
+    @property
+    def fabricant_name(self):
+        return "Notfixedyet"
+
+    def image(self):
+        return self.version.imagesVersion
+
+    def modele_name(self):
+        return self.version.modele_name
 
 class LigneTarif(models.Model):
     # Fields
@@ -292,8 +316,8 @@ class LigneTarif(models.Model):
 
 class FicheTechnique(models.Model):
     idVersion = models.OneToOneField(Version,
-                                  related_name="fichetechniques",
-                                  on_delete="DO_NOTHING", )
+                                     related_name="fichetechniques",
+                                     on_delete="DO_NOTHING", )
     nombrePortes = models.CharField(max_length=100)
     boiteVitesse = models.CharField(max_length=100)
     puissanceFiscale = models.CharField(max_length=100)

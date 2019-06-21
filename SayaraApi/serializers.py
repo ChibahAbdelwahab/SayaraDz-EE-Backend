@@ -35,6 +35,7 @@ class MarqueSerializer(serializers.ModelSerializer):
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
+
     class Meta:
         model = models.Version
         fields = (
@@ -47,6 +48,7 @@ class VersionSerializer(serializers.ModelSerializer):
             'imagesVersion',
             'pk'
         )
+
 
 class VersionCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -140,11 +142,22 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
         model = models.VehiculeNeuf
         fields = (
             'numChassis',
-            'versionVoiture',
+            'version',
             'disponible',
-            'prix'
+            'prix',
+
         )
 
+
+class AnnnonceNeufSerializer(serializers.ModelSerializer):
+    fabricant_name = serializers.CharField()
+    fabricant_id = serializers.IntegerField()
+    marque = serializers.CharField()
+    modele_name = serializers.CharField()
+    image = serializers.ImageField()
+    class Meta:
+        model = models.VehiculeNeuf
+        fields = "__all__"
 
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
     # titre = serializers.CharField()
@@ -178,7 +191,6 @@ class ModeleSerializer(serializers.ModelSerializer):
 
 
 class LigneTarifSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.LigneTarif
         fields = (
@@ -190,8 +202,8 @@ class LigneTarifSerializer(serializers.ModelSerializer):
             'code3'
         )
 
-class FicheTechniqueSerializer(serializers.ModelSerializer):
 
+class FicheTechniqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FicheTechnique
         fields = (
