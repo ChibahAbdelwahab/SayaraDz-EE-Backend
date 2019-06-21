@@ -209,17 +209,6 @@
     }
   },
   {
-    "model": "SayaraApi.version",
-    "pk": 11122,
-    "fields": {
-      "codeVersion": "",
-      "nomVersion": "Allure",
-      "imagesVersion": "[]",
-      "modeleVersion": 1,
-      "optionsVersion": []
-    }
-  },
-  {
     "model": "SayaraApi.refmodele",
     "pk": 31,
     "fields": {
