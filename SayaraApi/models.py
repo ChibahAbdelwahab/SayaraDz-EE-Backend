@@ -291,25 +291,25 @@ class VehiculeNeuf(Vehicule):
 class LigneTarif(models.Model):
     # Fields
     dateDebut = models.DateField()
-    dateFin = models.DateField()
-    prix = models.FloatField()
-
-    # Relationship Fields
-    code1 = models.OneToOneField(
-        Version,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
-    code2 = models.OneToOneField(
-        Option,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
-    code3 = models.OneToOneField(
-        Couleur,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
+    # dateFin = models.DateField()
+    # prix = models.FloatField()
+    #
+    # # Relationship Fields
+    # code1 = models.OneToOneField(
+    #     Version,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
+    # code2 = models.OneToOneField(
+    #     Option,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
+    # code3 = models.OneToOneField(
+    #     Couleur,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
 
     class Meta:
         ordering = ('-pk',)
