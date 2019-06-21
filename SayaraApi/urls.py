@@ -68,9 +68,9 @@ urlpatterns += (
 
 urlpatterns += (
     # TODO type as a parameter and annonce goes to same view
+    path('annonce', views.AnnonceListView.as_view(), name='AnnonceUser'),
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
     path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
-    path('annonce', views.AnnonceListView.as_view(), name='AnnonceUser'),
 )
 
 
