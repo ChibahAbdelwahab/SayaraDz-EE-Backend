@@ -316,20 +316,22 @@ class LigneTarif(models.Model):
 
 
 class FicheTechnique(models.Model):
-    idVersion = models.OneToOneField(Version,
-                                     related_name="fichetechniques",
-                                     on_delete="DO_NOTHING", )
-    nombrePortes = models.CharField(max_length=100)
-    boiteVitesse = models.CharField(max_length=100)
-    puissanceFiscale = models.CharField(max_length=100)
-    motorisation = models.CharField(max_length=100)
-    consommation = models.CharField(max_length=100)
-    dimensions = models.CharField(max_length=100)
-    transmission = models.CharField(max_length=100)
-    capaciteReservoir = models.CharField(max_length=100)
-    vitesseMaxi = models.IntegerField()
-    acceleration = models.CharField(max_length=100)
-    images = models.ManyToManyField(
-        Image,
-        blank=True
-    )
+    pass
+#     idVersion = models.OneToOneField(Version,
+#                                      related_name="fichetechniques",
+#                                      on_delete="DO_NOTHING", )
+#     nombrePortes = models.CharField(max_length=100)
+#     boiteVitesse = models.CharField(max_length=100)
+#     puissanceFiscale = models.CharField(max_length=100)
+#     motorisation = models.CharField(max_length=100)
+#     consommation = models.CharField(max_length=100)
+#     dimensions = models.CharField(max_length=100)
+#     transmission = models.CharField(max_length=100)
+#     capaciteReservoir = models.CharField(max_length=100)
+#     vitesseMaxi = models.IntegerField()
+#     acceleration = models.CharField(max_length=100)
+#     images = models.ManyToManyField(
+#         Image,
+#         blank=True
+#     )
+# heroku
