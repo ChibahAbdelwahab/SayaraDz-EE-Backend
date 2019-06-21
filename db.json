@@ -420,30 +420,6 @@
     }
   },
   {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 2,
-    "fields": {
-      "numChassis": "15467",
-      "kilometrage": 23,
-      "date": "2012-01-01",
-      "image2": "",
-      "image1": "",
-      "version": "RLine",
-      "model": 33,
-      "options": []
-    }
-  },
-  {
-    "model": "SayaraApi.version",
-    "pk": "11122",
-    "fields": {
-      "nomVersion": "Allure",
-      "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
-    }
-  },
-  {
     "model": "SayaraApi.version",
     "pk": "122",
     "fields": {
