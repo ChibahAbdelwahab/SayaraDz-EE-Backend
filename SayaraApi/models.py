@@ -183,7 +183,7 @@ class Fabricant(models.Model):
 
     def __str__(self):
         return self.nomFabricant
-#
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User,
