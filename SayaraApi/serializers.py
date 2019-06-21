@@ -33,6 +33,23 @@ class MarqueSerializer(serializers.ModelSerializer):
 
 
 class VersionSerializer(serializers.ModelSerializer):
+    modele_name = models.Modele
+    marque_name = serializers.CharField()
+    class Meta:
+        model = models.Version
+        fields = (
+            'nomVersion',
+            'codeVersion',
+            "modele_name",
+            'modeleVersion',
+            'marque_name',
+            'optionsVersion',
+            'imagesVersion',
+            'pk'
+        )
+
+
+class VersionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
@@ -40,7 +57,8 @@ class VersionSerializer(serializers.ModelSerializer):
             'codeVersion',
             'modeleVersion',
             'optionsVersion',
-            'pk',
+            'imagesVersion',
+            'pk'
         )
 
 
@@ -95,7 +113,7 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = (
             'nomOption',
             'codeOption',
-
+            'modeleOption'
         )
 
 
@@ -123,21 +141,32 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
         model = models.VehiculeNeuf
         fields = (
             'numChassis',
-            'versionVoiture',
+            'version',
             'disponible',
-            'prix'
+            'prix',
+
         )
 
 
+class AnnnonceNeufSerializer(serializers.ModelSerializer):
+    fabricant_name = serializers.CharField()
+    fabricant_id = serializers.IntegerField()
+    marque = serializers.CharField()
+    modele_name = serializers.CharField()
+    image = serializers.ImageField()
+    class Meta:
+        model = models.VehiculeNeuf
+        fields = "__all__"
+
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
-    titre = serializers.CharField()
+    # titre = serializers.CharField()
     # idVehicule= VehiculeOccasionSerializer()
-    idUser = serializers.StringRelatedField()
-    date = serializers.DateField(source='idVehicule.date')
-    imageVehicle1 = serializers.ImageField(source='idVehicule.imageVehicle1')
-    imageVehicle2 = serializers.ImageField(source='idVehicule.imageVehicle2')
-    imageVehicle3 = serializers.ImageField(source='idVehicule.imageVehicle3')
-    kilometrage = serializers.IntegerField(source='idVehicule.kilometrage')
+    pseudoUser = serializers.CharField()
+    date = serializers.DateField()
+    image1 = serializers.ImageField()
+    image2 = serializers.ImageField()
+    image3 = serializers.ImageField()
+    kilometrage = serializers.IntegerField()
 
     class Meta:
         model = models.Annonce
@@ -145,8 +174,9 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-    #TODO remove idModele from nested couleur objects
-    couleur_set = CouleurSerializer(many=True,read_only=True,)
+    # TODO remove idModele from nested couleur objects
+    couleur_set = CouleurSerializer(many=True, read_only=True, )
+
     class Meta:
         depth = 1
         model = models.Modele
@@ -158,3 +188,57 @@ class ModeleSerializer(serializers.ModelSerializer):
             'couleur_set',
         )
 
+
+class LigneTarifSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.LigneTarif
+        fields = (
+            'dateDebut',
+            'dateFin',
+            'prix',
+            'code1',
+            'code2',
+            'code3'
+        )
+
+
+class FicheTechniqueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
+        )
+
+class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
+        )
+
+        depth = 4

@@ -67,8 +67,26 @@ urlpatterns += (
 
 
 urlpatterns += (
-    # urls for Mobile Queries
     # TODO type as a parameter and annonce goes to same view
+    path('annonce/', views.AnnonceListView.as_view(), name='AnnonceUser'),
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
-    path('annonce/neuf', views.AnnnonceNeufListView.as_view(), name='Annonce'),
+    path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
+)
+
+
+
+urlpatterns += (
+    # urls for LigneTarif
+    path('lignetarif/', views.LigneTarifListView.as_view(), name='SayaraApi_lignetarif_list'),
+    path('lignetarif/create/', views.LigneTarifCreateView.as_view(), name='SayaraApi_lignetarif_create'),
+    path('lignetarif/detail/<slug:pk>/', views.LigneTarifDetailView.as_view(), name='SayaraApi_lignetarif_detail'),
+    path('lignetarif/update/<slug:pk>/', views.LigneTarifUpdateView.as_view(), name='SayaraApi_lignetarif_update'),
+)
+
+urlpatterns += (
+    # urls for FicheTechnique
+    path('fichetechnique/', views.FicheTechniqueListView.as_view(), name='app_name_fichetechnique_list'),
+    path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(), name='app_name_fichetechnique_create'),
+    path('fichetechnique/detail/<slug:pk>/', views.FicheTechniqueDetailView.as_view(), name='app_name_fichetechnique_detail'),
+    path('fichetechnique/update/<slug:pk>/', views.FicheTechniqueUpdateView.as_view(), name='app_name_fichetechnique_update'),
 )

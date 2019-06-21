@@ -8,12 +8,6 @@ class Vehicule(models.Model):
     numChassis = models.CharField(max_length=100)
     idVehicule = models.AutoField(primary_key=True)
 
-    # Relationship Fields
-    versionVoiture = models.ForeignKey(
-        'SayaraApi.Version',
-        on_delete=models.CASCADE,
-    )
-
     @property
     def marque(self):
         return self.versionVoiture.modeleVersion.nomModele.marqueModele
@@ -23,7 +17,7 @@ class Vehicule(models.Model):
         return self.versionVoiture.nomVersion
 
     @property
-    def modele(self):
+    def modele_name(self):
         return self.versionVoiture.modeleVersion.nomModele
 
     class Meta:
@@ -45,11 +39,11 @@ class Marque(models.Model):
     # TODO change this to real fabricant id
     @property
     def fabricant_id(self):
-        return self.nomMarque
+        return self.fabricants
 
 
 class RefVersion(models.Model):
-    nomVersion = models.CharField(max_length=255, unique=True)
+    nomVersion = models.CharField(max_length=255, unique=True, primary_key=True)
 
     def __str__(self):
         return self.nomVersion
@@ -58,17 +52,13 @@ class RefVersion(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    codeVersion = models.CharField(max_length=20, primary_key=True)
+    codeVersion = models.CharField(max_length=20)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
-
+    imagesVersion = models.ImageField(upload_to="images/versions", null=True, blank=True)
     # Relationship Fields
     optionsVersion = models.ManyToManyField(
         'SayaraApi.Option',
         related_name="versions",
-        blank=True
-    )
-    imagesVersion = models.ManyToManyField(
-        'SayaraApi.Image',
         blank=True
     )
 
@@ -82,8 +72,12 @@ class Version(models.Model):
         return self.modeleVersion.nomModele.marqueModele
 
     @property
-    def modele(self):
-        return self.modeleVersion.nomModele
+    def modele_name(self):
+        return self.modeleVersion.nomModele.nomModele
+
+    @property
+    def marque_name(self):
+        return self.modeleVersion.nomModele.marqueModele.nomMarque
 
     def __str__(self):
         return self.nomVersion.nomVersion
@@ -115,6 +109,14 @@ class Modele(models.Model):
         return self.nomModele.nomModele
 
     @property
+    def fabricant_name(self):
+        return self.nomModele.marqueModele.fabricant
+
+    @property
+    def fabricant_id(self):
+        return self.nomModele.marqueModele
+
+    @property
     def marque(self):
         return self.nomModele.marqueModele.nomMarque
 
@@ -139,6 +141,30 @@ class Annonce(models.Model):
         related_name="proprietaire",
         on_delete="DO_NOTHING",
     )
+
+    @property
+    def image1(self):
+        return self.idVehicule.image1
+
+    @property
+    def image2(self):
+        return self.idVehicule.image2
+
+    @property
+    def image3(self):
+        return self.idVehicule.image3
+
+    @property
+    def kilometrage(self):
+        return self.idVehicule.kilometrage
+
+    @property
+    def pseudoUser(self):
+        return self.idUser.username
+
+    @property
+    def date(self):
+        return self.idVehicule.date
 
     def __str__(self):
         return self.titre
@@ -218,7 +244,6 @@ class Option(models.Model):
     #     # if not self.pk:
     #     #     self.fabricantOption_id=Fabricant.objects.get(pk=1)
     #     super(Option, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.nomOption.nomOption
 
@@ -226,25 +251,87 @@ class Option(models.Model):
 class VehiculeOccasion(Vehicule):
     kilometrage = models.IntegerField()
     date = models.DateField()
-    imageVehicle1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    imageVehicle2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    imageVehicle3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    options = models.ManyToManyField(
-        'SayaraApi.RefOption',
-        related_name="options",
-        blank=True
-    )
+    image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    image2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    image3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
+    model = models.ForeignKey(RefModele, related_name="model", on_delete="DO_NOTHING")
+    options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
     concessionnaire = models.CharField(max_length=250)
-
-    optionsVersion = models.ManyToManyField(
-        'SayaraApi.Option',
-        blank=True
-    )
+    version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    optionsVersion = models.ManyToManyField(Option, blank=True)
 
     @property
     def prix(self):
         return 122
+
+    @property
+    def marque(self):
+        return self.version.modeleVersion.marque
+
+    @property
+    def fabricant_id(self):
+        return 1
+
+    @property
+    def fabricant_name(self):
+        return "Notfixedyet"
+
+    def image(self):
+        return self.version.imagesVersion
+
+    def modele_name(self):
+        return self.version.modele_name
+
+
+class LigneTarif(models.Model):
+    # Fields
+    dateDebut = models.DateField()
+    # dateFin = models.DateField()
+    # prix = models.FloatField()
+    #
+    # # Relationship Fields
+    # code1 = models.OneToOneField(
+    #     Version,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
+    # code2 = models.OneToOneField(
+    #     Option,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
+    # code3 = models.OneToOneField(
+    #     Couleur,
+    #     on_delete=models.CASCADE, related_name="lignetarifs",
+    #     blank=True, null=True
+    # )
+
+    class Meta:
+        ordering = ('-pk',)
+
+
+class FicheTechnique(models.Model):
+    pass
+#     idVersion = models.OneToOneField(Version,
+#                                      related_name="fichetechniques",
+#                                      on_delete="DO_NOTHING", )
+#     nombrePortes = models.CharField(max_length=100)
+#     boiteVitesse = models.CharField(max_length=100)
+#     puissanceFiscale = models.CharField(max_length=100)
+#     motorisation = models.CharField(max_length=100)
+#     consommation = models.CharField(max_length=100)
+#     dimensions = models.CharField(max_length=100)
+#     transmission = models.CharField(max_length=100)
+#     capaciteReservoir = models.CharField(max_length=100)
+#     vitesseMaxi = models.IntegerField()
+#     acceleration = models.CharField(max_length=100)
+#     images = models.ManyToManyField(
+#         Image,
+#         blank=True
+#     )
+# heroku

@@ -49,7 +49,7 @@ def create_marque(**kwargs):
 def create_version(**kwargs):
     defaults = {}
     defaults["nomVersion"] = "nomVersion"
-    defaults["codeVersion"] = "codeVersion"
+    defaults["code"] = "code"
     defaults.update(**kwargs)
     return Version.objects.create(**defaults)
 
@@ -158,7 +158,7 @@ class VersionViewTest(unittest.TestCase):
         url = reverse('app_name_version_create')
         data = {
             "nomVersion": "nomVersion",
-            "codeVersion": "codeVersion",
+            "code": "code",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -173,7 +173,7 @@ class VersionViewTest(unittest.TestCase):
         version = create_version()
         data = {
             "nomVersion": "nomVersion",
-            "codeVersion": "codeVersion",
+            "code": "code",
         }
         url = reverse('app_name_version_update', args=[version.pk,])
         response = self.client.post(url, data)
