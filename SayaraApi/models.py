@@ -291,6 +291,7 @@ class VehiculeNeuf(Vehicule):
 class LigneTarif(models.Model):
     # Fields
     dateDebut = models.DateField()
+
     # dateFin = models.DateField()
     # prix = models.FloatField()
     #
@@ -316,9 +317,7 @@ class LigneTarif(models.Model):
 
 
 class FicheTechnique(models.Model):
-    idVersion = models.OneToOneField(Version,
-                                     related_name="fichetechniques",
-                                     on_delete="DO_NOTHING", )
+    idVersion = models.OneToOneField(Version, related_name="fichetechniques", on_delete="DO_NOTHING", )
     nombrePortes = models.CharField(max_length=100)
     boiteVitesse = models.CharField(max_length=100)
     puissanceFiscale = models.CharField(max_length=100)
@@ -329,7 +328,4 @@ class FicheTechnique(models.Model):
     capaciteReservoir = models.CharField(max_length=100)
     vitesseMaxi = models.IntegerField()
     acceleration = models.CharField(max_length=100)
-    images = models.ManyToManyField(
-        Image,
-        blank=True
-    )
+    images = models.ManyToManyField(Image, blank=True)
