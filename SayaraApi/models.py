@@ -183,6 +183,8 @@ class Fabricant(models.Model):
 
     def __str__(self):
         return self.nomFabricant
+
+
 #
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -280,11 +282,17 @@ class VehiculeNeuf(Vehicule):
     def fabricant_name(self):
         return "Notfixedyet"
 
-    def image(self):
+    @property
+    def image1(self):
         return self.version.imagesVersion
 
+    @property
     def modele_name(self):
         return self.version.modele_name
+
+    @property
+    def titre(self):
+        return str(self.modele_name + " " + self.version.nomVersion.nomVersion)
 
 
 class LigneTarif(models.Model):
