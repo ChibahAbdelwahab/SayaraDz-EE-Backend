@@ -52,7 +52,7 @@ class RefVersion(models.Model):
 class Version(models.Model):
     # Fields
     app_label = "Version"
-    codeVersion = models.CharField(max_length=20)
+    codeVersion = models.CharField(max_length=20,primary_key=True)
     nomVersion = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
     imagesVersion = models.ImageField(upload_to="images/versions", null=True, blank=True)
     # Relationship Fields
