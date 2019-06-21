@@ -74,7 +74,8 @@ class VersionListView(generics.ListAPIView):
             return Version.objects.filter(Q(modeleVersion__nomModele=query_modele_name))
         if query_marque_name is not "":
             print(query_marque_name)
-            return Version.objects.filter(Q(modeleVersion__nomModele__marqueModele__nomMarque__icontains=query_marque_name))
+            return Version.objects.filter(
+                Q(modeleVersion__nomModele__marqueModele__nomMarque__icontains=query_marque_name))
 
         return Version.objects.all()
 
@@ -229,6 +230,20 @@ class AnnnonceOccasionListView(generics.ListAPIView):
         return queryset
 
 
+class AnnonceListView(generics.ListAPIView):
+    models = Annonce
+    serializer_class = AnnonceSerializer
+    models = Annonce
+    serializer_class = AnnonceOccasionSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        query_user = self.request.GET.get("userId", "")
+        if query_user is not "":
+            return Annonce.objects.filter(Q(idUser=query_user))
+
+        return Annonce.objects.all()
+
+
 class AnnonceNeufListView(generics.ListAPIView):
     models = VehiculeNeuf
     serializer_class = AnnnonceNeufSerializer
@@ -343,7 +358,6 @@ class OptionDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
-
 class LigneTarifListView(generics.ListAPIView):
     model = LigneTarif
     serializer_class = LigneTarifSerializer
@@ -378,7 +392,8 @@ class LigneTarifDeleteView(views.APIView):
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
 
-#Fiche Technique
+
+# Fiche Technique
 class FicheTechniqueListView(generics.ListAPIView):
     model = FicheTechnique
     serializer_class = FicheTechniqueViewAllSerializer
