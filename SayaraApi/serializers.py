@@ -35,7 +35,6 @@ class MarqueSerializer(serializers.ModelSerializer):
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
-
     class Meta:
         model = models.Version
         fields = (
@@ -215,5 +214,31 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'idVersion'
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
         )
+
+class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'idVersion',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+            'images'
+        )
+
+        depth = 4

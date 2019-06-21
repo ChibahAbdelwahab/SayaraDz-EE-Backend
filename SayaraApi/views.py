@@ -381,7 +381,7 @@ class LigneTarifDeleteView(views.APIView):
 #Fiche Technique
 class FicheTechniqueListView(generics.ListAPIView):
     model = FicheTechnique
-    serializer_class = FicheTechniqueSerializer
+    serializer_class = FicheTechniqueViewAllSerializer
 
     def get_queryset(self, *args, **kwargs):
         queryset = FicheTechnique.objects.all()

@@ -325,3 +325,10 @@ class FicheTechnique(models.Model):
     consommation = models.CharField(max_length=100)
     dimensions = models.CharField(max_length=100)
     transmission = models.CharField(max_length=100)
+    capaciteReservoir = models.CharField(max_length=100)
+    vitesseMaxi= models.IntegerField()
+    acceleration = models.CharField(max_length=100)
+    images = models.ManyToManyField(
+        Image,
+        blank=True
+    )
