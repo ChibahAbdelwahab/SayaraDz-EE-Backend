@@ -232,8 +232,6 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
 class AnnonceListView(generics.ListAPIView):
     models = Annonce
-    serializer_class = AnnonceSerializer
-    models = Annonce
     serializer_class = AnnonceOccasionSerializer
 
     def get_queryset(self, *args, **kwargs):
