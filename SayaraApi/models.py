@@ -333,4 +333,3 @@ class FicheTechnique(models.Model):
         Image,
         blank=True
     )
-    #
