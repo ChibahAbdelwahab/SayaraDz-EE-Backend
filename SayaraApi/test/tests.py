@@ -221,7 +221,7 @@ class MarqueViewTest(unittest.TestCase):
         marque = create_marque()
         data = {
             'pk': marque.pk,
-            "nom": "nom2",
+            "nom": "nosm2",
         }
         url = '/api/marque/update/' + str(marque.pk) + '/'
         response = self.client.post(url, data)
