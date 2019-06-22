@@ -30,7 +30,7 @@ def create_django_contrib_contenttypes_models_contenttype(**kwargs):
 
 def create_vehicule(**kwargs):
     defaults = {}
-    defaults["numChassis"] = "numChassis"
+    defaults["num"] = "num"
     defaults["idVehicule"] = "idVehicule"
     defaults["imageVehicle1"] = "imageVehicle1"
     defaults["imageVehicle2"] = "imageVehicle2"
@@ -42,8 +42,8 @@ def create_vehicule(**kwargs):
 def create_marque(**kwargs):
     defaults = {}
     defaults["idMarque"] = "idMarque"
-    defaults["nomMarque"] = "nomMarque"
-    defaults["imageMarque"] = "imageMarque"
+    defaults["nom"] = "nom"
+    defaults["image"] = "image"
     defaults.update(**kwargs)
     return Marque.objects.create(**defaults)
 
@@ -204,7 +204,7 @@ class VehiculeViewTest(unittest.TestCase):
     def test_create_vehicule(self):
         url = reverse('SayaraApi_vehicule_create')
         data = {
-            "numChassis": "numChassis",
+            "num": "num",
             "idVehicule": "idVehicule",
             "imageVehicle1": "imageVehicle1",
             "imageVehicle2": "imageVehicle2",
@@ -222,7 +222,7 @@ class VehiculeViewTest(unittest.TestCase):
     def test_update_vehicule(self):
         vehicule = create_vehicule()
         data = {
-            "numChassis": "numChassis",
+            "num": "num",
             "idVehicule": "idVehicule",
             "imageVehicle1": "imageVehicle1",
             "imageVehicle2": "imageVehicle2",
@@ -249,8 +249,8 @@ class MarqueViewTest(unittest.TestCase):
         url = reverse('SayaraApi_marque_create')
         data = {
             "idMarque": "idMarque",
-            "nomMarque": "nomMarque",
-            "imageMarque": "imageMarque",
+            "nom": "nom",
+            "image": "image",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -265,8 +265,8 @@ class MarqueViewTest(unittest.TestCase):
         marque = create_marque()
         data = {
             "idMarque": "idMarque",
-            "nomMarque": "nomMarque",
-            "imageMarque": "imageMarque",
+            "nom": "nom",
+            "image": "image",
         }
         url = reverse('SayaraApi_marque_update', args=[marque.pk,])
         response = self.client.post(url, data)

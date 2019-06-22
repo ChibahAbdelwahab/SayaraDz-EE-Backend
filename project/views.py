@@ -10,7 +10,7 @@ class CustomLoginView(LoginView):
         try :
             fabricant = self.user.profile.fabricant.nom
             marqueid = self.user.profile.fabricant.marque.id
-            marque = self.user.profile.fabricant.marque.nomMarque
+            marque = self.user.profile.fabricant.marque.nom
         except:
             fabricant=""
             marqueid=""

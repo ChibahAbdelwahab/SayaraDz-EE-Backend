@@ -7,7 +7,7 @@ class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Vehicule
         fields = (
-            'numChassis',
+            'num',
             'disponible',
             'versionVoiture'
         )
@@ -27,8 +27,8 @@ class MarqueSerializer(serializers.ModelSerializer):
         model = models.Marque
         fields = (
             'pk',
-            'nomMarque',
-            'imageMarque',
+            'nom',
+            'image',
         )
 
 
@@ -132,7 +132,7 @@ class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.VehiculeOccasion
         fields = (
-            'numChassis',
+            'num',
             'versionVoiture',
             'kilometrage',
             'date',
@@ -144,7 +144,7 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.VehiculeNeuf
         fields = (
-            'numChassis',
+            'num',
             'version',
             'disponible',
             'prix',

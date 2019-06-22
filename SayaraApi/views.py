@@ -14,10 +14,10 @@ class MarqueListView(generics.ListAPIView):
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Marque.objects.all()
-        query_nom = self.request.GET.get("nomMarque", "")
+        query_nom = self.request.GET.get("nom", "")
         query_idModele = self.request.GET.get("pk", "")
         if query_nom is not "":
-            queryset = queryset.filter(Q(nomMarque=query_nom))
+            queryset = queryset.filter(Q(nom=query_nom))
         if query_idModele is not "":
             queryset = queryset.filter(Q(pk=query_idModele))
 
@@ -75,7 +75,7 @@ class VersionListView(generics.ListAPIView):
         if query_marque_name is not "":
             print(query_marque_name)
             return Version.objects.filter(
-                Q(modele__nom__marque__nomMarque__icontains=query_marque_name))
+                Q(modele__nom__marque__nom__icontains=query_marque_name))
 
         return Version.objects.all()
 
@@ -225,7 +225,7 @@ class AnnnonceOccasionListView(generics.ListAPIView):
             queryset = queryset.filter(Q(prix__lte=query_prix2))
 
         if query_marque is not "":
-            queryset = queryset.filter(Q(vehicule__model__marque__nomMarque__icontains=query_marque))
+            queryset = queryset.filter(Q(vehicule__model__marque__nom__icontains=query_marque))
 
         return queryset
 
@@ -250,14 +250,14 @@ class AnnonceNeufListView(generics.ListAPIView):
 
         queryset = VehiculeNeuf.objects.all()
 
-        query_nom = self.request.GET.get("numChassis", "")
+        query_nom = self.request.GET.get("num", "")
         query_prix = self.request.GET.get("prix", "")
         query_idModele = self.request.GET.get("idVehicle", "")
 
         if query_nom is not "":
             queryset = queryset.filter(Q(idMarque=query_nom))
         if query_idModele is not "":
-            queryset = queryset.filter(Q(nomMarque=query_idModele))
+            queryset = queryset.filter(Q(nom=query_idModele))
         if query_prix is not "":
             queryset = queryset.filter(Q(prix=query_prix))
 

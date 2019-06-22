@@ -11,7 +11,7 @@ class VehiculeForm(forms.ModelForm):
 class MarqueForm(forms.ModelForm):
     class Meta:
         model = Marque
-        fields = ['nomMarque']
+        fields = ['nom']
 
 
 class VersionForm(forms.ModelForm):

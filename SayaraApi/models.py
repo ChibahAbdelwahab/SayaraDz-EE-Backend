@@ -5,7 +5,7 @@ from django.db import models as models
 class Vehicule(models.Model):
     # Fields
     app_label = "Vehicule"
-    numChassis = models.CharField(max_length=100)
+    num = models.CharField(max_length=100)
     vehicule = models.AutoField(primary_key=True)
 
     @property
@@ -24,17 +24,17 @@ class Vehicule(models.Model):
         abstract = True
 
     def __str__(self):
-        return self.numChassis
+        return self.num
 
 
 class Marque(models.Model):
     # Fields
     app_label = "Marque"
-    nomMarque = models.CharField(max_length=50)
-    imageMarque = models.ImageField(upload_to="marque/images/")
+    nom = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="marque/images/")
 
     def __str__(self):
-        return self.nomMarque
+        return self.nom
 
     # TODO change this to real fabricant id
     @property
@@ -77,7 +77,7 @@ class Version(models.Model):
 
     @property
     def marque_name(self):
-        return self.modele.nom.marque.nomMarque
+        return self.modele.nom.marque.nom
 
     def __str__(self):
         return self.nom.nom
@@ -118,7 +118,7 @@ class Modele(models.Model):
 
     @property
     def marque(self):
-        return self.nom.marque.nomMarque
+        return self.nom.marque.nom
 
 
 class Annonce(models.Model):
