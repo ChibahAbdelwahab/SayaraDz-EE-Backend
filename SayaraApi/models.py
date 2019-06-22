@@ -3,7 +3,7 @@ from django.db import models as models
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    image = models.ImageField(upload_to="images/vehicules",default='images/vehicules/voiture.jpg')
 
 
 class Vehicule(models.Model):
@@ -35,7 +35,7 @@ class Marque(models.Model):
     # Fields
     app_label = "Marque"
     nom = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="marque/images/")
+    image = models.ImageField(default='images/vehicules/voiture.jpg', upload_to="marque/images/")
 
     def __str__(self):
         return self.nom
@@ -98,7 +98,7 @@ class Modele(models.Model):
     app_label = "Modele"
     code = models.CharField(max_length=10)
     nom = models.ForeignKey(RefModele, on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(default='images/vehicules/voiture.jpg',upload_to="images/vehicules" )
 
     def __str__(self):
         return self.nom.nom
@@ -243,8 +243,8 @@ class VehiculeOccasion(Vehicule):
     kilometrage = models.IntegerField()
     date = models.DateField()
     image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    image2 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
-    image3 = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+    image2 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
     model = models.ForeignKey(RefModele, related_name="model", on_delete="DO_NOTHING")
     options = models.ManyToManyField(RefOption, related_name="options", blank=True)
