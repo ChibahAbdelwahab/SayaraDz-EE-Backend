@@ -67,10 +67,7 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
         fields = (
-            'nomModele',
-            'codeModele',
-            'fabricantModele',
-            # 'couleurCompatible'
+            '__all__'
         )
 
 
