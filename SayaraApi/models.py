@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models as models
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
+
+
 class Vehicule(models.Model):
     # Fields
     app_label = "Vehicule"
@@ -54,18 +58,12 @@ class Version(models.Model):
     app_label = "Version"
     code = models.CharField(max_length=20, primary_key=True)
     nom = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to="images/versions", null=True, blank=True)
-    # Relationship Fields
-    options = models.ManyToManyField(
-        'SayaraApi.Option',
-        related_name="versions",
-        blank=True
-    )
-
-    modele = models.ForeignKey(
-        'SayaraApi.Modele',
-        on_delete=models.CASCADE, related_name="versions"
-    )
+    images = models.ForeignKey(Image, on_delete=models.CASCADE)
+    options = models.ManyToManyField('SayaraApi.Option', blank=True)
+    modele = models.ForeignKey('SayaraApi.Modele', on_delete=models.CASCADE)
+    prix_base = models.IntegerField()
+    ficheTechnique = models.ForeignKey("SayaraApi.FicheTechnique", on_delete=models.CASCADE)
+    couleur = models.ForeignKey("SayaraApi.Couleur", on_delete=models.CASCADE)
 
     @property
     def fabricantVersion_id(self):
@@ -79,12 +77,12 @@ class Version(models.Model):
     def marque_name(self):
         return self.modele.nom.marque.nom
 
+    @property
+    def prix(self):
+        return self.prix_base + 2
+
     def __str__(self):
         return self.nom.nom
-
-
-class Image(models.Model):
-    image = models.ImageField(upload_to="images/vehicules", null=True, blank=True)
 
 
 class RefModele(models.Model):
@@ -100,6 +98,7 @@ class Modele(models.Model):
     app_label = "Modele"
     code = models.CharField(max_length=10)
     nom = models.ForeignKey(RefModele, on_delete=models.CASCADE)
+    image = models.ImageField()
 
     def __str__(self):
         return self.nom.nom
@@ -109,15 +108,15 @@ class Modele(models.Model):
         return self.nom.nom
 
     @property
-    def fabricant_name(self):
+    def fabricant_nom(self):
         return self.nom.marque.fabricant
 
     @property
-    def fabricant_id(self):
+    def fabricant_pk(self):
         return self.nom.marque
 
     @property
-    def marque(self):
+    def marque_nom(self):
         return self.nom.marque.nom
 
 
@@ -162,7 +161,7 @@ class Annonce(models.Model):
         return self.titre
 
 
-class fabricant(models.Model):
+class Fabricant(models.Model):
     app_label = "fabricant"
     # Fields
     nom = models.CharField(max_length=255)
@@ -177,7 +176,6 @@ class fabricant(models.Model):
         return self.nom
 
 
-#
 class Profile(models.Model):
     user = models.OneToOneField(
         User,
@@ -254,10 +252,14 @@ class VehiculeOccasion(Vehicule):
 
 class VehiculeNeuf(Vehicule):
     disponible = models.BooleanField()
+    reserve = models.BooleanField()
     concessionnaire = models.CharField(max_length=250)
     version = models.ForeignKey(Version, on_delete=models.CASCADE)
     options = models.ManyToManyField(Option, blank=True)
+    couleur = models.ForeignKey(Couleur, on_delete=models.CASCADE)
 
+    # TODO Contrainte : Option incluses dans options version
+    # TODO Contrainte : Couleur incluses dans couleurs Version
     @property
     def prix(self):
         return 122
@@ -315,10 +317,7 @@ class LigneTarif(models.Model):
 
 
 class FicheTechnique(models.Model):
-    version = models.OneToOneField(Version,
-                                   related_name="fichetechniques",
-                                   on_delete="DO_NOTHING", )
-    nombrePortes = models.CharField(max_length=100)
+    nombrePortes = models.IntegerField()
     boiteVitesse = models.CharField(max_length=100)
     puissanceFiscale = models.CharField(max_length=100)
     motorisation = models.CharField(max_length=100)
@@ -328,7 +327,3 @@ class FicheTechnique(models.Model):
     capaciteReservoir = models.CharField(max_length=100)
     vitesseMaxi = models.IntegerField()
     acceleration = models.CharField(max_length=100)
-    images = models.ManyToManyField(
-        Image,
-        blank=True
-    )

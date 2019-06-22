@@ -56,7 +56,7 @@ class VersionListView(generics.ListAPIView):
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         # try:
-        #     queryset = Version.objects.filter(fabricantVersion_id=self.request.user.profile.fabricant_id)
+        #     queryset = Version.objects.filter(FabricantVersion_id=self.request.user.profile.Fabricant_id)
         # # except User.profile.RelatedObjectDoesNotExist:
         # except:
         #     return ""
@@ -109,13 +109,15 @@ class ModeleListView(generics.ListAPIView):
     model = Modele
     serializer_class = ModeleSerializer
 
+    # TODO return only Fabricant's marques for Fabricant
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
+        marque_pk = self.request.GET.get("marque_pk", "")
+        marque_nom = self.request.GET.get("marque_nom", "")
 
-        query_marque_id = self.request.GET.get("marqueId", "")
-
-        if query_marque_id is not "":
-            queryset = queryset.filter(Q(nom__marque_id=query_marque_id))
+        if marque_pk is not "":
+            # TODO check this
+            queryset = queryset.filter(Q(marque_pk=marque_pk))
         return queryset
 
 
@@ -149,13 +151,13 @@ class ModeleDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
-class fabricantListView(generics.ListAPIView):
-    model = fabricant
-    serializer_class = fabricantSerializer
+class FabricantListView(generics.ListAPIView):
+    model = Fabricant
+    serializer_class = FabricantSerializer
 
     # pagination_class    = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
-        queryset = fabricant.objects.all()
+        queryset = Fabricant.objects.all()
         query_nom = self.request.GET.get("nom", "")
         query_id = self.request.GET.get("pk", "")
         if query_nom is not "":
@@ -166,24 +168,24 @@ class fabricantListView(generics.ListAPIView):
         return queryset
 
 
-class fabricantCreateView(generics.CreateAPIView):
-    queryset = fabricant.objects.all()
-    serializer_class = fabricantSerializer
+class FabricantCreateView(generics.CreateAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 
-class fabricantDetailView(generics.RetrieveAPIView):
-    queryset = fabricant.objects.all()
-    serializer_class = fabricantSerializer
+class FabricantDetailView(generics.RetrieveAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 
-class fabricantUpdateView(generics.UpdateAPIView):
-    queryset = fabricant.objects.all()
-    serializer_class = fabricantSerializer
+class FabricantUpdateView(generics.UpdateAPIView):
+    queryset = Fabricant.objects.all()
+    serializer_class = FabricantSerializer
 
 
-class fabricantDeleteView(views.APIView):
+class FabricantDeleteView(views.APIView):
     def get_object(self, pk):
-        return get_object_or_404(fabricant, pk=pk)
+        return get_object_or_404(Fabricant, pk=pk)
 
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)
@@ -341,8 +343,8 @@ class OptionCreateView(generics.CreateAPIView):
     queryset = Option.objects.all()
     serializer_class = OptionSerializer
     # def perform_create(self, serializer):
-    #     #     if "fabricantOption_id" not in serializer._kwargs["data"]:
-    #     #         serializer.save(fabricantOption_id=fabricant.objects.get(pk=1))
+    #     #     if "FabricantOption_id" not in serializer._kwargs["data"]:
+    #     #         serializer.save(FabricantOption_id=Fabricant.objects.get(pk=1))
     #     #     else: serializer.save()
 
 

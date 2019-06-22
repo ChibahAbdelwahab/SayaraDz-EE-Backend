@@ -66,9 +66,7 @@ class VersionCreateSerializer(serializers.ModelSerializer):
 class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
-        fields = (
-            '__all__'
-        )
+        fields = ('__all__')
 
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
@@ -83,9 +81,9 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
         )
 
 
-class fabricantSerializer(serializers.ModelSerializer):
+class FabricantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.fabricant
+        model = models.Fabricant
         fields = (
             'nom',
             'pk',

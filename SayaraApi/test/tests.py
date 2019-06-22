@@ -1,16 +1,18 @@
 import unittest
 from django.urls import reverse
 from django.test import Client
-from .models import Vehicule, Marque, Version, Modele, Annonce, Fabricant, Profile, Couleur, Option, RefVersion, Image, RefModele, fabricant, RefCouleur, RefOption, LigneTarif, FicheTechnique
+from SayaraApi.models import Vehicule, Marque, Version, Modele, Annonce, Fabricant, Profile, Couleur, Option
+from SayaraApi.models import RefVersion, Image, RefModele, Fabricant, RefCouleur, RefOption, LigneTarif, FicheTechnique
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.contenttypes.models import ContentType
 
 
 def create_django_contrib_auth_models_user(**kwargs):
-    defaults = {}
-    defaults["username"] = "username"
-    defaults["email"] = "username@tempurl.com"
+    defaults = {
+        "username": "username",
+        "email": "username@tempurl.com"
+    }
     defaults.update(**kwargs)
     return User.objects.create(**defaults)
 
@@ -62,11 +64,11 @@ def create_modele(**kwargs):
     defaults["nomModele"] = "nomModele"
     defaults.update(**kwargs)
     if "couleurCompatible" not in defaults:
-        defaults["couleurCompatible"] = create_"sayaraapi_couleur"()
+        defaults["couleurCompatible"] = create_couleur()
     if "marqueModele" not in defaults:
-        defaults["marqueModele"] = create_'sayaraapi_marque'()
+        defaults["marqueModele"] = create_marque()
     if "couleurCompatible" not in defaults:
-        defaults["couleurCompatible"] = create_'sayaraapi_couleur'()
+        defaults["couleurCompatible"] = create_couleur()
     return Modele.objects.create(**defaults)
 
 
@@ -79,7 +81,7 @@ def create_annonce(**kwargs):
     return Annonce.objects.create(**defaults)
 
 
-def create_fabricant(**kwargs):
+def create_Fabricant(**kwargs):
     defaults = {}
     defaults["nomFabricant"] = "nomFabricant"
     defaults["idFabricant"] = "idFabricant"
@@ -89,11 +91,11 @@ def create_fabricant(**kwargs):
 
 def create_profile(**kwargs):
     defaults = {}
-    defaults["is_fabricant"] = "is_fabricant"
+    defaults["is_Fabricant"] = "is_Fabricant"
     defaults["is_client"] = "is_client"
     defaults.update(**kwargs)
     if "Fabricant" not in defaults:
-        defaults["Fabricant"] = create_'sayaraapi_fabricant'()
+        defaults["Fabricant"] = Fabricant()
     return Profile.objects.create(**defaults)
 
 
@@ -114,7 +116,7 @@ def create_option(**kwargs):
     defaults["disponible"] = "disponible"
     defaults.update(**kwargs)
     if "idFabricant" not in defaults:
-        defaults["idFabricant"] = create_'sayaraapi_fabricant'()
+        defaults["idFabricant"] = Fabricant()
     return Option.objects.create(**defaults)
 
 
@@ -141,11 +143,11 @@ def create_refmodele(**kwargs):
     return RefModele.objects.create(**defaults)
 
 
-def create_fabricant(**kwargs):
+def create_Fabricant(**kwargs):
     defaults = {}
     defaults["nom"] = "nom"
     defaults.update(**kwargs)
-    return fabricant.objects.create(**defaults)
+    return Fabricant.objects.create(**defaults)
 
 
 def create_refcouleur(**kwargs):
@@ -189,64 +191,23 @@ def create_fichetechnique(**kwargs):
     return FicheTechnique.objects.create(**defaults)
 
 
-class VehiculeViewTest(unittest.TestCase):
-    '''
-    Tests for Vehicule
-    '''
-    def setUp(self):
-        self.client = Client()
-
-    def test_list_vehicule(self):
-        url = reverse('SayaraApi_vehicule_list')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_vehicule(self):
-        url = reverse('SayaraApi_vehicule_create')
-        data = {
-            "num": "num",
-            "idVehicule": "idVehicule",
-            "imageVehicle1": "imageVehicle1",
-            "imageVehicle2": "imageVehicle2",
-            "imageVehicle3": "imageVehicle3",
-        }
-        response = self.client.post(url, data=data)
-        self.assertEqual(response.status_code, 302)
-
-    def test_detail_vehicule(self):
-        vehicule = create_vehicule()
-        url = reverse('SayaraApi_vehicule_detail', args=[vehicule.pk,])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_vehicule(self):
-        vehicule = create_vehicule()
-        data = {
-            "num": "num",
-            "idVehicule": "idVehicule",
-            "imageVehicle1": "imageVehicle1",
-            "imageVehicle2": "imageVehicle2",
-            "imageVehicle3": "imageVehicle3",
-        }
-        url = reverse('SayaraApi_vehicule_update', args=[vehicule.pk,])
-        response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)
 
 
 class MarqueViewTest(unittest.TestCase):
     '''
     Tests for Marque
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_marque(self):
-        url = reverse('SayaraApi_marque_list')
+        url = str('/api/marque/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_marque(self):
-        url = reverse('SayaraApi_marque_create')
+        url = str('/api/marque/create')
         data = {
             "idMarque": "idMarque",
             "nom": "nom",
@@ -257,7 +218,7 @@ class MarqueViewTest(unittest.TestCase):
 
     def test_detail_marque(self):
         marque = create_marque()
-        url = reverse('SayaraApi_marque_detail', args=[marque.pk,])
+        url = '/api/marque/detail/' + str(marque.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -268,7 +229,7 @@ class MarqueViewTest(unittest.TestCase):
             "nom": "nom",
             "image": "image",
         }
-        url = reverse('SayaraApi_marque_update', args=[marque.pk,])
+        url = '/api/marque/update/' + str(marque.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -277,16 +238,17 @@ class VersionViewTest(unittest.TestCase):
     '''
     Tests for Version
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_version(self):
-        url = reverse('SayaraApi_version_list')
+        url = str('/api/version/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_version(self):
-        url = reverse('SayaraApi_version_create')
+        url = str('/api/version/create')
         data = {
             "nomVersion": "nomVersion",
             "codeVersion": "codeVersion",
@@ -296,7 +258,7 @@ class VersionViewTest(unittest.TestCase):
 
     def test_detail_version(self):
         version = create_version()
-        url = reverse('SayaraApi_version_detail', args=[version.pk,])
+        url = '/api/version/detail/' + str(version.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -306,7 +268,7 @@ class VersionViewTest(unittest.TestCase):
             "nomVersion": "nomVersion",
             "codeVersion": "codeVersion",
         }
-        url = reverse('SayaraApi_version_update', args=[version.pk,])
+        url = '/api/version/update/' + str(version.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -315,29 +277,30 @@ class ModeleViewTest(unittest.TestCase):
     '''
     Tests for Modele
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_modele(self):
-        url = reverse('SayaraApi_modele_list')
+        url = str('/api/modele/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_modele(self):
-        url = reverse('SayaraApi_modele_create')
+        url = str('/api/modele/create')
         data = {
             "idModele": "idModele",
             "nomModele": "nomModele",
-            "couleurCompatible": create_"sayaraapi_couleur"().pk,
-            "marqueModele": create_'sayaraapi_marque'().pk,
-            "couleurCompatible": create_'sayaraapi_couleur'().pk,
+            "couleurCompatible": create_couleur().pk,
+            "marqueModele": create_marque().pk,
+            "couleurCompatible": create_couleur().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_modele(self):
         modele = create_modele()
-        url = reverse('SayaraApi_modele_detail', args=[modele.pk,])
+        url = '/api/modele/detail/' + str(modele.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -346,11 +309,11 @@ class ModeleViewTest(unittest.TestCase):
         data = {
             "idModele": "idModele",
             "nomModele": "nomModele",
-            "couleurCompatible": create_"sayaraapi_couleur"().pk,
-            "marqueModele": create_'sayaraapi_marque'().pk,
-            "couleurCompatible": create_'sayaraapi_couleur'().pk,
+            "couleurCompatible": create_couleur().pk,
+            "marqueModele": create_marque().pk,
+            "couleurCompatible": create_couleur().pk,
         }
-        url = reverse('SayaraApi_modele_update', args=[modele.pk,])
+        url = '/api/modele/update/' + str(modele.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -359,16 +322,17 @@ class AnnonceViewTest(unittest.TestCase):
     '''
     Tests for Annonce
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_annonce(self):
-        url = reverse('SayaraApi_annonce_list')
+        url = str('/api/annonce/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_annonce(self):
-        url = reverse('SayaraApi_annonce_create')
+        url = str('/api/annonce/create')
         data = {
             "titre": "titre",
             "prix": "prix",
@@ -379,7 +343,7 @@ class AnnonceViewTest(unittest.TestCase):
 
     def test_detail_annonce(self):
         annonce = create_annonce()
-        url = reverse('SayaraApi_annonce_detail', args=[annonce.pk,])
+        url = '/api/annonce/detail/' + str(annonce.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -390,7 +354,7 @@ class AnnonceViewTest(unittest.TestCase):
             "prix": "prix",
             "commentaites": "commentaites",
         }
-        url = reverse('SayaraApi_annonce_update', args=[annonce.pk,])
+        url = '/api/annonce/update/' + str(annonce.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -399,16 +363,17 @@ class FabricantViewTest(unittest.TestCase):
     '''
     Tests for Fabricant
     '''
+
     def setUp(self):
         self.client = Client()
 
-    def test_list_fabricant(self):
-        url = reverse('SayaraApi_fabricant_list')
+    def test_list_Fabricant(self):
+        url = str('/api/fabricant/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_fabricant(self):
-        url = reverse('SayaraApi_fabricant_create')
+    def test_create_Fabricant(self):
+        url = str('/api/fabricant/create')
         data = {
             "nomFabricant": "nomFabricant",
             "idFabricant": "idFabricant",
@@ -416,59 +381,19 @@ class FabricantViewTest(unittest.TestCase):
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_fabricant(self):
-        fabricant = create_fabricant()
-        url = reverse('SayaraApi_fabricant_detail', args=[fabricant.pk,])
+    def test_detail_Fabricant(self):
+        Fabricant = create_Fabricant()
+        url = '/api/fabricant/detail/' + str(Fabricant.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_update_fabricant(self):
-        fabricant = create_fabricant()
+    def test_update_Fabricant(self):
+        Fabricant = create_Fabricant()
         data = {
             "nomFabricant": "nomFabricant",
             "idFabricant": "idFabricant",
         }
-        url = reverse('SayaraApi_fabricant_update', args=[fabricant.pk,])
-        response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)
-
-
-class ProfileViewTest(unittest.TestCase):
-    '''
-    Tests for Profile
-    '''
-    def setUp(self):
-        self.client = Client()
-
-    def test_list_profile(self):
-        url = reverse('SayaraApi_profile_list')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_profile(self):
-        url = reverse('SayaraApi_profile_create')
-        data = {
-            "is_fabricant": "is_fabricant",
-            "is_client": "is_client",
-            "Fabricant": create_'sayaraapi_fabricant'().pk,
-        }
-        response = self.client.post(url, data=data)
-        self.assertEqual(response.status_code, 302)
-
-    def test_detail_profile(self):
-        profile = create_profile()
-        url = reverse('SayaraApi_profile_detail', args=[profile.pk,])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_profile(self):
-        profile = create_profile()
-        data = {
-            "is_fabricant": "is_fabricant",
-            "is_client": "is_client",
-            "Fabricant": create_'sayaraapi_fabricant'().pk,
-        }
-        url = reverse('SayaraApi_profile_update', args=[profile.pk,])
+        url = '/api/fabricant/update/' + str(Fabricant.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -477,16 +402,17 @@ class CouleurViewTest(unittest.TestCase):
     '''
     Tests for Couleur
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_couleur(self):
-        url = reverse('SayaraApi_couleur_list')
+        url = str('/api/couleur/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_couleur(self):
-        url = reverse('SayaraApi_couleur_create')
+        url = str('/api/couleur/create')
         data = {
             "codeCouleur": "codeCouleur",
             "nomCouleur": "nomCouleur",
@@ -496,7 +422,7 @@ class CouleurViewTest(unittest.TestCase):
 
     def test_detail_couleur(self):
         couleur = create_couleur()
-        url = reverse('SayaraApi_couleur_detail', args=[couleur.pk,])
+        url = '/api/couleur/detail/' + str(couleur.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -506,39 +432,36 @@ class CouleurViewTest(unittest.TestCase):
             "codeCouleur": "codeCouleur",
             "nomCouleur": "nomCouleur",
         }
-        url = reverse('SayaraApi_couleur_update', args=[couleur.pk,])
+        url = '/api/couleur/update/' + str(couleur.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
 
 class OptionViewTest(unittest.TestCase):
-    '''
-    Tests for Option
-    '''
     def setUp(self):
         self.client = Client()
 
     def test_list_option(self):
-        url = reverse('SayaraApi_option_list')
+        url = str('/api/option/')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_option(self):
-        url = reverse('SayaraApi_option_create')
+        url = str('/api/option/create')
         data = {
             "nomOption": "nomOption",
             "codeOption": "codeOption",
             "kilometrage": "kilometrage",
             "date": "date",
             "disponible": "disponible",
-            "idFabricant": create_'sayaraapi_fabricant'().pk,
+            "idFabricant": create_Fabricant().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_option(self):
         option = create_option()
-        url = reverse('SayaraApi_option_detail', args=[option.pk,])
+        url = '/api/option/detail/' + str(option.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -550,9 +473,9 @@ class OptionViewTest(unittest.TestCase):
             "kilometrage": "kilometrage",
             "date": "date",
             "disponible": "disponible",
-            "idFabricant": create_'sayaraapi_fabricant'().pk,
+            "idFabricant": create_Fabricant().pk,
         }
-        url = reverse('SayaraApi_option_update', args=[option.pk,])
+        url = '/api/option/update/' + str(option.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -561,61 +484,66 @@ class RefVersionViewTest(unittest.TestCase):
     '''
     Tests for RefVersion
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_refversion(self):
-        url = reverse('SayaraApi_refversion_list')
+        url = 'api/refversion/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_refversion(self):
-        url = reverse('SayaraApi_refversion_create')
+        url = 'api/refversion/create'
         data = {
-            "nom": "nom",
+            "nom": "nom"
+
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_refversion(self):
-        refversion = create_refversion()
-        url = reverse('SayaraApi_refversion_detail', args=[refversion.pk,])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
 
-    def test_update_refversion(self):
-        refversion = create_refversion()
-        data = {
-            "nom": "nom",
-        }
-        url = reverse('SayaraApi_refversion_update', args=[refversion.pk,])
-        response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)
+def test_detail_refversion(self):
+    refversion = create_refversion()
+    url = 'api/refversion/detail/' + str(refversion.pk) + '/'
+    response = self.client.get(url)
+    self.assertEqual(response.status_code, 200)
+
+
+def test_update_refversion(self):
+    refversion = create_refversion()
+    data = {
+        "nom": "nom",
+    }
+    url = 'api/refversion/update/' + str(refversion.pk) + '/'
+    response = self.client.post(url, data)
+    self.assertEqual(response.status_code, 302)
 
 
 class ImageViewTest(unittest.TestCase):
     '''
     Tests for Image
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_image(self):
-        url = reverse('SayaraApi_image_list')
+        url = '/api/image/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_image(self):
-        url = reverse('SayaraApi_image_create')
+        url = '/api/image/create'
         data = {
-            "image": "image",
+        "image": "image",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_image(self):
         image = create_image()
-        url = reverse('SayaraApi_image_detail', args=[image.pk,])
+        url = '/api/image/detail/' + str(image.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -624,7 +552,7 @@ class ImageViewTest(unittest.TestCase):
         data = {
             "image": "image",
         }
-        url = reverse('SayaraApi_image_update', args=[image.pk,])
+        url = '/api/image/update/' + str(image.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -633,26 +561,27 @@ class RefModeleViewTest(unittest.TestCase):
     '''
     Tests for RefModele
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_refmodele(self):
-        url = reverse('SayaraApi_refmodele_list')
+        url = '/api/refmodele/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_refmodele(self):
-        url = reverse('SayaraApi_refmodele_create')
+        url = '/api/refmodele/create'
         data = {
-            "nom": "nom",
-            "marque": create_marque().pk,
+        "nom": "nom",
+        "marque": create_marque().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_refmodele(self):
         refmodele = create_refmodele()
-        url = reverse('SayaraApi_refmodele_detail', args=[refmodele.pk,])
+        url = '/api/refmodele/detail/' + str(refmodele.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -662,43 +591,44 @@ class RefModeleViewTest(unittest.TestCase):
             "nom": "nom",
             "marque": create_marque().pk,
         }
-        url = reverse('SayaraApi_refmodele_update', args=[refmodele.pk,])
+        url = '/api/refmodele/update/' + str(refmodele.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
 
-class fabricantViewTest(unittest.TestCase):
+class FabricantViewTest(unittest.TestCase):
     '''
-    Tests for fabricant
+    Tests for Fabricant
     '''
+
     def setUp(self):
         self.client = Client()
 
-    def test_list_fabricant(self):
-        url = reverse('SayaraApi_fabricant_list')
+    def test_list_Fabricant(self):
+        url = '/api/fabricant/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_fabricant(self):
-        url = reverse('SayaraApi_fabricant_create')
+    def test_create_Fabricant(self):
+        url = '/api/fabricant/create/'
         data = {
-            "nom": "nom",
+        "nom": "nom",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_fabricant(self):
-        fabricant = create_fabricant()
-        url = reverse('SayaraApi_fabricant_detail', args=[fabricant.pk,])
+    def test_detail_Fabricant(self):
+        Fabricant = create_Fabricant()
+        url = '/api/fabricant/detail/' + str(Fabricant.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_update_fabricant(self):
-        fabricant = create_fabricant()
+    def test_update_Fabricant(self):
+        Fabricant = create_Fabricant()
         data = {
             "nom": "nom",
         }
-        url = reverse('SayaraApi_fabricant_update', args=[fabricant.pk,])
+        url = '/api/fabricant/update/' + str(Fabricant.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -707,25 +637,26 @@ class RefCouleurViewTest(unittest.TestCase):
     '''
     Tests for RefCouleur
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_refcouleur(self):
-        url = reverse('SayaraApi_refcouleur_list')
+        url = '/api/refcouleur/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_refcouleur(self):
-        url = reverse('SayaraApi_refcouleur_create')
+        url = '/api/refcouleur/create'
         data = {
-            "nom": "nom",
+        "nom": "nom",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_refcouleur(self):
         refcouleur = create_refcouleur()
-        url = reverse('SayaraApi_refcouleur_detail', args=[refcouleur.pk,])
+        url = '/api/refcouleur/detail/' + str(refcouleur.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -734,7 +665,7 @@ class RefCouleurViewTest(unittest.TestCase):
         data = {
             "nom": "nom",
         }
-        url = reverse('SayaraApi_refcouleur_update', args=[refcouleur.pk,])
+        url = '/api/refcouleur/update/' + str(refcouleur.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -743,25 +674,26 @@ class RefOptionViewTest(unittest.TestCase):
     '''
     Tests for RefOption
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_refoption(self):
-        url = reverse('SayaraApi_refoption_list')
+        url = '/api/refoption/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_refoption(self):
-        url = reverse('SayaraApi_refoption_create')
+        url = '/api/refoption/create'
         data = {
-            "nom": "nom",
+        "nom": "nom",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_refoption(self):
         refoption = create_refoption()
-        url = reverse('SayaraApi_refoption_detail', args=[refoption.pk,])
+        url = '/api/refoption/detail/' + str(refoption.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -770,7 +702,7 @@ class RefOptionViewTest(unittest.TestCase):
         data = {
             "nom": "nom",
         }
-        url = reverse('SayaraApi_refoption_update', args=[refoption.pk,])
+        url = '/api/refoption/update/' + str(refoption.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -779,27 +711,28 @@ class LigneTarifViewTest(unittest.TestCase):
     '''
     Tests for LigneTarif
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_lignetarif(self):
-        url = reverse('SayaraApi_lignetarif_list')
+        url = '/api/lignetarif/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_lignetarif(self):
-        url = reverse('SayaraApi_lignetarif_create')
+        url = '/api/lignetarif/create'
         data = {
-            "dateDebut": "dateDebut",
-            "dateFin": "dateFin",
-            "prix": "prix",
+        "dateDebut": "dateDebut",
+        "dateFin": "dateFin",
+        "prix": "prix",
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_lignetarif(self):
         lignetarif = create_lignetarif()
-        url = reverse('SayaraApi_lignetarif_detail', args=[lignetarif.pk,])
+        url = '/api/lignetarif/detail/' + str(lignetarif.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -810,7 +743,7 @@ class LigneTarifViewTest(unittest.TestCase):
             "dateFin": "dateFin",
             "prix": "prix",
         }
-        url = reverse('SayaraApi_lignetarif_update', args=[lignetarif.pk,])
+        url = '/api/lignetarif/update/' + str(lignetarif.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -819,35 +752,36 @@ class FicheTechniqueViewTest(unittest.TestCase):
     '''
     Tests for FicheTechnique
     '''
+
     def setUp(self):
         self.client = Client()
 
     def test_list_fichetechnique(self):
-        url = reverse('SayaraApi_fichetechnique_list')
+        url = '/api/fichetechnique/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_fichetechnique(self):
-        url = reverse('SayaraApi_fichetechnique_create')
+        url = '/api/fichetechnique/create'
         data = {
-            "nombrePortes": "nombrePortes",
-            "boiteVitesse": "boiteVitesse",
-            "puissanceFiscale": "puissanceFiscale",
-            "motorisation": "motorisation",
-            "consommation": "consommation",
-            "dimensions": "dimensions",
-            "transmission": "transmission",
-            "capaciteReservoir": "capaciteReservoir",
-            "vitesseMaxi": "vitesseMaxi",
-            "acceleration": "acceleration",
-            "images": create_image().pk,
+        "nombrePortes": "nombrePortes",
+        "boiteVitesse": "boiteVitesse",
+        "puissanceFiscale": "puissanceFiscale",
+        "motorisation": "motorisation",
+        "consommation": "consommation",
+        "dimensions": "dimensions",
+        "transmission": "transmission",
+        "capaciteReservoir": "capaciteReservoir",
+        "vitesseMaxi": "vitesseMaxi",
+        "acceleration": "acceleration",
+        "images": create_image().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
     def test_detail_fichetechnique(self):
         fichetechnique = create_fichetechnique()
-        url = reverse('SayaraApi_fichetechnique_detail', args=[fichetechnique.pk,])
+        url = '/api/fichetechnique/detail/' + str(fichetechnique.pk) + '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -866,8 +800,6 @@ class FicheTechniqueViewTest(unittest.TestCase):
             "acceleration": "acceleration",
             "images": create_image().pk,
         }
-        url = reverse('SayaraApi_fichetechnique_update', args=[fichetechnique.pk,])
+        url = '/api/fichetechnique/update/' + str(fichetechnique.pk) + '/'
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
-
-

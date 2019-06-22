@@ -39,11 +39,11 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for Fabriquant
-    path('fabricant/', views.fabricantListView.as_view(), name='SayaraApi_fabricant_list'),
-    path('fabricant/create/', views.fabricantCreateView.as_view(), name='SayaraApi_fabricant_create'),
-    path('fabricant/detail/<slug:pk>/', views.fabricantDetailView.as_view(), name='SayaraApi_fabricant_detail'),
-    path('fabricant/update/<slug:pk>/', views.fabricantUpdateView.as_view(), name='SayaraApi_fabricant_update'),
-    path('fabricant/delete/<slug:pk>/', views.fabricantDeleteView.as_view(), name='SayaraApi_fabricant_delete'),
+    path('fabricant/', views.FabricantListView.as_view(), name='SayaraApi_fabricant_list'),
+    path('fabricant/create/', views.FabricantCreateView.as_view(), name='SayaraApi_fabricant_create'),
+    path('fabricant/detail/<slug:pk>/', views.FabricantDetailView.as_view(), name='SayaraApi_fabricant_detail'),
+    path('fabricant/update/<slug:pk>/', views.FabricantUpdateView.as_view(), name='SayaraApi_fabricant_update'),
+    path('fabricant/delete/<slug:pk>/', views.FabricantDeleteView.as_view(), name='SayaraApi_fabricant_delete'),
 )
 
 #
