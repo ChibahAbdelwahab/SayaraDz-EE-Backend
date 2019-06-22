@@ -107,7 +107,7 @@ class CouleurSerializer(serializers.ModelSerializer):
 
 class ModeleCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Version
+        model = models.Modele
         fields = ('__all__')
 
 
