@@ -35,6 +35,7 @@ class MarqueSerializer(serializers.ModelSerializer):
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
+
     class Meta:
         model = models.Version
         fields = (
@@ -107,6 +108,12 @@ class CouleurSerializer(serializers.ModelSerializer):
         )
 
 
+class ModeleCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Version
+        fields = ('__all__')
+
+
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Option
@@ -155,9 +162,11 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     modele_name = serializers.CharField()
     image1 = serializers.ImageField()
     titre = serializers.CharField()
+
     class Meta:
         model = models.VehiculeNeuf
         fields = "__all__"
+
 
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
     # titre = serializers.CharField()
@@ -175,7 +184,6 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-    # TODO remove idModele from nested couleur objects
     couleur_set = CouleurSerializer(many=True, read_only=True, )
 
     class Meta:
@@ -187,6 +195,7 @@ class ModeleSerializer(serializers.ModelSerializer):
             'marque',
             'codeModele',
             'couleur_set',
+            'nomModele',
         )
 
 
@@ -222,8 +231,8 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'images'
         )
 
-class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
 
+class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FicheTechnique
         fields = (

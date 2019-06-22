@@ -126,7 +126,7 @@ class ListModeleView(generics.ListAPIView):
 
 class ModeleCreateView(generics.CreateAPIView):
     queryset = Modele.objects.all()
-    serializer_class = ModeleSerializer
+    serializer_class = ModeleCreateSerializer
 
 
 class ModeleDetailView(generics.RetrieveAPIView):
