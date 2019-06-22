@@ -8,9 +8,9 @@ class CustomLoginView(LoginView):
         #print(self.user.profile.__dict__)
         orginal_response = super().get_response()
         try :
-            fabricant = self.user.profile.Fabricant.nomFabricant
-            marqueid = self.user.profile.Fabricant.marqueFabricant.id
-            marque = self.user.profile.Fabricant.marqueFabricant.nomMarque
+            fabricant = self.user.profile.fabricant.nom
+            marqueid = self.user.profile.fabricant.marque.id
+            marque = self.user.profile.fabricant.marque.nomMarque
         except:
             fabricant=""
             marqueid=""

@@ -48,7 +48,7 @@ def create_marque(**kwargs):
 
 def create_version(**kwargs):
     defaults = {}
-    defaults["nomVersion"] = "nomVersion"
+    defaults["nom"] = "nom"
     defaults["code"] = "code"
     defaults.update(**kwargs)
     return Version.objects.create(**defaults)
@@ -56,7 +56,7 @@ def create_version(**kwargs):
 
 def create_modele(**kwargs):
     defaults = {}
-    defaults["nomModele"] = "nomModele"
+    defaults["nom"] = "nom"
     defaults["idModele"] = "idModele"
     defaults.update(**kwargs)
     return Modele.objects.create(**defaults)
@@ -157,7 +157,7 @@ class VersionViewTest(unittest.TestCase):
     def test_create_version(self):
         url = reverse('app_name_version_create')
         data = {
-            "nomVersion": "nomVersion",
+            "nom": "nom",
             "code": "code",
         }
         response = self.client.post(url, data=data)
@@ -172,7 +172,7 @@ class VersionViewTest(unittest.TestCase):
     def test_update_version(self):
         version = create_version()
         data = {
-            "nomVersion": "nomVersion",
+            "nom": "nom",
             "code": "code",
         }
         url = reverse('app_name_version_update', args=[version.pk,])
@@ -195,7 +195,7 @@ class ModeleViewTest(unittest.TestCase):
     def test_create_modele(self):
         url = reverse('app_name_modele_create')
         data = {
-            "nomModele": "nomModele",
+            "nom": "nom",
             "idModele": "idModele",
         }
         response = self.client.post(url, data=data)
@@ -210,7 +210,7 @@ class ModeleViewTest(unittest.TestCase):
     def test_update_modele(self):
         modele = create_modele()
         data = {
-            "nomModele": "nomModele",
+            "nom": "nom",
             "idModele": "idModele",
         }
         url = reverse('app_name_modele_update', args=[modele.pk,])

@@ -26,9 +26,9 @@ class authentifiedUserRequest(unittest.TestCase):
 class modeleCRUDtest(APITestCase):
      def test_create_modele(self):
         url = reverse("SayaraApi_marque_create")
-        data = {"nomModele" : "Modele1",
-                "codeModele" : "code",
-                "marqueModele" : "marque1",
+        data = {"nom" : "Modele1",
+                "code" : "code",
+                "marque" : "marque1",
                 "couleurCompatible" : []}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

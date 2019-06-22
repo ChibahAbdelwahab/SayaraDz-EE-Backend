@@ -1,5 +1,3 @@
-python manage.py makemigrations
-python manage.py migrate
-python manage.py migrate --run-syncdb
-python manage.py loaddata db.json
+release: python manage.py migrate auth
+release: python manage.py migrate --run-syncdb
 web: gunicorn project.wsgi

@@ -168,239 +168,217 @@
     }
   },
   {
-    "model": "SayaraApi.refversion",
-    "pk": 1,
-    "fields": {
-      "nomVersion": "Sport"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": 2,
-    "fields": {
-      "nomVersion": "GTLine"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": 5,
-    "fields": {
-      "nomVersion": "Allure"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": 6,
-    "fields": {
-      "nomVersion": "RLine"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": 7,
-    "fields": {
-      "nomVersion": "TT"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": 10,
-    "fields": {
-      "nomVersion": "SLine"
-    }
-  },
-  {
     "model": "SayaraApi.refmodele",
     "pk": 31,
     "fields": {
-      "nomModele": "301",
-      "marqueModele": 20
+      "nom": "301",
+      "marque": 20
     }
   },
   {
     "model": "SayaraApi.refmodele",
     "pk": 32,
     "fields": {
-      "nomModele": "308",
-      "marqueModele": 20
+      "nom": "308",
+      "marque": 20
     }
   },
   {
     "model": "SayaraApi.refmodele",
     "pk": 33,
     "fields": {
-      "nomModele": "A7",
-      "marqueModele": 2
+      "nom": "A7",
+      "marque": 2
     }
   },
   {
-    "model": "SayaraApi.modele",
+    "model": "SayaraApi.refversion",
     "pk": 1,
     "fields": {
-      "codeModele": "12",
-      "nomModele": 31
+      "nom": "Sport"
     }
   },
   {
-    "model": "SayaraApi.fabricant",
-    "pk": 1,
-    "fields": {
-      "nomFabricant": "BMW -FAB",
-      "marqueFabricant": 1
-    }
-  },
-  {
-    "model": "SayaraApi.fabricant",
+    "model": "SayaraApi.refversion",
     "pk": 2,
     "fields": {
-      "nomFabricant": "AUDI-FAB",
-      "marqueFabricant": 2
+      "nom": "GTLine"
     }
   },
   {
-    "model": "SayaraApi.fabricant",
-    "pk": 3,
+    "model": "SayaraApi.refversion",
+    "pk": 5,
     "fields": {
-      "nomFabricant": "Mercedes -FAB",
-      "marqueFabricant": 3
+      "nom": "Allure"
     }
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": 6,
+    "fields": {
+      "nom": "RLine"
+    }
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": 7,
+    "fields": {
+      "nom": "TT"
+    }
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": 10,
+    "fields": {
+      "nom": "SLine"
+    }
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "Allure",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "GTLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "RLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "SLine",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "Sport",
+    "fields": {}
+  },
+  {
+    "model": "SayaraApi.refversion",
+    "pk": "TT",
+    "fields": {}
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 14,
     "fields": {
-      "nomCouleur": "Bleu"
+      "nom": "Bleu"
     }
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 15,
     "fields": {
-      "nomCouleur": "Rouge"
+      "nom": "Rouge"
     }
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 16,
     "fields": {
-      "nomCouleur": "Violet"
+      "nom": "Violet"
     }
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 17,
     "fields": {
-      "nomCouleur": "Gris"
+      "nom": "Gris"
     }
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 18,
     "fields": {
-      "nomCouleur": "Noir"
+      "nom": "Noir"
     }
   },
   {
     "model": "SayaraApi.refcouleur",
     "pk": 19,
     "fields": {
-      "nomCouleur": "Blanc"
+      "nom": "Blanc"
     }
   },
   {
     "model": "SayaraApi.refoption",
     "pk": 1,
     "fields": {
-      "nomOption": "Toit ouvrant"
+      "nom": "Toit ouvrant"
     }
   },
   {
     "model": "SayaraApi.refoption",
     "pk": 2,
     "fields": {
-      "nomOption": "Vitres \u00e9lectriques"
+      "nom": "Vitres \u00e9lectriques"
     }
   },
   {
     "model": "SayaraApi.refoption",
     "pk": 3,
     "fields": {
-      "nomOption": "Gantes aliage"
+      "nom": "Gantes aliage"
     }
   },
   {
     "model": "SayaraApi.refoption",
     "pk": 4,
     "fields": {
-      "nomOption": "Salon cuir"
+      "nom": "Salon cuir"
     }
   },
   {
-    "model": "auth.user",
+    "model": "SayaraApi.fabricant",
     "pk": 1,
     "fields": {
-      "password": "pbkdf2_sha256$120000$G9zormg35Yms$KUxVJjGksbW4GHUakFh6Oeiz87Y4Oerg9UOos9LHHDQ=",
-      "last_login": "2019-06-09T12:40:52.172Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2019-06-09T12:40:47.384Z",
-      "groups": [],
-      "user_permissions": []
+      "nom": "BMW -FAB",
+      "marque": 1
     }
   },
   {
-    "model": "auth.user",
+    "model": "SayaraApi.fabricant",
     "pk": 2,
     "fields": {
-      "password": "pbkdf2_sha256$120000$BwvSZV1qUeSX$9rkWjOokxRPqPlCgn3gcXXhPBwlgDSmtN02r7yQ7VTc=",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2019-06-09T14:03:10.641Z",
-      "groups": [],
-      "user_permissions": []
+      "nom": "AUDI-FAB",
+      "marque": 2
     }
   },
   {
-    "model": "SayaraApi.profile",
-    "pk": 1,
+    "model": "SayaraApi.fabricant",
+    "pk": 3,
     "fields": {
-      "user": 2,
-      "is_fabricant": true,
-      "is_client": true,
-      "Fabricant": null
+      "nom": "Mercedes -FAB",
+      "marque": 3
     }
   },
   {
-    "model": "SayaraApi.annonce",
-    "pk": 1,
+    "model": "SayaraApi.refmodele",
+    "pk": 31,
     "fields": {
-      "titre": "Rline en tres bon etat",
-      "prix": 133,
-      "commentaires": "Salam, vend vehicule allemand occasion",
-      "idVehicule": 1,
-      "idUser": 2
+      "nom": "301",
+      "marque": 20
     }
   },
   {
-    "model": "SayaraApi.annonce",
-    "pk": 2,
+    "model": "SayaraApi.refmodele",
+    "pk": 32,
     "fields": {
-      "titre": "3456",
-      "prix": 11,
-      "commentaires": "Salam, vend vehicule a vendre",
-      "idVehicule": 2,
-      "idUser": 2
+      "nom": "308",
+      "marque": 20
+    }
+  },
+  {
+    "model": "SayaraApi.refmodele",
+    "pk": 33,
+    "fields": {
+      "nom": "A7",
+      "marque": 2
     }
   },
   {
@@ -418,40 +396,5 @@
         1
       ]
     }
-  },
-  {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 2,
-    "fields": {
-      "numChassis": "15467",
-      "kilometrage": 23,
-      "date": "2012-01-01",
-      "image2": "",
-      "image1": "",
-      "version": "RLine",
-      "model": 33,
-      "options": []
-    }
-  },
-  {
-    "model": "SayaraApi.version",
-    "pk": "11122",
-    "fields": {
-      "nomVersion": "Allure",
-      "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
-    }
-  },
-  {
-    "model": "SayaraApi.version",
-    "pk": "122",
-    "fields": {
-      "nomVersion": "GTLine",
-      "modeleVersion": 1,
-      "optionsVersion": [],
-      "imagesVersion": []
-    }
   }
-
 ]

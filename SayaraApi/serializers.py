@@ -35,16 +35,17 @@ class MarqueSerializer(serializers.ModelSerializer):
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
+
     class Meta:
         model = models.Version
         fields = (
-            'nomVersion',
-            'codeVersion',
+            'nom',
+            'code',
             "modele_name",
-            'modeleVersion',
+            'modele',
             'marque_name',
-            'optionsVersion',
-            'imagesVersion',
+            'options',
+            'images',
             'pk'
         )
 
@@ -53,11 +54,11 @@ class VersionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
-            'nomVersion',
-            'codeVersion',
-            'modeleVersion',
-            'optionsVersion',
-            'imagesVersion',
+            'nom',
+            'code',
+            'modele',
+            'options',
+            'images',
             'pk'
         )
 
@@ -66,10 +67,7 @@ class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
         fields = (
-            'nomModele',
-            'codeModele',
-            'fabricantModele',
-            # 'couleurCompatible'
+            '__all__'
         )
 
 
@@ -77,21 +75,21 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Modele
         fields = (
-            'nomModele',
+            'nom',
             'pk',
-            'codeModele',
+            'code',
             'fabricantModele',
             # 'couleurCompatible'
         )
 
 
-class FabricantSerializer(serializers.ModelSerializer):
+class fabricantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Fabricant
+        model = models.fabricant
         fields = (
-            'nomFabricant',
+            'nom',
             'pk',
-            'marqueFabricant'
+            'marque'
         )
 
 
@@ -100,20 +98,26 @@ class CouleurSerializer(serializers.ModelSerializer):
         model = models.Couleur
         fields = (
             'pk',
-            'codeCouleur',
-            'nomCouleur',
-            'ModeleCouleur',
+            'code',
+            'nom',
+            'modele',
             'fabricantCouleur_id'
         )
+
+
+class ModeleCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Modele
+        fields = ('__all__')
 
 
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Option
         fields = (
-            'nomOption',
-            'codeOption',
-            'modeleOption'
+            'nom',
+            'code',
+            'modele'
         )
 
 
@@ -153,14 +157,17 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     fabricant_id = serializers.IntegerField()
     marque = serializers.CharField()
     modele_name = serializers.CharField()
-    image = serializers.ImageField()
+    image1 = serializers.ImageField()
+    titre = serializers.CharField()
+
     class Meta:
         model = models.VehiculeNeuf
         fields = "__all__"
 
+
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
     # titre = serializers.CharField()
-    # idVehicule= VehiculeOccasionSerializer()
+    # vehicule= VehiculeOccasionSerializer()
     pseudoUser = serializers.CharField()
     date = serializers.DateField()
     image1 = serializers.ImageField()
@@ -174,7 +181,6 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 
 class ModeleSerializer(serializers.ModelSerializer):
-    # TODO remove idModele from nested couleur objects
     couleur_set = CouleurSerializer(many=True, read_only=True, )
 
     class Meta:
@@ -184,8 +190,9 @@ class ModeleSerializer(serializers.ModelSerializer):
             'nom',
             'pk',
             'marque',
-            'codeModele',
+            'code',
             'couleur_set',
+            'nom',
         )
 
 
@@ -214,15 +221,15 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'idVersion',
+            'version',
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
             'images'
         )
 
-class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
 
+class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.FicheTechnique
         fields = (
@@ -234,7 +241,7 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'idVersion',
+            'version',
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',

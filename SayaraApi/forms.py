@@ -17,12 +17,12 @@ class MarqueForm(forms.ModelForm):
 class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
-        fields = ['nomVersion']
+        fields = ['nom']
 
 
 class ModeleForm(forms.ModelForm):
     class Meta:
         model = Modele
-        fields = ['nomModele']
+        fields = ['nom']
 
 
