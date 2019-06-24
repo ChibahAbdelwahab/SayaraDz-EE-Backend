@@ -38,6 +38,16 @@ urlpatterns += (
 )
 
 urlpatterns += (
+    # urls for Modele
+    path('refmodele/', views.RefModeleListView.as_view(), name='SayaraApi_Refmodele_list'),
+    # path('refmodele/create/', views.ModeleCreateView.as_view(), name='SayaraApi_modele_create'),
+    # path('refmodele/detail/<slug:pk>/', views.ModeleDetailView.as_view(), name='SayaraApi_modele_detail'),
+    # path('refmodele/update/<slug:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
+    # path('refmodele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
+    # path('refmodele/list', views.ListModeleView.as_view(), name="modele_List"),
+)
+
+urlpatterns += (
     # urls for Fabriquant
     path('fabricant/', views.FabricantListView.as_view(), name='SayaraApi_fabricant_list'),
     path('fabricant/create/', views.FabricantCreateView.as_view(), name='SayaraApi_fabricant_create'),

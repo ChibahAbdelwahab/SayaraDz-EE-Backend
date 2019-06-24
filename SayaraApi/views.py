@@ -119,6 +119,15 @@ class ModeleListView(generics.ListAPIView):
         return queryset
 
 
+class RefModeleListView(generics.ListAPIView):
+    model = RefModele
+    serializer_class = RefModeleSerializer
+    print("yes")
+
+    def get_queryset(self, *args, **kwargs):
+        return RefModele.objects.all()
+
+
 class ListModeleView(generics.ListAPIView):
     queryset = Modele.objects.all()
     serializer_class = ModeleSerializer

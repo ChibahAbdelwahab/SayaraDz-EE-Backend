@@ -196,6 +196,14 @@ class ModeleSerializer(serializers.ModelSerializer):
         )
 
 
+class RefModeleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.RefModele
+        fields = (
+          '__all__'
+        )
+
+
 class LigneTarifSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LigneTarif
