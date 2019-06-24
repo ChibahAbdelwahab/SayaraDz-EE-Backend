@@ -1,5 +1,4 @@
 release: python manage.py migrate auth
 release: python manage.py migrate --run-syncdb
-release: restart
-release: pg:reset DATABASE:
+release: python manage.py loaddata db.json
 web: gunicorn project.wsgi
