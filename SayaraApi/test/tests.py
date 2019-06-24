@@ -191,10 +191,6 @@ def create_fichetechnique(**kwargs):
 
 
 class MarqueViewTest(unittest.TestCase):
-    '''
-    Tests for Marque
-    '''
-
     def setUp(self):
         self.client = Client()
 
@@ -224,8 +220,8 @@ class MarqueViewTest(unittest.TestCase):
             "nom": "nosm2",
         }
         url = '/api/marque/update/' + str(marque.pk) + '/'
-        response = self.client.post(url, data)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.put(url, data, content_type="application/json")
+        self.assertEqual(response.status_code, 200)
 
 #
 # class VersionViewTest(unittest.TestCase):
