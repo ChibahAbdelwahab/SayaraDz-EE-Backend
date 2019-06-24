@@ -131,6 +131,11 @@ class ModeleCreateView(generics.CreateAPIView):
     serializer_class = ModeleCreateSerializer
 
 
+class RefModeleCreateView(generics.CreateAPIView):
+    queryset = RefModele.objects.all()
+    serializer_class = RefModeleCreateSerializer
+
+
 class ModeleDetailView(generics.RetrieveAPIView):
     queryset = Modele.objects.all()
     serializer_class = ModeleSerializer

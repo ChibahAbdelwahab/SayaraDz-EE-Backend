@@ -108,6 +108,11 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
         model = models.Modele
         fields = ('__all__')
 
+class RefModeleCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.RefModele
+        fields = ('__all__')
+
 
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
