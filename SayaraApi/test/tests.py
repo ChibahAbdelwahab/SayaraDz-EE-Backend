@@ -1,129 +1,9 @@
 import unittest
-from django.urls import reverse
+import random
 from django.test import Client
-from SayaraApi.models import Vehicule, Marque, Version, Modele, Annonce, Fabricant, Profile, Couleur, Option
+
 from SayaraApi.models import RefVersion, Image, RefModele, Fabricant, RefCouleur, RefOption, LigneTarif, FicheTechnique
-from django.contrib.auth.models import User
-from django.contrib.auth.models import Group
-from django.contrib.contenttypes.models import ContentType
-
-
-def create_django_contrib_auth_models_user(**kwargs):
-    defaults = {
-        "username": "username",
-        "email": "username@tempurl.com"
-    }
-    defaults.update(**kwargs)
-    return User.objects.create(**defaults)
-
-
-def create_django_contrib_auth_models_group(**kwargs):
-    defaults = {}
-    defaults["name"] = "group"
-    defaults.update(**kwargs)
-    return Group.objects.create(**defaults)
-
-
-def create_django_contrib_contenttypes_models_contenttype(**kwargs):
-    defaults = {}
-    defaults.update(**kwargs)
-    return ContentType.objects.create(**defaults)
-
-
-def create_vehicule(**kwargs):
-    defaults = {}
-    defaults["num"] = "num"
-    defaults["idVehicule"] = "idVehicule"
-    defaults["imageVehicle1"] = "imageVehicle1"
-    defaults["imageVehicle2"] = "imageVehicle2"
-    defaults["imageVehicle3"] = "imageVehicle3"
-    defaults.update(**kwargs)
-    return Vehicule.objects.create(**defaults)
-
-
-def create_marque(**kwargs):
-    defaults = {}
-    defaults["nom"] = "nom"
-    defaults["image"] = "image"
-    defaults.update(**kwargs)
-    return Marque.objects.create(**defaults)
-
-
-def create_version(**kwargs):
-    defaults = {}
-    defaults["nomVersion"] = "nomVersion"
-    defaults["codeVersion"] = "codeVersion"
-    defaults.update(**kwargs)
-    return Version.objects.create(**defaults)
-
-
-def create_modele(**kwargs):
-    defaults = {}
-    defaults["idModele"] = "idModele"
-    defaults["nomModele"] = "nomModele"
-    defaults.update(**kwargs)
-    if "couleurCompatible" not in defaults:
-        defaults["couleurCompatible"] = create_couleur()
-    if "marqueModele" not in defaults:
-        defaults["marqueModele"] = create_marque()
-    if "couleurCompatible" not in defaults:
-        defaults["couleurCompatible"] = create_couleur()
-    return Modele.objects.create(**defaults)
-
-
-def create_annonce(**kwargs):
-    defaults = {}
-    defaults["titre"] = "titre"
-    defaults["prix"] = "prix"
-    defaults["commentaites"] = "commentaites"
-    defaults.update(**kwargs)
-    return Annonce.objects.create(**defaults)
-
-
-def create_Fabricant(**kwargs):
-    defaults = {}
-    defaults["nomFabricant"] = "nomFabricant"
-    defaults["idFabricant"] = "idFabricant"
-    defaults.update(**kwargs)
-    return Fabricant.objects.create(**defaults)
-
-
-def create_profile(**kwargs):
-    defaults = {}
-    defaults["is_Fabricant"] = "is_Fabricant"
-    defaults["is_client"] = "is_client"
-    defaults.update(**kwargs)
-    if "Fabricant" not in defaults:
-        defaults["Fabricant"] = Fabricant()
-    return Profile.objects.create(**defaults)
-
-
-def create_couleur(**kwargs):
-    defaults = {}
-    defaults["codeCouleur"] = "codeCouleur"
-    defaults["nomCouleur"] = "nomCouleur"
-    defaults.update(**kwargs)
-    return Couleur.objects.create(**defaults)
-
-
-def create_option(**kwargs):
-    defaults = {}
-    defaults["nomOption"] = "nomOption"
-    defaults["codeOption"] = "codeOption"
-    defaults["kilometrage"] = "kilometrage"
-    defaults["date"] = "date"
-    defaults["disponible"] = "disponible"
-    defaults.update(**kwargs)
-    if "idFabricant" not in defaults:
-        defaults["idFabricant"] = Fabricant()
-    return Option.objects.create(**defaults)
-
-
-def create_refversion(**kwargs):
-    defaults = {}
-    defaults["nom"] = "nom"
-    defaults.update(**kwargs)
-    return RefVersion.objects.create(**defaults)
+from SayaraApi.models import Vehicule, Marque, Version, Modele, Annonce, Profile, Couleur, Option
 
 
 def create_image(**kwargs):
@@ -133,34 +13,131 @@ def create_image(**kwargs):
     return Image.objects.create(**defaults)
 
 
+def create_vehicule(**kwargs):
+    defaults = {}
+    defaults["num"] = "num"
+    defaults["vehicule"] = "vehicule"
+    defaults.update(**kwargs)
+    return Vehicule.objects.create(**defaults)
+
+
+def create_marque(**kwargs):
+    defaults = {}
+    defaults["nom"] = "nom" + str(RefVersion.objects.count() + 1)
+    defaults["image"] = "image"
+    defaults.update(**kwargs)
+    return Marque.objects.create(**defaults)
+
+
+def create_refversion(**kwargs):
+    defaults = {}
+    size = RefVersion.objects.all()
+    defaults["nom"] = "nom" + str(RefVersion.objects.count() + 1)
+
+    defaults.update(**kwargs)
+    return RefVersion.objects.create(**defaults)
+
+
+def create_version(**kwargs):
+    defaults = {}
+    defaults["code"] = "code"
+    defaults["prix_base"] = "prix_base"
+    defaults.update(**kwargs)
+    if "nom" not in defaults:
+        defaults["nom"] = create_refversion()
+    if "images" not in defaults:
+        defaults["images"] = create_image()
+    if "options" not in defaults:
+        defaults["options"] = create_option()
+    if "modele" not in defaults:
+        defaults["modele"] = create_modele()
+    if "ficheTechnique" not in defaults:
+        defaults["ficheTechnique"] = create_fichetechnique()
+    if "couleur" not in defaults:
+        defaults["couleur"] = create_couleur()
+    return Version.objects.create(**defaults)
+
+
 def create_refmodele(**kwargs):
     defaults = {}
-    defaults["nom"] = "nom"
+    defaults["nom"] = "nom" + str(RefModele.objects.count() + 2)
     defaults.update(**kwargs)
     if "marque" not in defaults:
         defaults["marque"] = create_marque()
     return RefModele.objects.create(**defaults)
 
 
-def create_Fabricant(**kwargs):
+def create_modele(**kwargs):
+    defaults = {}
+    defaults["code"] = "code"
+    defaults["image"] = "image"
+    defaults.update(**kwargs)
+    if "nom" not in defaults:
+        defaults["ref"] = create_refmodele()
+    return Modele.objects.create(**defaults)
+
+
+def create_annonce(**kwargs):
+    defaults = {}
+    defaults["titre"] = "titre"
+    defaults["prix"] = "prix"
+    defaults["commentaires"] = "commentaires"
+    defaults.update(**kwargs)
+    if "vehicule" not in defaults:
+        defaults["vehicule"] = create_vehiculeoccasion()
+    if "user" not in defaults:
+        defaults["user"] = create_user()
+    return Annonce.objects.create(**defaults)
+
+
+def create_fabricant(**kwargs):
     defaults = {}
     defaults["nom"] = "nom"
     defaults.update(**kwargs)
     return Fabricant.objects.create(**defaults)
 
 
+def create_profile(**kwargs):
+    defaults = {}
+    defaults["is_fabricant"] = "is_fabricant"
+    defaults["is_client"] = "is_client"
+    defaults.update(**kwargs)
+    if "fabricant" not in defaults:
+        defaults["fabricant"] = create_fabricant()
+    return Profile.objects.create(**defaults)
+
+
 def create_refcouleur(**kwargs):
     defaults = {}
-    defaults["nom"] = "nom"
+    defaults["nom"] = "nom" + str(RefCouleur.objects.count() + 1)
     defaults.update(**kwargs)
     return RefCouleur.objects.create(**defaults)
 
 
+def create_couleur(**kwargs):
+    defaults = {}
+    defaults["code"] = "code"
+    defaults.update(**kwargs)
+    if "nom" not in defaults:
+        defaults["ref"] = create_refcouleur()
+    if "modele" not in defaults:
+        defaults["modele"] = create_modele()
+    return Couleur.objects.create(**defaults)
+
+
 def create_refoption(**kwargs):
     defaults = {}
-    defaults["nom"] = "nom"
+    defaults["nom"] = "nom" + str(RefOption.objects.count() + 1)
     defaults.update(**kwargs)
     return RefOption.objects.create(**defaults)
+
+
+def create_option(**kwargs):
+    defaults = {}
+    defaults["code"] = "code"+str(Option.objects.count()+1)
+    defaults["ref"] = create_refoption()
+    defaults["modele"] = create_modele()
+    return Option.objects.create(**defaults)
 
 
 def create_lignetarif(**kwargs):
@@ -174,7 +151,7 @@ def create_lignetarif(**kwargs):
 
 def create_fichetechnique(**kwargs):
     defaults = {}
-    defaults["nombrePortes"] = "nombrePortes"
+    defaults["nombrePortes"] = 10
     defaults["boiteVitesse"] = "boiteVitesse"
     defaults["puissanceFiscale"] = "puissanceFiscale"
     defaults["motorisation"] = "motorisation"
@@ -182,11 +159,9 @@ def create_fichetechnique(**kwargs):
     defaults["dimensions"] = "dimensions"
     defaults["transmission"] = "transmission"
     defaults["capaciteReservoir"] = "capaciteReservoir"
-    defaults["vitesseMaxi"] = "vitesseMaxi"
+    defaults["vitesseMaxi"] = 100
     defaults["acceleration"] = "acceleration"
     defaults.update(**kwargs)
-    if "images" not in defaults:
-        defaults["images"] = create_image()
     return FicheTechnique.objects.create(**defaults)
 
 
@@ -224,45 +199,51 @@ class MarqueViewTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-#
-# class VersionViewTest(unittest.TestCase):
-#     '''
-#     Tests for Version
-#     '''
-#
-#     def setUp(self):
-#         self.client = Client()
-#
-#     def test_list_version(self):
-#         url = str('/api/version/')
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_create_version(self):
-#         url = str('/api/version/create/')
-#         data = {
-#             "nomVersion": "nomVersion",
-#             "codeVersion": "codeVersion",
-#         }
-#         response = self.client.post(url, data=data)
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_detail_version(self):
-#         version = create_version()
-#         url = '/api/version/detail/' + str(version.pk) + '/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_update_version(self):
-#         version = create_version()
-#         data = {
-#             "nomVersion": "nomVersion",
-#             "codeVersion": "codeVersion",
-#         }
-#         url = '/api/version/update/' + str(version.pk) + '/'
-#         response = self.client.put(url, data, content_type="application/json")
-#         self.assertEqual(response.status_code, 302)
-#
+class VersionViewTest(unittest.TestCase):
+    '''
+    Tests for Version
+    '''
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_list_version(self):
+        url = str('/api/version/')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_version(self):
+        url = str('/api/version/create/')
+        data = {
+            "code": "code",
+            "prix_base": "prix_base",
+            "ref": create_refversion().pk,
+            "images": create_image().pk,
+            "options": create_option().pk,
+            "modele": create_modele().pk,
+            "ficheTechnique": create_fichetechnique().pk,
+            "couleur": create_couleur().pk,
+        }
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_version(self):
+        version = create_version()
+        url = '/api/version/detail/' + str(version.pk) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_version(self):
+        version = create_version()
+        data = {
+            "nomVersion": "nomVersion",
+            "codeVersion": "codeVersion",
+        }
+        url = '/api/version/update/' + str(version.pk) + '/'
+        response = self.client.put(url, data, content_type="application/json")
+        self.assertEqual(response.status_code, 302)
+
+
 #
 # class ModeleViewTest(unittest.TestCase):
 #     '''
@@ -322,34 +303,34 @@ class MarqueViewTest(unittest.TestCase):
 #         response = self.client.get(url)
 #         self.assertEqual(response.status_code, 200)
 #
-#     def test_create_annonce(self):
-#         url = str('/api/annonce/create/')
-#         data = {
-#             "titre": "titre",
-#             "prix": "prix",
-#             "commentaites": "commentaites",
-#         }
-#         response = self.client.post(url, data=data)
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_detail_annonce(self):
-#         annonce = create_annonce()
-#         url = '/api/annonce/detail/' + str(annonce.pk) + '/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_update_annonce(self):
-#         annonce = create_annonce()
-#         data = {
-#             "titre": "titre",
-#             "prix": "prix",
-#             "commentaites": "commentaites",
-#         }
-#         url = '/api/annonce/update/' + str(annonce.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
-#
-#
+#     # def test_create_annonce(self):
+#     #     url = str('/api/annonce/create/')
+#     #     data = {
+#     #         "titre": "titre",
+#     #         "prix": "prix",
+#     #         "commentaites": "commentaites",
+#     #     }
+#     #     response = self.client.post(url, data=data)
+#     #     self.assertEqual(response.status_code, 302)
+#     #
+#     # def test_detail_annonce(self):
+#     #     annonce = create_annonce()
+#     #     url = '/api/annonce/detail/' + str(annonce.pk) + '/'
+#     #     response = self.client.get(url)
+#     #     self.assertEqual(response.status_code, 200)
+#     #
+#     # def test_update_annonce(self):
+#     #     annonce = create_annonce()
+#     #     data = {
+#     #         "titre": "titre",
+#     #         "prix": "prix",
+#     #         "commentaites": "commentaites",
+#     #     }
+#     #     url = '/api/annonce/update/' + str(annonce.pk) + '/'
+#     #     response = self.client.post(url, data)
+#     #     self.assertEqual(response.status_code, 302)
+
+
 # class FabricantViewTest(unittest.TestCase):
 #     '''
 #     Tests for Fabricant
@@ -510,42 +491,41 @@ def test_update_refversion(self):
     response = self.client.post(url, data)
     self.assertEqual(response.status_code, 302)
 
-
-class ImageViewTest(unittest.TestCase):
-    '''
-    Tests for Image
-    '''
-
-    def setUp(self):
-        self.client = Client()
-
-    def test_list_image(self):
-        url = '/api/image/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_image(self):
-        url = '/api/image/create/'
-        data = {
-            "image": "image",
-        }
-        response = self.client.post(url, data=data)
-        self.assertEqual(response.status_code, 302)
-
-    def test_detail_image(self):
-        image = create_image()
-        url = '/api/image/detail/' + str(image.pk) + '/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_image(self):
-        image = create_image()
-        data = {
-            "image": "image",
-        }
-        url = '/api/image/update/' + str(image.pk) + '/'
-        response = self.client.post(url, data,content_type="application/json")
-        self.assertEqual(response.status_code, 200)
+# class ImageViewTest(unittest.TestCase):
+#     '''
+#     Tests for Image
+#     '''
+#
+#     def setUp(self):
+#         self.client = Client()
+#
+#     def test_list_image(self):
+#         url = '/api/image/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_create_image(self):
+#         url = '/api/image/create/'
+#         data = {
+#             "image": "image",
+#         }
+#         response = self.client.post(url, data=data)
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_detail_image(self):
+#         image = create_image()
+#         url = '/api/image/detail/' + str(image.pk) + '/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_update_image(self):
+#         image = create_image()
+#         data = {
+#             "image": "image",
+#         }
+#         url = '/api/image/update/' + str(image.pk) + '/'
+#         response = self.client.post(url, data,content_type="application/json")
+#         self.assertEqual(response.status_code, 200)
 #
 #
 # class RefModeleViewTest(unittest.TestCase):
@@ -698,99 +678,99 @@ class ImageViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 
-class LigneTarifViewTest(unittest.TestCase):
-    '''
-    Tests for LigneTarif
-    '''
-
-    def setUp(self):
-        self.client = Client()
-
-    def test_list_lignetarif(self):
-        url = '/api/lignetarif/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_lignetarif(self):
-        url = '/api/lignetarif/create/'
-        data = {
-            "dateDebut": "dateDebut",
-            "dateFin": "dateFin",
-            "prix": "prix",
-        }
-        response = self.client.post(url, data=data)
-        self.assertEqual(response.status_code, 302)
-
-    def test_detail_lignetarif(self):
-        lignetarif = create_lignetarif()
-        url = '/api/lignetarif/detail/' + str(lignetarif.pk) + '/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_lignetarif(self):
-        lignetarif = create_lignetarif()
-        data = {
-            "dateDebut": "dateDebut",
-            "dateFin": "dateFin",
-            "prix": "prix",
-        }
-        url = '/api/lignetarif/update/' + str(lignetarif.pk) + '/'
-        response = self.client.put(url, data, content_type="application/json")
-        self.assertEqual(response.status_code, 200)
-
-
-class FicheTechniqueViewTest(unittest.TestCase):
-    '''
-    Tests for FicheTechnique
-    '''
-
-    def setUp(self):
-        self.client = Client()
-
-    def test_list_fichetechnique(self):
-        url = '/api/fichetechnique/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_create_fichetechnique(self):
-        url = '/api/fichetechnique/create/'
-        data = {
-            "nombrePortes": "nombrePortes",
-            "boiteVitesse": "boiteVitesse",
-            "puissanceFiscale": "puissanceFiscale",
-            "motorisation": "motorisation",
-            "consommation": "consommation",
-            "dimensions": "dimensions",
-            "transmission": "transmission",
-            "capaciteReservoir": "capaciteReservoir",
-            "vitesseMaxi": "vitesseMaxi",
-            "acceleration": "acceleration",
-            "images": create_image().pk,
-        }
-        response = self.client.post(url, data=data)
-        self.assertEqual(response.status_code, 302)
-
-    def test_detail_fichetechnique(self):
-        fichetechnique = create_fichetechnique()
-        url = '/api/fichetechnique/detail/' + str(fichetechnique.pk) + '/'
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_update_fichetechnique(self):
-        fichetechnique = create_fichetechnique()
-        data = {
-            "nombrePortes": "nombrePortes",
-            "boiteVitesse": "boiteVitesse",
-            "puissanceFiscale": "puissanceFiscale",
-            "motorisation": "motorisation",
-            "consommation": "consommation",
-            "dimensions": "dimensions",
-            "transmission": "transmission",
-            "capaciteReservoir": "capaciteReservoir",
-            "vitesseMaxi": "vitesseMaxi",
-            "acceleration": "acceleration",
-            "images": create_image().pk,
-        }
-        url = '/api/fichetechnique/update/' + str(fichetechnique.pk) + '/'
-        response = self.client.put(url, data, content_type="application/json")
-        self.assertEqual(response.status_code, 302)
+# class LigneTarifViewTest(unittest.TestCase):
+#     '''
+#     Tests for LigneTarif
+#     '''
+#
+#     def setUp(self):
+#         self.client = Client()
+#
+#     def test_list_lignetarif(self):
+#         url = '/api/lignetarif/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_create_lignetarif(self):
+#         url = '/api/lignetarif/create/'
+#         data = {
+#             "dateDebut": "dateDebut",
+#             "dateFin": "dateFin",
+#             "prix": "prix",
+#         }
+#         response = self.client.post(url, data=data)
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_detail_lignetarif(self):
+#         lignetarif = create_lignetarif()
+#         url = '/api/lignetarif/detail/' + str(lignetarif.pk) + '/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_update_lignetarif(self):
+#         lignetarif = create_lignetarif()
+#         data = {
+#             "dateDebut": "dateDebut",
+#             "dateFin": "dateFin",
+#             "prix": "prix",
+#         }
+#         url = '/api/lignetarif/update/' + str(lignetarif.pk) + '/'
+#         response = self.client.put(url, data, content_type="application/json")
+#         self.assertEqual(response.status_code, 200)
+#
+#
+# class FicheTechniqueViewTest(unittest.TestCase):
+#     '''
+#     Tests for FicheTechnique
+#     '''
+#
+#     def setUp(self):
+#         self.client = Client()
+#
+#     def test_list_fichetechnique(self):
+#         url = '/api/fichetechnique/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_create_fichetechnique(self):
+#         url = '/api/fichetechnique/create/'
+#         data = {
+#             "nombrePortes": "nombrePortes",
+#             "boiteVitesse": "boiteVitesse",
+#             "puissanceFiscale": "puissanceFiscale",
+#             "motorisation": "motorisation",
+#             "consommation": "consommation",
+#             "dimensions": "dimensions",
+#             "transmission": "transmission",
+#             "capaciteReservoir": "capaciteReservoir",
+#             "vitesseMaxi": "vitesseMaxi",
+#             "acceleration": "acceleration",
+#             "images": create_image().pk,
+#         }
+#         response = self.client.post(url, data=data)
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_detail_fichetechnique(self):
+#         fichetechnique = create_fichetechnique()
+#         url = '/api/fichetechnique/detail/' + str(fichetechnique.pk) + '/'
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#     def test_update_fichetechnique(self):
+#         fichetechnique = create_fichetechnique()
+#         data = {
+#             "nombrePortes": "nombrePortes",
+#             "boiteVitesse": "boiteVitesse",
+#             "puissanceFiscale": "puissanceFiscale",
+#             "motorisation": "motorisation",
+#             "consommation": "consommation",
+#             "dimensions": "dimensions",
+#             "transmission": "transmission",
+#             "capaciteReservoir": "capaciteReservoir",
+#             "vitesseMaxi": "vitesseMaxi",
+#             "acceleration": "acceleration",
+#             "images": create_image().pk,
+#         }
+#         url = '/api/fichetechnique/update/' + str(fichetechnique.pk) + '/'
+#         response = self.client.put(url, data, content_type="application/json")
+#         self.assertEqual(response.status_code, 302)

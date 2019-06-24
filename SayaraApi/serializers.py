@@ -108,6 +108,7 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
         model = models.Modele
         fields = ('__all__')
 
+
 class RefModeleCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.RefModele
@@ -117,11 +118,7 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Option
-        fields = (
-            'nom',
-            'code',
-            'modele'
-        )
+        fields = ("__all__")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -192,10 +189,8 @@ class ModeleSerializer(serializers.ModelSerializer):
         fields = (
             'nom',
             'pk',
-            'marque',
             'code',
             'couleur_set',
-            'nom',
         )
 
 

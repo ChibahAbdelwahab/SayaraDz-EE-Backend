@@ -3,7 +3,7 @@ from django.db import models as models
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="images/vehicules",default='images/vehicules/voiture.jpg')
+    image = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
 
 
 class Vehicule(models.Model):
@@ -57,7 +57,7 @@ class Version(models.Model):
     # Fields
     app_label = "Version"
     code = models.CharField(max_length=20, primary_key=True)
-    nom = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
+    ref = models.ForeignKey(RefVersion, on_delete=models.CASCADE)
     images = models.ForeignKey(Image, on_delete=models.CASCADE)
     options = models.ManyToManyField('SayaraApi.Option', blank=True)
     modele = models.ForeignKey('SayaraApi.Modele', on_delete=models.CASCADE)
@@ -97,15 +97,15 @@ class Modele(models.Model):
     # Fields
     app_label = "Modele"
     code = models.CharField(max_length=10)
-    nom = models.ForeignKey(RefModele, on_delete=models.CASCADE)
-    image = models.ImageField(default='images/vehicules/voiture.jpg',upload_to="images/vehicules" )
+    ref = models.ForeignKey(RefModele, related_name="modele", on_delete=models.CASCADE)
+    image = models.ImageField(default='images/vehicules/voiture.jpg', upload_to="images/vehicules")
 
     def __str__(self):
-        return self.nom.nom
+        return self.ref.nom
 
     @property
     def nom(self):
-        return self.nom.nom
+        return self.ref.nom
 
     @property
     def fabricant_nom(self):
@@ -202,7 +202,7 @@ class RefCouleur(models.Model):
 class Couleur(models.Model):
     app_label = "Couleur"
     code = models.CharField(max_length=3)
-    nom = models.ForeignKey(RefCouleur, on_delete=models.CASCADE)
+    ref = models.ForeignKey(RefCouleur, on_delete=models.CASCADE)
 
     modele = models.ForeignKey(
         'SayaraApi.Modele',
@@ -226,7 +226,7 @@ class RefOption(models.Model):
 
 class Option(models.Model):
     # Fields
-    nom = models.ForeignKey(RefOption, on_delete=models.CASCADE)
+    ref = models.ForeignKey(RefOption, on_delete=models.CASCADE)
     code = models.CharField(max_length=100, primary_key=True)
     modele = models.ForeignKey('SayaraApi.modele', on_delete=models.CASCADE)
 
