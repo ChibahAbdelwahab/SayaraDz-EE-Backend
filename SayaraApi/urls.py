@@ -75,7 +75,7 @@ urlpatterns += (
     path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_option_delete'),
 )
 
-
+#
 urlpatterns += (
     # TODO type as a parameter and annonce goes to same view
     path('annonce/', views.AnnonceListView.as_view(), name='AnnonceUser'),
