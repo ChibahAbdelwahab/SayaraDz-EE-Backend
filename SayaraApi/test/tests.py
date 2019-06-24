@@ -223,6 +223,7 @@ class MarqueViewTest(unittest.TestCase):
         response = self.client.put(url, data, content_type="application/json")
         self.assertEqual(response.status_code, 200)
 
+
 #
 # class VersionViewTest(unittest.TestCase):
 #     '''
@@ -238,7 +239,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_version(self):
-#         url = str('/api/version/create')
+#         url = str('/api/version/create/')
 #         data = {
 #             "nomVersion": "nomVersion",
 #             "codeVersion": "codeVersion",
@@ -259,7 +260,7 @@ class MarqueViewTest(unittest.TestCase):
 #             "codeVersion": "codeVersion",
 #         }
 #         url = '/api/version/update/' + str(version.pk) + '/'
-#         response = self.client.post(url, data)
+#         response = self.client.put(url, data, content_type="application/json")
 #         self.assertEqual(response.status_code, 302)
 #
 #
@@ -277,7 +278,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_modele(self):
-#         url = str('/api/modele/create')
+#         url = str('/api/modele/create/')
 #         data = {
 #             "idModele": "idModele",
 #             "nomModele": "nomModele",
@@ -322,7 +323,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_annonce(self):
-#         url = str('/api/annonce/create')
+#         url = str('/api/annonce/create/')
 #         data = {
 #             "titre": "titre",
 #             "prix": "prix",
@@ -363,7 +364,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_Fabricant(self):
-#         url = str('/api/fabricant/create')
+#         url = str('/api/fabricant/create/')
 #         data = {
 #             "nomFabricant": "nomFabricant",
 #             "idFabricant": "idFabricant",
@@ -402,7 +403,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_couleur(self):
-#         url = str('/api/couleur/create')
+#         url = str('/api/couleur/create/')
 #         data = {
 #             "codeCouleur": "codeCouleur",
 #             "nomCouleur": "nomCouleur",
@@ -437,7 +438,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_option(self):
-#         url = str('/api/option/create')
+#         url = str('/api/option/create/')
 #         data = {
 #             "nomOption": "nomOption",
 #             "codeOption": "codeOption",
@@ -484,7 +485,7 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_refversion(self):
-#         url = 'api/refversion/create'
+#         url = 'api/refversion/create/'
 #         data = {
 #             "nom": "nom"
 #
@@ -492,59 +493,59 @@ class MarqueViewTest(unittest.TestCase):
 #         response = self.client.post(url, data=data)
 #         self.assertEqual(response.status_code, 302)
 #
-#
-# def test_detail_refversion(self):
-#     refversion = create_refversion()
-#     url = 'api/refversion/detail/' + str(refversion.pk) + '/'
-#     response = self.client.get(url)
-#     self.assertEqual(response.status_code, 200)
-#
-#
-# def test_update_refversion(self):
-#     refversion = create_refversion()
-#     data = {
-#         "nom": "nom",
-#     }
-#     url = 'api/refversion/update/' + str(refversion.pk) + '/'
-#     response = self.client.post(url, data)
-#     self.assertEqual(response.status_code, 302)
-#
-#
-# class ImageViewTest(unittest.TestCase):
-#     '''
-#     Tests for Image
-#     '''
-#
-#     def setUp(self):
-#         self.client = Client()
-#
-#     def test_list_image(self):
-#         url = '/api/image/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_create_image(self):
-#         url = '/api/image/create'
-#         data = {
-#         "image": "image",
-#         }
-#         response = self.client.post(url, data=data)
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_detail_image(self):
-#         image = create_image()
-#         url = '/api/image/detail/' + str(image.pk) + '/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_update_image(self):
-#         image = create_image()
-#         data = {
-#             "image": "image",
-#         }
-#         url = '/api/image/update/' + str(image.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
+
+def test_detail_refversion(self):
+    refversion = create_refversion()
+    url = 'api/refversion/detail/' + str(refversion.pk) + '/'
+    response = self.client.get(url)
+    self.assertEqual(response.status_code, 200)
+
+
+def test_update_refversion(self):
+    refversion = create_refversion()
+    data = {
+        "nom": "nom",
+    }
+    url = 'api/refversion/update/' + str(refversion.pk) + '/'
+    response = self.client.post(url, data)
+    self.assertEqual(response.status_code, 302)
+
+
+class ImageViewTest(unittest.TestCase):
+    '''
+    Tests for Image
+    '''
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_list_image(self):
+        url = '/api/image/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_image(self):
+        url = '/api/image/create/'
+        data = {
+            "image": "image",
+        }
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_image(self):
+        image = create_image()
+        url = '/api/image/detail/' + str(image.pk) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_image(self):
+        image = create_image()
+        data = {
+            "image": "image",
+        }
+        url = '/api/image/update/' + str(image.pk) + '/'
+        response = self.client.post(url, data,content_type="application/json")
+        self.assertEqual(response.status_code, 200)
 #
 #
 # class RefModeleViewTest(unittest.TestCase):
@@ -561,10 +562,10 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_refmodele(self):
-#         url = '/api/refmodele/create'
+#         url = '/api/refmodele/create/'
 #         data = {
-#         "nom": "nom",
-#         "marque": create_marque().pk,
+#             "nom": "nom",
+#             "marque": create_marque().pk,
 #         }
 #         response = self.client.post(url, data=data)
 #         self.assertEqual(response.status_code, 302)
@@ -582,10 +583,10 @@ class MarqueViewTest(unittest.TestCase):
 #             "marque": create_marque().pk,
 #         }
 #         url = '/api/refmodele/update/' + str(refmodele.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
+#         response = self.client.put(url, data,content_type="application/json")
+#         self.assertEqual(response.status_code, 200)
 #
-#
+
 # class FabricantViewTest(unittest.TestCase):
 #     '''
 #     Tests for Fabricant
@@ -602,7 +603,7 @@ class MarqueViewTest(unittest.TestCase):
 #     def test_create_Fabricant(self):
 #         url = '/api/fabricant/create/'
 #         data = {
-#         "nom": "nom",
+#             "nom": "nom",
 #         }
 #         response = self.client.post(url, data=data)
 #         self.assertEqual(response.status_code, 302)
@@ -619,8 +620,8 @@ class MarqueViewTest(unittest.TestCase):
 #             "nom": "nom",
 #         }
 #         url = '/api/fabricant/update/' + str(Fabricant.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
+#         response = self.client.put(url, data, content_type="application/json")
+#         self.assertEqual(response.status_code, 200)
 #
 #
 # class RefCouleurViewTest(unittest.TestCase):
@@ -637,9 +638,9 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_refcouleur(self):
-#         url = '/api/refcouleur/create'
+#         url = '/api/refcouleur/create/'
 #         data = {
-#         "nom": "nom",
+#             "nom": "nom",
 #         }
 #         response = self.client.post(url, data=data)
 #         self.assertEqual(response.status_code, 302)
@@ -656,8 +657,8 @@ class MarqueViewTest(unittest.TestCase):
 #             "nom": "nom",
 #         }
 #         url = '/api/refcouleur/update/' + str(refcouleur.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
+#         response = self.client.put(url, data, content_type="application/json")
+#         self.assertEqual(response.status_code, 200)
 #
 #
 # class RefOptionViewTest(unittest.TestCase):
@@ -674,9 +675,9 @@ class MarqueViewTest(unittest.TestCase):
 #         self.assertEqual(response.status_code, 200)
 #
 #     def test_create_refoption(self):
-#         url = '/api/refoption/create'
+#         url = '/api/refoption/create/'
 #         data = {
-#         "nom": "nom",
+#             "nom": "nom",
 #         }
 #         response = self.client.post(url, data=data)
 #         self.assertEqual(response.status_code, 302)
@@ -693,103 +694,103 @@ class MarqueViewTest(unittest.TestCase):
 #             "nom": "nom",
 #         }
 #         url = '/api/refoption/update/' + str(refoption.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
-#
-#
-# class LigneTarifViewTest(unittest.TestCase):
-#     '''
-#     Tests for LigneTarif
-#     '''
-#
-#     def setUp(self):
-#         self.client = Client()
-#
-#     def test_list_lignetarif(self):
-#         url = '/api/lignetarif/'
-#         response = self.client.get(url)
+#         response = self.client.put(url, data, content_type="application/json")
 #         self.assertEqual(response.status_code, 200)
 #
-#     def test_create_lignetarif(self):
-#         url = '/api/lignetarif/create'
-#         data = {
-#         "dateDebut": "dateDebut",
-#         "dateFin": "dateFin",
-#         "prix": "prix",
-#         }
-#         response = self.client.post(url, data=data)
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_detail_lignetarif(self):
-#         lignetarif = create_lignetarif()
-#         url = '/api/lignetarif/detail/' + str(lignetarif.pk) + '/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_update_lignetarif(self):
-#         lignetarif = create_lignetarif()
-#         data = {
-#             "dateDebut": "dateDebut",
-#             "dateFin": "dateFin",
-#             "prix": "prix",
-#         }
-#         url = '/api/lignetarif/update/' + str(lignetarif.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
-#
-#
-# class FicheTechniqueViewTest(unittest.TestCase):
-#     '''
-#     Tests for FicheTechnique
-#     '''
-#
-#     def setUp(self):
-#         self.client = Client()
-#
-#     def test_list_fichetechnique(self):
-#         url = '/api/fichetechnique/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_create_fichetechnique(self):
-#         url = '/api/fichetechnique/create'
-#         data = {
-#         "nombrePortes": "nombrePortes",
-#         "boiteVitesse": "boiteVitesse",
-#         "puissanceFiscale": "puissanceFiscale",
-#         "motorisation": "motorisation",
-#         "consommation": "consommation",
-#         "dimensions": "dimensions",
-#         "transmission": "transmission",
-#         "capaciteReservoir": "capaciteReservoir",
-#         "vitesseMaxi": "vitesseMaxi",
-#         "acceleration": "acceleration",
-#         "images": create_image().pk,
-#         }
-#         response = self.client.post(url, data=data)
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_detail_fichetechnique(self):
-#         fichetechnique = create_fichetechnique()
-#         url = '/api/fichetechnique/detail/' + str(fichetechnique.pk) + '/'
-#         response = self.client.get(url)
-#         self.assertEqual(response.status_code, 200)
-#
-#     def test_update_fichetechnique(self):
-#         fichetechnique = create_fichetechnique()
-#         data = {
-#             "nombrePortes": "nombrePortes",
-#             "boiteVitesse": "boiteVitesse",
-#             "puissanceFiscale": "puissanceFiscale",
-#             "motorisation": "motorisation",
-#             "consommation": "consommation",
-#             "dimensions": "dimensions",
-#             "transmission": "transmission",
-#             "capaciteReservoir": "capaciteReservoir",
-#             "vitesseMaxi": "vitesseMaxi",
-#             "acceleration": "acceleration",
-#             "images": create_image().pk,
-#         }
-#         url = '/api/fichetechnique/update/' + str(fichetechnique.pk) + '/'
-#         response = self.client.post(url, data)
-#         self.assertEqual(response.status_code, 302)
+
+class LigneTarifViewTest(unittest.TestCase):
+    '''
+    Tests for LigneTarif
+    '''
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_list_lignetarif(self):
+        url = '/api/lignetarif/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_lignetarif(self):
+        url = '/api/lignetarif/create/'
+        data = {
+            "dateDebut": "dateDebut",
+            "dateFin": "dateFin",
+            "prix": "prix",
+        }
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_lignetarif(self):
+        lignetarif = create_lignetarif()
+        url = '/api/lignetarif/detail/' + str(lignetarif.pk) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_lignetarif(self):
+        lignetarif = create_lignetarif()
+        data = {
+            "dateDebut": "dateDebut",
+            "dateFin": "dateFin",
+            "prix": "prix",
+        }
+        url = '/api/lignetarif/update/' + str(lignetarif.pk) + '/'
+        response = self.client.put(url, data, content_type="application/json")
+        self.assertEqual(response.status_code, 200)
+
+
+class FicheTechniqueViewTest(unittest.TestCase):
+    '''
+    Tests for FicheTechnique
+    '''
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_list_fichetechnique(self):
+        url = '/api/fichetechnique/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_fichetechnique(self):
+        url = '/api/fichetechnique/create/'
+        data = {
+            "nombrePortes": "nombrePortes",
+            "boiteVitesse": "boiteVitesse",
+            "puissanceFiscale": "puissanceFiscale",
+            "motorisation": "motorisation",
+            "consommation": "consommation",
+            "dimensions": "dimensions",
+            "transmission": "transmission",
+            "capaciteReservoir": "capaciteReservoir",
+            "vitesseMaxi": "vitesseMaxi",
+            "acceleration": "acceleration",
+            "images": create_image().pk,
+        }
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_fichetechnique(self):
+        fichetechnique = create_fichetechnique()
+        url = '/api/fichetechnique/detail/' + str(fichetechnique.pk) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_fichetechnique(self):
+        fichetechnique = create_fichetechnique()
+        data = {
+            "nombrePortes": "nombrePortes",
+            "boiteVitesse": "boiteVitesse",
+            "puissanceFiscale": "puissanceFiscale",
+            "motorisation": "motorisation",
+            "consommation": "consommation",
+            "dimensions": "dimensions",
+            "transmission": "transmission",
+            "capaciteReservoir": "capaciteReservoir",
+            "vitesseMaxi": "vitesseMaxi",
+            "acceleration": "acceleration",
+            "images": create_image().pk,
+        }
+        url = '/api/fichetechnique/update/' + str(fichetechnique.pk) + '/'
+        response = self.client.put(url, data, content_type="application/json")
+        self.assertEqual(response.status_code, 302)
