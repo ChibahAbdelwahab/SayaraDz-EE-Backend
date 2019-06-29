@@ -39,7 +39,7 @@ class VersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
-            'nom',
+            'ref',
             'code',
             "modele_name",
             'modele',
@@ -54,7 +54,7 @@ class VersionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
-            'nom',
+            'ref',
             'code',
             'modele',
             'options',
