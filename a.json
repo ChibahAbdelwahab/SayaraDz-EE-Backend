@@ -1,469 +1,172 @@
 [
+
+
   {
     "model": "SayaraApi.marque",
     "pk": 1,
     "fields": {
-      "nomMarque": "BMW",
-      "imageMarque": "marque/images/"
+      "nom": "BMW",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 2,
     "fields": {
-      "nomMarque": "Audi",
-      "imageMarque": "marque/images/"
+      "nom": "Audi",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 3,
     "fields": {
-      "nomMarque": "Mercedes-Benz",
-      "imageMarque": "marque/images/"
+      "nom": "Mercedes-Benz",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 4,
     "fields": {
-      "nomMarque": "Honda",
-      "imageMarque": "marque/images/"
+      "nom": "Honda",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 5,
     "fields": {
-      "nomMarque": "Renault",
-      "imageMarque": "marque/images/"
+      "nom": "Renault",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 6,
     "fields": {
-      "nomMarque": "Nissan",
-      "imageMarque": "marque/images/"
+      "nom": "Nissan",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 7,
     "fields": {
-      "nomMarque": "GMC",
-      "imageMarque": "marque/images/"
+      "nom": "GMC",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 8,
     "fields": {
-      "nomMarque": "Mercury",
-      "imageMarque": "marque/images/"
+      "nom": "Mercury",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 9,
     "fields": {
-      "nomMarque": "Nissan",
-      "imageMarque": "marque/images/"
+      "nom": "Nissan",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 10,
     "fields": {
-      "nomMarque": "Kia",
-      "imageMarque": "marque/images/"
+      "nom": "Kia",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 11,
     "fields": {
-      "nomMarque": "Infiniti",
-      "imageMarque": "marque/images/"
+      "nom": "Infiniti",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 12,
     "fields": {
-      "nomMarque": "Infiniti",
-      "imageMarque": "marque/images/"
+      "nom": "Infiniti",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 13,
     "fields": {
-      "nomMarque": "Dodge",
-      "imageMarque": "marque/images/"
+      "nom": "Dodge",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 14,
     "fields": {
-      "nomMarque": "Ford",
-      "imageMarque": "marque/images/"
+      "nom": "Ford",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 15,
     "fields": {
-      "nomMarque": "GMC",
-      "imageMarque": "marque/images/"
+      "nom": "GMC",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 16,
     "fields": {
-      "nomMarque": "Ford",
-      "imageMarque": "marque/images/"
+      "nom": "Ford",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 17,
     "fields": {
-      "nomMarque": "Chevrolet",
-      "imageMarque": "marque/images/"
+      "nom": "Chevrolet",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 18,
     "fields": {
-      "nomMarque": "Maybach",
-      "imageMarque": "marque/images/"
+      "nom": "Maybach",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 19,
     "fields": {
-      "nomMarque": "Maybach",
-      "imageMarque": "marque/images/"
+      "nom": "Maybach",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 20,
     "fields": {
-      "nomMarque": "Peugeot",
-      "imageMarque": "marque/images/"
+      "nom": "Peugeot",
+      "image": "marque/images/"
     }
   },
   {
     "model": "SayaraApi.marque",
     "pk": 21,
     "fields": {
-      "nomMarque": "Renault",
-      "imageMarque": "marque/images/Capture_du_2019-05-27_16-44-08.png"
-    }
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "Allure",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "GTLine",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "RLine",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "SLine",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "Sport",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.refversion",
-    "pk": "TT",
-    "fields": {}
-  },
-  {
-    "model": "SayaraApi.version",
-    "pk": 122,
-    "fields": {
-      "codeVersion": "",
-      "nomVersion": "GTLine",
-      "imagesVersion": "[]",
-      "modeleVersion": 1,
-      "optionsVersion": []
-    }
-  },
-  {
-    "model": "SayaraApi.refmodele",
-    "pk": 31,
-    "fields": {
-      "nomModele": "301",
-      "marqueModele": 20
-    }
-  },
-  {
-    "model": "SayaraApi.refmodele",
-    "pk": 32,
-    "fields": {
-      "nomModele": "308",
-      "marqueModele": 20
-    }
-  },
-  {
-    "model": "SayaraApi.refmodele",
-    "pk": 33,
-    "fields": {
-      "nomModele": "A7",
-      "marqueModele": 2
-    }
-  },
-  {
-    "model": "SayaraApi.modele",
-    "pk": 1,
-    "fields": {
-      "codeModele": "12",
-      "nomModele": 31
-    }
-  },
-  {
-    "model": "SayaraApi.fabricant",
-    "pk": 1,
-    "fields": {
-      "nomFabricant": "BMW -FAB",
-      "marqueFabricant": 1
-    }
-  },
-  {
-    "model": "SayaraApi.fabricant",
-    "pk": 2,
-    "fields": {
-      "nomFabricant": "AUDI-FAB",
-      "marqueFabricant": 2
-    }
-  },
-  {
-    "model": "SayaraApi.fabricant",
-    "pk": 3,
-    "fields": {
-      "nomFabricant": "Mercedes -FAB",
-      "marqueFabricant": 3
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 14,
-    "fields": {
-      "nomCouleur": "Bleu"
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 15,
-    "fields": {
-      "nomCouleur": "Rouge"
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 16,
-    "fields": {
-      "nomCouleur": "Violet"
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 17,
-    "fields": {
-      "nomCouleur": "Gris"
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 18,
-    "fields": {
-      "nomCouleur": "Noir"
-    }
-  },
-  {
-    "model": "SayaraApi.refcouleur",
-    "pk": 19,
-    "fields": {
-      "nomCouleur": "Blanc"
-    }
-  },
-  {
-    "model": "SayaraApi.refoption",
-    "pk": 1,
-    "fields": {
-      "nomOption": "Toit ouvrant"
-    }
-  },
-  {
-    "model": "SayaraApi.refoption",
-    "pk": 2,
-    "fields": {
-      "nomOption": "Vitres \u00e9lectriques"
-    }
-  },
-  {
-    "model": "SayaraApi.refoption",
-    "pk": 3,
-    "fields": {
-      "nomOption": "Gantes aliage"
-    }
-  },
-  {
-    "model": "SayaraApi.refoption",
-    "pk": 4,
-    "fields": {
-      "nomOption": "Salon cuir"
-    }
-  },
-  {
-    "model": "SayaraApi.option",
-    "pk": "qsq",
-    "fields": {
-      "nomOption": 2,
-      "modeleOption": 1
-    }
-  },
-  {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 1,
-    "fields": {
-      "numChassis": "12345678",
-      "kilometrage": 10,
-      "date": "2010-01-01",
-      "image1": "",
-      "image2": "",
-      "image3": "",
-      "version": "Allure",
-      "model": 31,
-      "options": [
-        1
-      ]
-    }
-  },
-  {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 2,
-    "fields": {
-      "numChassis": "15467",
-      "kilometrage": 23,
-      "date": "2012-01-01",
-      "image1": "",
-      "image2": "",
-      "image3": "",
-      "version": "RLine",
-      "model": 33,
-      "options": []
-    }
-  },
-  {
-    "model": "SayaraApi.vehiculeneuf",
-    "pk": 1,
-    "fields": {
-      "numChassis": "123",
-      "disponible": true,
-      "concessionnaire": "Hmida",
-      "version": 11122,
-      "optionsVersion": [
-        "qsq"
-      ]
-    }
-  },
-  {
-    "model": "SayaraApi.vehiculeneuf",
-    "pk": 2,
-    "fields": {
-      "numChassis": "34567",
-      "disponible": true,
-      "concessionnaire": "Hmida",
-      "version": 11122,
-      "optionsVersion": []
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$120000$G9zormg35Yms$KUxVJjGksbW4GHUakFh6Oeiz87Y4Oerg9UOos9LHHDQ=",
-      "last_login": "2019-06-21T09:29:32.757Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2019-06-09T12:40:47.384Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 2,
-    "fields": {
-      "password": "pbkdf2_sha256$120000$BwvSZV1qUeSX$9rkWjOokxRPqPlCgn3gcXXhPBwlgDSmtN02r7yQ7VTc=",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "user",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2019-06-09T14:03:10.641Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "SayaraApi.annonce",
-    "pk": 1,
-    "fields": {
-      "titre": "Rline en tres bon etat",
-      "prix": 133,
-      "commentaires": "Salam, vend vehicule allemand occasion",
-      "idVehicule": 1,
-      "idUser": 2
-    }
-  },
-  {
-    "model": "SayaraApi.annonce",
-    "pk": 2,
-    "fields": {
-      "titre": "3456",
-      "prix": 11,
-      "commentaires": "Salam, vend vehicule a vendre",
-      "idVehicule": 2,
-      "idUser": 2
-    }
-  },
-  {
-    "model": "SayaraApi.profile",
-    "pk": 1,
-    "fields": {
-      "user": 2,
-      "is_fabricant": true,
-      "is_client": true,
-      "Fabricant": null
+      "nom": "Renault",
+      "image": "marque/images/Capture_du_2019-05-27_16-44-08.png"
     }
   }
 ]

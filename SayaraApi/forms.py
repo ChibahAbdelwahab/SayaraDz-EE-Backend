@@ -11,18 +11,18 @@ class VehiculeForm(forms.ModelForm):
 class MarqueForm(forms.ModelForm):
     class Meta:
         model = Marque
-        fields = ['nomMarque']
+        fields = ['nom']
 
 
 class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
-        fields = ['nomVersion']
+        fields = ['nom']
 
 
 class ModeleForm(forms.ModelForm):
     class Meta:
         model = Modele
-        fields = ['nomModele']
+        fields = ['nom']
 
 

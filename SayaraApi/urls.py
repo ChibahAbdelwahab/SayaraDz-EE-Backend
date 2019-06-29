@@ -39,8 +39,8 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for Modele
-    path('refmodele/', views.RefModeleListView.as_view(), name='SayaraApi_Refmodele_list'),
-    # path('refmodele/create/', views.ModeleCreateView.as_view(), name='SayaraApi_modele_create'),
+    # path('refmodele/', views.RefModeleListView.as_view(), name='SayaraApi_Refmodele_list'),
+    # path('refmodele/create/', views.RefModeleCreateView.as_view(), name='SayaraApi_modele_create'),
     # path('refmodele/detail/<slug:pk>/', views.ModeleDetailView.as_view(), name='SayaraApi_modele_detail'),
     # path('refmodele/update/<slug:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
     # path('refmodele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
@@ -75,7 +75,7 @@ urlpatterns += (
     path('option/delete/<slug:pk>/', views.OptionDeleteView.as_view(), name='SayaraApi_option_delete'),
 )
 
-
+#
 urlpatterns += (
     # TODO type as a parameter and annonce goes to same view
     path('annonce/', views.AnnonceListView.as_view(), name='AnnonceUser'),
