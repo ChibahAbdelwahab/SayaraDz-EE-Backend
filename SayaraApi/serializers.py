@@ -59,7 +59,6 @@ class VersionCreateSerializer(serializers.ModelSerializer):
             'modele',
             'options',
             'images',
-            'pk'
         )
 
 
