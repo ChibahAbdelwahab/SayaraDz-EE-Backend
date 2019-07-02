@@ -76,7 +76,6 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'pk',
             'code',
             'fabricantModele',
-            # 'couleurCompatible'
         )
 
 
@@ -96,9 +95,9 @@ class CouleurSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'code',
-            'nom',
+            'ref',
             'modele',
-            'fabricantCouleur_id'
+            'fabricantCouleur_id',
         )
 
 
