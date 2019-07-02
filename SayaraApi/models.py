@@ -80,7 +80,9 @@ class Version(models.Model):
     @property
     def prix(self):
         return self.prix_base + 2
-
+    @property
+    def nom(self):
+        return self.ref.nom
     def __str__(self):
         return self.ref.nom
 
@@ -211,7 +213,9 @@ class Couleur(models.Model):
 
     def __str__(self):
         return self.ref.nom
-
+    @property
+    def nom(self):
+        return self.ref.nom
     @property
     def fabricantCouleur_id(self):
         return self.modele.fabricantModele_id

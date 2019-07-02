@@ -39,7 +39,7 @@ class VersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Version
         fields = (
-            'ref',
+            'nom',
             'code',
             "modele_name",
             'modele',
@@ -95,7 +95,7 @@ class CouleurSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'code',
-            'ref',
+            'nom',
             'modele',
             'fabricantCouleur_id',
         )
