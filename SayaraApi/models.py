@@ -113,11 +113,11 @@ class Modele(models.Model):
 
     @property
     def fabricant_pk(self):
-        return self.nom.marque
+        return self.ref.marque
 
     @property
     def marque_nom(self):
-        return self.nom.marque.nom
+        return self.ref.marque.nom
 
 
 class Annonce(models.Model):
@@ -236,7 +236,7 @@ class Option(models.Model):
     #     #     self.fabricantOption_id=fabricant.objects.get(pk=1)
     #     super(Option, self).save(*args, **kwargs)
     def __str__(self):
-        return self.nom.nom
+        return self.ref.nom
 
 
 class VehiculeOccasion(Vehicule):
