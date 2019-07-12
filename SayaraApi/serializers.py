@@ -266,7 +266,6 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
         )
 
 class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
-    version_fiche = serializers.CharField()
     class Meta:
         model = models.FicheTechnique
         fields = (
