@@ -199,6 +199,7 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk',
             'code',
             'couleur_set',
+            'image'
         )
 
 
