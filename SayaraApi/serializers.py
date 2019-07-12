@@ -246,6 +246,7 @@ class TarifVersionSerializer(serializers.ModelSerializer):
 
 
 class FicheTechniqueSerializer(serializers.ModelSerializer):
+    version_fiche = serializers.CharField()
     class Meta:
         model = models.FicheTechnique
         fields = (
@@ -257,11 +258,30 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'version',
+            'version_fiche',
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
-            'images'
+#            'images'
+        )
+
+class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
+    version_fiche = serializers.CharField()
+    class Meta:
+        model = models.FicheTechnique
+        fields = (
+            'pk',
+            'nombrePortes',
+            'boiteVitesse',
+            'puissanceFiscale',
+            'motorisation',
+            'consommation',
+            'dimensions',
+            'transmission',
+            'capaciteReservoir',
+            'vitesseMaxi',
+            'acceleration',
+#            'images'
         )
 
 
@@ -281,7 +301,7 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
-            'images'
+#            'images'
         )
 
         depth = 4

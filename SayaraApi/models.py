@@ -407,3 +407,7 @@ class FicheTechnique(models.Model):
     capaciteReservoir = models.CharField(max_length=100)
     vitesseMaxi = models.IntegerField()
     acceleration = models.CharField(max_length=100)
+
+    @property
+    def version_fiche(self):
+        return self.version_set

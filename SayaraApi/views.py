@@ -483,12 +483,12 @@ class FicheTechniqueDetailView(generics.RetrieveAPIView):
 
 class FicheTechniqueUpdateView(generics.UpdateAPIView):
     model = FicheTechnique
-    serializer_class = FicheTechniqueSerializer
+    serializer_class = FicheTechniqueCreateSerializer
 
 
 class FicheTechniqueCreateView(generics.CreateAPIView):
     model = FicheTechnique
-    serializer_class = FicheTechniqueSerializer
+    serializer_class = FicheTechniqueCreateSerializer
 
 
 class FicheTechniqueDeleteView(views.APIView):
