@@ -285,6 +285,7 @@ class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
 
 
 class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
+    version_fiche = serializers.CharField()
     class Meta:
         model = models.FicheTechnique
         fields = (
@@ -296,11 +297,10 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
             'consommation',
             'dimensions',
             'transmission',
-            'version',
+            'version_fiche',
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
 #            'images'
         )
-
         depth = 4
