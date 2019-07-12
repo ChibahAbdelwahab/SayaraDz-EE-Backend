@@ -85,7 +85,7 @@ class Version(models.Model):
                                             fin__gte=datetime.now()).first()
         if query:
             return query.prix
-        query = TarifVersion.objects.filter(base=True).last()
+        query = TarifVersion.objects.filter(version=self, base=True).last()
         if query:
             return query.prix
         return 0
@@ -245,7 +245,7 @@ class Couleur(models.Model):
                                             fin__gte=datetime.now()).first()
         if query:
             return query.prix
-        query = TarifOption.objects.filter(base=True).last()
+        query = TarifCouleur.objects.filter(couleur=self, base=True).last()
         if query:
             return query.prix
         return 0
@@ -278,7 +278,7 @@ class Option(models.Model):
                                            fin__gte=datetime.now()).first()
         if query:
             return query.prix
-        query = TarifOption.objects.filter(base=True).last()
+        query = TarifOption.objects.filter(option=self, base=True).last()
         if query:
             return query.prix
         return 0
