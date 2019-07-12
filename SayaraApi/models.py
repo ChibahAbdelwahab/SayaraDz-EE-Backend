@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models as models
 
@@ -79,10 +81,19 @@ class Version(models.Model):
 
     @property
     def prix(self):
-        return self.prix_base + 2
+        query = TarifVersion.objects.filter(version=self, base=False, debut__lte=datetime.now(),
+                                            fin__gte=datetime.now()).first()
+        if query:
+            return query.prix
+        query = TarifVersion.objects.filter(base=True).last()
+        if query:
+            return query.prix
+        return 0
+
     @property
     def nom(self):
         return self.ref.nom
+
     def __str__(self):
         return self.ref.nom
 
@@ -120,6 +131,12 @@ class Modele(models.Model):
     @property
     def marque_nom(self):
         return self.ref.marque.nom
+
+    @classmethod
+    def create(cls, new_ref):
+        book = cls()
+        # do something with the book
+        return book
 
 
 class Annonce(models.Model):
@@ -191,7 +208,7 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        return fabricant.nom
+        return self.fabricant.nom
 
 
 class RefCouleur(models.Model):
@@ -213,12 +230,25 @@ class Couleur(models.Model):
 
     def __str__(self):
         return self.ref.nom
+
     @property
     def nom(self):
         return self.ref.nom
+
     @property
     def fabricantCouleur_id(self):
         return self.modele.fabricantModele_id
+
+    @property
+    def prix(self):
+        query = TarifCouleur.objects.filter(couleur=self, base=False, debut__lte=datetime.now(),
+                                            fin__gte=datetime.datetime.now()).first()
+        if query:
+            return query
+        query = TarifOption.objects.filter(valid=False).last()
+        if query:
+            return query
+        return 0
 
 
 class RefOption(models.Model):
@@ -240,6 +270,21 @@ class Option(models.Model):
     #     #     self.fabricantOption_id=fabricant.objects.get(pk=1)
     #     super(Option, self).save(*args, **kwargs)
     def __str__(self):
+        return self.ref.nom
+
+    @property
+    def prix(self):
+        query = TarifOption.objects.filter(option=self, base=False, debut__lte=datetime.now(),
+                                           fin__gte=datetime.now()).first()
+        if query:
+            return query
+        query = TarifOption.objects.filter(valid=False).last()
+        if query:
+            return query
+        return 0
+
+    @property
+    def nom(self):
         return self.ref.nom
 
 
@@ -293,31 +338,63 @@ class VehiculeNeuf(Vehicule):
         return str(self.modele_name + " " + self.version.nom.nom)
 
 
+class TarifOption(models.Model):
+    debut = models.DateField()
+    fin = models.DateField()
+    prix = models.FloatField()
+    base = models.BooleanField(default=False)
+    # Relationship Fields
+    option = models.ForeignKey(Option, on_delete=models.CASCADE, related_name="lignetarifs")
+
+    @property
+    def valid(self):
+        return self.debut <= datetime.now() < self.fin
+
+    @property
+    def __str__(self):
+        return self.option.nom
+
+    class Meta:
+        ordering = ('-fin', 'option',)
+
+
+class TarifVersion(models.Model):
+    debut = models.DateField()
+    fin = models.DateField()
+    prix = models.FloatField()
+    base = models.BooleanField(default=False)
+    # Relationship Fields
+    version = models.ForeignKey(Version, on_delete=models.CASCADE, related_name="lignetarifs")
+
+    @property
+    def valid(self):
+        return self.debut <= datetime.now() < self.fin
+
+    class Meta:
+        ordering = ('-fin', 'version',)
+
+
+class TarifCouleur(models.Model):
+    debut = models.DateField()
+    fin = models.DateField()
+    prix = models.FloatField()
+    base = models.BooleanField(default=False)
+    # Relationship Fields
+    couleur = models.ForeignKey(Couleur, on_delete=models.CASCADE, blank=True, null=True)
+
+    @property
+    def valid(self):
+        return self.debut <= datetime.now() < self.fin
+
+    class Meta:
+        ordering = ('-fin', 'couleur',)
+
+
 class LigneTarif(models.Model):
     # Fields
     dateDebut = models.DateField()
     dateFin = models.DateField()
     prix = models.FloatField()
-
-    # Relationship Fields
-    code1 = models.OneToOneField(
-        Version,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
-    code2 = models.OneToOneField(
-        Option,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
-    code3 = models.OneToOneField(
-        Couleur,
-        on_delete=models.CASCADE, related_name="lignetarifs",
-        blank=True, null=True
-    )
-
-    class Meta:
-        ordering = ('-pk',)
 
 
 class FicheTechnique(models.Model):

@@ -35,7 +35,7 @@ class MarqueSerializer(serializers.ModelSerializer):
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
-
+    prix = serializers.IntegerField()
     class Meta:
         model = models.Version
         fields = (
@@ -46,7 +46,8 @@ class VersionSerializer(serializers.ModelSerializer):
             'marque_name',
             'options',
             'images',
-            'pk'
+            'pk',
+            'prix'
         )
 
 
@@ -90,6 +91,7 @@ class FabricantSerializer(serializers.ModelSerializer):
 
 
 class CouleurSerializer(serializers.ModelSerializer):
+    prix = serializers.IntegerField()
     class Meta:
         model = models.Couleur
         fields = (
@@ -98,13 +100,20 @@ class CouleurSerializer(serializers.ModelSerializer):
             'nom',
             'modele',
             'fabricantCouleur_id',
+            'prix'
         )
 
 
 class ModeleCreateSerializer(serializers.ModelSerializer):
+    new_ref = serializers.CharField(required=False, allow_blank=True, max_length=100)
+
     class Meta:
         model = models.Modele
         fields = ('__all__')
+
+    def create(self, validated_data):
+        print(validated_data)
+        image = validated_data[image]
 
 
 class RefModeleCreateSerializer(serializers.ModelSerializer):
@@ -114,6 +123,8 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 
 
 class OptionSerializer(serializers.ModelSerializer):
+    prix = serializers.IntegerField()
+
     class Meta:
         model = models.Option
         fields = ("__all__")
@@ -196,7 +207,7 @@ class RefModeleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.RefModele
         fields = (
-          '__all__'
+            '__all__'
         )
 
 
@@ -204,12 +215,33 @@ class LigneTarifSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LigneTarif
         fields = (
-            'dateDebut',
-            'dateFin',
-            'prix',
-            'code1',
-            'code2',
-            'code3'
+            '__all__'
+        )
+
+
+class TarifOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.TarifOption
+        fields = (
+            '__all__'
+        )
+
+
+class TarifCouleurSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.TarifCouleur
+        fields = (
+            '__all__'
+        )
+
+
+class TarifVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = models.TarifVersion
+        fields = (
+            '__all__'
         )
 
 

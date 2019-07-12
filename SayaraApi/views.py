@@ -396,6 +396,62 @@ class LigneTarifCreateView(generics.CreateAPIView):
     model = LigneTarif
     serializer_class = LigneTarifSerializer
 
+class TarifVersionListView(generics.ListAPIView):
+    model = TarifVersion
+    serializer_class = TarifVersionSerializer
+
+    # pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = TarifVersion.objects.all()
+        return queryset
+
+class TarifVersionUpdateView(generics.UpdateAPIView):
+    model = TarifVersion
+    serializer_class = TarifVersionSerializer
+
+
+class TarifVersionCreateView(generics.CreateAPIView):
+    model = TarifVersion
+    serializer_class = TarifVersionSerializer
+
+
+class TarifCouleurListView(generics.ListAPIView):
+    model = TarifCouleur
+    serializer_class = TarifCouleurSerializer
+
+    # pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = TarifCouleur.objects.all()
+        return queryset
+
+
+class TarifCouleurUpdateView(generics.UpdateAPIView):
+    model = TarifCouleur
+    serializer_class = TarifCouleurSerializer
+
+
+class TarifCouleurCreateView(generics.CreateAPIView):
+    model = TarifCouleur
+    serializer_class = TarifCouleurSerializer
+
+class TarifOptionListView(generics.ListAPIView):
+    model = TarifOption
+    serializer_class = TarifOptionSerializer
+
+    # pagination_class    = VehiculeListPagination
+    def get_queryset(self, *args, **kwargs):
+        queryset = TarifOption.objects.all()
+        return queryset
+
+class TarifOptionUpdateView(generics.UpdateAPIView):
+    model = TarifOption
+    serializer_class = TarifOptionSerializer
+
+
+class TarifOptionCreateView(generics.CreateAPIView):
+    model = TarifOption
+    serializer_class = TarifOptionSerializer
+
 
 class LigneTarifDeleteView(views.APIView):
     def get_object(self, pk):

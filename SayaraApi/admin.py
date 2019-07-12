@@ -81,6 +81,7 @@ class FicheTechniqueAdmin(ImportExportModelAdmin):
     resource_class = FicheTechniqueResource
 
 
+
 admin.site.register(VehiculeOccasion, VehiculeNeufAdmin)
 admin.site.register(VehiculeNeuf, VehiculeOccasionAdmin)
 admin.site.register(Marque)
@@ -95,5 +96,7 @@ admin.site.register(Fabricant)
 admin.site.register(Couleur, CouleurAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Image)
-admin.site.register(LigneTarif)
+admin.site.register(TarifOption)
+admin.site.register(TarifVersion)
+admin.site.register(TarifCouleur)
 admin.site.register(FicheTechnique, FicheTechniqueAdmin)

@@ -83,8 +83,6 @@ urlpatterns += (
     path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
 )
 
-
-
 urlpatterns += (
     # urls for LigneTarif
     path('lignetarif/', views.LigneTarifListView.as_view(), name='SayaraApi_lignetarif_list'),
@@ -92,11 +90,31 @@ urlpatterns += (
     path('lignetarif/detail/<slug:pk>/', views.LigneTarifDetailView.as_view(), name='SayaraApi_lignetarif_detail'),
     path('lignetarif/update/<slug:pk>/', views.LigneTarifUpdateView.as_view(), name='SayaraApi_lignetarif_update'),
 )
+urlpatterns += (
+    # urls for tarifoption
+    path('tarifoption/', views.TarifOptionListView.as_view(), name='SayaraApi_tarifoption_list'),
+    path('tarifoption/create/', views.TarifOptionCreateView.as_view(), name='SayaraApi_tarifoption_create'),
+    path('tarifoption/update/<slug:pk>/', views.TarifOptionUpdateView.as_view(), name='SayaraApi_tarifoption_update'),
+)
+urlpatterns += (
+    # urls for tarifversion
+    path('tarifversion/', views.TarifVersionListView.as_view(), name='SayaraApi_tarifversion_list'),
+    path('tarifversion/create/', views.TarifVersionCreateView.as_view(), name='SayaraApi_tarifversion_create'),
+    path('tarifversion/update/<slug:pk>/', views.TarifVersionUpdateView.as_view(),name='SayaraApi_tarifversion_update'),
+)
+urlpatterns += (
+    # urls for tarifcouleur
+    path('tarifcouleur/', views.TarifCouleurListView.as_view(), name='SayaraApi_tarifcouleur_list'),
+    path('tarifcouleur/create/', views.TarifCouleurCreateView.as_view(), name='SayaraApi_tarifcouleur_create'),
+    path('tarifcouleur/update/<slug:pk>/', views.TarifCouleurUpdateView.as_view(),name='SayaraApi_tarifcouleur_update'),
+)
 
 urlpatterns += (
     # urls for FicheTechnique
     path('fichetechnique/', views.FicheTechniqueListView.as_view(), name='app_name_fichetechnique_list'),
     path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(), name='app_name_fichetechnique_create'),
-    path('fichetechnique/detail/<slug:pk>/', views.FicheTechniqueDetailView.as_view(), name='app_name_fichetechnique_detail'),
-    path('fichetechnique/update/<slug:pk>/', views.FicheTechniqueUpdateView.as_view(), name='app_name_fichetechnique_update'),
+    path('fichetechnique/detail/<slug:pk>/', views.FicheTechniqueDetailView.as_view(),
+         name='app_name_fichetechnique_detail'),
+    path('fichetechnique/update/<slug:pk>/', views.FicheTechniqueUpdateView.as_view(),
+         name='app_name_fichetechnique_update'),
 )
