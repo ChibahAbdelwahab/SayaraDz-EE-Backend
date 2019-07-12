@@ -118,6 +118,9 @@ class ModeleListView(generics.ListAPIView):
         if marque_pk is not "":
             # TODO check this
             queryset = queryset.filter(Q(marque_pk=marque_pk))
+        if marque_nom is not "":
+            # TODO check this
+            queryset = queryset.filter(Q(marque_nom=marque_nom))
         return queryset
 
 
