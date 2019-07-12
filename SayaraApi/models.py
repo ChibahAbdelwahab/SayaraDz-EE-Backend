@@ -242,12 +242,12 @@ class Couleur(models.Model):
     @property
     def prix(self):
         query = TarifCouleur.objects.filter(couleur=self, base=False, debut__lte=datetime.now(),
-                                            fin__gte=datetime.datetime.now()).first()
+                                            fin__gte=datetime.now()).first()
         if query:
-            return query
-        query = TarifOption.objects.filter(valid=False).last()
+            return query.prix
+        query = TarifOption.objects.filter(base=True).last()
         if query:
-            return query
+            return query.prix
         return 0
 
 
@@ -277,10 +277,10 @@ class Option(models.Model):
         query = TarifOption.objects.filter(option=self, base=False, debut__lte=datetime.now(),
                                            fin__gte=datetime.now()).first()
         if query:
-            return query
-        query = TarifOption.objects.filter(valid=False).last()
+            return query.prix
+        query = TarifOption.objects.filter(base=True).last()
         if query:
-            return query
+            return query.prix
         return 0
 
     @property
@@ -348,14 +348,13 @@ class TarifOption(models.Model):
 
     @property
     def valid(self):
-        return self.debut <= datetime.now() < self.fin
+        return self.debut <= datetime.now() <= self.fin
 
-    @property
     def __str__(self):
         return self.option.nom
 
     class Meta:
-        ordering = ('-fin', 'option',)
+        ordering = ('-fin',)
 
 
 class TarifVersion(models.Model):

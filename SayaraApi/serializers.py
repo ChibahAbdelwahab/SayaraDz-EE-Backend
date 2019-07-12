@@ -124,7 +124,6 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
-
     class Meta:
         model = models.Option
         fields = ("__all__")
