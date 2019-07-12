@@ -47,7 +47,8 @@ class VersionSerializer(serializers.ModelSerializer):
             'options',
             'images',
             'pk',
-            'prix'
+            'prix',
+            'ficheTechnique'
         )
 
 
@@ -60,6 +61,7 @@ class VersionCreateSerializer(serializers.ModelSerializer):
             'modele',
             'options',
             'images',
+            'ficheTechnique'
         )
 
 
