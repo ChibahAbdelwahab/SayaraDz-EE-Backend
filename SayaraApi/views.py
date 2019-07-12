@@ -477,7 +477,7 @@ class FicheTechniqueListView(generics.ListAPIView):
 
 
 class FicheTechniqueDetailView(generics.RetrieveAPIView):
-    model = FicheTechnique
+    queryset = FicheTechnique.objects.all()
     serializer_class = FicheTechniqueSerializer
 
 
