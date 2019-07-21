@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from SayaraApi.models import RefModele
 from . import models
 
 
@@ -36,6 +37,7 @@ class VersionSerializer(serializers.ModelSerializer):
     modele_name = models.Modele
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
+
     class Meta:
         model = models.Version
         fields = (
@@ -92,6 +94,7 @@ class FabricantSerializer(serializers.ModelSerializer):
 
 class CouleurSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
+
     class Meta:
         model = models.Couleur
         fields = (
@@ -113,7 +116,17 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         print(validated_data)
-        image = validated_data[image]
+        new_ref = validated_data.get("new_ref", None)
+        if new_ref is not None:
+            try:
+                marque = self.context['request'].user.profile.fabricant.marque
+            except:
+                return validated_data
+            if not marque:
+                return validated_data
+            new_ref = RefModele.objects.create(nom=new_ref, marque=marque)
+            validated_data["ref"] = new_ref
+        return validated_data
 
 
 class RefModeleCreateSerializer(serializers.ModelSerializer):
@@ -124,6 +137,7 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
+
     class Meta:
         model = models.Option
         fields = ("__all__")
@@ -228,7 +242,6 @@ class TarifOptionSerializer(serializers.ModelSerializer):
 
 
 class TarifCouleurSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.TarifCouleur
         fields = (
@@ -238,7 +251,6 @@ class TarifCouleurSerializer(serializers.ModelSerializer):
 
 class TarifVersionSerializer(serializers.ModelSerializer):
     class Meta:
-
         model = models.TarifVersion
         fields = (
             '__all__'

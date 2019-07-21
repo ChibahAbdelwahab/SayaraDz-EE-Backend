@@ -135,6 +135,7 @@ class Modele(models.Model):
     @classmethod
     def create(cls, new_ref):
         book = cls()
+        print(new_ref)
         # do something with the book
         return book
 
