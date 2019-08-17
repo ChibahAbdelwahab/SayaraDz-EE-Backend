@@ -1,8 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, views
+from rest_framework import generics, views, status
 from rest_framework.response import Response
-
+from rest_framework.fields import empty
 from .models import *
 from .serializers import *
 
@@ -395,9 +395,26 @@ class LigneTarifUpdateView(generics.UpdateAPIView):
     serializer_class = LigneTarifSerializer
 
 
-class LigneTarifCreateView(generics.CreateAPIView):
-    model = LigneTarif
+class LigneTarifCreateView(generics.ListCreateAPIView):
+    queryset = LigneTarif.objects.all()
     serializer_class = LigneTarifSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = LigneTarifSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        data = request.data
+        if isinstance(data, list):  # <- is the main logic
+            serializer = self.get_serializer(data=request.data, many=True)
+        else:
+            serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class TarifVersionListView(generics.ListAPIView):
     model = TarifVersion
@@ -413,9 +430,25 @@ class TarifVersionUpdateView(generics.UpdateAPIView):
     serializer_class = TarifVersionSerializer
 
 
-class TarifVersionCreateView(generics.CreateAPIView):
-    model = TarifVersion
+class TarifVersionCreateView(generics.ListCreateAPIView):
+    queryset = TarifVersion.objects.all()
     serializer_class = TarifVersionSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = TarifVersionSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        data = request.data
+        if isinstance(data, list):  # <- is the main logic
+            serializer = self.get_serializer(data=request.data, many=True)
+        else:
+            serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TarifCouleurListView(generics.ListAPIView):
@@ -433,9 +466,25 @@ class TarifCouleurUpdateView(generics.UpdateAPIView):
     serializer_class = TarifCouleurSerializer
 
 
-class TarifCouleurCreateView(generics.CreateAPIView):
-    model = TarifCouleur
+class TarifCouleurCreateView(generics.ListCreateAPIView):
+    queryset = TarifCouleur.objects.all()
     serializer_class = TarifCouleurSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = TarifCouleurSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        data = request.data
+        if isinstance(data, list):  # <- is the main logic
+            serializer = self.get_serializer(data=request.data, many=True)
+        else:
+            serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TarifOptionListView(generics.ListAPIView):
     model = TarifOption
@@ -446,14 +495,25 @@ class TarifOptionListView(generics.ListAPIView):
         queryset = TarifOption.objects.all()
         return queryset
 
-class TarifOptionUpdateView(generics.UpdateAPIView):
-    model = TarifOption
+class TarifOptionCreateView(generics.ListCreateAPIView):
+    queryset = TarifOption.objects.all()
     serializer_class = TarifOptionSerializer
 
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = TarifOptionSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-class TarifOptionCreateView(generics.CreateAPIView):
-    model = TarifOption
-    serializer_class = TarifOptionSerializer
+    def post(self, request, format=None):
+        data = request.data
+        if isinstance(data, list):  # <- is the main logic
+            serializer = self.get_serializer(data=request.data, many=True)
+        else:
+            serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LigneTarifDeleteView(views.APIView):
