@@ -495,6 +495,11 @@ class TarifOptionListView(generics.ListAPIView):
         queryset = TarifOption.objects.all()
         return queryset
 
+
+class TarifOptionUpdateView(generics.UpdateAPIView):
+    model = TarifOption
+    serializer_class = TarifOptionSerializer
+
 class TarifOptionCreateView(generics.ListCreateAPIView):
     queryset = TarifOption.objects.all()
     serializer_class = TarifOptionSerializer
