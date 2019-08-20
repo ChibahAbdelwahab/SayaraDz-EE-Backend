@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Edit default rest auth response for the authentification
 class CustomLoginView(LoginView):
     def get_response(self):
-        orginal_response = super(CustomLoginView).get_response()
+        orginal_response = super().get_response()
         try:
             fabricant = self.user.profile.fabricant.nom
             marqueid = self.user.profile.fabricant.marque.id
@@ -15,7 +15,7 @@ class CustomLoginView(LoginView):
             fabricant = ""
             marqueid = ""
             marque = ""
-
+            image= ""
         mydata = {
             "admin": self.user.is_staff,
             'firstName': self.user.first_name,

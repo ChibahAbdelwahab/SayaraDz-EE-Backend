@@ -334,7 +334,7 @@ class OptionListView(generics.ListAPIView):
     model = Option
     serializer_class = OptionSerializer
 
-    # pagination_class    = VehiculeListPagination
+    # pagination_class = VehiculeListPagination
     def get_queryset(self, *args, **kwargs):
         queryset = Option.objects.all()
         query_nom = self.request.GET.get("nom", "")
