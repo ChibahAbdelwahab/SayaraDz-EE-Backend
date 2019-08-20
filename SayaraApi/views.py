@@ -425,6 +425,7 @@ class TarifVersionListView(generics.ListAPIView):
         queryset = TarifVersion.objects.all()
         return queryset
 
+
 class TarifVersionUpdateView(generics.UpdateAPIView):
     model = TarifVersion
     serializer_class = TarifVersionSerializer
@@ -486,6 +487,7 @@ class TarifCouleurCreateView(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class TarifOptionListView(generics.ListAPIView):
     model = TarifOption
     serializer_class = TarifOptionSerializer
@@ -499,6 +501,7 @@ class TarifOptionListView(generics.ListAPIView):
 class TarifOptionUpdateView(generics.UpdateAPIView):
     model = TarifOption
     serializer_class = TarifOptionSerializer
+
 
 class TarifOptionCreateView(generics.ListCreateAPIView):
     queryset = TarifOption.objects.all()
@@ -559,6 +562,41 @@ class FicheTechniqueCreateView(generics.CreateAPIView):
 class FicheTechniqueDeleteView(views.APIView):
     def get_object(self, pk):
         return get_object_or_404(FicheTechnique, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)
+
+
+# Commande
+class CommandeListView(generics.ListAPIView):
+    model = Commande
+    serializer_class = CommandeSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = Commande.objects.all()
+        return queryset
+
+
+class CommandeDetailView(generics.RetrieveAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeSerializer
+
+
+class CommandeUpdateView(generics.UpdateAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeSerializer
+
+
+class CommandeCreateView(generics.CreateAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeSerializer
+
+
+class CommandeDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Commande, pk=pk)
 
     def delete(self, request, pk, *args, **kwargs):
         thing = self.get_object(pk)

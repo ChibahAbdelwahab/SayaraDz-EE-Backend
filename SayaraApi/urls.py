@@ -118,3 +118,13 @@ urlpatterns += (
     path('fichetechnique/update/<slug:pk>/', views.FicheTechniqueUpdateView.as_view(),
          name='app_name_fichetechnique_update'),
 )
+
+urlpatterns += (
+    # urls for Commande
+    path('commande/', views.CommandeListView.as_view(), name='app_name_commande_list'),
+    path('commande/create/', views.CommandeCreateView.as_view(), name='app_name_commande_create'),
+    path('commande/detail/<slug:pk>/', views.CommandeDetailView.as_view(),
+         name='app_name_commande_detail'),
+    path('commande/update/<slug:pk>/', views.CommandeDeleteView.as_view(),
+         name='app_name_commande_update'),
+)

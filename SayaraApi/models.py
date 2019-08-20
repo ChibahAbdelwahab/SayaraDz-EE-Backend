@@ -412,3 +412,8 @@ class FicheTechnique(models.Model):
     @property
     def version_fiche(self):
         return self.version_set
+
+class Commande(models.Model):
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    vehicule = models.ForeignKey(VehiculeNeuf, on_delete=models.CASCADE)
+    confirmation = models.BooleanField(default=False)
