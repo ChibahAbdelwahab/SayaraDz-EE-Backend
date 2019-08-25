@@ -151,16 +151,26 @@ class AnnonceSerializer(serializers.ModelSerializer):
         depth = 1
         exclude = ()
 
+
+class AnnonceUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Annonce
+        depth = 1
+        exclude = ("user",)
+
+
 class AnnonceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Annonce
         depth = 1
         exclude = ()
 
+
 class AnnonceCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Annonce
         fields = ('__all__')
+
 
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -271,6 +281,7 @@ class TarifVersionSerializer(serializers.ModelSerializer):
 
 class FicheTechniqueSerializer(serializers.ModelSerializer):
     version_fiche = serializers.CharField()
+
     class Meta:
         model = models.FicheTechnique
         fields = (
@@ -286,8 +297,9 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
-#            'images'
+            #            'images'
         )
+
 
 class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -304,12 +316,13 @@ class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
-#            'images'
+            #            'images'
         )
 
 
 class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
     version_fiche = serializers.CharField()
+
     class Meta:
         model = models.FicheTechnique
         fields = (
@@ -325,6 +338,6 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
             'capaciteReservoir',
             'vitesseMaxi',
             'acceleration',
-#            'images'
+            #            'images'
         )
         depth = 4

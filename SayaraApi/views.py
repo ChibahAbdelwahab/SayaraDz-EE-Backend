@@ -247,9 +247,15 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
         return queryset
 
+
 class AnnonceCreateView(generics.CreateAPIView):
     model = Annonce
     serializer_class = AnnonceCreateSerializer
+
+
+class AnnonceUpdateView(generics.UpdateAPIView):
+    queryset = Annonce.objects.all()
+    serializer_class = AnnonceUpdateSerializer
 
 
 class AnnonceListView(generics.ListAPIView):
@@ -272,7 +278,6 @@ class AnnonceOccasionDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
-
 
 
 class AnnonceNeufListView(generics.ListAPIView):
@@ -439,6 +444,7 @@ class TarifVersionListView(generics.ListAPIView):
         queryset = TarifVersion.objects.all()
         return queryset
 
+
 class TarifVersionUpdateView(generics.UpdateAPIView):
     model = TarifVersion
     serializer_class = TarifVersionSerializer
@@ -500,6 +506,7 @@ class TarifCouleurCreateView(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class TarifOptionListView(generics.ListAPIView):
     model = TarifOption
     serializer_class = TarifOptionSerializer
@@ -513,6 +520,7 @@ class TarifOptionListView(generics.ListAPIView):
 class TarifOptionUpdateView(generics.UpdateAPIView):
     model = TarifOption
     serializer_class = TarifOptionSerializer
+
 
 class TarifOptionCreateView(generics.ListCreateAPIView):
     queryset = TarifOption.objects.all()
