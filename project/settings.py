@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'SayaraApi',
     'import_export',
     'corsheaders',
+    "pinax.models",
 ]
 
 MIDDLEWARE = [

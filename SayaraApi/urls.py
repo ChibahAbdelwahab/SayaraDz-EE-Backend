@@ -78,7 +78,11 @@ urlpatterns += (
 #
 urlpatterns += (
     # TODO type as a parameter and annonce goes to same view
+    # TODO annonce create remove user from available fields
+
     path('annonce/', views.AnnonceListView.as_view(), name='AnnonceUser'),
+    path('annonce/create/', views.AnnonceCreateView.as_view(), name='SayaraApi_lignetarif_create'),
+    path('annonce/delete/<slug:pk>/', views.AnnonceOccasionDeleteView.as_view(), name='AnnonceDelete'),
     path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
     path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
 )

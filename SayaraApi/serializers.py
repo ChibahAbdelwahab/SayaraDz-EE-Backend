@@ -151,6 +151,16 @@ class AnnonceSerializer(serializers.ModelSerializer):
         depth = 1
         exclude = ()
 
+class AnnonceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Annonce
+        depth = 1
+        exclude = ()
+
+class AnnonceCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Annonce
+        fields = ('__all__')
 
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:

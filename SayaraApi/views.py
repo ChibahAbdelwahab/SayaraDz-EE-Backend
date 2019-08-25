@@ -127,7 +127,6 @@ class ModeleListView(generics.ListAPIView):
 class RefModeleListView(generics.ListAPIView):
     model = RefModele
     serializer_class = RefModeleSerializer
-    print("yes")
 
     def get_queryset(self, *args, **kwargs):
         return RefModele.objects.all()
@@ -248,6 +247,10 @@ class AnnnonceOccasionListView(generics.ListAPIView):
 
         return queryset
 
+class AnnonceCreateView(generics.CreateAPIView):
+    model = Annonce
+    serializer_class = AnnonceCreateSerializer
+
 
 class AnnonceListView(generics.ListAPIView):
     models = Annonce
@@ -259,6 +262,17 @@ class AnnonceListView(generics.ListAPIView):
             return Annonce.objects.filter(Q(user=query_user))
 
         return Annonce.objects.all()
+
+
+class AnnonceOccasionDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Annonce, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)
+
 
 
 class AnnonceNeufListView(generics.ListAPIView):

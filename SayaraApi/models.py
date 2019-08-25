@@ -2,13 +2,14 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.db import models as models
+from pinax.models.models import LogicalDeleteModel
 
 
-class Image(models.Model):
+class Image(LogicalDeleteModel):
     image = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
 
 
-class Vehicule(models.Model):
+class Vehicule(LogicalDeleteModel):
     # Fields
     app_label = "Vehicule"
     num = models.CharField(max_length=100)
@@ -33,7 +34,7 @@ class Vehicule(models.Model):
         return self.num
 
 
-class Marque(models.Model):
+class Marque(LogicalDeleteModel):
     # Fields
     app_label = "Marque"
     nom = models.CharField(max_length=50)
@@ -45,17 +46,17 @@ class Marque(models.Model):
     # TODO change this to real fabricant id
     @property
     def fabricant_id(self):
-        return self.fabricants
+        return 1
 
 
-class RefVersion(models.Model):
+class RefVersion(LogicalDeleteModel):
     nom = models.CharField(max_length=255, unique=True, primary_key=True)
 
     def __str__(self):
         return self.nom
 
 
-class Version(models.Model):
+class Version(LogicalDeleteModel):
     # Fields
     app_label = "Version"
     code = models.CharField(max_length=20, primary_key=True)
@@ -98,7 +99,7 @@ class Version(models.Model):
         return self.ref.nom
 
 
-class RefModele(models.Model):
+class RefModele(LogicalDeleteModel):
     nom = models.CharField(max_length=255, unique=True)
     marque = models.ForeignKey(Marque, on_delete=models.CASCADE)
 
@@ -106,7 +107,7 @@ class RefModele(models.Model):
         return self.nom
 
 
-class Modele(models.Model):
+class Modele(LogicalDeleteModel):
     # Fields
     app_label = "Modele"
     code = models.CharField(max_length=10)
@@ -140,7 +141,7 @@ class Modele(models.Model):
         return book
 
 
-class Annonce(models.Model):
+class Annonce(LogicalDeleteModel):
     # Fields
     app_label = "Annonce"
     # idAnnonce = models.AutoField(primary_key=True)
@@ -181,7 +182,7 @@ class Annonce(models.Model):
         return self.titre
 
 
-class Fabricant(models.Model):
+class Fabricant(LogicalDeleteModel):
     app_label = "fabricant"
     # Fields
     nom = models.CharField(max_length=255)
@@ -196,7 +197,7 @@ class Fabricant(models.Model):
         return self.nom
 
 
-class Profile(models.Model):
+class Profile(LogicalDeleteModel):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE
@@ -212,14 +213,14 @@ class Profile(models.Model):
         return self.fabricant.nom
 
 
-class RefCouleur(models.Model):
+class RefCouleur(LogicalDeleteModel):
     nom = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.nom
 
 
-class Couleur(models.Model):
+class Couleur(LogicalDeleteModel):
     app_label = "Couleur"
     code = models.CharField(max_length=3)
     ref = models.ForeignKey(RefCouleur, on_delete=models.CASCADE)
@@ -252,14 +253,14 @@ class Couleur(models.Model):
         return 0
 
 
-class RefOption(models.Model):
+class RefOption(LogicalDeleteModel):
     nom = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.nom
 
 
-class Option(models.Model):
+class Option(LogicalDeleteModel):
     # Fields
     ref = models.ForeignKey(RefOption, on_delete=models.CASCADE)
     code = models.CharField(max_length=100, primary_key=True)
@@ -339,7 +340,7 @@ class VehiculeNeuf(Vehicule):
         return str(self.modele_name + " " + self.version.nom.nom)
 
 
-class TarifOption(models.Model):
+class TarifOption(LogicalDeleteModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -358,7 +359,7 @@ class TarifOption(models.Model):
         ordering = ('-fin',)
 
 
-class TarifVersion(models.Model):
+class TarifVersion(LogicalDeleteModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -374,7 +375,7 @@ class TarifVersion(models.Model):
         ordering = ('-fin', 'version',)
 
 
-class TarifCouleur(models.Model):
+class TarifCouleur(LogicalDeleteModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -390,14 +391,14 @@ class TarifCouleur(models.Model):
         ordering = ('-fin', 'couleur',)
 
 
-class LigneTarif(models.Model):
+class LigneTarif(LogicalDeleteModel):
     # Fields
     dateDebut = models.DateField()
     dateFin = models.DateField()
     prix = models.FloatField()
 
 
-class FicheTechnique(models.Model):
+class FicheTechnique(LogicalDeleteModel):
     nombrePortes = models.IntegerField()
     boiteVitesse = models.CharField(max_length=100)
     puissanceFiscale = models.CharField(max_length=100)

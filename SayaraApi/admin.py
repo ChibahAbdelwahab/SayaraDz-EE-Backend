@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import *
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
+from pinax.models.admin import LogicalDeleteModelAdmin
 
 
 # Define an inline admin descriptor for Employee model
@@ -81,6 +82,21 @@ class FicheTechniqueAdmin(ImportExportModelAdmin):
     resource_class = FicheTechniqueResource
 
 
+class FabricantAdmin(LogicalDeleteModelAdmin):
+    list_display = ("pk","__str__", "active")
+    list_display_filter = ()
+
+    def get_queryset(self, request):
+        qs = self.model._default_manager.all_with_deleted()
+        print(qs)
+        ordering = self.ordering or ()
+        if ordering:
+            qs = qs.order_by(*ordering)
+        return qs
+
+    class Meta:
+        model = Fabricant
+
 
 admin.site.register(VehiculeOccasion, VehiculeNeufAdmin)
 admin.site.register(VehiculeNeuf, VehiculeOccasionAdmin)
@@ -93,7 +109,7 @@ admin.site.register(RefOption)
 admin.site.register(RefModele)
 admin.site.register(RefVersion)
 admin.site.register(Annonce, AnnonceAdmin)
-admin.site.register(Fabricant)
+admin.site.register(Fabricant, FabricantAdmin)
 admin.site.register(Couleur, CouleurAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Image)
