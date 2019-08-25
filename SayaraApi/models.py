@@ -1,19 +1,47 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from django.contrib.auth.models import User
 from django.db import models as models
-from pinax.models.models import LogicalDeleteModel
+from . import managers
+from .utils import get_related_objects
+from django.utils import timezone
 
 
-class Image(LogicalDeleteModel):
+class SayaraModel(models.Model):
+    date_created = models.DateTimeField(default=timezone.now,)
+    date_modified = models.DateTimeField(default=timezone.now)
+    date_removed = models.DateTimeField(null=True, blank=True)
+
+    objects = managers.LogicalDeletedManager()
+
+    def active(self):
+        return self.date_removed is None
+
+    active.boolean = True
+
+    def delete(self):
+        # Fetch related models
+        to_delete = get_related_objects(self)
+
+        for obj in to_delete:
+            obj.delete()
+
+        # Soft delete the object
+        self.date_removed = timezone.now()
+        self.save()
+
+    class Meta:
+        abstract = True
+
+
+class Image(SayaraModel):
     image = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
 
 
-class Vehicule(LogicalDeleteModel):
+class Vehicule(SayaraModel):
     # Fields
     app_label = "Vehicule"
     num = models.CharField(max_length=100)
-    vehicule = models.AutoField(primary_key=True)
 
     @property
     def marque(self):
@@ -34,7 +62,7 @@ class Vehicule(LogicalDeleteModel):
         return self.num
 
 
-class Marque(LogicalDeleteModel):
+class Marque(SayaraModel):
     # Fields
     app_label = "Marque"
     nom = models.CharField(max_length=50)
@@ -49,14 +77,14 @@ class Marque(LogicalDeleteModel):
         return 1
 
 
-class RefVersion(LogicalDeleteModel):
+class RefVersion(SayaraModel):
     nom = models.CharField(max_length=255, unique=True, primary_key=True)
 
     def __str__(self):
         return self.nom
 
 
-class Version(LogicalDeleteModel):
+class Version(SayaraModel):
     # Fields
     app_label = "Version"
     code = models.CharField(max_length=20, primary_key=True)
@@ -99,7 +127,7 @@ class Version(LogicalDeleteModel):
         return self.ref.nom
 
 
-class RefModele(LogicalDeleteModel):
+class RefModele(SayaraModel):
     nom = models.CharField(max_length=255, unique=True)
     marque = models.ForeignKey(Marque, on_delete=models.CASCADE)
 
@@ -107,7 +135,7 @@ class RefModele(LogicalDeleteModel):
         return self.nom
 
 
-class Modele(LogicalDeleteModel):
+class Modele(SayaraModel):
     # Fields
     app_label = "Modele"
     code = models.CharField(max_length=10)
@@ -141,7 +169,7 @@ class Modele(LogicalDeleteModel):
         return book
 
 
-class Annonce(LogicalDeleteModel):
+class Annonce(SayaraModel):
     # Fields
     app_label = "Annonce"
     # idAnnonce = models.AutoField(primary_key=True)
@@ -182,7 +210,7 @@ class Annonce(LogicalDeleteModel):
         return self.titre
 
 
-class Fabricant(LogicalDeleteModel):
+class Fabricant(SayaraModel):
     app_label = "fabricant"
     # Fields
     nom = models.CharField(max_length=255)
@@ -197,7 +225,7 @@ class Fabricant(LogicalDeleteModel):
         return self.nom
 
 
-class Profile(LogicalDeleteModel):
+class Profile(SayaraModel):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE
@@ -213,14 +241,14 @@ class Profile(LogicalDeleteModel):
         return self.fabricant.nom
 
 
-class RefCouleur(LogicalDeleteModel):
+class RefCouleur(SayaraModel):
     nom = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.nom
 
 
-class Couleur(LogicalDeleteModel):
+class Couleur(SayaraModel):
     app_label = "Couleur"
     code = models.CharField(max_length=3)
     ref = models.ForeignKey(RefCouleur, on_delete=models.CASCADE)
@@ -253,14 +281,14 @@ class Couleur(LogicalDeleteModel):
         return 0
 
 
-class RefOption(LogicalDeleteModel):
+class RefOption(SayaraModel):
     nom = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.nom
 
 
-class Option(LogicalDeleteModel):
+class Option(SayaraModel):
     # Fields
     ref = models.ForeignKey(RefOption, on_delete=models.CASCADE)
     code = models.CharField(max_length=100, primary_key=True)
@@ -297,8 +325,7 @@ class VehiculeOccasion(Vehicule):
     image2 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
-    model = models.ForeignKey(RefModele, related_name="model", on_delete="DO_NOTHING")
-    options = models.ManyToManyField(RefOption, related_name="options", blank=True)
+    # options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
 
 class VehiculeNeuf(Vehicule):
@@ -340,7 +367,7 @@ class VehiculeNeuf(Vehicule):
         return str(self.modele_name + " " + self.version.nom.nom)
 
 
-class TarifOption(LogicalDeleteModel):
+class TarifOption(SayaraModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -359,7 +386,7 @@ class TarifOption(LogicalDeleteModel):
         ordering = ('-fin',)
 
 
-class TarifVersion(LogicalDeleteModel):
+class TarifVersion(SayaraModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -375,7 +402,7 @@ class TarifVersion(LogicalDeleteModel):
         ordering = ('-fin', 'version',)
 
 
-class TarifCouleur(LogicalDeleteModel):
+class TarifCouleur(SayaraModel):
     debut = models.DateField()
     fin = models.DateField()
     prix = models.FloatField()
@@ -391,14 +418,14 @@ class TarifCouleur(LogicalDeleteModel):
         ordering = ('-fin', 'couleur',)
 
 
-class LigneTarif(LogicalDeleteModel):
+class LigneTarif(SayaraModel):
     # Fields
     dateDebut = models.DateField()
     dateFin = models.DateField()
     prix = models.FloatField()
 
 
-class FicheTechnique(LogicalDeleteModel):
+class FicheTechnique(SayaraModel):
     nombrePortes = models.IntegerField()
     boiteVitesse = models.CharField(max_length=100)
     puissanceFiscale = models.CharField(max_length=100)
@@ -413,6 +440,7 @@ class FicheTechnique(LogicalDeleteModel):
     @property
     def version_fiche(self):
         return self.version_set
+
 
 class Commande(models.Model):
     client = models.ForeignKey(User, on_delete=models.CASCADE)

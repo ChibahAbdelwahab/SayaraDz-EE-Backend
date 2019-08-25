@@ -2,11 +2,12 @@ from rest_framework import serializers
 
 from SayaraApi.models import RefModele
 from . import models
+from .models import *
 
 
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Vehicule
+        model = Vehicule
         fields = (
             'num',
             'disponible',
@@ -16,7 +17,7 @@ class VehiculeSerializer(serializers.ModelSerializer):
 
 class VehiculeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Vehicule
+        model = Vehicule
         fields = (
             'disponible',
             'versionVoiture'
@@ -25,7 +26,7 @@ class VehiculeUpdateSerializer(serializers.ModelSerializer):
 
 class MarqueSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Marque
+        model = Marque
         fields = (
             'pk',
             'nom',
@@ -34,12 +35,12 @@ class MarqueSerializer(serializers.ModelSerializer):
 
 
 class VersionSerializer(serializers.ModelSerializer):
-    modele_name = models.Modele
+    modele_name = Modele
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
 
     class Meta:
-        model = models.Version
+        model = Version
         fields = (
             'nom',
             'code',
@@ -56,7 +57,7 @@ class VersionSerializer(serializers.ModelSerializer):
 
 class VersionCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Version
+        model = Version
         fields = (
             'ref',
             'code',
@@ -69,13 +70,13 @@ class VersionCreateSerializer(serializers.ModelSerializer):
 
 class ModeleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Modele
+        model = Modele
         fields = ('__all__')
 
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Modele
+        model = Modele
         fields = (
             'nom',
             'pk',
@@ -86,7 +87,7 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
 
 class FabricantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Fabricant
+        model = Fabricant
         fields = (
             'nom',
             'pk',
@@ -98,7 +99,7 @@ class CouleurSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
 
     class Meta:
-        model = models.Couleur
+        model = Couleur
         fields = (
             'pk',
             'code',
@@ -113,7 +114,7 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
     new_ref = serializers.CharField(required=False, allow_blank=True, max_length=100)
 
     class Meta:
-        model = models.Modele
+        model = Modele
         fields = ('__all__')
 
     def create(self, validated_data):
@@ -133,7 +134,7 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
 
 class RefModeleCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.RefModele
+        model = RefModele
         fields = ('__all__')
 
 
@@ -141,52 +142,64 @@ class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
 
     class Meta:
-        model = models.Option
+        model = Option
         fields = ("__all__")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Annonce
+        model = Annonce
         depth = 1
         exclude = ()
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Annonce
+        model = Annonce
         depth = 1
         exclude = ("user",)
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Annonce
+        model = Annonce
         depth = 1
-        exclude = ()
-
-
-class AnnonceCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Annonce
-        fields = ('__all__')
 
 
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.VehiculeOccasion
-        fields = (
-            'num',
-            'versionVoiture',
-            'kilometrage',
-            'date',
-            'imageVehicle',
-        )
+        model = VehiculeOccasion
+        exclude = ("date_created", "date_modified", "date_removed",)
+
+
+class AnnonceCreateSerializer(serializers.ModelSerializer):
+    vehicule = VehiculeOccasionSerializer()
+
+    class Meta:
+        model = Annonce
+        exclude = ("user", "date_created", "date_modified", "date_removed",)
+
+    def create(self, validated_data):
+        kilometrage = validated_data.get("kilometrage", None)
+        date = validated_data.get("date", None)
+        image1 = validated_data.get("image3", None)
+        image2 = validated_data.get("image2", None)
+        image3 = validated_data.get("image3", None)
+        version = validated_data.get("version", None)
+        print("creaaaate")
+        vehicule = VehiculeOccasion(kilometrage=kilometrage, date=date, image1=image1, image2=image2, image3=image3,
+                                    version=version)
+        user = self.context['request'].user
+        if user is "AnonymousUser":
+            return
+        validated_data["user"] = user
+        validated_data["vehicule"] = vehicule
+        return validated_data
 
 
 class VehiculeNeufSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.VehiculeNeuf
+        model = VehiculeNeuf
         fields = (
             'num',
             'version',
@@ -205,7 +218,7 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     titre = serializers.CharField()
 
     class Meta:
-        model = models.VehiculeNeuf
+        model = VehiculeNeuf
         fields = "__all__"
 
 
@@ -220,7 +233,7 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
     kilometrage = serializers.IntegerField()
 
     class Meta:
-        model = models.Annonce
+        model = Annonce
         fields = "__all__"
 
 
@@ -229,7 +242,7 @@ class ModeleSerializer(serializers.ModelSerializer):
 
     class Meta:
         depth = 1
-        model = models.Modele
+        model = Modele
         fields = (
             'nom',
             'pk',
@@ -241,7 +254,7 @@ class ModeleSerializer(serializers.ModelSerializer):
 
 class RefModeleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.RefModele
+        model = RefModele
         fields = (
             '__all__'
         )
@@ -249,7 +262,7 @@ class RefModeleSerializer(serializers.ModelSerializer):
 
 class LigneTarifSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.LigneTarif
+        model = LigneTarif
         fields = (
             '__all__'
         )
@@ -257,7 +270,7 @@ class LigneTarifSerializer(serializers.ModelSerializer):
 
 class TarifOptionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.TarifOption
+        model = TarifOption
         fields = (
             '__all__'
         )
@@ -265,7 +278,7 @@ class TarifOptionSerializer(serializers.ModelSerializer):
 
 class TarifCouleurSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.TarifCouleur
+        model = TarifCouleur
         fields = (
             '__all__'
         )
@@ -273,7 +286,7 @@ class TarifCouleurSerializer(serializers.ModelSerializer):
 
 class TarifVersionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.TarifVersion
+        model = TarifVersion
         fields = (
             '__all__'
         )
@@ -283,7 +296,7 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
     version_fiche = serializers.CharField()
 
     class Meta:
-        model = models.FicheTechnique
+        model = FicheTechnique
         fields = (
             'pk',
             'nombrePortes',
@@ -303,7 +316,7 @@ class FicheTechniqueSerializer(serializers.ModelSerializer):
 
 class FicheTechniqueCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.FicheTechnique
+        model = FicheTechnique
         fields = (
             'pk',
             'nombrePortes',
@@ -324,7 +337,7 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
     version_fiche = serializers.CharField()
 
     class Meta:
-        model = models.FicheTechnique
+        model = FicheTechnique
         fields = (
             'pk',
             'nombrePortes',
@@ -342,15 +355,15 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
         )
         depth = 4
 
-class CommandeSerializer(serializers.ModelSerializer):
 
+class CommandeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Commande
+        model = Commande
         fields = ("__all__")
+
 
 class CommandeViewSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = models.Commande
+        model = Commande
         fields = ("__all__")
-        depth=1
+        depth = 1

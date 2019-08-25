@@ -382,22 +382,6 @@
     }
   },
   {
-    "model": "SayaraApi.vehiculeoccasion",
-    "pk": 1,
-    "fields": {
-      "num": "12345678",
-      "kilometrage": 10,
-      "date": "2010-01-01",
-      "image2": "",
-      "image1": "",
-      "version": "Allure",
-      "model": 31,
-      "options": [
-        1
-      ]
-    }
-  },
-  {
     "model": "auth.user",
     "pk": 1,
     "fields": {
