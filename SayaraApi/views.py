@@ -586,3 +586,38 @@ class FicheTechniqueDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
+
+
+# Commande
+class CommandeListView(generics.ListAPIView):
+    model = Commande
+    serializer_class = CommandeViewSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = Commande.objects.all()
+        return queryset
+
+
+class CommandeDetailView(generics.RetrieveAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeViewSerializer
+
+
+class CommandeUpdateView(generics.UpdateAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeSerializer
+
+
+class CommandeCreateView(generics.CreateAPIView):
+    queryset = Commande.objects.all()
+    serializer_class = CommandeSerializer
+
+
+class CommandeDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Commande, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)

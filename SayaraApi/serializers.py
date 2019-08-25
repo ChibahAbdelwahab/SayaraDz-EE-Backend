@@ -341,3 +341,16 @@ class FicheTechniqueViewAllSerializer(serializers.ModelSerializer):
             #            'images'
         )
         depth = 4
+
+class CommandeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Commande
+        fields = ("__all__")
+
+class CommandeViewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Commande
+        fields = ("__all__")
+        depth=1
