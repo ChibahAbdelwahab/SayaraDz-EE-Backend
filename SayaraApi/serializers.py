@@ -180,21 +180,27 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
         exclude = ("user", "date_created", "date_modified", "date_removed",)
 
     def create(self, validated_data):
-        kilometrage = validated_data.get("kilometrage", None)
-        date = validated_data.get("date", None)
-        image1 = validated_data.get("image3", None)
-        image2 = validated_data.get("image2", None)
-        image3 = validated_data.get("image3", None)
-        version = validated_data.get("version", None)
-        print("creaaaate")
-        vehicule = VehiculeOccasion(kilometrage=kilometrage, date=date, image1=image1, image2=image2, image3=image3,
-                                    version=version)
-        user = self.context['request'].user
-        if user is "AnonymousUser":
-            return
-        validated_data["user"] = user
+        data = validated_data.pop("vehicule")
+        vehicule = VehiculeOccasion.objects.create(**data)
         validated_data["vehicule"] = vehicule
-        return validated_data
+        validated_data["user"] = self.context['request'].user
+
+        return Annonce.objects.create(**validated_data)
+    #     kilometrage = validated_data.get("kilometrage", None)
+    #     date = validated_data.get("date", None)
+    #     image1 = validated_data.get("image3", None)
+    #     image2 = validated_data.get("image2", None)
+    #     image3 = validated_data.get("image3", None)
+    #     version = validated_data.get("version", None)
+    #     print("creaaaate")
+    #     vehicule = VehiculeOccasion(kilometrage=kilometrage, date=date, image1=image1, image2=image2, image3=image3,
+    #                                 version=version)
+    #     user = self.context['request'].user
+    #     if user is "AnonymousUser":
+    #         return
+    #     validated_data["user"] = user
+    #     validated_data["vehicule"] = vehicule
+    #     return validated_data
 
 
 class VehiculeNeufSerializer(serializers.ModelSerializer):
