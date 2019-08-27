@@ -103,13 +103,15 @@ urlpatterns += (
     # urls for tarifversion
     path('tarifversion/', views.TarifVersionListView.as_view(), name='SayaraApi_tarifversion_list'),
     path('tarifversion/create/', views.TarifVersionCreateView.as_view(), name='SayaraApi_tarifversion_create'),
-    path('tarifversion/update/<slug:pk>/', views.TarifVersionUpdateView.as_view(),name='SayaraApi_tarifversion_update'),
+    path('tarifversion/update/<slug:pk>/', views.TarifVersionUpdateView.as_view(),
+         name='SayaraApi_tarifversion_update'),
 )
 urlpatterns += (
     # urls for tarifcouleur
     path('tarifcouleur/', views.TarifCouleurListView.as_view(), name='SayaraApi_tarifcouleur_list'),
     path('tarifcouleur/create/', views.TarifCouleurCreateView.as_view(), name='SayaraApi_tarifcouleur_create'),
-    path('tarifcouleur/update/<slug:pk>/', views.TarifCouleurUpdateView.as_view(),name='SayaraApi_tarifcouleur_update'),
+    path('tarifcouleur/update/<slug:pk>/', views.TarifCouleurUpdateView.as_view(),
+         name='SayaraApi_tarifcouleur_update'),
 )
 
 urlpatterns += (
@@ -132,4 +134,10 @@ urlpatterns += (
          name='app_name_commande_update'),
     path('commande/delete/<slug:pk>/', views.CommandeDeleteView.as_view(),
          name='app_name_commande_delete')
+)
+urlpatterns += (
+    # urls for Offre
+    path('Offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
+    path('Offre/create/', views.OffreCreateView.as_view(), name='SayaraApi_Offre_create'),
+    path('Offre/update/<int:pk>/', views.OffreUpdateView.as_view(), name='SayaraApi_Offre_update'),
 )

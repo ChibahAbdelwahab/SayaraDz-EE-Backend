@@ -373,3 +373,13 @@ class CommandeViewSerializer(serializers.ModelSerializer):
         model = Commande
         fields = ("__all__")
         depth = 1
+
+
+class OffreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Offre
+        fields = (
+            'annonce',
+            'user',
+            'prix',
+        )
