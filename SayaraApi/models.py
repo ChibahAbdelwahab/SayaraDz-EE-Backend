@@ -318,7 +318,7 @@ class Option(SayaraModel):
         return self.ref.nom
 
 
-class VehiculeOccasion(Vehicule):
+class VehiculeOccasion(SayaraModel):
     kilometrage = models.IntegerField()
     date = models.DateField()
     image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
