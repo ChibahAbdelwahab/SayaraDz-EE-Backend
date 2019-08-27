@@ -1,0 +1,21 @@
+[
+  {
+    "model": "SayaraApi.fichetechnique",
+    "pk": 1,
+    "fields": {
+      "date_created": "2019-08-26T13:14:10Z",
+      "date_modified": "2019-08-26T13:14:10Z",
+      "date_removed": null,
+      "nombrePortes": 5,
+      "boiteVitesse": "Manuelle 6 rapports",
+      "puissanceFiscale": "143ch 3500tr",
+      "motorisation": "2.0 TDI Diesel 4 cylindres 1968cc",
+      "consommation": "5.1",
+      "dimensions": "Longueur 4255 mm Largueur 2027 mm Hauteur 1452 mm",
+      "transmission": "manuelle",
+      "capaciteReservoir": "55",
+      "vitesseMaxi": 206,
+      "acceleration": "9.1"
+    }
+  }
+]
