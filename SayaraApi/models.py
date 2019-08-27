@@ -94,7 +94,7 @@ class Version(SayaraModel):
     modele = models.ForeignKey('SayaraApi.Modele', on_delete=models.CASCADE)
     prix_base = models.IntegerField()
     ficheTechnique = models.ForeignKey("SayaraApi.FicheTechnique", on_delete=models.CASCADE)
-    couleur = models.ForeignKey("SayaraApi.Couleur", on_delete=models.CASCADE)
+    couleur = models.ManyToManyField("SayaraApi.Couleur")
 
     @property
     def fabricantVersion_id(self):
@@ -325,6 +325,7 @@ class VehiculeOccasion(Vehicule):
     image2 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
+    Modele = models.ForeignKey(RefModele,  related_name="RefModele", on_delete="DO_NOTHING")
     # options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
 

@@ -1,0 +1,74 @@
+[
+  {
+    "model": "SayaraApi.modele",
+    "pk": 1,
+    "fields": {
+      "date_created": "2019-08-26T13:01:29Z",
+      "date_modified": "2019-08-26T13:01:29Z",
+      "date_removed": null,
+      "code": "00001",
+      "ref": 34,
+      "image": "images/vehicules/3230.png"
+    }
+  },
+  {
+    "model": "SayaraApi.modele",
+    "pk": 2,
+    "fields": {
+      "date_created": "2019-08-26T13:05:15Z",
+      "date_modified": "2019-08-26T13:05:15Z",
+      "date_removed": null,
+      "code": "000001",
+      "ref": 35,
+      "image": "images/vehicules/3185.png"
+    }
+  },
+  {
+    "model": "SayaraApi.modele",
+    "pk": 3,
+    "fields": {
+      "date_created": "2019-08-26T13:08:51Z",
+      "date_modified": "2019-08-26T13:08:51Z",
+      "date_removed": null,
+      "code": "000000002",
+      "ref": 36,
+      "image": "images/vehicules/3208.png"
+    }
+  },
+  {
+    "model": "SayaraApi.modele",
+    "pk": 4,
+    "fields": {
+      "date_created": "2019-08-26T13:10:24Z",
+      "date_modified": "2019-08-26T13:10:24Z",
+      "date_removed": null,
+      "code": "00000003",
+      "ref": 37,
+      "image": "images/vehicules/3191.png"
+    }
+  },
+  {
+    "model": "SayaraApi.modele",
+    "pk": 5,
+    "fields": {
+      "date_created": "2019-08-26T13:11:06Z",
+      "date_modified": "2019-08-26T13:11:06Z",
+      "date_removed": null,
+      "code": "0000004",
+      "ref": 38,
+      "image": "images/vehicules/3235.png"
+    }
+  },
+  {
+    "model": "SayaraApi.modele",
+    "pk": 6,
+    "fields": {
+      "date_created": "2019-08-26T13:11:28Z",
+      "date_modified": "2019-08-26T13:11:29Z",
+      "date_removed": null,
+      "code": "00000005",
+      "ref": 39,
+      "image": "images/vehicules/3233.png"
+    }
+  }
+]
