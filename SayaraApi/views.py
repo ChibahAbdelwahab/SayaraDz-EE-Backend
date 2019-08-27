@@ -49,6 +49,37 @@ class MarqueDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
+
+class OffreListView(generics.ListAPIView):
+    model = Offre
+    queryset = Offre.objects.all()
+    serializer_class = OffreSerializer
+
+class OffreCreateView(generics.CreateAPIView):
+    queryset = Offre.objects.all()
+    serializer_class = OffreSerializer
+
+
+class OffreDetailView(generics.RetrieveAPIView):
+    queryset = Offre.objects.all()
+    serializer_class = OffreSerializer
+
+
+class OffreUpdateView(generics.UpdateAPIView):
+    queryset = Offre.objects.all()
+    serializer_class = OffreSerializer
+
+
+class OffreDeleteView(views.APIView):
+    def get_object(self, pk):
+        return get_object_or_404(Offre, pk=pk)
+
+    def delete(self, request, pk, *args, **kwargs):
+        thing = self.get_object(pk)
+        thing.delete()
+        return Response({'message': 'supprimé'}, status=204)
+
+
 class VersionListView(generics.ListAPIView):
     model = Version
     serializer_class = VersionSerializer
@@ -621,3 +652,5 @@ class CommandeDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
+
+

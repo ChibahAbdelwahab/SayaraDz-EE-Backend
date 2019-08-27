@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 class SayaraModel(models.Model):
-    date_created = models.DateTimeField(default=timezone.now,)
+    date_created = models.DateTimeField(default=timezone.now, )
     date_modified = models.DateTimeField(default=timezone.now)
     date_removed = models.DateTimeField(null=True, blank=True)
 
@@ -440,6 +440,12 @@ class FicheTechnique(SayaraModel):
     @property
     def version_fiche(self):
         return self.version_set
+
+
+class Offre(SayaraModel):
+    annonce = models.ForeignKey(Annonce, on_delete=models.DO_NOTHING)
+    prix = models.IntegerField()
+    user = models.ForeignKey(User, related_name="offrant", on_delete="DO_NOTHING")
 
 
 class Commande(models.Model):
