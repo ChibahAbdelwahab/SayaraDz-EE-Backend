@@ -161,6 +161,10 @@ class Modele(SayaraModel):
     def marque_nom(self):
         return self.ref.marque.nom
 
+    @property
+    def marqueId(self):
+        return self.ref.marque.pk
+
     @classmethod
     def create(cls, new_ref):
         book = cls()
@@ -365,7 +369,7 @@ class VehiculeNeuf(Vehicule):
 
     @property
     def titre(self):
-        return str(self.modele_name + " " + self.version.nom.nom)
+        return str(self.modele_name + " " + self.version.nom)
 
 
 class TarifOption(SayaraModel):

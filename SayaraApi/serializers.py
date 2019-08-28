@@ -245,7 +245,8 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 class ModeleSerializer(serializers.ModelSerializer):
     couleur_set = CouleurSerializer(many=True, read_only=True, )
-
+    marque_nom = serializers.CharField()
+    marqueId = serializers.CharField()
     class Meta:
         depth = 1
         model = Modele
@@ -254,7 +255,9 @@ class ModeleSerializer(serializers.ModelSerializer):
             'pk',
             'code',
             'couleur_set',
-            'image'
+            'image',
+            'marque_nom',
+            'marqueId'
         )
 
 

@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, views, status
 from rest_framework.response import Response
@@ -143,12 +143,12 @@ class ModeleListView(generics.ListAPIView):
     # TODO return only Fabricant's marques for Fabricant
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
-        marque_pk = self.request.GET.get("marque_pk", "")
+        marqueId = self.request.GET.get("marqueId", "")
         marque_nom = self.request.GET.get("marque_nom", "")
 
-        if marque_pk is not "":
+        if marqueId is not "":
             # TODO check this
-            queryset = queryset.filter(Q(marque_pk=marque_pk))
+            queryset = queryset.filter(ref__marque__pk=marqueId)
         if marque_nom is not "":
             # TODO check this
             queryset = queryset.filter(Q(marque_nom=marque_nom))
