@@ -349,7 +349,7 @@ class VehiculeNeuf(Vehicule):
 
     @property
     def marque(self):
-        return self.version.modele.marque
+        return self.version.modele.ref.marque
 
     @property
     def fabricant_id(self):
