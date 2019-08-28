@@ -293,7 +293,8 @@ class AnnnonceOccasionListView(generics.ListAPIView):
             queryset = queryset.filter(Q(prix__lte=query_prix2))
 
         if query_marque is not "":
-            queryset = queryset.filter(Q(vehicule__model__marque__nom__icontains=query_marque))
+            queryset = queryset.filter(Q(vehicule__Modele__marque__nom__icontains=query_marque))
+
 
         return queryset
 
