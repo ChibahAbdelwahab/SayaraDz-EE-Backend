@@ -299,6 +299,11 @@ class AnnnonceOccasionListView(generics.ListAPIView):
         return queryset
 
 
+class AnnonceOccasionDetailView(generics.RetrieveAPIView):
+    queryset = Annonce.objects.all().select_related('vehicule')
+    serializer_class = AnnonceOccasionSerializer
+
+
 class AnnonceCreateView(generics.CreateAPIView):
     model = Annonce
     serializer_class = AnnonceCreateSerializer
@@ -352,6 +357,10 @@ class AnnonceNeufListView(generics.ListAPIView):
 
         return queryset
 
+
+class AnnonceNeufDetailView(generics.RetrieveAPIView):
+    queryset = VehiculeNeuf.objects.all()
+    serializer_class = AnnnonceNeufSerializer
 
 class CouleurListView(generics.ListAPIView):
     model = Couleur
