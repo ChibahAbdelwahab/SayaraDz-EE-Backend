@@ -115,7 +115,7 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Modele
-        fields = ('__all__')
+        fields = ("new_ref", "code",)
 
     def create(self, validated_data):
         print(validated_data)
@@ -124,12 +124,17 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
             try:
                 marque = self.context['request'].user.profile.fabricant.marque
             except:
+                print("error")
                 return validated_data
             if not marque:
                 return validated_data
-            new_ref = RefModele.objects.create(nom=new_ref, marque=marque)
+            try:
+                new_ref = RefModele.objects.create(nom=new_ref, marque=marque)
+            except:
+                return validated_data
             validated_data["ref"] = new_ref
-        return validated_data
+            validated_data.pop("new_ref")
+        return Modele.objects.create(**validated_data)
 
 
 class RefModeleCreateSerializer(serializers.ModelSerializer):
@@ -245,6 +250,7 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 class ModeleSerializer(serializers.ModelSerializer):
     couleur_set = CouleurSerializer(many=True, read_only=True, )
+
     class Meta:
         depth = 1
         model = Modele
@@ -256,8 +262,10 @@ class ModeleSerializer(serializers.ModelSerializer):
             'image',
         )
 
+
 class ModeleSerializerMobile(serializers.ModelSerializer):
     couleur_set = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Modele
         fields = (

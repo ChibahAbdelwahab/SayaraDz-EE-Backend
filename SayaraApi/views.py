@@ -25,7 +25,7 @@ class MarqueListView(generics.ListAPIView):
 
 
 class MarqueCreateView(generics.CreateAPIView):
-    queryset = Marque.objects.all()
+    model = Marque
     serializer_class = MarqueSerializer
 
 
@@ -49,11 +49,11 @@ class MarqueDeleteView(views.APIView):
         return Response({'message': 'supprimé'}, status=204)
 
 
-
 class OffreListView(generics.ListAPIView):
     model = Offre
     queryset = Offre.objects.all()
     serializer_class = OffreSerializer
+
 
 class OffreCreateView(generics.CreateAPIView):
     queryset = Offre.objects.all()
@@ -154,6 +154,7 @@ class ModeleListView(generics.ListAPIView):
             queryset = queryset.filter(Q(marque_nom=marque_nom))
         return queryset
 
+
 class ModeleListViewMobile(generics.ListAPIView):
     model = Modele
     serializer_class = ModeleSerializerMobile
@@ -187,7 +188,7 @@ class ListModeleView(generics.ListAPIView):
 
 
 class ModeleCreateView(generics.CreateAPIView):
-    queryset = Modele.objects.all()
+    model = Modele
     serializer_class = ModeleCreateSerializer
 
 
@@ -670,5 +671,3 @@ class CommandeDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
-
-

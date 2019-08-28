@@ -10,7 +10,7 @@ class CustomLoginView(LoginView):
             fabricant = self.user.profile.fabricant.nom
             marqueid = self.user.profile.fabricant.marque.id
             marque = self.user.profile.fabricant.marque.nom
-            image = self.user.profile.fabricant.marque.image
+            image = self.user.profile.fabricant.marque.image.url
         except:
             fabricant = ""
             marqueid = ""
