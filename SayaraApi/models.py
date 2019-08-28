@@ -242,8 +242,9 @@ class Profile(SayaraModel):
     )
 
     def __str__(self):
-        return self.fabricant.nom
-
+        if self.is_fabricant:
+            return self.fabricant.nom
+        return self.user.username
 
 class RefCouleur(SayaraModel):
     nom = models.CharField(max_length=50, unique=True)
