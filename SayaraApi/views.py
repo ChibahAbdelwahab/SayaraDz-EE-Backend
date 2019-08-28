@@ -154,6 +154,24 @@ class ModeleListView(generics.ListAPIView):
             queryset = queryset.filter(Q(marque_nom=marque_nom))
         return queryset
 
+class ModeleListViewMobile(generics.ListAPIView):
+    model = Modele
+    serializer_class = ModeleSerializerMobile
+
+    # TODO return only Fabricant's marques for Fabricant
+    def get_queryset(self, *args, **kwargs):
+        queryset = Modele.objects.all()
+        marqueId = self.request.GET.get("marqueId", "")
+        marque_nom = self.request.GET.get("marque_nom", "")
+
+        if marqueId is not "":
+            # TODO check this
+            queryset = queryset.filter(ref__marque__pk=marqueId)
+        if marque_nom is not "":
+            # TODO check this
+            queryset = queryset.filter(Q(marque_nom=marque_nom))
+        return queryset
+
 
 class RefModeleListView(generics.ListAPIView):
     model = RefModele

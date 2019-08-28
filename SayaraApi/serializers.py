@@ -256,6 +256,18 @@ class ModeleSerializer(serializers.ModelSerializer):
             'image',
         )
 
+class ModeleSerializerMobile(serializers.ModelSerializer):
+    couleur_set = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Modele
+        fields = (
+            'nom',
+            'pk',
+            'code',
+            'couleur_set',
+            'image',
+        )
+
 
 class RefModeleSerializer(serializers.ModelSerializer):
     class Meta:

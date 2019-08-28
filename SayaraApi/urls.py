@@ -30,6 +30,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for Modele
     path('modele/', views.ModeleListView.as_view(), name='SayaraApi_modele_list'),
+    path('modele/mobile', views.ModeleListViewMobile.as_view(), name='SayaraApi_modele_list'),
     path('modele/create/', views.ModeleCreateView.as_view(), name='SayaraApi_modele_create'),
     path('modele/detail/<slug:pk>/', views.ModeleDetailView.as_view(), name='SayaraApi_modele_detail'),
     path('modele/update/<slug:pk>/', views.ModeleUpdateView.as_view(), name='SayaraApi_modele_update'),
