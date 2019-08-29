@@ -151,30 +151,36 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = ("__all__")
 
 
-class AnnonceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Annonce
-        depth = 1
-        exclude = ()
-
-
-class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Annonce
-        depth = 1
-        exclude = ("user",)
-
-
-class AnnonceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Annonce
-        depth = 1
-
-
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
-        exclude = ("date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed","modele","version")
+
+
+class VehiculeOccasionUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehiculeOccasion
+        exclude = ("date_created", "date_modified", "date_removed", 'modele')
+
+
+class AnnonceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Annonce
+        depth = 1
+        exclude = ("modele", "version", "date")
+
+
+class AnnonceUpdateSerializer(serializers.ModelSerializer):
+    vehicule = VehiculeOccasionSerializer()
+    class Meta:
+        model = Annonce
+        depth = 0
+        exclude = ("user", "date_created", "date_modified", "date_removed")
+
+
+class AnnonceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Annonce
 
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
@@ -242,6 +248,8 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
     image2 = serializers.ImageField()
     image3 = serializers.ImageField()
     kilometrage = serializers.IntegerField()
+    marque_name = serializers.CharField()
+    modele_name = serializers.CharField()
 
     class Meta:
         model = Annonce

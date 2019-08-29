@@ -187,6 +187,14 @@ class Annonce(SayaraModel):
     user = models.ForeignKey(User, related_name="proprietaire", on_delete="DO_NOTHING")
 
     @property
+    def marque_name(self):
+        return self.vehicule.marque_name
+
+    @property
+    def modele_name(self):
+        return self.vehicule.modele_name
+
+    @property
     def image1(self):
         return self.vehicule.image1
 
@@ -245,6 +253,7 @@ class Profile(SayaraModel):
         if self.is_fabricant:
             return self.fabricant.nom
         return self.user.username
+
 
 class RefCouleur(SayaraModel):
     nom = models.CharField(max_length=50, unique=True)
@@ -330,8 +339,17 @@ class VehiculeOccasion(SayaraModel):
     image2 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
-    Modele = models.ForeignKey(RefModele,  related_name="RefModele", on_delete="DO_NOTHING")
+    modele = models.ForeignKey(RefModele, related_name="RefModele", on_delete="DO_NOTHING")
+
     # options = models.ManyToManyField(RefOption, related_name="options", blank=True)
+
+    @property
+    def marque_name(self):
+        return self.modele.marque.nom
+
+    @property
+    def modele_name(self):
+        return self.modele.nom
 
 
 class VehiculeNeuf(Vehicule):
