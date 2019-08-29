@@ -156,11 +156,17 @@ class VehiculeOccasionSerializer(serializers.ModelSerializer):
         model = VehiculeOccasion
         exclude = ("date_created", "date_modified", "date_removed","modele","version")
 
+class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehiculeOccasion
+        exclude = ("date_created", "date_modified", "date_removed",)
+
+
 
 class VehiculeOccasionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
-        exclude = ("date_created", "date_modified", "date_removed", 'modele')
+        exclude = ("date_created", "date_modified", "date_removed","modele","version")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -171,7 +177,7 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionSerializer()
+    vehicule = VehiculeOccasionUpdateSerializer()
     class Meta:
         model = Annonce
         depth = 0
@@ -184,7 +190,7 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionSerializer()
+    vehicule = VehiculeOccasionCreateSerializer()
 
     class Meta:
         model = Annonce
