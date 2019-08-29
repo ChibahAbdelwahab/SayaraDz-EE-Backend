@@ -123,8 +123,8 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
         if new_ref is not None:
             try:
                 marque = self.context['request'].user.profile.fabricant.marque
-            except:
-                print("error")
+            except Exception as  e:
+                print("error",e)
                 return validated_data
             if not marque:
                 return validated_data
