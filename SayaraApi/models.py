@@ -340,6 +340,8 @@ class VehiculeOccasion(SayaraModel):
     image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
     version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
     modele = models.ForeignKey(RefModele, related_name="RefModele", on_delete="DO_NOTHING")
+    options = models.ManyToManyField(RefOption, blank=True)
+    couleur = models.ForeignKey(RefCouleur, on_delete="DO_NOTHING")
 
     # options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
