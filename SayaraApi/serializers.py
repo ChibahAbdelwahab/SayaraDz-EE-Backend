@@ -111,7 +111,8 @@ class CouleurSerializer(serializers.ModelSerializer):
 
 
 class ModeleCreateSerializer(serializers.ModelSerializer):
-    new_ref = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    new_ref = serializers.CharField(required=False, allow_blank=True,
+                                    max_length=100)
 
     class Meta:
         model = Modele
@@ -123,8 +124,8 @@ class ModeleCreateSerializer(serializers.ModelSerializer):
         if new_ref is not None:
             try:
                 marque = self.context['request'].user.profile.fabricant.marque
-            except Exception as  e:
-                print("error",e)
+            except Exception as e:
+                print("error", e)
                 return validated_data
             if not marque:
                 return validated_data
@@ -154,7 +155,10 @@ class OptionSerializer(serializers.ModelSerializer):
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
-        exclude = ("date_created", "date_modified", "date_removed","modele","version")
+        exclude = (
+            "date_created", "date_modified", "date_removed", "modele",
+            "version")
+
 
 class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -162,11 +166,12 @@ class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
         exclude = ("date_created", "date_modified", "date_removed",)
 
 
-
 class VehiculeOccasionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
-        exclude = ("date_created", "date_modified", "date_removed","modele","version")
+        exclude = (
+            "date_created", "date_modified", "date_removed", "modele",
+            "version")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -178,6 +183,7 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
     vehicule = VehiculeOccasionUpdateSerializer()
+
     class Meta:
         model = Annonce
         depth = 0
