@@ -262,6 +262,8 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
     kilometrage = serializers.IntegerField()
     marque_name = serializers.CharField()
     modele_name = serializers.CharField()
+    version_name = serializers.CharField()
+    couleur = serializers.CharField()
 
     class Meta:
         model = Annonce

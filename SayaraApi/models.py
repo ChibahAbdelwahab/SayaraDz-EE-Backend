@@ -187,6 +187,11 @@ class Annonce(SayaraModel):
     user = models.ForeignKey(User, related_name="proprietaire", on_delete="DO_NOTHING")
 
     @property
+    def couleur(self):
+        return self.vehicule.couleur.nom
+    def version_name(self):
+        return self.vehicule.version.nom
+
     def marque_name(self):
         return self.vehicule.marque_name
 

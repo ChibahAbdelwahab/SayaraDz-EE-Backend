@@ -83,9 +83,9 @@ urlpatterns += (
     path('annonce/create/', views.AnnonceCreateView.as_view(), name='AnnonceCreate'),
     path('annonce/delete/<slug:pk>/', views.AnnonceOccasionDeleteView.as_view(), name='AnnonceDelete'),
     path('annonce/update/<slug:pk>/', views.AnnonceUpdateView.as_view(), name='AnnonceUpdate'),
-    path('annonce/occasion', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
+    path('annonce/occasion/', views.AnnnonceOccasionListView.as_view(), name='Annonce'),
     path('annonce/occasion/detail/<slug:pk>/', views.AnnonceOccasionDetailView.as_view(), name='AnnonceODetail'),
-    path('annonce/neuf', views.AnnonceNeufListView.as_view(), name='Annonce'),
+    path('annonce/neuf/', views.AnnonceNeufListView.as_view(), name='Annonce'),
     path('annonce/neuf/detail/<slug:pk>/', views.AnnonceNeufDetailView.as_view(), name='AnnonceNDetail'),
 )
 
