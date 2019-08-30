@@ -34,10 +34,40 @@ class MarqueSerializer(serializers.ModelSerializer):
         )
 
 
+class OptionSerializer(serializers.ModelSerializer):
+    prix = serializers.IntegerField()
+
+    class Meta:
+        model = Option
+        fields = ("__all__")
+
+
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = Modele
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
+
+    class Meta:
+        model = Version
+        fields = (
+            'nom',
+            'code',
+            "modele_name",
+            'modele',
+            'marque_name',
+            'options',
+            'images',
+            'pk',
+            'prix',
+            'ficheTechnique'
+        )
+
+
+class VersionDetailSerializer(serializers.ModelSerializer):
+    modele_name = serializers.CharField()
+    marque_name = serializers.CharField()
+    prix = serializers.IntegerField()
+    options = OptionSerializer(many=True)
 
     class Meta:
         model = Version
