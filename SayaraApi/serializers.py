@@ -177,7 +177,7 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
-
+    nom = serializers.CharField()
     class Meta:
         model = Option
         fields = ("__all__")
