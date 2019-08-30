@@ -40,7 +40,7 @@ class OptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Option
-        fields = ("__all__")
+        exclude = ("date_created", "date_modified", "date_removed",)
 
 
 class VersionSerializer(serializers.ModelSerializer):
