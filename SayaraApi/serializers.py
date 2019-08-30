@@ -247,6 +247,7 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
     vehicule = VehiculeOccasionCreateSerializer()
+    image = serializers.ImageField()
 
     class Meta:
         model = Annonce
@@ -254,7 +255,9 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         data = validated_data.pop("vehicule")
-        vehicule = VehiculeOccasion.objects.create(**data)
+        data = data.pop("image")
+        image = validated_data["image"]
+        vehicule = VehiculeOccasion.objects.create(**data, image1=image)
         validated_data["vehicule"] = vehicule
         validated_data["user"] = self.context['request'].user
 
