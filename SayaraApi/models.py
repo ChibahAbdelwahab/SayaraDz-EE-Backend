@@ -35,7 +35,8 @@ class SayaraModel(models.Model):
 
 
 class Image(SayaraModel):
-    image = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
+    image = models.ImageField(upload_to="images/vehicules",
+                              default='images/vehicules/voiture.jpg')
 
 
 class Vehicule(SayaraModel):
@@ -66,7 +67,8 @@ class Marque(SayaraModel):
     # Fields
     app_label = "Marque"
     nom = models.CharField(max_length=50)
-    image = models.ImageField(default='images/vehicules/voiture.jpg', upload_to="marque/images/")
+    image = models.ImageField(default='images/vehicules/voiture.jpg',
+                              upload_to="marque/images/")
 
     def __str__(self):
         return self.nom
@@ -93,7 +95,8 @@ class Version(SayaraModel):
     options = models.ManyToManyField('SayaraApi.Option', blank=True)
     modele = models.ForeignKey('SayaraApi.Modele', on_delete=models.CASCADE)
     prix_base = models.IntegerField()
-    ficheTechnique = models.ForeignKey("SayaraApi.FicheTechnique", on_delete=models.CASCADE)
+    ficheTechnique = models.ForeignKey("SayaraApi.FicheTechnique",
+                                       on_delete=models.CASCADE)
     couleur = models.ManyToManyField("SayaraApi.Couleur")
 
     @property
@@ -110,7 +113,8 @@ class Version(SayaraModel):
 
     @property
     def prix(self):
-        query = TarifVersion.objects.filter(version=self, base=False, debut__lte=datetime.now(),
+        query = TarifVersion.objects.filter(version=self, base=False,
+                                            debut__lte=datetime.now(),
                                             fin__gte=datetime.now()).first()
         if query:
             return query.prix
@@ -139,8 +143,10 @@ class Modele(SayaraModel):
     # Fields
     app_label = "Modele"
     code = models.CharField(max_length=10)
-    ref = models.ForeignKey(RefModele, related_name="modele", on_delete=models.CASCADE)
-    image = models.ImageField(default='images/vehicules/voiture.jpg', upload_to="images/vehicules")
+    ref = models.ForeignKey(RefModele, related_name="modele",
+                            on_delete=models.CASCADE)
+    image = models.ImageField(default='images/vehicules/voiture.jpg',
+                              upload_to="images/vehicules")
 
     def __str__(self):
         return self.ref.nom
@@ -183,12 +189,15 @@ class Annonce(SayaraModel):
     commentaires = models.CharField(max_length=255)
 
     # Relationship Fields
-    vehicule = models.ForeignKey('SayaraApi.VehiculeOccasion', on_delete="DO_NOTHING", )
-    user = models.ForeignKey(User, related_name="proprietaire", on_delete="DO_NOTHING")
+    vehicule = models.ForeignKey('SayaraApi.VehiculeOccasion',
+                                 on_delete="DO_NOTHING", )
+    user = models.ForeignKey(User, related_name="proprietaire",
+                             on_delete="DO_NOTHING")
 
     @property
     def couleur(self):
         return self.vehicule.couleur.nom
+
     def version_name(self):
         return self.vehicule.version.nom
 
@@ -251,7 +260,8 @@ class Profile(SayaraModel):
     is_client = models.BooleanField(default=False)
     fabricant = models.ForeignKey(
         'SayaraApi.fabricant',
-        on_delete=models.CASCADE, related_name="fabricant", blank=True, null=True
+        on_delete=models.CASCADE, related_name="fabricant", blank=True,
+        null=True
     )
 
     def __str__(self):
@@ -290,7 +300,8 @@ class Couleur(SayaraModel):
 
     @property
     def prix(self):
-        query = TarifCouleur.objects.filter(couleur=self, base=False, debut__lte=datetime.now(),
+        query = TarifCouleur.objects.filter(couleur=self, base=False,
+                                            debut__lte=datetime.now(),
                                             fin__gte=datetime.now()).first()
         if query:
             return query.prix
@@ -323,7 +334,8 @@ class Option(SayaraModel):
 
     @property
     def prix(self):
-        query = TarifOption.objects.filter(option=self, base=False, debut__lte=datetime.now(),
+        query = TarifOption.objects.filter(option=self, base=False,
+                                           debut__lte=datetime.now(),
                                            fin__gte=datetime.now()).first()
         if query:
             return query.prix
@@ -340,11 +352,16 @@ class Option(SayaraModel):
 class VehiculeOccasion(SayaraModel):
     kilometrage = models.IntegerField()
     date = models.DateField()
-    image1 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    image2 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    image3 = models.ImageField(upload_to="images/vehicules", default='images/vehicules/voiture.jpg')
-    version = models.ForeignKey(RefVersion, related_name="Refversion", on_delete="DO_NOTHING")
-    modele = models.ForeignKey(RefModele, related_name="RefModele", on_delete="DO_NOTHING")
+    image1 = models.ImageField(upload_to="images/vehicules",
+                               default='images/vehicules/voiture.jpg')
+    image2 = models.ImageField(upload_to="images/vehicules",
+                               default='images/vehicules/voiture.jpg')
+    image3 = models.ImageField(upload_to="images/vehicules",
+                               default='images/vehicules/voiture.jpg')
+    version = models.ForeignKey(RefVersion, related_name="Refversion",
+                                on_delete="DO_NOTHING")
+    modele = models.ForeignKey(RefModele, related_name="RefModele",
+                               on_delete="DO_NOTHING")
     options = models.ManyToManyField(RefOption, blank=True)
     couleur = models.ForeignKey(RefCouleur, on_delete="DO_NOTHING")
 
@@ -379,7 +396,7 @@ class VehiculeNeuf(Vehicule):
 
     @property
     def fabricant_id(self):
-        return 1
+        return 'don t know but, remember you have to correct me '
 
     @property
     def fabricant_name(self):
@@ -396,6 +413,7 @@ class VehiculeNeuf(Vehicule):
     @property
     def modele(self):
         return self.version.modele
+
     @property
     def titre(self):
         return str(self.modele_name + " " + self.version.nom)
@@ -407,7 +425,8 @@ class TarifOption(SayaraModel):
     prix = models.FloatField()
     base = models.BooleanField(default=False)
     # Relationship Fields
-    option = models.ForeignKey(Option, on_delete=models.CASCADE, related_name="lignetarifs")
+    option = models.ForeignKey(Option, on_delete=models.CASCADE,
+                               related_name="lignetarifs")
 
     @property
     def valid(self):
@@ -426,7 +445,8 @@ class TarifVersion(SayaraModel):
     prix = models.FloatField()
     base = models.BooleanField(default=False)
     # Relationship Fields
-    version = models.ForeignKey(Version, on_delete=models.CASCADE, related_name="lignetarifs")
+    version = models.ForeignKey(Version, on_delete=models.CASCADE,
+                                related_name="lignetarifs")
 
     @property
     def valid(self):
@@ -442,7 +462,8 @@ class TarifCouleur(SayaraModel):
     prix = models.FloatField()
     base = models.BooleanField(default=False)
     # Relationship Fields
-    couleur = models.ForeignKey(Couleur, on_delete=models.CASCADE, blank=True, null=True)
+    couleur = models.ForeignKey(Couleur, on_delete=models.CASCADE, blank=True,
+                                null=True)
 
     @property
     def valid(self):
@@ -479,7 +500,8 @@ class FicheTechnique(SayaraModel):
 class Offre(SayaraModel):
     annonce = models.ForeignKey(Annonce, on_delete=models.DO_NOTHING)
     prix = models.IntegerField()
-    user = models.ForeignKey(User, related_name="offrant", on_delete="DO_NOTHING")
+    user = models.ForeignKey(User, related_name="offrant",
+                             on_delete="DO_NOTHING")
 
 
 class Commande(models.Model):
