@@ -188,9 +188,9 @@ class VehiculeNeufListView(generics.ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         queryset = VehiculeNeuf.objects.all()
-        modele = self.request.GET.get("modele", "")
-        version = self.request.GET.get("version", "")
-        couleur = self.request.GET.get("couleur", "")
+        modele = self.request.GET.get("modele_pk", "")
+        version = self.request.GET.get("version_pk", "")
+        couleur = self.request.GET.get("couleur_pk", "")
 
         if modele is not "":
             queryset = queryset.filter(Q(modele=modele))
