@@ -396,7 +396,7 @@ class VehiculeNeuf(Vehicule):
 
     @property
     def fabricant_id(self):
-        return 'don t know but, remember you have to correct me '
+        return 1
 
     @property
     def fabricant_name(self):
