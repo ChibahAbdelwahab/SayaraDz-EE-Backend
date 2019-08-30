@@ -47,6 +47,11 @@ urlpatterns += (
     # path('refmodele/delete/<slug:pk>/', views.ModeleDeleteView.as_view(), name='SayaraApi_modele_delete'),
     # path('refmodele/list', views.ListModeleView.as_view(), name="modele_List"),
 )
+urlpatterns += (
+    # urls for Modele
+    path('refcouleur/', views.RefCouleurListView.as_view(), name='SayaraApi_Refcouleur_list'),
+    path('refcouleur/create/', views.RefCouleurCreateView.as_view(), name='SayaraApi_couleur_create'),
+)
 
 urlpatterns += (
     # urls for Fabriquant
