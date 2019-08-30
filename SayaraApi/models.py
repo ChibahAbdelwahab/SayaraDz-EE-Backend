@@ -394,6 +394,9 @@ class VehiculeNeuf(Vehicule):
         return self.version.modele_name
 
     @property
+    def modele(self):
+        return self.version.modele
+    @property
     def titre(self):
         return str(self.modele_name + " " + self.version.nom)
 

@@ -182,6 +182,26 @@ class RefModeleListView(generics.ListAPIView):
         return RefModele.objects.all()
 
 
+class VehiculeNeufListView(generics.ListAPIView):
+    model = VehiculeNeuf
+    serializer_class = VehiculeSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = VehiculeNeuf.objects.all()
+        modele = self.request.GET.get("modele", "")
+        version = self.request.GET.get("version", "")
+        couleur = self.request.GET.get("couleur", "")
+
+        if modele is not "":
+            queryset = queryset.filter(Q(modele=modele))
+        if version is not "":
+            queryset = queryset.filter(Q(version=version))
+        if couleur is not "":
+            queryset = queryset.filter(Q(couleur=Couleur))
+
+        return queryset
+
+
 class ListModeleView(generics.ListAPIView):
     queryset = Modele.objects.all()
     serializer_class = ModeleSerializer
@@ -293,8 +313,8 @@ class AnnnonceOccasionListView(generics.ListAPIView):
             queryset = queryset.filter(Q(prix__lte=query_prix2))
 
         if query_marque is not "":
-            queryset = queryset.filter(Q(vehicule__Modele__marque__nom__icontains=query_marque))
-
+            queryset = queryset.filter(
+                Q(vehicule__Modele__marque__nom__icontains=query_marque))
 
         return queryset
 
@@ -361,6 +381,7 @@ class AnnonceNeufListView(generics.ListAPIView):
 class AnnonceNeufDetailView(generics.RetrieveAPIView):
     queryset = VehiculeNeuf.objects.all()
     serializer_class = AnnnonceNeufSerializer
+
 
 class CouleurListView(generics.ListAPIView):
     model = Couleur

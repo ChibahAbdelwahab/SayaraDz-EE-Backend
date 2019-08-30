@@ -144,3 +144,10 @@ urlpatterns += (
     path('Offre/create/', views.OffreCreateView.as_view(), name='SayaraApi_Offre_create'),
     path('Offre/update/<int:pk>/', views.OffreUpdateView.as_view(), name='SayaraApi_Offre_update'),
 )
+
+urlpatterns += (
+    # urls for Offre
+    path('vehiculeneuf/', views.VehiculeNeufListView.as_view(), name='SayaraApi_Vehicule_list'),
+    # path('Offre/create/', views.OffreCreateView.as_view(), name='SayaraApi_Offre_create'),
+    # path('Offre/update/<int:pk>/', views.OffreUpdateView.as_view(), name='SayaraApi_Offre_update'),
+)
