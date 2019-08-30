@@ -57,7 +57,7 @@ class VersionSerializer(serializers.ModelSerializer):
     modele_name = Modele
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
-
+    options = OptionSerializer()
     class Meta:
         model = Version
         fields = (
