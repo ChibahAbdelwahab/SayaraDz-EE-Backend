@@ -60,16 +60,16 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    #    'DEFAULT_PERMISSION_CLASSES': [
-    #        'rest_framework.permissions.IsAuthenticated'
-    #    ],
-    #    'DEFAULT_AUTHENTICATION_CLASSES': [
-    #        'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
-    #        'rest_framework.authentication.TokenAuthentication',
-    #    ],
+       'DEFAULT_PERMISSION_CLASSES': [
+           'rest_framework.permissions.IsAuthenticated'
+       ],
+       'DEFAULT_AUTHENTICATION_CLASSES': [
+           'SayaraApi.firebaseAuthentification.FirebaseAuthentication',
+           'rest_framework.authentication.TokenAuthentication',
+       ],
 }
 
-REST_FRAMEWORK = {}
+# REST_FRAMEWORK = {}
 
 DRF_FIREBASE_AUTH = {
     'FIREBASE_SERVICE_ACCOUNT_KEY': 'configuration.json'
