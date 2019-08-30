@@ -25,20 +25,6 @@ class FabricantSerializer(serializers.ModelSerializer):
         )
 
 
-class VehiculeNeufSerializer(serializers.ModelSerializer):
-    modele_name = serializers.CharField()
-    fabricant_name = serializers.CharField()
-    fabricant = FabricantSerializer()
-    version = VersionSerializer()
-    modele = ModeleSerializer()
-    marque = serializers.CharField()
-    options = OptionSerializer(many=True)
-
-    class Meta:
-        model = VehiculeNeuf
-        fields = ("__all__")
-
-
 class VehiculeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicule
@@ -458,3 +444,17 @@ class OffreSerializer(serializers.ModelSerializer):
             'user',
             'prix',
         )
+
+
+class VehiculeNeufSerializer(serializers.ModelSerializer):
+    modele_name = serializers.CharField()
+    fabricant_name = serializers.CharField()
+    fabricant = FabricantSerializer()
+    version = VersionSerializer()
+    modele = ModeleSerializer()
+    marque = serializers.CharField()
+    options = OptionSerializer(many=True)
+
+    class Meta:
+        model = VehiculeNeuf
+        fields = ("__all__")
