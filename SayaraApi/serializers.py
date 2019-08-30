@@ -36,6 +36,7 @@ class MarqueSerializer(serializers.ModelSerializer):
 
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
+    nom = serializers.CharField()
 
     class Meta:
         model = Option
