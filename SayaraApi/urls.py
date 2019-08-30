@@ -52,6 +52,11 @@ urlpatterns += (
     path('refcouleur/', views.RefCouleurListView.as_view(), name='SayaraApi_Refcouleur_list'),
     path('refcouleur/create/', views.RefCouleurCreateView.as_view(), name='SayaraApi_couleur_create'),
 )
+urlpatterns += (
+    # urls for Modele
+    path('refversion/', views.RefVersionListView.as_view(), name='SayaraApi_Refversion_list'),
+    path('refversion/create/', views.RefVersionCreateView.as_view(), name='SayaraApi_version_create'),
+)
 
 urlpatterns += (
     # urls for Fabriquant

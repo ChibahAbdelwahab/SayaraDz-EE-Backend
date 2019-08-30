@@ -180,6 +180,16 @@ class RefCouleurCreateSerializer(serializers.ModelSerializer):
         model = RefCouleur
         fields = ('__all__')
 
+class RefCouleurCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RefCouleur
+        fields = ('__all__')
+
+class RefVersionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RefVersion
+        fields = ('__all__')
+
 
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
@@ -336,6 +346,14 @@ class RefModeleSerializer(serializers.ModelSerializer):
 class RefCouleurSerializer(serializers.ModelSerializer):
     class Meta:
         model = RefCouleur
+        fields = (
+            '__all__'
+        )
+
+
+class RefVersionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RefVersion
         fields = (
             '__all__'
         )

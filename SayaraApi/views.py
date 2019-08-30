@@ -187,6 +187,12 @@ class RefCouleurListView(generics.ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         return RefCouleur.objects.all()
+class RefVersionListView(generics.ListAPIView):
+    model = RefVersion
+    serializer_class = RefVersionSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        return RefVersion.objects.all()
 
 
 class VehiculeNeufListView(generics.ListAPIView):
@@ -227,6 +233,10 @@ class RefModeleCreateView(generics.CreateAPIView):
 class RefCouleurCreateView(generics.CreateAPIView):
     queryset = Couleur.objects.all()
     serializer_class = RefCouleurCreateSerializer
+
+class RefVersionCreateView(generics.CreateAPIView):
+    queryset = Version.objects.all()
+    serializer_class = RefVersionCreateSerializer
 
 
 class ModeleDetailView(generics.RetrieveAPIView):
