@@ -7,12 +7,18 @@ from .models import *
 
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Vehicule
+        model = VehiculeN
         fields = (
             'num',
             'disponible',
             'versionVoiture'
         )
+
+
+class VehiculeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehiculeNeuf
+        fields = ("__all__")
 
 
 class VehiculeUpdateSerializer(serializers.ModelSerializer):
@@ -178,6 +184,7 @@ class RefModeleCreateSerializer(serializers.ModelSerializer):
 class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
     nom = serializers.CharField()
+
     class Meta:
         model = Option
         fields = ("__all__")
