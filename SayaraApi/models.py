@@ -363,7 +363,7 @@ class VehiculeOccasion(SayaraModel):
     modele = models.ForeignKey(RefModele, related_name="RefModele",
                                on_delete="DO_NOTHING")
     options = models.ManyToManyField(RefOption, blank=True)
-    couleur = models.ForeignKey(RefCouleur, on_delete="DO_NOTHING")
+    couleur = models.CharField()
 
     # options = models.ManyToManyField(RefOption, related_name="options", blank=True)
 
