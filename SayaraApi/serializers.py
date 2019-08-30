@@ -449,7 +449,6 @@ class OffreSerializer(serializers.ModelSerializer):
 class VehiculeNeufSerializer(serializers.ModelSerializer):
     modele_name = serializers.CharField()
     fabricant_name = serializers.CharField()
-    fabricant = FabricantSerializer()
     version = VersionSerializer()
     modele = ModeleSerializer()
     marque = serializers.CharField()
