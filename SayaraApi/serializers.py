@@ -15,6 +15,16 @@ class VehiculeSerializer(serializers.ModelSerializer):
         )
 
 
+class FabricantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fabricant
+        fields = (
+            'nom',
+            'pk',
+            'marque'
+        )
+
+
 class VehiculeNeufSerializer(serializers.ModelSerializer):
     modele_name = serializers.CharField()
     fabricant_name = serializers.CharField()
@@ -127,16 +137,6 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'pk',
             'code',
             'fabricantModele',
-        )
-
-
-class FabricantSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Fabricant
-        fields = (
-            'nom',
-            'pk',
-            'marque'
         )
 
 
