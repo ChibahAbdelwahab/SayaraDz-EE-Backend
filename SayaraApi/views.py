@@ -184,7 +184,7 @@ class RefModeleListView(generics.ListAPIView):
 
 class VehiculeNeufListView(generics.ListAPIView):
     model = VehiculeNeuf
-    serializer_class = VehiculeSerializer
+    serializer_class = VehiculeNeufSerializer
 
     def get_queryset(self, *args, **kwargs):
         queryset = VehiculeNeuf.objects.all()

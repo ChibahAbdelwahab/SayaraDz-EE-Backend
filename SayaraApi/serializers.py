@@ -7,7 +7,7 @@ from .models import *
 
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = VehiculeN
+        model = VehiculeNeuf
         fields = (
             'num',
             'disponible',
@@ -15,7 +15,7 @@ class VehiculeSerializer(serializers.ModelSerializer):
         )
 
 
-class VehiculeSerializer(serializers.ModelSerializer):
+class VehiculeNeufSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
         fields = ("__all__")
