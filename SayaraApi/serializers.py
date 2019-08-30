@@ -22,6 +22,8 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
     version = VersionSerializer()
     modele = ModeleSerializer()
     marque = serializers.CharField()
+    options = OptionSerializer(many=True)
+
     class Meta:
         model = VehiculeNeuf
         fields = ("__all__")
@@ -268,18 +270,6 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
     #     validated_data["user"] = user
     #     validated_data["vehicule"] = vehicule
     #     return validated_data
-
-
-class VehiculeNeufSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VehiculeNeuf
-        fields = (
-            'num',
-            'version',
-            'disponible',
-            'prix',
-
-        )
 
 
 class AnnnonceNeufSerializer(serializers.ModelSerializer):
