@@ -1216,6 +1216,7 @@
       "acceleration": "11.3"
     }
   },
+  {
     "model": "auth.permission",
     "pk": 1,
     "fields": {
