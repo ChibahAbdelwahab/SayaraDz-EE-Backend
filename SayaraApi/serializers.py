@@ -5,6 +5,21 @@ from . import models
 from .models import *
 
 
+class CouleurSerializer(serializers.ModelSerializer):
+    prix = serializers.IntegerField()
+
+    class Meta:
+        model = Couleur
+        fields = (
+            'pk',
+            'code',
+            'nom',
+            'modele',
+            'fabricantCouleur_id',
+            'prix'
+        )
+
+
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
@@ -53,26 +68,21 @@ class OptionSerializer(serializers.ModelSerializer):
         exclude = ("date_created", "date_modified", "date_removed",)
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        exclude = ("date_created", "date_modified", "date_removed",)
+
+
 class VersionSerializer(serializers.ModelSerializer):
     modele_name = Modele
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
-    options = OptionSerializer(many=True)
+    couleur = CouleurSerializer(many=True)
 
     class Meta:
         model = Version
-        fields = (
-            'nom',
-            'code',
-            "modele_name",
-            'modele',
-            'marque_name',
-            'options',
-            'images',
-            'pk',
-            'prix',
-            'ficheTechnique'
-        )
+        exclude = ("date_created", "date_modified", "date_removed",)
 
 
 class VersionDetailSerializer(serializers.ModelSerializer):
@@ -124,21 +134,6 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
             'pk',
             'code',
             'fabricantModele',
-        )
-
-
-class CouleurSerializer(serializers.ModelSerializer):
-    prix = serializers.IntegerField()
-
-    class Meta:
-        model = Couleur
-        fields = (
-            'pk',
-            'code',
-            'nom',
-            'modele',
-            'fabricantCouleur_id',
-            'prix'
         )
 
 
