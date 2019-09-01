@@ -75,7 +75,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
 
 class VersionSerializer(serializers.ModelSerializer):
-    modele_name = Modele
+    nom = serializers.CharField()
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
     couleur = CouleurSerializer(many=True)
