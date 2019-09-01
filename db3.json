@@ -416,7 +416,6 @@
       "date_modified": "2019-08-27T15:46:06Z",
       "date_removed": null,
       "ref": "Tech Vision",
-      "images": 3,
       "modele": 1,
       "prix_base": 270,
       "ficheTechnique": 2,
@@ -436,7 +435,6 @@
       "date_modified": "2019-08-27T15:24:01Z",
       "date_removed": null,
       "ref": "Memphis",
-      "images": 2,
       "modele": 2,
       "prix_base": 325,
       "ficheTechnique": 1,
@@ -458,7 +456,6 @@
       "date_modified": "2019-08-27T15:15:07Z",
       "date_removed": null,
       "ref": "start+",
-      "images": 1,
       "modele": 2,
       "prix_base": 330,
       "ficheTechnique": 1,
@@ -480,7 +477,6 @@
       "date_modified": "2019-08-27T22:16:00Z",
       "date_removed": null,
       "ref": "Visia+",
-      "images": 4,
       "modele": 7,
       "prix_base": 199,
       "ficheTechnique": 3,
@@ -499,7 +495,6 @@
       "date_modified": "2019-08-27T22:24:31Z",
       "date_removed": null,
       "ref": "Visia",
-      "images": 5,
       "modele": 8,
       "prix_base": 220,
       "ficheTechnique": 4,
@@ -2420,5 +2415,5 @@
       "is_client": false,
       "fabricant": 4
     }
-  },
+  }
 ]
