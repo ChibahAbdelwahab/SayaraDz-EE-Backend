@@ -249,8 +249,6 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionCreateSerializer()
-    image = serializers.ImageField()
 
     class Meta:
         model = Annonce
