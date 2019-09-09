@@ -480,7 +480,7 @@ class OptionUpdateView(generics.UpdateAPIView):
 
 class OptionCreateView(generics.CreateAPIView):
     queryset = Option.objects.all()
-    serializer_class = OptionSerializer
+    serializer_class = OptionCreateSerializer
     # def perform_create(self, serializer):
     #     #     if "FabricantOption_id" not in serializer._kwargs["data"]:
     #     #         serializer.save(FabricantOption_id=Fabricant.objects.get(pk=1))

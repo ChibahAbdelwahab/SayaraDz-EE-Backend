@@ -79,6 +79,7 @@ class VersionSerializer(serializers.ModelSerializer):
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
     couleur = CouleurSerializer(many=True)
+    options = OptionSerializer()
 
     class Meta:
         model = Version
@@ -193,6 +194,12 @@ class OptionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
     nom = serializers.CharField()
 
+    class Meta:
+        model = Option
+        fields = ("__all__")
+
+
+class OptionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Option
         fields = ("__all__")
