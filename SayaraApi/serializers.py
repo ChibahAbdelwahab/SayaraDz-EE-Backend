@@ -88,25 +88,16 @@ class VersionSerializer(serializers.ModelSerializer):
 
 
 class VersionDetailSerializer(serializers.ModelSerializer):
-    modele_name = serializers.CharField()
+    nom = serializers.CharField()
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
+    couleur = CouleurSerializer(many=True)
     options = OptionSerializer(many=True)
+    ref_id = models.CharField()
 
     class Meta:
         model = Version
-        fields = (
-            'nom',
-            'code',
-            "modele_name",
-            'modele',
-            'marque_name',
-            'options',
-            'images',
-            'pk',
-            'prix',
-            'ficheTechnique'
-        )
+        exclude = ("date_created", "date_modified", "date_removed",)
 
 
 class VersionCreateSerializer(serializers.ModelSerializer):
