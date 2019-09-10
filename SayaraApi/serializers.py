@@ -300,6 +300,8 @@ class ModeleSerializer(serializers.ModelSerializer):
 
 class ModeleSerializerMobile(serializers.ModelSerializer):
     couleur_set = serializers.StringRelatedField(many=True)
+    marque_nom = serializers.CharField()
+    marqueId = serializers.IntegerField()
 
     class Meta:
         model = Modele
@@ -309,7 +311,9 @@ class ModeleSerializerMobile(serializers.ModelSerializer):
             'code',
             'couleur_set',
             'image',
-            'ref_id'
+            'ref_id',
+            'marque_nom',
+            'marqueId'
         )
 
 
