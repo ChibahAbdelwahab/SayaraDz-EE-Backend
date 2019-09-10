@@ -293,7 +293,6 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 class ModeleSerializer(serializers.ModelSerializer):
     couleur_set = CouleurSerializer(many=True, read_only=True, )
-    ref_id = serializers.IntegerField()
 
     class Meta:
         depth = 1

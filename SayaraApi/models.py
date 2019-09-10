@@ -161,9 +161,7 @@ class Modele(SayaraModel):
     def nom(self):
         return self.ref.nom
 
-    @property
-    def ref_id(self):
-        return self.ref.id
+
 
     @property
     def fabricant_nom(self):
