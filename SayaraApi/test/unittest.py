@@ -19,7 +19,7 @@ class AnnoncesTestCases(APITestCase):
             "kilometrage": 3456,
             "date": "2019-09-18",
             "couleur": "Bleu",
-            "version": "Tech Vision",
+            "version": "g7memphis",
             "modele": 34,
             "options": [
                 1

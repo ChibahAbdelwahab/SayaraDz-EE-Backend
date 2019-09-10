@@ -210,6 +210,10 @@ class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
         model = VehiculeOccasion
         exclude = ("date_created", "date_modified", "date_removed",)
 
+    def create(self, validated_data):
+        print(validated_data)
+        return VehiculeOccasion.objects.create(**validated_data)
+
 
 class VehiculeOccasionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
