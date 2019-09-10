@@ -414,7 +414,7 @@ class VehiculeNeuf(Vehicule):
 
     @property
     def image1(self):
-        return self.version.images
+        return self.version.image1
 
     @property
     def modele_name(self):
