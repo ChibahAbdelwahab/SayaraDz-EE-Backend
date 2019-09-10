@@ -204,9 +204,11 @@ class Annonce(SayaraModel):
     def couleur(self):
         return self.vehicule.couleur
 
+    @property
     def version_name(self):
         return self.vehicule.version.nom
 
+    @property
     def marque_name(self):
         return self.vehicule.marque_name
 
