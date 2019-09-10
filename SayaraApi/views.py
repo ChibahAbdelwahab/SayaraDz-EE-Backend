@@ -399,14 +399,21 @@ class AnnonceNeufListView(generics.ListAPIView):
         query_nom = self.request.GET.get("num", "")
         query_prix = self.request.GET.get("prix", "")
         query_idModele = self.request.GET.get("idVehicle", "")
-
+        qcouleur = self.request.GET.get("couleur", "")
+        qversion = self.request.GET.get("version", "")
+        qmodele = self.request.GET.get("modele", "")
         if query_nom is not "":
             queryset = queryset.filter(Q(idMarque=query_nom))
         if query_idModele is not "":
             queryset = queryset.filter(Q(nom=query_idModele))
         if query_prix is not "":
             queryset = queryset.filter(Q(prix=query_prix))
-
+        if qcouleur is not "":
+            queryset = queryset.filter(couleur=qcouleur)
+        if qversion is not "":
+            queryset = queryset.filter(version=qversion)
+        if qmodele is not "":
+            queryset = queryset.filter(version__modele=qmodele)
         return queryset
 
 
