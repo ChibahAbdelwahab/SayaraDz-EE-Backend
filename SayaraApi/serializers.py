@@ -201,8 +201,7 @@ class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
         exclude = (
-            "date_created", "date_modified", "date_removed", "modele",
-            "version")
+            "date_created", "date_modified", "date_removed", )
 
 
 class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
