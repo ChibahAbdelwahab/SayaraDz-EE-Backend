@@ -318,6 +318,7 @@ class ModeleSerializerMobile(serializers.ModelSerializer):
             'code',
             'couleur_set',
             'image',
+            'ref_id'
         )
 
 
