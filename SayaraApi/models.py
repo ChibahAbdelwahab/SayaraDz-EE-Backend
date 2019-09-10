@@ -162,6 +162,10 @@ class Modele(SayaraModel):
         return self.ref.nom
 
     @property
+    def ref_id(self):
+        return self.ref.id
+
+    @property
     def fabricant_nom(self):
         return self.nom.marque.fabricant
 

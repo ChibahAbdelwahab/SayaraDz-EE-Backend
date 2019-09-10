@@ -80,6 +80,7 @@ class VersionSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
     couleur = CouleurSerializer(many=True)
     options = OptionSerializer(many=True)
+    ref_id = models.CharField()
 
     class Meta:
         model = Version
@@ -254,7 +255,6 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
         exclude = ("user", "date_created", "date_modified", "date_removed",)
 
     def create(self, validated_data):
-
         validated_data["user"] = self.context['request'].user
         return Annonce.objects.create(**validated_data)
 
@@ -293,6 +293,7 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
 
 class ModeleSerializer(serializers.ModelSerializer):
     couleur_set = CouleurSerializer(many=True, read_only=True, )
+    ref_id = models.IntegerField()
 
     class Meta:
         depth = 1
@@ -303,6 +304,7 @@ class ModeleSerializer(serializers.ModelSerializer):
             'code',
             'couleur_set',
             'image',
+            'ref_id'
         )
 
 
