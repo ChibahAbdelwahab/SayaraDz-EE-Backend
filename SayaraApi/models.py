@@ -308,7 +308,7 @@ class Couleur(SayaraModel):
 
     @property
     def prix(self):
-        query = TarifCouleur.objects.filter(couleur=self, base=False,
+        query = TarifCouleur.objects.filter(couleur=self.id, base=False,
                                             debut__lte=datetime.now(),
                                             fin__gte=datetime.now()).first()
         if query:

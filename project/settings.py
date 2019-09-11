@@ -69,7 +69,7 @@ REST_FRAMEWORK = {
        ],
 }
 
-# REST_FRAMEWORK = {}
+REST_FRAMEWORK = {}
 
 DRF_FIREBASE_AUTH = {
     'FIREBASE_SERVICE_ACCOUNT_KEY': 'configuration.json'

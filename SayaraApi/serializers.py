@@ -22,14 +22,16 @@ class CouleurSerializer(serializers.ModelSerializer):
 
 class CouleurCreateSerializer(serializers.ModelSerializer):
     prix = serializers.IntegerField()
+    new_ref = serializers.CharField(required=False, allow_blank=True,
+                                    max_length=100)
 
     class Meta:
         model = Couleur
-        exclude = ("date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed", "ref")
 
     def create(self, validated_data):
         new_ref = validated_data.get("new_ref", None)
-        new_ref = RefCouleur.objects.create(nom=new_ref)
+        new_ref, res = RefCouleur.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
         validated_data.pop("new_ref")
         return Couleur.objects.create(**validated_data)
@@ -207,13 +209,16 @@ class OptionSerializer(serializers.ModelSerializer):
 
 
 class OptionCreateSerializer(serializers.ModelSerializer):
+    new_ref = serializers.CharField(required=False, allow_blank=True,
+                                    max_length=100)
+
     class Meta:
         model = Option
-        exclude = ("date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed", "ref")
 
     def create(self, validated_data):
         new_ref = validated_data.get("new_ref", None)
-        new_ref = RefOption.objects.create(nom=new_ref)
+        new_ref, res = RefOption.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
         validated_data.pop("new_ref")
         return Option.objects.create(**validated_data)
