@@ -342,12 +342,12 @@ class Option(SayaraModel):
 
     @property
     def prix(self):
-        query = TarifOption.objects.filter(option=self, base=False,
+        query = TarifOption.objects.filter(option=self.id, base=False,
                                            debut__lte=datetime.now(),
                                            fin__gte=datetime.now()).first()
         if query:
             return query.prix
-        query = TarifOption.objects.filter(option=self, base=True).last()
+        query = TarifOption.objects.filter(option=self.id, base=True).last()
         if query:
             return query.prix
         return 0
