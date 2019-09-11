@@ -161,8 +161,6 @@ class Modele(SayaraModel):
     def nom(self):
         return self.ref.nom
 
-
-
     @property
     def fabricant_nom(self):
         return self.nom.marque.fabricant
@@ -398,7 +396,13 @@ class VehiculeNeuf(Vehicule):
     # TODO Contrainte : Couleur incluses dans couleurs Version
     @property
     def prix(self):
-        return 122
+        res = 0
+        try:
+            for i in self.options.all():
+                res += i.prix
+        except:
+            res = 0
+        return res + self.version.prix + self.couleur.prix
 
     @property
     def marque(self):
