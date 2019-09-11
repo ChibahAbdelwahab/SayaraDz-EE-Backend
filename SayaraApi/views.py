@@ -446,7 +446,7 @@ class CouleurListView(generics.ListAPIView):
 
 class CouleurCreateView(generics.CreateAPIView):
     queryset = Couleur.objects.all()
-    serializer_class = CouleurSerializer
+    serializer_class = CouleurCreateSerializer
 
 
 class CouleurDetailView(generics.RetrieveAPIView):

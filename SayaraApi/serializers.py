@@ -20,6 +20,21 @@ class CouleurSerializer(serializers.ModelSerializer):
         )
 
 
+class CouleurCreateSerializer(serializers.ModelSerializer):
+    prix = serializers.IntegerField()
+
+    class Meta:
+        model = Couleur
+        exclude = ("date_created", "date_modified", "date_removed",)
+
+    def create(self, validated_data):
+        new_ref = validated_data.get("new_ref", None)
+        new_ref = RefCouleur.objects.create(nom=new_ref)
+        validated_data["ref"] = new_ref
+        validated_data.pop("new_ref")
+        return Modele.objects.create(**validated_data)
+
+
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
@@ -194,14 +209,14 @@ class OptionSerializer(serializers.ModelSerializer):
 class OptionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Option
-        fields = ("__all__")
+        exclude = ("date_created", "date_modified", "date_removed",)
 
 
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeOccasion
         exclude = (
-            "date_created", "date_modified", "date_removed", )
+            "date_created", "date_modified", "date_removed",)
 
 
 class VehiculeOccasionCreateSerializer(serializers.ModelSerializer):
