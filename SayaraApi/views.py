@@ -219,6 +219,27 @@ class VehiculeNeufListView(generics.ListAPIView):
         return queryset
 
 
+class VehiculeNeufCreateView(generics.ListCreateAPIView):
+    queryset = VehiculeNeuf.objects.all()
+    serializer_class = VehiculeNeufSerialiser
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = VehiculeNeufSerialiser(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        data = request.data
+        if isinstance(data, list):  # <- is the main logic
+            serializer = self.get_serializer(data=request.data, many=True)
+        else:
+            serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class ListModeleView(generics.ListAPIView):
     queryset = Modele.objects.all()
     serializer_class = ModeleSerializer
