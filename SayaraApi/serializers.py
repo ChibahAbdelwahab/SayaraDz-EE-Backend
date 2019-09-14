@@ -288,6 +288,11 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
         model = VehiculeNeuf
         fields = "__all__"
 
+class VehiculeNeufSerialiser(serializers.ModelSerializer):
+    class Meta:
+        model = VehiculeNeuf
+        fields = "__all__"
+
 
 class AnnonceOccasionSerializer(serializers.ModelSerializer):
     # titre = serializers.CharField()
