@@ -253,16 +253,13 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionUpdateSerializer()
+    vehicule = VehiculeOccasionUpdateSerializer(partial=True)
 
     class Meta:
         model = Annonce
         depth = 0
         exclude = ("date_created", "date_modified", "date_removed",)
 
-    def update(self, instance, validated_data):
-        validated_data["user"] = self.context['request'].user
-        super(AnnonceUpdateSerializer.update(instance, validated_data))
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
