@@ -253,12 +253,12 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionUpdateSerializer(read_only=True)
+    vehicule = VehiculeOccasionUpdateSerializer()
 
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("date_created", "date_modified", "date_removed", "options")
+        exclude = ("date_created", "date_modified", "date_removed",)
 
     def update(self, instance, validated_data):
         validated_data["user"] = self.context['request'].user
@@ -274,20 +274,28 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
     # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     # user = serializers.PrimaryKeyRelatedField(read_only=True,
     #                                           default=serializers.CurrentUserDefault())
+    # Create a custom method field
+    user = serializers.SerializerMethodField('_user')
+
+    # Use this method for the custom field
+    def _user(self, obj):
+        request = getattr(self.context, 'request', None)
+        if request:
+            return request.user
 
     class Meta:
         model = Annonce
         exclude = ("date_created", "date_modified", "date_removed",)
 
-    def create(self, validated_data):
-        print(validated_data)
-        try:
-            validated_data["user"] = self.context['request'].user
-            return Annonce.objects.create(**validated_data)
-        except Exception as e:
-            validated_data.pop("user")
-            print(e)
-        return Annonce.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     print(validated_data)
+    #     try:
+    #         validated_data["user"] = self.context['request'].user
+    #         return Annonce.objects.create(**validated_data)
+    #     except Exception as e:
+    #         validated_data.pop("user")
+    #         print(e)
+    #     return Annonce.objects.create(**validated_data)
 
 
 class AnnnonceNeufSerializer(serializers.ModelSerializer):
