@@ -258,7 +258,11 @@ class AnnonceUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("user", "date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed", "options")
+
+    def update(self, instance, validated_data):
+        validated_data["user"] = self.context['request'].user
+        super(AnnonceUpdateSerializer.update(instance, validated_data))
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -267,11 +271,16 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
+    # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    # user = serializers.PrimaryKeyRelatedField(read_only=True,
+    #                                           default=serializers.CurrentUserDefault())
+    
     class Meta:
         model = Annonce
-        exclude = ("user", "date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed",)
 
     def create(self, validated_data):
+        print(validated_data)
         try:
             validated_data["user"] = self.context['request'].user
             return Annonce.objects.create(**validated_data)
