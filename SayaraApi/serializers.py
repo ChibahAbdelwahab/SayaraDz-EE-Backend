@@ -498,7 +498,7 @@ class CommandeViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         fields = ("__all__")
-        depth = 1w
+        depth = 1
 
 
 class OffreSerializer(serializers.ModelSerializer):
