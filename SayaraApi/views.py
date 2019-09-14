@@ -384,7 +384,7 @@ class AnnonceCreateView(generics.CreateAPIView):
 
 class AnnonceUpdateView(generics.UpdateAPIView):
     queryset = Annonce.objects.all()
-    serializer_class = AnnonceUpdateSerializer
+    serializer_class = AnnonceUpdateSerializer(partial=True)
 
 
 class AnnonceListView(generics.ListAPIView):

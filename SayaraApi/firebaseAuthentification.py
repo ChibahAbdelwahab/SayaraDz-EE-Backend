@@ -14,6 +14,7 @@ json = os.path.join(settings.BASE_DIR, settings.FIREBASE_KEY)
 cred = credentials.Certificate(json)
 firebase_admin.initialize_app(cred)
 
+
 #
 class FirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
@@ -32,6 +33,6 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
 
         uid = decoded_token.get('uid')
         name = decoded_token.get('name')
-        email = decoded_token.get('email')
-        user, bool = User.objects.get_or_create(username=name, email=email)
+        # email = decoded_token.get('email')
+        user, bool = User.objects.get_or_create(username=name)
         return (user, None)
