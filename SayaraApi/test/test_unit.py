@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase
@@ -35,16 +34,18 @@ class test_create(APITestCase):
         data = {
             "nom": "testversion",
         }
-        response = self.client.post('/api/refversion/create/', data, format='json')
+        response = self.client.post('/api/refversion/create/', data,
+                                    format='json')
 
         self.assertEqual(response.status_code, 201)
 
     def test_refmodele_create(self):
         data = {
             "nom": "testmodele",
-            "marque":"1"
+            "marque": "1"
         }
-        response = self.client.post('/api/refmodele/create/', data, format='json')
+        response = self.client.post('/api/refmodele/create/', data,
+                                    format='json')
 
         self.assertEqual(response.status_code, 201)
 
@@ -52,10 +53,10 @@ class test_create(APITestCase):
         data = {
             "nom": "testcouleur",
         }
-        response = self.client.post('/api/refcouleur/create/', data, format='json')
+        response = self.client.post('/api/refcouleur/create/', data,
+                                    format='json')
 
         self.assertEqual(response.status_code, 201)
-
 
     # def test_couleur_create(self):
     #     data = {
@@ -65,6 +66,15 @@ class test_create(APITestCase):
     #     }
     #     response = self.client.post('/api/refcouleur/create/', data, format='json')
     #     self.assertEqual(response.status_code, 201)
+
+
+class test_mobile_annonces(APITestCase):
+    def setUp(self):
+        call_command('loaddata', 'db3.json', verbosity=0)
+        self.username = 'uservw1'
+        self.password = 'password123.'
+        self.client.force_authenticate(self.username)
+        print(self.client)
 
 
 class test_list(APITestCase):
@@ -119,12 +129,6 @@ class test_list(APITestCase):
         response = self.client.get('/api/fichetechnique/')
         self.assertEqual(response.status_code, 200)
 
-
-
-
     # def test_refoption_list(self):
     #     response = self.client.get('/api/refoption/')
     #     self.assertEqual(response.status_code, 200)
-
-
-
