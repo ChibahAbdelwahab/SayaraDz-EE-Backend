@@ -743,12 +743,12 @@ class CommandeDetailView(generics.RetrieveAPIView):
 
 class CommandeUpdateView(generics.UpdateAPIView):
     queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer
+    serializer_class = CommandeSerializer(partial=True)
 
 
 class CommandeCreateView(generics.CreateAPIView):
     queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer
+    serializer_class = CommandeSerializer(partial=True)
 
 
 class CommandeDeleteView(views.APIView):
