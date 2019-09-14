@@ -71,10 +71,19 @@ class test_create(APITestCase):
 class test_mobile_annonces(APITestCase):
     def setUp(self):
         call_command('loaddata', 'db3.json', verbosity=0)
-        self.username = 'uservw1'
+        self.username = 'automobiliste1'
         self.password = 'password123.'
         self.client.force_authenticate(self.username)
-        print(self.client)
+
+    def test_create_annonce(self):
+        data = {
+            "titre": "Test insertion",
+            "prix": 999,
+            "commentaires": "Ceci est un test d'insertion de mon annonce",
+            "vehicule": 1
+        }
+        response = self.client.post("/api/annonce/create/")
+        self.assertEqual(response.status_code, 201)
 
 
 class test_list(APITestCase):

@@ -242,7 +242,7 @@ class VehiculeOccasionUpdateSerializer(serializers.ModelSerializer):
         model = VehiculeOccasion
         exclude = (
             "date_created", "date_modified", "date_removed", "modele",
-            "version")
+            "options", "version")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -253,12 +253,12 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionUpdateSerializer()
+    vehicule = VehiculeOccasionUpdateSerializer(read_only=True)
 
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("user", "date_created", "date_modified", "date_removed")
+        exclude = ("user", "date_created", "date_modified", "date_removed",)
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -272,7 +272,12 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
         exclude = ("user", "date_created", "date_modified", "date_removed",)
 
     def create(self, validated_data):
-        validated_data["user"] = self.context['request'].user
+        try:
+            validated_data["user"] = self.context['request'].user
+            return Annonce.objects.create(**validated_data)
+        except Exception as e:
+            validated_data.pop("user")
+            print(e)
         return Annonce.objects.create(**validated_data)
 
 
@@ -287,6 +292,7 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
         fields = "__all__"
+
 
 class VehiculeNeufSerialiser(serializers.ModelSerializer):
     class Meta:
