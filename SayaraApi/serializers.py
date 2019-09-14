@@ -272,9 +272,9 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 class AnnonceCreateSerializer(serializers.ModelSerializer):
     # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    # user = serializers.PrimaryKeyRelatedField(read_only=True,
-    #                                           default=serializers.CurrentUserDefault())
-    
+    user = serializers.PrimaryKeyRelatedField(read_only=True,
+                                              default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Annonce
         exclude = ("date_created", "date_modified", "date_removed",)
