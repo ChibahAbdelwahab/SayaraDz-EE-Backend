@@ -732,11 +732,8 @@ class FicheTechniqueDeleteView(views.APIView):
 # Commande
 class CommandeListView(generics.ListAPIView):
     model = Commande
+    queryset = Commande.objects.all()
     serializer_class = CommandeViewSerializer
-
-    def get_queryset(self, *args, **kwargs):
-        queryset = Commande.objects.all()
-        return queryset
 
 
 class CommandeDetailView(generics.RetrieveAPIView):

@@ -149,7 +149,7 @@ class ModeleByMarqueSerializer(serializers.ModelSerializer):
 
 class ModeleCreateSerializer(serializers.ModelSerializer):
     new_ref = serializers.CharField(required=False, allow_blank=True,
-                                    max_length=100)
+                                    max_length=100,allow_blank=True)
 
     class Meta:
         model = Modele
@@ -498,7 +498,7 @@ class CommandeViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         fields = ("__all__")
-        depth = 1
+        depth = 1w
 
 
 class OffreSerializer(serializers.ModelSerializer):
