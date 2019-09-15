@@ -261,7 +261,6 @@ class AnnonceUpdateSerializer(serializers.ModelSerializer):
         exclude = ("date_created", "date_modified", "date_removed",)
 
 
-
 class AnnonceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annonce
@@ -282,7 +281,7 @@ class AnnonceCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Annonce
-        exclude = ("date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed", "user")
 
     def create(self, validated_data):
         print(validated_data)
