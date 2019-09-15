@@ -25,16 +25,21 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
     # prix = serializers.IntegerField()
     new_ref = serializers.CharField(required=False, allow_blank=True,
                                     max_length=100)
+    nom = serializers.CharField(required=False)
 
     class Meta:
         model = Couleur
-        exclude = ("date_created", "date_modified", "date_removed", "ref")
+        exclude = ("date_created", "date_modified", "date_removed",)
 
     def create(self, validated_data):
-        new_ref = validated_data.get("new_ref", None)
+        new_ref = validated_data.get("new_ref", None) or validated_data.get(
+            "nom", None)
+        if new_ref is None:
+            return Couleur.objects.none()
         new_ref, res = RefCouleur.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
         validated_data.pop("new_ref")
+        print(validated_data)
         return Couleur.objects.create(**validated_data)
 
 
