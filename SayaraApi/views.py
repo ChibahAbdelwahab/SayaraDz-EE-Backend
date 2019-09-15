@@ -745,12 +745,12 @@ class CommandeDetailView(generics.RetrieveAPIView):
 
 class CommandeUpdateView(generics.UpdateAPIView):
     queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer(partial=True)
+    serializer_class = CommandeSerializer
 
 
 class CommandeCreateView(generics.CreateAPIView):
     queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer(partial=True)
+    serializer_class = CommandeSerializer
 
 
 class CommandeDeleteView(views.APIView):
@@ -780,3 +780,13 @@ class UserFabricant(ModelViewSet):
         queryset = self.get_queryset()
         serializer = ProfileCreateSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class CommandeView(ModelViewSet):
+    serializers = CommandeSerializer
+    queryset = Commande.objects.all()
+
+
+class FicheTechniqueView(ModelViewSet):
+    serializers = FicheTechniqueSerializer
+    queryset = FicheTechnique.objects.all()

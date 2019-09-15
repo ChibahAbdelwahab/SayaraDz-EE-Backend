@@ -88,7 +88,6 @@ class FabricantAdmin(LogicalDeleteModelAdmin):
 
     def get_queryset(self, request):
         qs = self.model._default_manager.all_with_deleted()
-        print(qs)
         ordering = self.ordering or ()
         if ordering:
             qs = qs.order_by(*ordering)

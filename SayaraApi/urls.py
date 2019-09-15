@@ -4,6 +4,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r"userfabricant", views.UserFabricant, basename='userfabricant')
+router.register(r"commande", views.CommandeView, basename='commande')
+router.register(r"fichetechnique", views.FicheTechniqueView, basename='commande')
 urlpatterns = (
     # urls for Django Rest Framework SayaraApi
     path('', include(router.urls)),
@@ -183,33 +185,33 @@ urlpatterns += (
          name='SayaraApi_tarifcouleur_update'),
 )
 
-urlpatterns += (
-    # urls for FicheTechnique
-    path('fichetechnique/', views.FicheTechniqueListView.as_view(),
-         name='app_name_fichetechnique_list'),
-    path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(),
-         name='app_name_fichetechnique_create'),
-    path('fichetechnique/detail/<slug:pk>/',
-         views.FicheTechniqueDetailView.as_view(),
-         name='app_name_fichetechnique_detail'),
-    path('fichetechnique/update/<slug:pk>/',
-         views.FicheTechniqueUpdateView.as_view(),
-         name='app_name_fichetechnique_update'),
-)
+# urlpatterns += (
+#     # urls for FicheTechnique
+#     path('fichetechnique/', views.FicheTechniqueListView.as_view(),
+#          name='app_name_fichetechnique_list'),
+#     path('fichetechnique/create/', views.FicheTechniqueCreateView.as_view(),
+#          name='app_name_fichetechnique_create'),
+#     path('fichetechnique/detail/<slug:pk>/',
+#          views.FicheTechniqueDetailView.as_view(),
+#          name='app_name_fichetechnique_detail'),
+#     path('fichetechnique/update/<slug:pk>/',
+#          views.FicheTechniqueUpdateView.as_view(),
+#          name='app_name_fichetechnique_update'),
+# )
 
-urlpatterns += (
-    # urls for Commande
-    path('commande/', views.CommandeListView.as_view(),
-         name='app_name_commande_list'),
-    path('commande/create/', views.CommandeCreateView.as_view(),
-         name='app_name_commande_create'),
-    path('commande/detail/<slug:pk>/', views.CommandeDetailView.as_view(),
-         name='app_name_commande_detail'),
-    path('commande/update/<slug:pk>/', views.CommandeUpdateView.as_view(),
-         name='app_name_commande_update'),
-    path('commande/delete/<slug:pk>/', views.CommandeDeleteView.as_view(),
-         name='app_name_commande_delete')
-)
+# urlpatterns += (
+#     # urls for Commande
+#     path('commande/', views.CommandeListView.as_view(),
+#          name='app_name_commande_list'),
+#     path('commande/create/', views.CommandeCreateView.as_view(),
+#          name='app_name_commande_create'),
+#     path('commande/detail/<slug:pk>/', views.CommandeDetailView.as_view(),
+#          name='app_name_commande_detail'),
+#     path('commande/update/<slug:pk>/', views.CommandeUpdateView.as_view(),
+#          name='app_name_commande_update'),
+#     path('commande/delete/<slug:pk>/', views.CommandeDeleteView.as_view(),
+#          name='app_name_commande_delete')
+# )
 urlpatterns += (
     # urls for Offre
     path('Offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
