@@ -22,7 +22,7 @@ class CouleurSerializer(serializers.ModelSerializer):
 
 
 class CouleurCreateSerializer(serializers.ModelSerializer):
-    prix = serializers.IntegerField()
+    # prix = serializers.IntegerField()
     new_ref = serializers.CharField(required=False, allow_blank=True,
                                     max_length=100)
 
