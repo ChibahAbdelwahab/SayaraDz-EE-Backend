@@ -44,7 +44,7 @@ class VehiculeSerializer(serializers.ModelSerializer):
         fields = (
             'num',
             'disponible',
-            'versionVoiture'
+            'versionVoiture'n
         )
 
 
@@ -211,19 +211,17 @@ class OptionSerializer(serializers.ModelSerializer):
 
 
 class OptionCreateSerializer(serializers.ModelSerializer):
-    new_ref = serializers.CharField(required=False, allow_blank=True,
-                                    max_length=100)
+    nom = serializers.CharField()
 
     class Meta:
         model = Option
         exclude = ("date_created", "date_modified", "date_removed", "ref")
 
     def create(self, validated_data):
-        new_ref = validated_data.get("new_ref", None) or validated_data("nom",
-                                                                        None)
+        new_ref = validated_data.get("nom", None)
         new_ref, res = RefOption.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
-        validated_data.pop("new_ref")
+        validated_data.pop("nom")
         return Option.objects.create(**validated_data)
 
 
