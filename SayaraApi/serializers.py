@@ -219,7 +219,8 @@ class OptionCreateSerializer(serializers.ModelSerializer):
         exclude = ("date_created", "date_modified", "date_removed", "ref")
 
     def create(self, validated_data):
-        new_ref = validated_data.get("new_ref", None)
+        new_ref = validated_data.get("new_ref", None) or validated_data("nom",
+                                                                        None)
         new_ref, res = RefOption.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
         validated_data.pop("new_ref")
