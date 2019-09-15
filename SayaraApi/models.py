@@ -209,6 +209,10 @@ class Annonce(SayaraModel):
         return self.vehicule.version.nom
 
     @property
+    def version_id(self):
+        return self.vehicule.version.nom
+
+    @property
     def marque_name(self):
         return self.vehicule.marque_name
 

@@ -301,6 +301,7 @@ class AnnnonceNeufSerializer(serializers.ModelSerializer):
     modele_name = serializers.CharField()
     image1 = serializers.ImageField()
     titre = serializers.CharField()
+    version_id = serializers.CharField()
 
     class Meta:
         model = VehiculeNeuf
@@ -326,6 +327,7 @@ class AnnonceOccasionSerializer(serializers.ModelSerializer):
     modele_name = serializers.CharField()
     version_name = serializers.CharField()
     couleur = serializers.CharField()
+    version_id = serializers.CharField()
 
     class Meta:
         model = Annonce
