@@ -782,20 +782,14 @@ class UserFabricant(ModelViewSet):
 
 
 class CommandeView(ModelViewSet):
-    serializer_class = CommandeSerializer
+    serializer_class = CommandeCreateSerializer
     queryset = Commande.objects.all()
 
     def create(self, request, *args, **kwargs):
-        vehicule = VehiculeNeuf.objects.filter(id=request.data.vehicule)
-        if not vehicule.disponible:
-            return Response("Vehicule Non Disponnible",
-                            status=status.HTTP_401_UNAUTHORIZED,
-                            headers=headers)
+        request.data["user"] = request.user
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        VehiculeNeuf.objects.filter(id=request.data.vehicule).update(
-            disponible=False)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED,
                         headers=headers)
