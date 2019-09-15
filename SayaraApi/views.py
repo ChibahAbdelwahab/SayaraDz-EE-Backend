@@ -507,10 +507,13 @@ class OptionListView(generics.ListAPIView):
         queryset = Option.objects.all()
         query_nom = self.request.GET.get("nom", "")
         query_id = self.request.GET.get("code", "")
+        query_modele = self.request.GET.get("modele", "")
         if query_nom is not "":
             queryset = queryset.filter(Q(nom=query_nom))
         if query_id is not "":
             queryset = queryset.filter(Q(idOption=query_id))
+        if query_modele is not "":
+            queryset = queryset.filter(Q(modele=query_modele))
         return queryset
 
 
