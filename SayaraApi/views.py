@@ -782,10 +782,10 @@ class UserFabricant(ModelViewSet):
 
 
 class CommandeView(ModelViewSet):
-    serializers = CommandeSerializer
+    serializer_class = CommandeSerializer
     queryset = Commande.objects.all()
 
 
 class FicheTechniqueView(ModelViewSet):
-    serializers = FicheTechniqueSerializer
+    serializer_class = FicheTechniqueSerializer
     queryset = FicheTechnique.objects.all()
