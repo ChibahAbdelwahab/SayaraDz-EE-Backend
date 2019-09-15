@@ -527,3 +527,6 @@ class Commande(models.Model):
     vehicule = models.ForeignKey(VehiculeNeuf, on_delete=models.CASCADE)
     confirmation = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
+    version = models.ForeignKey(Version, on_delete=models.DO_NOTHING)
+    couleur = models.ForeignKey(Couleur, on_delete=models.DO_NOTHING)
+    options = models.ManyToManyField(Option)
