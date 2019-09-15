@@ -56,11 +56,17 @@ class OffreListView(generics.ListAPIView):
     model = Offre
     queryset = Offre.objects.all()
     serializer_class = OffreSerializer
+    def get_queryset(self, *args, **kwargs):
+        query_user = self.request.user.id or None
+        if query_user is not None:
+            return Offre.objects.filter(Q(user=query_user))
+
+        return Offre.objects.all()
 
 
 class OffreCreateView(generics.CreateAPIView):
     queryset = Offre.objects.all()
-    serializer_class = OffreSerializer
+    serializer_class = OffreCreateSerializer
 
 
 class OffreDetailView(generics.RetrieveAPIView):
@@ -516,6 +522,17 @@ class OptionDetailView(generics.RetrieveAPIView):
 class OptionUpdateView(generics.UpdateAPIView):
     queryset = Option.objects.all()
     serializer_class = OptionUpdateSerializer
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        print(kwargs["pk"])
+        print(request.data["nom"])
+        new_ref = request.data.get("nom", None)
+
+        serializer = self.get_serializer(instance)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
 
 
 class OptionCreateView(generics.CreateAPIView):
