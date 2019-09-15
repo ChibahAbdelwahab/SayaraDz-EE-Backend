@@ -33,7 +33,6 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
         new_ref = validated_data.get("nom", None)
         new_ref, res = RefCouleur.objects.get_or_create(nom=new_ref)
         validated_data["ref"] = new_ref
-        validated_data.pop("new_ref")
         print(validated_data)
         return Couleur.objects.create(**validated_data)
 
