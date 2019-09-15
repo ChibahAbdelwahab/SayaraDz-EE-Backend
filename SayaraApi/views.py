@@ -783,7 +783,7 @@ class UserFabricant(ModelViewSet):
 
 
 class CommandeView(ModelViewSet):
-    serializer_class = CommandeCreateSerializer
+    serializer_class = CommandeSerializer
     queryset = Commande.objects.all()
 
     def create(self, request, *args, **kwargs):
