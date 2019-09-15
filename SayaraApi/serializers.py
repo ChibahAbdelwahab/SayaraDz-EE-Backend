@@ -44,7 +44,7 @@ class VehiculeSerializer(serializers.ModelSerializer):
         fields = (
             'num',
             'disponible',
-            'versionVoiture'n
+            'versionVoiture'
         )
 
 
