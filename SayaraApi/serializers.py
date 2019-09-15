@@ -106,11 +106,13 @@ class VersionSerializer(serializers.ModelSerializer):
 
 class VersionDetailSerializer(serializers.ModelSerializer):
     nom = serializers.CharField()
+    modele_name = serializers.CharField()
     marque_name = serializers.CharField()
     prix = serializers.IntegerField()
     couleur = CouleurSerializer(many=True)
     options = OptionSerializer(many=True)
     ref_id = models.CharField()
+
 
     class Meta:
         model = Version
@@ -350,6 +352,7 @@ class ModeleSerializer(serializers.ModelSerializer):
 
 class ModeleSerializerMobile(serializers.ModelSerializer):
     couleur_set = serializers.StringRelatedField(many=True)
+    couleur = couleur_set
     marque_nom = serializers.CharField()
     marqueId = serializers.IntegerField()
 
@@ -360,6 +363,7 @@ class ModeleSerializerMobile(serializers.ModelSerializer):
             'pk',
             'code',
             'couleur_set',
+            'couleur',
             'image',
             'ref_id',
             'marque_nom',
