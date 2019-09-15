@@ -478,7 +478,7 @@ class CouleurDetailView(generics.RetrieveAPIView):
 
 class CouleurUpdateView(generics.UpdateAPIView):
     queryset = Couleur.objects.all()
-    serializer_class = CouleurSerializer
+    serializer_class = CouleurCreateSerializer
 
 
 class CouleurDeleteView(views.APIView):
@@ -514,7 +514,7 @@ class OptionDetailView(generics.RetrieveAPIView):
 
 class OptionUpdateView(generics.UpdateAPIView):
     queryset = Option.objects.all()
-    serializer_class = OptionSerializer
+    serializer_class = OptionUpdateSerializer
 
 
 class OptionCreateView(generics.CreateAPIView):

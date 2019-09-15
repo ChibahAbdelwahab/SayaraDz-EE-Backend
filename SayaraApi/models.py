@@ -116,6 +116,9 @@ class Version(SayaraModel):
     @property
     def marque_name(self):
         return self.modele.ref.marque.nom
+    @property
+    def marque_id(self):
+        return self.modele.ref.marque.id
 
     @property
     def prix(self):

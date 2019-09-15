@@ -38,6 +38,22 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
         return Couleur.objects.create(**validated_data)
 
 
+    def update(self, instance, validated_data):
+        print(instance)
+        print(RefCouleur.objects.filter(pk=Couleur.objects.get(ref__nom=instance).ref_id))
+        instance.code = validated_data.get("code", instance.code)
+        new_ref = validated_data.get("nom", None)
+        if new_ref is not None:
+            try:
+                RefCouleur.objects.filter(pk=Couleur.objects.get(ref__nom=instance).ref_id).update(nom=new_ref)
+            except:
+                return validated_data
+            validated_data.pop("nom")
+            instance.save()
+        return instance
+
+
+
 class VehiculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
@@ -109,6 +125,7 @@ class VersionDetailSerializer(serializers.ModelSerializer):
     nom = serializers.CharField()
     modele_name = serializers.CharField()
     marque_name = serializers.CharField()
+    marque_id = serializers.CharField()
     prix = serializers.IntegerField()
     couleur = CouleurSerializer(many=True)
     options = OptionSerializer(many=True)
@@ -217,6 +234,27 @@ class OptionCreateSerializer(serializers.ModelSerializer):
         validated_data["ref"] = new_ref
         validated_data.pop("nom")
         return Option.objects.create(**validated_data)
+
+
+class OptionUpdateSerializer(serializers.ModelSerializer):
+    nom = serializers.CharField()
+
+    class Meta:
+        model = Option
+        exclude = ("date_created", "date_modified", "date_removed", "ref", "code")
+
+    def update(self, instance, validated_data):
+        print(instance)
+        print(RefOption.objects.filter(pk=Option.objects.get(ref__nom=instance).ref_id))
+        new_ref = validated_data.get("nom", None)
+        if new_ref is not None:
+            try:
+                RefOption.objects.filter(pk=Option.objects.get(ref__nom=instance).ref_id).update(nom=new_ref)
+            except:
+                return validated_data
+            validated_data.pop("nom")
+            instance.save()
+        return instance
 
 
 class VehiculeOccasionSerializer(serializers.ModelSerializer):
