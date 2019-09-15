@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.response import Response
 
 from SayaraApi.models import RefModele
 from . import models
@@ -112,7 +113,6 @@ class VersionDetailSerializer(serializers.ModelSerializer):
     couleur = CouleurSerializer(many=True)
     options = OptionSerializer(many=True)
     ref_id = models.CharField()
-
 
     class Meta:
         model = Version
@@ -527,3 +527,30 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehiculeNeuf
         fields = ("__all__")
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ("password",)
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserListSerializer()
+
+    class Meta:
+        model = Profile
+        exclude = ("date_created", "date_modified", "date_removed")
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+
+
+class ProfileCreateSerializer(serializers.ModelSerializer):
+    user = UserCreateSerializer()
+
+    class Meta:
+        model = Profile
+        exclude = ("date_created", "date_modified", "date_removed")

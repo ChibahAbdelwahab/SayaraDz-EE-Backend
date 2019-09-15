@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, views, status
 from rest_framework.response import Response
 from rest_framework.fields import empty
+from rest_framework.viewsets import ModelViewSet
+
 from .models import *
 from .serializers import *
 
@@ -759,3 +761,22 @@ class CommandeDeleteView(views.APIView):
         thing = self.get_object(pk)
         thing.delete()
         return Response({'message': 'supprimé'}, status=204)
+
+
+class UserFabricant(ModelViewSet):
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        try:
+            fabricant_id = self.request.user.profile.fabricant.id
+            queryset = Profile.objects.filter(is_fabricant=True,
+                                              fabricant_id=fabricant_id)
+        except Exception as e:
+            print(e)
+            queryset = Profile.objects.none()
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = ProfileCreateSerializer(queryset, many=True)
+        return Response(serializer.data)
