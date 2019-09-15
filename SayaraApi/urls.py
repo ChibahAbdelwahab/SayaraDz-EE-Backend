@@ -5,7 +5,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r"userfabricant", views.UserFabricant, basename='userfabricant')
 router.register(r"commande", views.CommandeView, basename='commande')
-router.register(r"fichetechnique", views.FicheTechniqueView, basename='commande')
+router.register(r"fichetechnique", views.FicheTechniqueView, basename='FciheTechnique')
 urlpatterns = (
     # urls for Django Rest Framework SayaraApi
     path('', include(router.urls)),
