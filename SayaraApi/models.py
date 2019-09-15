@@ -527,7 +527,7 @@ class Offre(SayaraModel):
 
 class Commande(SayaraModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    vehicule = models.ForeignKey(VehiculeNeuf, on_delete=models.CASCADE)
+    vehicule = models.ForeignKey(VehiculeNeuf,blank=True,null=True, on_delete=models.CASCADE)
     confirmation = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
     version = models.ForeignKey(Version, on_delete=models.DO_NOTHING)

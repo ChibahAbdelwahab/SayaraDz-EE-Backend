@@ -794,6 +794,12 @@ class CommandeView(ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED,
                         headers=headers)
 
+    def update(self, request, *args, **kwargs):
+        super(CommandeView).update(request, args, kwargs)
+        if request.data.vehicule is not None:
+            vehicule = VehiculeNeuf.objects.filter(pk=request.data.vehicule.id)
+            vehicule.update(disponible=False)
+
 
 class FicheTechniqueView(ModelViewSet):
     serializer_class = FicheTechniqueSerializer
