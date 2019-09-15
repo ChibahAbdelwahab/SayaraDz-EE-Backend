@@ -807,8 +807,8 @@ class CommandeView(ModelViewSet):
         queryset = VehiculeNeuf.objects.all()
         queryset = queryset.filter(version=instance.version)
         queryset = queryset.filter(couleur=instance.couleur)
-        queryset = queryset.filter(options__code__in=instance.options)
-        serializer = VehiculeNeufSerialiser(data=queryset, many=True)
+        queryset = queryset.filter(options__code__in=instance.options)[0]
+        serializer = VehiculeNeufSerialiser(data=queryset)
         return Response(serializer.data)
 
 
