@@ -559,7 +559,7 @@ class CommandeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         exclude = (
-        "date_created", "date_modified", "date_removed", "vehicule", "user",
+        "date_created", "date_modified", "date_removed", "vehicule",
         "confirmation")
 
 

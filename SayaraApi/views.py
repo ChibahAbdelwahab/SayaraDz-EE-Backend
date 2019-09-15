@@ -1,6 +1,7 @@
 from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, views, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.fields import empty
 from rest_framework.viewsets import ModelViewSet
@@ -786,8 +787,8 @@ class CommandeView(ModelViewSet):
     queryset = Commande.objects.all()
 
     def create(self, request, *args, **kwargs):
-        request.data["user"] = request.user
-        serializer = self.get_serializer(data=request.data)
+        request.data["user"] = request.user.id
+        serializer = CommandeCreateSerializer(data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
@@ -799,6 +800,16 @@ class CommandeView(ModelViewSet):
         if request.data.vehicule is not None:
             vehicule = VehiculeNeuf.objects.filter(pk=request.data.vehicule.id)
             vehicule.update(disponible=False)
+
+    @action(detail=True, methods=['get'])
+    def propositions(self, request, pk=None):
+        instance = self.get_object()
+        queryset = VehiculeNeuf.objects.all()
+        queryset = queryset.filter(version=instance.version)
+        queryset = queryset.filter(couleur=instance.couleur)
+        queryset = queryset.filter(options__code__in=instance.options)
+        serializer = VehiculeNeufSerialiser(data=queryset, many=True)
+        return Response(serializer.data)
 
 
 class FicheTechniqueView(ModelViewSet):
