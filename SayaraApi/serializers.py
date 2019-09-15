@@ -132,12 +132,6 @@ class VersionCreateSerializer(serializers.ModelSerializer):
         )
 
 
-class ModeleUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Modele
-        fields = ('__all__')
-
-
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modele
@@ -378,6 +372,27 @@ class RefModeleSerializer(serializers.ModelSerializer):
         fields = (
             '__all__'
         )
+
+
+class ModeleUpdateSerializer(serializers.ModelSerializer):
+    new_ref = serializers.CharField(required=False, allow_blank=True,
+                                    max_length=100)
+    class Meta:
+        model = Modele
+        fields = ("new_ref", "code")
+
+    def update(self, instance, validated_data):
+        print(RefModele.objects.filter(pk=Modele.objects.get(ref__nom=instance).ref_id))
+        instance.code = validated_data.get("code", instance.ref.nom)
+        new_ref = validated_data.get("new_ref", None)
+        if new_ref is not None:
+            try:
+                RefModele.objects.filter(pk=Modele.objects.get(ref__nom=instance).ref_id).update(nom=new_ref)
+            except:
+                return validated_data
+            validated_data.pop("new_ref")
+            instance.save()
+        return instance
 
 
 class RefCouleurSerializer(serializers.ModelSerializer):

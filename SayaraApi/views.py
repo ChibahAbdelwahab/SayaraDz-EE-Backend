@@ -215,8 +215,7 @@ class VehiculeNeufListView(generics.ListAPIView):
         if version is not "":
             queryset = queryset.filter(Q(version_pk=version))
         if couleur is not "":
-            pass
-            # queryset = queryset.filter(Q(couleur_pk=Couleur))
+            queryset = queryset.filter(Q(couleur_pk=couleur))
 
         return queryset
 
