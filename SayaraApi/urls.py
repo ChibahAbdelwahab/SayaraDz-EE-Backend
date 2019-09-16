@@ -5,7 +5,8 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r"userfabricant", views.UserFabricant, basename='userfabricant')
 router.register(r"commande", views.CommandeView, basename='commande')
-router.register(r"fichetechnique", views.FicheTechniqueView, basename='FciheTechnique')
+router.register(r"fichetechnique", views.FicheTechniqueView,
+                basename='FciheTechnique')
 urlpatterns = (
     # urls for Django Rest Framework SayaraApi
     path('', include(router.urls)),
@@ -214,7 +215,8 @@ urlpatterns += (
 # )
 urlpatterns += (
     # urls for Offre
-    path('Offre/annonce', views.OffreAnnonceListView.as_view(), name='SayaraApi_Offre_list'),
+    path('Offre/annonce', views.OffreAnnonceListView.as_view(),
+         name='SayaraApi_Offre_list'),
     path('Offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
     path('Offre/create/', views.OffreCreateView.as_view(),
          name='SayaraApi_Offre_create'),
@@ -229,6 +231,9 @@ urlpatterns += (
     path('vehiculeneuf/create', views.VehiculeNeufCreateView.as_view(),
          name='SayaraApi_Vehicule_list'),
     path('vehiculeoccasion/create/', views.VehiculeOccasionCreateView.as_view(),
+         name='SayaraApi_Vehicule_list'),
+    path('vehiculeoccasion/update/<int:pk>/',
+         views.VehiculeOccasionUpdateView.as_view(),
          name='SayaraApi_Vehicule_list'),
     # path('Offre/create/', views.OffreCreateView.as_view(), name='SayaraApi_Offre_create'),
     # path('Offre/update/<int:pk>/', views.OffreUpdateView.as_view(), name='SayaraApi_Offre_update'),

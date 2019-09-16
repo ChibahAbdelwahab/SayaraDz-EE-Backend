@@ -287,6 +287,12 @@ class VehiculeOccasionCreateView(generics.CreateAPIView):
     serializer_class = VehiculeOccasionCreateSerializer
 
 
+class VehiculeOccasionUpdateView(generics.UpdateAPIView):
+    model = VehiculeOccasion
+    serializer_class = VehiculeOccasionUpdateSerializer
+    queryset = VehiculeOccasion.objects.all()
+
+
 class RefModeleCreateView(generics.CreateAPIView):
     queryset = RefModele.objects.all()
     serializer_class = RefModeleCreateSerializer
