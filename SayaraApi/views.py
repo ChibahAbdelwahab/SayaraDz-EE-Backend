@@ -840,7 +840,7 @@ class CommandeView(ModelViewSet):
         instance = self.get_object()
         instance.vehicule.reserve = False
         serializer = CommandeSerializer(instance, data=request.data,
-                                         partial=partial)
+                                        partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
