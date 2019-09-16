@@ -558,6 +558,14 @@ class CommandeSerializer(serializers.ModelSerializer):
         exclude = ("date_created", "date_modified", "date_removed")
 
 
+class CommandeListSerializer(serializers.ModelSerializer):
+    vehicule = VehiculeNeufSerialiser()
+
+    class Meta:
+        model = Commande
+        exclude = ("date_created", "date_modified", "date_removed")
+
+
 class CommandeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande

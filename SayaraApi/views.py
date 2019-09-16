@@ -823,7 +823,7 @@ class UserFabricant(ModelViewSet):
 
 
 class CommandeView(ModelViewSet):
-    serializer_class = CommandeSerializer
+    serializer_class = CommandeListSerializer
     queryset = Commande.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -839,7 +839,7 @@ class CommandeView(ModelViewSet):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         instance.vehicule.reserve = False
-        serializer = self.get_serializer(instance, data=request.data,
+        serializer = CommandeSerializer(instance, data=request.data,
                                          partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
