@@ -291,10 +291,12 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
+    vehicule = VehiculeOccasionSerializer()
+
     class Meta:
         model = Annonce
         exclude = (
-        "date_created", "date_modified", "date_removed", 'user', "vehicule")
+            "date_created", "date_modified", "date_removed", 'user',)
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
