@@ -146,8 +146,8 @@ class VersionCreateSerializer(serializers.ModelSerializer):
             'modele',
             'options',
             'image1',
-            'ficheTechnique'
         )
+
 
 
 class ModeleByMarqueSerializer(serializers.ModelSerializer):
