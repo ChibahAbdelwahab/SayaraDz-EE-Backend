@@ -294,7 +294,8 @@ class AnnonceUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("date_created", "date_modified", "date_removed", 'user')
+        exclude = (
+        "date_created", "date_modified", "date_removed", 'user', "vehicule")
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
