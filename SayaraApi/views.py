@@ -71,7 +71,7 @@ class OffreAnnonceListView(generics.ListAPIView):
     serializer_class = OffreSerializer
 
     def get_queryset(self, *args, **kwargs):
-        queryAnnonce = self.request.GET.get("annonce", "")
+        queryAnnonce = self.request.GET.get("annonce", None)
         if queryAnnonce is not None:
             return Offre.objects.filter(Q(annonce=queryAnnonce))
         return Offre.objects.all()
