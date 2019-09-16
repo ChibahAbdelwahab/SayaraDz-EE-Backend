@@ -40,7 +40,6 @@ Thumbs.db
 .idea
 # Folder #
 migrations/*.pyc
-media/
 
 #Cached files #
 *.pyc
