@@ -829,11 +829,22 @@ class CommandeView(ModelViewSet):
                         headers=headers)
 
     def update(self, request, *args, **kwargs):
-        super(CommandeView).update(request, args, kwargs)
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data,
+                                         partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
 
-        if request.data.vehicule is not None:
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+        if instance.vehicule is not None:
             vehicule = VehiculeNeuf.objects.filter(pk=request.data.vehicule.id)
             vehicule.update(disponible=False)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def propositions(self, request, pk=None):
