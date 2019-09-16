@@ -838,7 +838,10 @@ class CommandeView(ModelViewSet):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        instance.vehicule.reserve = False
+        try:
+            instance.vehicule.reserve = False
+        except:
+            pass
         serializer = CommandeSerializer(instance, data=request.data,
                                         partial=partial)
         serializer.is_valid(raise_exception=True)
@@ -846,7 +849,7 @@ class CommandeView(ModelViewSet):
 
         if getattr(instance, '_prefetched_objects_cache', None):
             # If 'prefetch_related' has been applied to a queryset, we need to
-            # forcibly invalidate the prefetch cache on the instance.
+            # forcibly invalidate the prefetch cache on the in!stance.
             instance._prefetched_objects_cache = {}
         print(instance)
         if instance.vehicule is not None:
