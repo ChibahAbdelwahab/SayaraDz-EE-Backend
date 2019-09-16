@@ -37,7 +37,6 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
         print(validated_data)
         return Couleur.objects.create(**validated_data)
 
-
     def update(self, instance, validated_data):
         print(instance)
         print(RefCouleur.objects.filter(pk=Couleur.objects.get(ref__nom=instance).ref_id))
@@ -51,7 +50,6 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
             validated_data.pop("nom")
             instance.save()
         return instance
-
 
 
 class VehiculeSerializer(serializers.ModelSerializer):
@@ -144,7 +142,7 @@ class VersionCreateSerializer(serializers.ModelSerializer):
             'code',
             'modele',
             'options',
-            'images',
+            'image1',
             'ficheTechnique'
         )
 
@@ -289,7 +287,7 @@ class AnnonceUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("date_created", "date_modified", "date_removed",)
+        exclude = ("date_created", "date_modified", "date_removed",'user')
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -576,6 +574,24 @@ class OffreSerializer(serializers.ModelSerializer):
             'user',
             'prix',
         )
+
+class OffreCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Offre
+        fields = (
+            'annonce',
+            'prix',
+        )
+
+    def create(self, validated_data):
+        print(validated_data)
+        try:
+            validated_data["user"] = self.context['request'].user
+            return Offre.objects.create(**validated_data)
+        except Exception as e:
+            validated_data.pop("user")
+            print(e)
+        return Offre.objects.create(**validated_data)
 
 
 class VehiculeNeufSerializer(serializers.ModelSerializer):

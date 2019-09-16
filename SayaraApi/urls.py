@@ -214,6 +214,7 @@ urlpatterns += (
 # )
 urlpatterns += (
     # urls for Offre
+    path('Offre/annonce', views.OffreAnnonceListView.as_view(), name='SayaraApi_Offre_list'),
     path('Offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
     path('Offre/create/', views.OffreCreateView.as_view(),
          name='SayaraApi_Offre_create'),
