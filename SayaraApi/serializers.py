@@ -560,6 +560,9 @@ class CommandeSerializer(serializers.ModelSerializer):
 
 class CommandeListSerializer(serializers.ModelSerializer):
     vehicule = VehiculeNeufSerialiser()
+    options = OptionSerializer(many=True)
+    version = VersionSerializer()
+    couleur = CouleurSerializer()
 
     class Meta:
         model = Commande
