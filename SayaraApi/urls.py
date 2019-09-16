@@ -214,11 +214,11 @@ urlpatterns += (
 # )
 urlpatterns += (
     # urls for Offre
-    path('offre/annonce', views.OffreAnnonceListView.as_view(), name='SayaraApi_Offre_list'),
-    path('offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
-    path('offre/create/', views.OffreCreateView.as_view(),
+    path('Offre/annonce', views.OffreAnnonceListView.as_view(), name='SayaraApi_Offre_list'),
+    path('Offre/', views.OffreListView.as_view(), name='SayaraApi_Offre_list'),
+    path('Offre/create/', views.OffreCreateView.as_view(),
          name='SayaraApi_Offre_create'),
-    path('offre/update/<int:pk>/', views.OffreUpdateView.as_view(),
+    path('Offre/update/<int:pk>/', views.OffreUpdateView.as_view(),
          name='SayaraApi_Offre_update'),
 )
 
