@@ -56,11 +56,24 @@ class OffreListView(generics.ListAPIView):
     model = Offre
     queryset = Offre.objects.all()
     serializer_class = OffreSerializer
+
     def get_queryset(self, *args, **kwargs):
         query_user = self.request.user.id or None
         if query_user is not None:
             return Offre.objects.filter(Q(user=query_user))
 
+        return Offre.objects.all()
+
+
+class OffreAnnonceListView(generics.ListAPIView):
+    model = Offre
+    queryset = Offre.objects.all()
+    serializer_class = OffreSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryAnnonce = self.request.GET.get("annonce", "")
+        if queryAnnonce is not None:
+            return Offre.objects.filter(Q(annonce=queryAnnonce))
         return Offre.objects.all()
 
 
@@ -817,6 +830,7 @@ class CommandeView(ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         super(CommandeView).update(request, args, kwargs)
+
         if request.data.vehicule is not None:
             vehicule = VehiculeNeuf.objects.filter(pk=request.data.vehicule.id)
             vehicule.update(disponible=False)
