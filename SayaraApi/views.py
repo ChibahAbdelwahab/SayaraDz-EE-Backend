@@ -230,13 +230,16 @@ class VehiculeNeufListView(generics.ListAPIView):
         version = self.request.GET.get("version_pk", "")
         couleur = self.request.GET.get("couleur_pk", "")
 
-        if modele is not "":
-            queryset = queryset.filter(Q(modele_pk=modele))
-        if version is not "":
-            queryset = queryset.filter(Q(version_pk=version))
-        if couleur is not "":
-            queryset = queryset.filter(Q(couleur_pk=couleur))
+        modele = self.request.GET.get("modele", modele)
+        version = self.request.GET.get("version", version)
+        couleur = self.request.GET.get("couleur", couleur)
 
+        if modele is not "":
+            queryset = queryset.filter(Q(version__modele=modele))
+        if version is not "":
+            queryset = queryset.filter(Q(version=version))
+        if couleur is not "":
+            queryset = queryset.filter(Q(version__couleur=couleur))
         return queryset
 
 
