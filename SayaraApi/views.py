@@ -167,9 +167,10 @@ class ModeleListView(generics.ListAPIView):
         marqueId = self.request.GET.get("marqueId", "")
         marque_nom = self.request.GET.get("marque_nom", "")
         try:
-            fabricant_id = self.request.user.profile.fabricant.id
-            queryset = Modele.objects.all(Q(fabricant_nom=fabricant_id))
-        except:
+            marque = self.request.user.profile.fabricant.marque
+            queryset = Modele.objects.filter(Q(ref__marque=marque))
+        except Exception as e:
+            print(e)
             pass
         if marqueId is not "":
             # TODO check this
