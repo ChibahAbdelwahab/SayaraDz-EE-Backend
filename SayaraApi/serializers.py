@@ -39,12 +39,15 @@ class CouleurCreateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         print(instance)
-        print(RefCouleur.objects.filter(pk=Couleur.objects.get(ref__nom=instance).ref_id))
+        print(RefCouleur.objects.filter(
+            pk=Couleur.objects.get(ref__nom=instance).ref_id))
         instance.code = validated_data.get("code", instance.code)
         new_ref = validated_data.get("nom", None)
         if new_ref is not None:
             try:
-                RefCouleur.objects.filter(pk=Couleur.objects.get(ref__nom=instance).ref_id).update(nom=new_ref)
+                RefCouleur.objects.filter(
+                    pk=Couleur.objects.get(ref__nom=instance).ref_id).update(
+                    nom=new_ref)
             except:
                 return validated_data
             validated_data.pop("nom")
@@ -239,15 +242,19 @@ class OptionUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Option
-        exclude = ("date_created", "date_modified", "date_removed", "ref", "code")
+        exclude = (
+            "date_created", "date_modified", "date_removed", "ref", "code")
 
     def update(self, instance, validated_data):
         print(instance)
-        print(RefOption.objects.filter(pk=Option.objects.get(ref__nom=instance).ref_id))
+        print(RefOption.objects.filter(
+            pk=Option.objects.get(ref__nom=instance).ref_id))
         new_ref = validated_data.get("nom", None)
         if new_ref is not None:
             try:
-                RefOption.objects.filter(pk=Option.objects.get(ref__nom=instance).ref_id).update(nom=new_ref)
+                RefOption.objects.filter(
+                    pk=Option.objects.get(ref__nom=instance).ref_id).update(
+                    nom=new_ref)
             except:
                 return validated_data
             validated_data.pop("nom")
@@ -287,7 +294,7 @@ class AnnonceUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Annonce
         depth = 0
-        exclude = ("date_created", "date_modified", "date_removed",'user')
+        exclude = ("date_created", "date_modified", "date_removed", 'user')
 
 
 class AnnonceSerializer(serializers.ModelSerializer):
@@ -555,8 +562,8 @@ class CommandeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         exclude = (
-        "date_created", "date_modified", "date_removed", "vehicule",
-        "confirmation")
+            "date_created", "date_modified", "date_removed", "vehicule",
+            "confirmation")
 
 
 class CommandeViewSerializer(serializers.ModelSerializer):
@@ -575,16 +582,15 @@ class OffreSerializer(serializers.ModelSerializer):
             'prix',
         )
 
+
 class OffreCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offre
         fields = (
-            'annonce',
-            'prix',
+            'annonce', "prix"
         )
 
     def create(self, validated_data):
-        print(validated_data)
         try:
             validated_data["user"] = self.context['request'].user
             return Offre.objects.create(**validated_data)
