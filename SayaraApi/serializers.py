@@ -620,6 +620,7 @@ class VehiculeNeufSerializer(serializers.ModelSerializer):
     modele = ModeleSerializer()
     marque = serializers.CharField()
     options = OptionSerializer(many=True)
+    couleur = CouleurSerializer()
 
     class Meta:
         model = VehiculeNeuf
