@@ -291,7 +291,6 @@ class AnnonceSerializer(serializers.ModelSerializer):
 
 
 class AnnonceUpdateSerializer(serializers.ModelSerializer):
-    vehicule = VehiculeOccasionSerializer()
 
     class Meta:
         model = Annonce
