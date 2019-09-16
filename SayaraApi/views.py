@@ -162,12 +162,15 @@ class ModeleListView(generics.ListAPIView):
     model = Modele
     serializer_class = ModeleSerializer
 
-    # TODO return only Fabricant's marques for Fabricant
     def get_queryset(self, *args, **kwargs):
         queryset = Modele.objects.all()
         marqueId = self.request.GET.get("marqueId", "")
         marque_nom = self.request.GET.get("marque_nom", "")
-
+        try:
+            fabricant_id = self.request.user.profile.fabricant.id
+            queryset = Modele.objects.all(Q(fabricant_nom=fabricant_id))
+        except:
+            pass
         if marqueId is not "":
             # TODO check this
             queryset = queryset.filter(ref__marque__pk=marqueId)
